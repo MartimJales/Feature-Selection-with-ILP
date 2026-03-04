@@ -161,4 +161,5 @@ cython_debug/
 *.out
 *.pkl
 *.zip
+*.json
 *.apk
