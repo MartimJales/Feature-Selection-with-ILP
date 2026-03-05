@@ -116,31 +116,40 @@ class JSONFeatureExtractor:
                 progress_pct = ((idx + 1) / total_samples) * 100
                 logger.info(f"  Extracted: {idx + 1}/{total_samples} ({progress_pct:.1f}%)")
 
-        # Convert sparse matrix to dense (single efficient operation)
-        logger.info("Converting to DataFrame...")
-        binary_dense = sparse_binary.tocsr().toarray()
+        # Build DataFrame efficiently (avoid converting entire sparse matrix at once)
+        logger.info("Building DataFrame from features...")
 
-        # Build DataFrame efficiently
-        df_dict = {'file_hash': file_hashes}
+        # Convert sparse matrix to CSR for efficient column access
+        sparse_binary = sparse_binary.tocsr()
 
-        # Add binary features
+        # Build dictionary with file_hash and count features first (memory-efficient)
+        df_dict = {
+            'file_hash': file_hashes,
+            'n_activities': count_features[:, 0],
+            'n_services': count_features[:, 1],
+            'n_receivers': count_features[:, 2],
+            'n_providers': count_features[:, 3],
+            'n_api_calls': count_features[:, 4],
+            'n_permissions': count_features[:, 5],
+            'n_used_permissions': count_features[:, 6],
+            'n_urls': count_features[:, 7]
+        }
+
+        # Add binary features efficiently (convert only needed columns)
+        col_idx = 0
         for i, perm in enumerate(permissions_list):
-            df_dict[f'perm_{perm}'] = binary_dense[:, i]
+            df_dict[f'perm_{perm}'] = sparse_binary.getcol(col_idx).toarray().ravel().astype(np.int8)
+            col_idx += 1
+
         for i, call in enumerate(suspicious_list):
-            df_dict[f'suspicious_{call}'] = binary_dense[:, len(permissions_list) + i]
+            df_dict[f'suspicious_{call}'] = sparse_binary.getcol(col_idx).toarray().ravel().astype(np.int8)
+            col_idx += 1
+
         for i, intent in enumerate(intents_list):
-            df_dict[f'intent_{intent}'] = binary_dense[:, len(permissions_list) + len(suspicious_list) + i]
+            df_dict[f'intent_{intent}'] = sparse_binary.getcol(col_idx).toarray().ravel().astype(np.int8)
+            col_idx += 1
 
-        # Add count features
-        df_dict['n_activities'] = count_features[:, 0]
-        df_dict['n_services'] = count_features[:, 1]
-        df_dict['n_receivers'] = count_features[:, 2]
-        df_dict['n_providers'] = count_features[:, 3]
-        df_dict['n_api_calls'] = count_features[:, 4]
-        df_dict['n_permissions'] = count_features[:, 5]
-        df_dict['n_used_permissions'] = count_features[:, 6]
-        df_dict['n_urls'] = count_features[:, 7]
-
+        logger.info("Creating DataFrame...")
         df = pd.DataFrame(df_dict)
         logger.info(f"Extracted {df.shape[1]-1} features from {df.shape[0]} samples")
         return df
@@ -200,5 +209,23 @@ if __name__ == "__main__":
 
     output_path = Path(output_file)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(output_file, index=False)
-    logger.info(f"Features exported to {output_file}")
+
+    logger.info(f"Saving DataFrame ({df.shape[0]} rows x {df.shape[1]} cols) to {output_file}...")
+    logger.info("This may take several minutes for large datasets...")
+
+    # Use Parquet format if available (much faster), otherwise CSV
+    if output_file.endswith('.csv'):
+        # Try to use Parquet instead
+        parquet_file = output_file.replace('.csv', '.parquet')
+        try:
+            df.to_parquet(parquet_file, index=False, engine='pyarrow', compression='snappy')
+            logger.info(f"✓ Features saved as Parquet: {parquet_file} (also saving CSV...)")
+        except ImportError:
+            logger.warning("pyarrow not available, skipping Parquet format")
+
+        # Save CSV with progress indication
+        df.to_csv(output_file, index=False)
+        logger.info(f"✓ Features exported to {output_file}")
+    else:
+        df.to_parquet(output_file, index=False, engine='pyarrow', compression='snappy')
+        logger.info(f"✓ Features exported to {output_file}")
