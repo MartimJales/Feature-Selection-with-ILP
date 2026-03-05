@@ -119,12 +119,23 @@ class JSONFeatureExtractor:
 
 if __name__ == "__main__":
     import sys
-    json_dir = sys.argv[1] if len(sys.argv) > 1 else "./data/destino"
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Extract features from Android malware JSON files")
+    parser.add_argument("json_dir", nargs="?", default="./data/destino", help="Directory containing JSON files")
+    parser.add_argument("--output", "-o", default="./reports/extracted_features.csv", help="Output CSV file path")
+    parser.add_argument("--limit", type=int, default=None, help="Limit number of samples to load")
+
+    args = parser.parse_args()
+
+    json_dir = args.json_dir
+    output_file = args.output
 
     extractor = JSONFeatureExtractor(json_dir)
-    samples = extractor.load_json_files()
+    samples = extractor.load_json_files(limit=args.limit)
     df = extractor.extract_binary_features(samples)
 
-    Path("./reports").mkdir(parents=True, exist_ok=True)
-    df.to_csv('./reports/extracted_features.csv', index=False)
-    logger.info("Features exported to ./reports/extracted_features.csv")
+    output_path = Path(output_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(output_file, index=False)
+    logger.info(f"Features exported to {output_file}")
