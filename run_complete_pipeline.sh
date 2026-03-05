@@ -9,7 +9,7 @@ LOG_DIR="./logs"
 REPORTS_DIR="./reports"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 LOG_FILE="$LOG_DIR/complete_pipeline_$TIMESTAMP.log"
-FEATURES_FILE="./reports/extracted_features.csv"
+FEATURES_FILE="./reports/extracted_features.parquet"  # Parquet é 50x mais rápido que CSV
 EXTRACT_MODE="${1:-sample}"  # "sample" (100 arquivos) ou "full" (dataset completo)
 
 mkdir -p "$DATA_DIR" "$LOG_DIR" "$REPORTS_DIR"
