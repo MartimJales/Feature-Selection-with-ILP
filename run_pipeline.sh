@@ -8,7 +8,6 @@ LOG_DIR="./logs"
 REPORTS_DIR="./reports"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 LOG_FILE="$LOG_DIR/pipeline_$TIMESTAMP.log"
-MAX_SAMPLES=100
 FEATURES_FILE="./reports/extracted_features.csv"
 
 
@@ -23,16 +22,12 @@ echo "✓ Dependências instaladas" | tee -a "$LOG_FILE"
 
 # Verificar arquivos JSON
 echo "[1/5] Verificando arquivos JSON..." | tee -a "$LOG_FILE"
-JSON_COUNT=$(ls -1 "$DATA_DIR"/*.json 2>/dev/null | wc -l)
+JSON_COUNT=$(find "$DATA_DIR" -maxdepth 1 -type f -name "*.json" | wc -l)
 if [ "$JSON_COUNT" -eq 0 ]; then
     echo "✗ ERRO: Nenhum arquivo JSON encontrado em $DATA_DIR/" | tee -a "$LOG_FILE"
     exit 1
 fi
-if [ "$JSON_COUNT" -gt "$MAX_SAMPLES" ]; then
-    echo "⚠ Encontrados $JSON_COUNT arquivos. Limitando a $MAX_SAMPLES samples..." | tee -a "$LOG_FILE"
-else
-    echo "✓ Encontrados $JSON_COUNT arquivos JSON" | tee -a "$LOG_FILE"
-fi
+echo "✓ Encontrados $JSON_COUNT arquivos JSON" | tee -a "$LOG_FILE"
 
 # Extrair features dos JSONs
 echo "[2/5] Extraindo features dos JSONs..." | tee -a "$LOG_FILE"
