@@ -40,8 +40,10 @@ class JSONFeatureExtractor:
 
     def extract_binary_features(self, samples: List[Dict]) -> pd.DataFrame:
         """
-        Extract binary features with memory optimization (chunked processing).
+        Extract binary features with vectorized processing (fast).
         """
+        from scipy.sparse import lil_matrix
+
         # Pass 1: Build vocabulary
         logger.info("Pass 1/2: Building feature vocabulary...")
         all_permissions = set()
@@ -65,56 +67,81 @@ class JSONFeatureExtractor:
 
         logger.info(f"Vocabulary: {len(permissions_list)} permissions, {len(suspicious_list)} suspicious calls, {len(intents_list)} intents")
 
-        # Pass 2: Extract features in chunks (memory-efficient)
+        # Create fast lookup dictionaries
+        perm_to_idx = {p: i for i, p in enumerate(permissions_list)}
+        susp_to_idx = {s: i + len(permissions_list) for i, s in enumerate(suspicious_list)}
+        intent_to_idx = {it: i + len(permissions_list) + len(suspicious_list) for i, it in enumerate(intents_list)}
+
+        n_binary_features = len(permissions_list) + len(suspicious_list) + len(intents_list)
+
+        # Pass 2: Extract features with sparse matrix
         logger.info("Pass 2/2: Extracting features...")
-        chunk_size = 5000  # Process in chunks to avoid OOM
-        all_chunks = []
-        processed = 0
 
-        for chunk_start in range(0, total_samples, chunk_size):
-            chunk_end = min(chunk_start + chunk_size, total_samples)
-            chunk_samples = samples[chunk_start:chunk_end]
+        sparse_binary = lil_matrix((total_samples, n_binary_features), dtype=np.int8)
+        count_features = np.zeros((total_samples, 8), dtype=np.int16)
+        file_hashes = []
 
-            rows = []
-            for sample in chunk_samples:
-                row = {'file_hash': sample['file_hash']}
+        for idx, sample in enumerate(samples):
+            # Binary features: permissions (vectorized with lookup)
+            perms = sample.get('req_permissions', [])
+            for perm in perms:
+                if perm in perm_to_idx:
+                    sparse_binary[idx, perm_to_idx[perm]] = 1
 
-                # Binary features: permissions
-                perms = sample.get('req_permissions', [])
-                for perm in permissions_list:
-                    row[f'perm_{perm}'] = int(perm in perms)
+            # Binary features: suspicious calls
+            suspicious = sample.get('suspicious_calls', [])
+            for call in suspicious:
+                if call in susp_to_idx:
+                    sparse_binary[idx, susp_to_idx[call]] = 1
 
-                # Binary features: suspicious calls
-                suspicious = sample.get('suspicious_calls', [])
-                for call in suspicious_list:
-                    row[f'suspicious_{call}'] = int(call in suspicious)
+            # Binary features: intents
+            intents = sample.get('intent_filters', [])
+            for intent in intents:
+                if intent in intent_to_idx:
+                    sparse_binary[idx, intent_to_idx[intent]] = 1
 
-                # Binary features: intents
-                intents = sample.get('intent_filters', [])
-                for intent in intents_list:
-                    row[f'intent_{intent}'] = int(intent in intents)
+            # Count features (vectorized)
+            count_features[idx, 0] = len(sample.get('activities', []))
+            count_features[idx, 1] = len(sample.get('services', []))
+            count_features[idx, 2] = len(sample.get('receivers', []))
+            count_features[idx, 3] = len(sample.get('providers', []))
+            count_features[idx, 4] = len(sample.get('api_calls', []))
+            count_features[idx, 5] = len(sample.get('req_permissions', []))
+            count_features[idx, 6] = len(sample.get('used_permissions', []))
+            count_features[idx, 7] = len(sample.get('urls', []))
 
-                # Count features
-                row['n_activities'] = len(sample.get('activities', []))
-                row['n_services'] = len(sample.get('services', []))
-                row['n_receivers'] = len(sample.get('receivers', []))
-                row['n_providers'] = len(sample.get('providers', []))
-                row['n_api_calls'] = len(sample.get('api_calls', []))
-                row['n_permissions'] = len(sample.get('req_permissions', []))
-                row['n_used_permissions'] = len(sample.get('used_permissions', []))
-                row['n_urls'] = len(sample.get('urls', []))
+            file_hashes.append(sample['file_hash'])
 
-                rows.append(row)
+            if (idx + 1) % 5000 == 0 or idx == total_samples - 1:
+                progress_pct = ((idx + 1) / total_samples) * 100
+                logger.info(f"  Extracted: {idx + 1}/{total_samples} ({progress_pct:.1f}%)")
 
-            chunk_df = pd.DataFrame(rows)
-            all_chunks.append(chunk_df)
-            processed = chunk_end
+        # Convert sparse matrix to dense (single efficient operation)
+        logger.info("Converting to DataFrame...")
+        binary_dense = sparse_binary.tocsr().toarray()
 
-            progress_pct = (processed / total_samples) * 100
-            logger.info(f"  Extracted: {processed}/{total_samples} ({progress_pct:.1f}%)")
+        # Build DataFrame efficiently
+        df_dict = {'file_hash': file_hashes}
 
-        # Concatenate all chunks
-        df = pd.concat(all_chunks, ignore_index=True)
+        # Add binary features
+        for i, perm in enumerate(permissions_list):
+            df_dict[f'perm_{perm}'] = binary_dense[:, i]
+        for i, call in enumerate(suspicious_list):
+            df_dict[f'suspicious_{call}'] = binary_dense[:, len(permissions_list) + i]
+        for i, intent in enumerate(intents_list):
+            df_dict[f'intent_{intent}'] = binary_dense[:, len(permissions_list) + len(suspicious_list) + i]
+
+        # Add count features
+        df_dict['n_activities'] = count_features[:, 0]
+        df_dict['n_services'] = count_features[:, 1]
+        df_dict['n_receivers'] = count_features[:, 2]
+        df_dict['n_providers'] = count_features[:, 3]
+        df_dict['n_api_calls'] = count_features[:, 4]
+        df_dict['n_permissions'] = count_features[:, 5]
+        df_dict['n_used_permissions'] = count_features[:, 6]
+        df_dict['n_urls'] = count_features[:, 7]
+
+        df = pd.DataFrame(df_dict)
         logger.info(f"Extracted {df.shape[1]-1} features from {df.shape[0]} samples")
         return df
 
