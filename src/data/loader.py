@@ -2,7 +2,10 @@ import os
 import json
 import csv
 import numpy as np
+import pandas as pd
 import sys
+import argparse
+from pathlib import Path
 
 def load_labels(csv_path):
     """Load labels from CSV file."""
@@ -67,14 +70,69 @@ def load_data(json_dir, csv_path):
 
     return np.array(data), np.array(labels)
 
+def load_features_file(features_path, labels_path):
+    """Load features from Parquet or CSV file with labels."""
+    features_path = Path(features_path)
+
+    print(f"Loading features from: {features_path}")
+
+    # Load features (Parquet or CSV)
+    if features_path.suffix == '.parquet':
+        df = pd.read_parquet(features_path)
+        print(f"✓ Loaded Parquet file: {df.shape[0]} rows x {df.shape[1]} cols")
+    elif features_path.suffix == '.csv':
+        df = pd.read_csv(features_path)
+        print(f"✓ Loaded CSV file: {df.shape[0]} rows x {df.shape[1]} cols")
+    else:
+        raise ValueError(f"Unsupported file format: {features_path.suffix}")
+
+    # Load labels
+    labels_df = pd.read_csv(labels_path)
+    print(f"✓ Loaded {len(labels_df)} labels")
+
+    # Merge with labels
+    if 'file_hash' in df.columns:
+        df['file_hash'] = df['file_hash'].str.lower().str.strip()
+        labels_df['sha256'] = labels_df['sha256'].str.lower().str.strip()
+
+        df = df.merge(labels_df[['sha256', 'label']],
+                     left_on='file_hash',
+                     right_on='sha256',
+                     how='left')
+
+        df = df.dropna(subset=['label'])
+        df = df.drop(columns=['file_hash', 'sha256'], errors='ignore')
+
+        matched = len(df)
+        print(f"✓ Matched {matched} samples with labels")
+
+        X = df.drop(columns=['label'])
+        y = df['label'].astype(int).values
+
+        print(f"Final dataset: {X.shape[0]} samples, {X.shape[1]} features")
+        print(f"Label distribution: {np.sum(y)} malicious, {len(y) - np.sum(y)} benign")
+
+        return X, y
+    else:
+        raise ValueError("Features file must contain 'file_hash' column")
+
 if __name__ == "__main__":
-    json_dir = sys.argv[1] if len(sys.argv) > 1 else "./data/destino"
-    csv_path = sys.argv[2] if len(sys.argv) > 2 else "./data/training_set.csv"
+    parser = argparse.ArgumentParser(description="Load features and labels")
+    parser.add_argument("json_dir", nargs="?", default="./data/destino", help="Directory with JSON files (legacy)")
+    parser.add_argument("labels_path", nargs="?", default="./data/training_set.csv", help="Path to labels CSV")
+    parser.add_argument("--features", type=str, default=None, help="Path to extracted features file (.parquet or .csv)")
 
-    print(f"Looking for JSON files in: {json_dir}")
-    print(f"Looking for labels in: {csv_path}")
+    args = parser.parse_args()
 
-    data, labels = load_data(json_dir, csv_path)
-    print(f"Final: Loaded {len(data)} samples with labels")
-    if len(labels) > 0:
-        print(f"Label distribution: {np.sum(labels)} malicious, {len(labels) - np.sum(labels)} benign")
+    # If features file is provided, use it (faster)
+    if args.features and Path(args.features).exists():
+        X, y = load_features_file(args.features, args.labels_path)
+    else:
+        # Legacy mode: load from JSON files
+        print(f"Looking for JSON files in: {args.json_dir}")
+        print(f"Looking for labels in: {args.labels_path}")
+
+        data, labels = load_data(args.json_dir, args.labels_path)
+        print(f"Final: Loaded {len(data)} samples with labels")
+        if len(labels) > 0:
+            print(f"Label distribution: {np.sum(labels)} malicious, {len(labels) - np.sum(labels)} benign")

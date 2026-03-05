@@ -195,7 +195,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Extract features from Android malware JSON files")
     parser.add_argument("json_dir", nargs="?", default="./data/destino", help="Directory containing JSON files")
-    parser.add_argument("--output", "-o", default="./reports/extracted_features.csv", help="Output CSV file path")
+    parser.add_argument("--output", "-o", default="./reports/extracted_features.parquet", help="Output file path (.parquet or .csv)")
     parser.add_argument("--limit", type=int, default=None, help="Limit number of samples to load")
 
     args = parser.parse_args()
