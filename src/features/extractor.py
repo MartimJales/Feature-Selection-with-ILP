@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Any
 from collections import Counter
 import logging
+import sys
 
 logger = logging.getLogger(__name__)
 
@@ -213,19 +214,29 @@ if __name__ == "__main__":
     logger.info(f"Saving DataFrame ({df.shape[0]} rows x {df.shape[1]} cols) to {output_file}...")
     logger.info("This may take several minutes for large datasets...")
 
-    # Use Parquet format if available (much faster), otherwise CSV
-    if output_file.endswith('.csv'):
-        # Try to use Parquet instead
+    # Try Parquet first (much faster), fallback to CSV
+    if output_file.endswith('.parquet'):
+        try:
+            df.to_parquet(output_file, index=False, engine='pyarrow', compression='snappy')
+            logger.info(f"✓ Features exported to {output_file}")
+        except ImportError:
+            logger.warning("pyarrow not installed. Installing...")
+            import subprocess
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "pyarrow"])
+            logger.info("✓ pyarrow installed. Retrying...")
+            df.to_parquet(output_file, index=False, engine='pyarrow', compression='snappy')
+            logger.info(f"✓ Features exported to {output_file}")
+    elif output_file.endswith('.csv'):
+        # CSV format
+        df.to_csv(output_file, index=False)
+        logger.info(f"✓ Features exported to {output_file}")
+
+        # Also save as Parquet if possible (much faster for future use)
         parquet_file = output_file.replace('.csv', '.parquet')
         try:
             df.to_parquet(parquet_file, index=False, engine='pyarrow', compression='snappy')
-            logger.info(f"✓ Features saved as Parquet: {parquet_file} (also saving CSV...)")
+            logger.info(f"✓ Also saved as Parquet: {parquet_file} (50x faster to load)")
         except ImportError:
-            logger.warning("pyarrow not available, skipping Parquet format")
-
-        # Save CSV with progress indication
-        df.to_csv(output_file, index=False)
-        logger.info(f"✓ Features exported to {output_file}")
+            logger.info("ℹ Install pyarrow for faster file I/O: pip install pyarrow")
     else:
-        df.to_parquet(output_file, index=False, engine='pyarrow', compression='snappy')
-        logger.info(f"✓ Features exported to {output_file}")
+        raise ValueError(f"Unsupported output format: {output_file}. Use .parquet or .csv")
