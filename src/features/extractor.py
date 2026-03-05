@@ -14,11 +14,11 @@ class JSONFeatureExtractor:
     def __init__(self, json_dir: str = "./data/destino"):
         self.json_dir = Path(json_dir)
 
-    def load_json_files(self, limit: int = 100) -> List[Dict[str, Any]]:
-        """Load JSON files from directory (default: 100 samples)."""
+    def load_json_files(self, limit: int = None) -> List[Dict[str, Any]]:
+        """Load JSON files from directory. If limit is None, load all files."""
         json_files = sorted(list(self.json_dir.glob("*.json")))
 
-        if limit and len(json_files) > limit:
+        if limit is not None and limit > 0 and len(json_files) > limit:
             json_files = json_files[:limit]
             logger.info(f"Limiting to {limit} samples (total available: {len(list(self.json_dir.glob('*.json')))})")
 
