@@ -4,7 +4,7 @@
 set -e
 
 # Configurações
-DATA_DIR="./data/raw"
+DATA_DIR="./raw"
 LOG_DIR="./logs"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 LOG_FILE="$LOG_DIR/pipeline_$TIMESTAMP.log"
