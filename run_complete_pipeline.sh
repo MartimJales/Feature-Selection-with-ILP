@@ -25,20 +25,28 @@ pip install -q -r requirements.txt >> "$LOG_FILE" 2>&1
 echo "✓ Dependências instaladas" | tee -a "$LOG_FILE"
 
 # [1/6] Descompactar dataset
-echo "[1/6] Descompactando arquivos..." | tee -a "$LOG_FILE"
-if [ -f "data/training_set_features.zip" ]; then
-    if [ "$EXTRACT_MODE" = "full" ]; then
-        echo "Extraindo dataset completo..." | tee -a "$LOG_FILE"
-        unzip -q data/training_set_features.zip -d "$DATA_DIR" >> "$LOG_FILE" 2>&1
-    else
-        echo "Extraindo amostra de 100 arquivos aleatórios..." | tee -a "$LOG_FILE"
-        zipinfo -1 data/training_set_features.zip | shuf | head -n 100 | xargs unzip -q data/training_set_features.zip -d "$DATA_DIR" >> "$LOG_FILE" 2>&1
-    fi
-    EXTRACTED=$(ls "$DATA_DIR" | wc -l)
-    echo "✓ Arquivos descompactados: $EXTRACTED em $DATA_DIR" | tee -a "$LOG_FILE"
+echo "[1/6] Verificando arquivos..." | tee -a "$LOG_FILE"
+EXISTING_JSON=$(find "$DATA_DIR" -maxdepth 1 -type f -name "*.json" 2>/dev/null | wc -l)
+
+if [ "$EXISTING_JSON" -ge 75000 ]; then
+    echo "✓ Dataset completo já existe ($EXISTING_JSON arquivos JSON encontrados)" | tee -a "$LOG_FILE"
+    EXTRACTED=$EXISTING_JSON
 else
-    echo "✗ ERRO: data/training_set_features.zip não encontrado" | tee -a "$LOG_FILE"
-    exit 1
+    echo "Descompactando arquivos..." | tee -a "$LOG_FILE"
+    if [ -f "data/training_set_features.zip" ]; then
+        if [ "$EXTRACT_MODE" = "full" ]; then
+            echo "Extraindo dataset completo..." | tee -a "$LOG_FILE"
+            unzip -oq data/training_set_features.zip -d "$DATA_DIR" >> "$LOG_FILE" 2>&1
+        else
+            echo "Extraindo amostra de 100 arquivos aleatórios..." | tee -a "$LOG_FILE"
+            zipinfo -1 data/training_set_features.zip | shuf | head -n 100 | xargs unzip -oq data/training_set_features.zip -d "$DATA_DIR" >> "$LOG_FILE" 2>&1
+        fi
+        EXTRACTED=$(find "$DATA_DIR" -maxdepth 1 -type f -name "*.json" 2>/dev/null | wc -l)
+        echo "✓ Arquivos descompactados: $EXTRACTED em $DATA_DIR" | tee -a "$LOG_FILE"
+    else
+        echo "✗ ERRO: data/training_set_features.zip não encontrado" | tee -a "$LOG_FILE"
+        exit 1
+    fi
 fi
 
 # [2/6] Verificar arquivos JSON
