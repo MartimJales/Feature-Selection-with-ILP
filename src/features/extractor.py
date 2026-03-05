@@ -23,67 +23,98 @@ class JSONFeatureExtractor:
             logger.info(f"Limiting to {limit} samples (total available: {len(list(self.json_dir.glob('*.json')))})")
 
         data = []
-        for file_path in json_files:
+        total_files = len(json_files)
+        progress_step = max(1, total_files // 20)  # ~5% updates
+
+        for idx, file_path in enumerate(json_files, start=1):
             with open(file_path, 'r') as f:
                 sample = json.load(f)
                 sample['file_hash'] = file_path.stem
                 data.append(sample)
+
+            if idx == 1 or idx % progress_step == 0 or idx == total_files:
+                logger.info(f"Loading JSON files: {idx}/{total_files} ({(idx/total_files)*100:.1f}%)")
 
         logger.info(f"Loaded {len(data)} JSON files")
         return data
 
     def extract_binary_features(self, samples: List[Dict]) -> pd.DataFrame:
         """
-        Extract binary features: permission presence, suspicious API calls, etc.
+        Extract binary features with memory optimization (chunked processing).
         """
-        # Coletar vocabulário único
+        # Pass 1: Build vocabulary
+        logger.info("Pass 1/2: Building feature vocabulary...")
         all_permissions = set()
-        all_activities = set()
-        all_services = set()
-        all_receivers = set()
-        all_api_calls = set()
         all_suspicious = set()
         all_intents = set()
 
-        for sample in samples:
+        total_samples = len(samples)
+
+        for idx, sample in enumerate(samples, start=1):
             all_permissions.update(sample.get('req_permissions', []))
-            all_activities.update(sample.get('activities', []))
-            all_services.update(sample.get('services', []))
-            all_receivers.update(sample.get('receivers', []))
-            all_api_calls.update(sample.get('api_calls', []))
             all_suspicious.update(sample.get('suspicious_calls', []))
             all_intents.update(sample.get('intent_filters', []))
 
-        # Criar DataFrame binário
-        rows = []
-        for sample in samples:
-            row = {'file_hash': sample['file_hash']}
+            if idx % 5000 == 0 or idx == total_samples:
+                logger.info(f"  Vocabulary: {idx}/{total_samples} ({(idx/total_samples)*100:.1f}%)")
 
-            # Binary features: permissions
-            for perm in all_permissions:
-                row[f'perm_{perm}'] = int(perm in sample.get('req_permissions', []))
+        # Convert to sorted lists for consistent ordering
+        permissions_list = sorted(list(all_permissions))
+        suspicious_list = sorted(list(all_suspicious))
+        intents_list = sorted(list(all_intents))
 
-            # Binary features: suspicious calls
-            for call in all_suspicious:
-                row[f'suspicious_{call}'] = int(call in sample.get('suspicious_calls', []))
+        logger.info(f"Vocabulary: {len(permissions_list)} permissions, {len(suspicious_list)} suspicious calls, {len(intents_list)} intents")
 
-            # Binary features: intents
-            for intent in all_intents:
-                row[f'intent_{intent}'] = int(intent in sample.get('intent_filters', []))
+        # Pass 2: Extract features in chunks (memory-efficient)
+        logger.info("Pass 2/2: Extracting features...")
+        chunk_size = 5000  # Process in chunks to avoid OOM
+        all_chunks = []
+        processed = 0
 
-            # Count features
-            row['n_activities'] = len(sample.get('activities', []))
-            row['n_services'] = len(sample.get('services', []))
-            row['n_receivers'] = len(sample.get('receivers', []))
-            row['n_providers'] = len(sample.get('providers', []))
-            row['n_api_calls'] = len(sample.get('api_calls', []))
-            row['n_permissions'] = len(sample.get('req_permissions', []))
-            row['n_used_permissions'] = len(sample.get('used_permissions', []))
-            row['n_urls'] = len(sample.get('urls', []))
+        for chunk_start in range(0, total_samples, chunk_size):
+            chunk_end = min(chunk_start + chunk_size, total_samples)
+            chunk_samples = samples[chunk_start:chunk_end]
 
-            rows.append(row)
+            rows = []
+            for sample in chunk_samples:
+                row = {'file_hash': sample['file_hash']}
 
-        df = pd.DataFrame(rows)
+                # Binary features: permissions
+                perms = sample.get('req_permissions', [])
+                for perm in permissions_list:
+                    row[f'perm_{perm}'] = int(perm in perms)
+
+                # Binary features: suspicious calls
+                suspicious = sample.get('suspicious_calls', [])
+                for call in suspicious_list:
+                    row[f'suspicious_{call}'] = int(call in suspicious)
+
+                # Binary features: intents
+                intents = sample.get('intent_filters', [])
+                for intent in intents_list:
+                    row[f'intent_{intent}'] = int(intent in intents)
+
+                # Count features
+                row['n_activities'] = len(sample.get('activities', []))
+                row['n_services'] = len(sample.get('services', []))
+                row['n_receivers'] = len(sample.get('receivers', []))
+                row['n_providers'] = len(sample.get('providers', []))
+                row['n_api_calls'] = len(sample.get('api_calls', []))
+                row['n_permissions'] = len(sample.get('req_permissions', []))
+                row['n_used_permissions'] = len(sample.get('used_permissions', []))
+                row['n_urls'] = len(sample.get('urls', []))
+
+                rows.append(row)
+
+            chunk_df = pd.DataFrame(rows)
+            all_chunks.append(chunk_df)
+            processed = chunk_end
+
+            progress_pct = (processed / total_samples) * 100
+            logger.info(f"  Extracted: {processed}/{total_samples} ({progress_pct:.1f}%)")
+
+        # Concatenate all chunks
+        df = pd.concat(all_chunks, ignore_index=True)
         logger.info(f"Extracted {df.shape[1]-1} features from {df.shape[0]} samples")
         return df
 
@@ -120,6 +151,11 @@ class JSONFeatureExtractor:
 if __name__ == "__main__":
     import sys
     import argparse
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s"
+    )
 
     parser = argparse.ArgumentParser(description="Extract features from Android malware JSON files")
     parser.add_argument("json_dir", nargs="?", default="./data/destino", help="Directory containing JSON files")
