@@ -98,12 +98,17 @@ class FeatureSelector:
         X: pd.DataFrame,
         y: np.ndarray,
         top_k: int = 30
-    ) -> pd.DataFrame:
-        """Compare IG and MI rankings side by side."""
-        ig_df = self.rank_features_by_information_gain(X, y, top_k)
-        mi_df = self.rank_features_by_mutual_information(X, y, top_k)
+    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
+        """
+        Compare IG and MI rankings side by side.
+        Returns: (top_k_df, all_features_df)
+        """
+        # Get rankings for all features (not just top_k)
+        ig_df = self.rank_features_by_information_gain(X, y, top_k=len(X.columns))
+        mi_df = self.rank_features_by_mutual_information(X, y, top_k=len(X.columns))
 
-        comparison = ig_df.merge(
+        # Merge all results
+        all_features = ig_df.merge(
             mi_df,
             on='feature',
             how='outer',
@@ -111,11 +116,11 @@ class FeatureSelector:
         )
 
         # Calculate combined score
-        comparison['combined_score'] = (
-            comparison['information_gain'].fillna(0) +
-            comparison['mutual_information'].fillna(0)
+        all_features['combined_score'] = (
+            all_features['information_gain'].fillna(0) +
+            all_features['mutual_information'].fillna(0)
         ) / 2
 
-        comparison = comparison.sort_values('combined_score', ascending=False)
+        all_features = all_features.sort_values('combined_score', ascending=False)
 
-        return comparison
+        return all_features.head(top_k), all_features

@@ -73,8 +73,13 @@ echo "[5/6] Analisando features (IG + MI)..." | tee -a "$LOG_FILE"
 python3 -m src.analysis.feature_analysis >> "$LOG_FILE" 2>&1
 echo "✓ Análise concluída. Resultados em ./reports/feature_analysis/" | tee -a "$LOG_FILE"
 
-# [6/6] Treinamento (comentado)
-# echo "[6/6] Executando treinamento..." | tee -a "$LOG_FILE"
+# [6/6] Análise incremental de IG (crescimento por 100 features)
+echo "[6/6] Analisando crescimento incremental de IG..." | tee -a "$LOG_FILE"
+python3 -m src.analysis.incremental_ig_analysis >> "$LOG_FILE" 2>&1
+echo "✓ Análise incremental concluída. Resultados em ./reports/feature_analysis/" | tee -a "$LOG_FILE"
+
+# [7/7] Treinamento (comentado)
+# echo "[7/7] Executando treinamento..." | tee -a "$LOG_FILE"
 # if python3 -c "import src.models.train" 2>/dev/null; then
 #     python3 -m src.models.train >> "$LOG_FILE" 2>&1
 #     echo "✓ Treinamento concluído" | tee -a "$LOG_FILE"
@@ -89,6 +94,8 @@ echo "=== Pipeline Completo finalizado com sucesso ===" | tee -a "$LOG_FILE"
 echo "=============================================" | tee -a "$LOG_FILE"
 echo "✓ Samples processados: $JSON_COUNT" | tee -a "$LOG_FILE"
 echo "✓ Features extraídas: $FEATURES_FILE" | tee -a "$LOG_FILE"
-echo "✓ Análise de features: ./reports/feature_analysis/feature_rankings.csv" | tee -a "$LOG_FILE"
-echo "✓ Gráficos: ./reports/feature_analysis/feature_importance.png" | tee -a "$LOG_FILE"
+echo "✓ Análise de features: ./reports/feature_analysis/feature_rankings_top30.csv" | tee -a "$LOG_FILE"
+echo "✓ Rankings completos: ./reports/feature_analysis/feature_rankings_all.parquet" | tee -a "$LOG_FILE"
+echo "✓ Análise incremental: ./reports/feature_analysis/incremental_ig_analysis.csv" | tee -a "$LOG_FILE"
+echo "✓ Gráficos IG: ./reports/feature_analysis/incremental_ig_analysis.png" | tee -a "$LOG_FILE"
 echo "✓ Log completo: $LOG_FILE" | tee -a "$LOG_FILE"

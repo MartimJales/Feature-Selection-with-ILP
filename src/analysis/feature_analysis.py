@@ -29,10 +29,17 @@ def analyze_features(
 
     # Feature selection
     selector = FeatureSelector()
-    comparison_df = selector.compare_methods(X, y, top_k=top_k)
+    comparison_df, all_features_df = selector.compare_methods(X, y, top_k=top_k)
 
-    # Save & plot
+    # Save top-K
     comparison_df.to_csv(output_path / f"feature_rankings_top{top_k}.csv", index=False)
+    logger.info(f"✓ Saved top-{top_k} features to feature_rankings_top{top_k}.csv")
+
+    # Save ALL features (Parquet format for efficiency)
+    all_features_df.to_parquet(output_path / "feature_rankings_all.parquet", index=False)
+    logger.info(f"✓ Saved all {len(all_features_df)} features to feature_rankings_all.parquet")
+
+    # Plot
     plot_feature_importance(comparison_df, output_path, top_k)
 
 def plot_feature_importance(df: pd.DataFrame, output_dir: Path, top_k: int):
