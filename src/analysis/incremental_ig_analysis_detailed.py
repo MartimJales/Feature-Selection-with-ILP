@@ -2,8 +2,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import logging
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+import matplotlib.pyplot as plt
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -23,7 +22,7 @@ def analyze_incremental_ig_detailed(parquet_file, output_dir="./reports/feature_
 
     # Detailed analysis: steps of 50 up to 20k features
     step_size = 50
-    max_k = min(20000, len(df_rankings))
+    max_k = min(1500, len(df_rankings))
 
     logger.info(f"Analyzing incremental growth with step={step_size} up to top-{max_k}")
 
@@ -71,107 +70,44 @@ def analyze_incremental_ig_detailed(parquet_file, output_dir="./reports/feature_
 
     return incremental_df
 
-def plot_interactive_analysis(df, output_dir="./reports/feature_analysis"):
-    """Create interactive plots with Plotly."""
+def plot_incremental_analysis(df, output_dir="./reports/feature_analysis"):
+    """Create static PNG plots with matplotlib."""
     output_path = Path(output_dir)
 
-    # Create subplots
-    fig = make_subplots(
-        rows=2, cols=2,
-        subplot_titles=(
-            'Cumulative Information Gain',
-            'Cumulative Mutual Information',
-            'Mean IG per Feature',
-            'Incremental Gain (per 50 features)'
-        ),
-        vertical_spacing=0.12,
-        horizontal_spacing=0.10
-    )
+    fig, axes = plt.subplots(2, 2, figsize=(14, 8))
 
-    # Plot 1: Cumulative IG
-    fig.add_trace(
-        go.Scatter(
-            x=df['top_k'],
-            y=df['cumulative_ig'],
-            mode='lines+markers',
-            name='Cumulative IG',
-            line=dict(color='#3357FF', width=2),
-            marker=dict(size=4),
-            hovertemplate='<b>Top-%{x}</b><br>Cumulative IG: %{y:.4f}<extra></extra>'
-        ),
-        row=1, col=1
-    )
+    axes[0, 0].plot(df['top_k'], df['cumulative_ig'], color='#3357FF', linewidth=2)
+    axes[0, 0].set_title('Cumulative Information Gain', fontsize=12, fontweight='bold')
+    axes[0, 0].set_xlabel('Top-K Features', fontsize=11, fontweight='bold')
+    axes[0, 0].set_ylabel('Cumulative IG', fontsize=11, fontweight='bold')
+    axes[0, 0].grid(alpha=0.3)
 
-    # Plot 2: Cumulative MI
-    fig.add_trace(
-        go.Scatter(
-            x=df['top_k'],
-            y=df['cumulative_mi'],
-            mode='lines+markers',
-            name='Cumulative MI',
-            line=dict(color='#FF5733', width=2),
-            marker=dict(size=4),
-            hovertemplate='<b>Top-%{x}</b><br>Cumulative MI: %{y:.4f}<extra></extra>'
-        ),
-        row=1, col=2
-    )
+    axes[0, 1].plot(df['top_k'], df['cumulative_mi'], color='#FF5733', linewidth=2)
+    axes[0, 1].set_title('Cumulative Mutual Information', fontsize=12, fontweight='bold')
+    axes[0, 1].set_xlabel('Top-K Features', fontsize=11, fontweight='bold')
+    axes[0, 1].set_ylabel('Cumulative MI', fontsize=11, fontweight='bold')
+    axes[0, 1].grid(alpha=0.3)
 
-    # Plot 3: Mean IG
-    fig.add_trace(
-        go.Scatter(
-            x=df['top_k'],
-            y=df['mean_ig'],
-            mode='lines+markers',
-            name='Mean IG',
-            line=dict(color='#3357FF', width=2),
-            marker=dict(size=4),
-            hovertemplate='<b>Top-%{x}</b><br>Mean IG: %{y:.6f}<extra></extra>'
-        ),
-        row=2, col=1
-    )
+    axes[1, 0].plot(df['top_k'], df['mean_ig'], color='#3357FF', linewidth=2)
+    axes[1, 0].set_title('Mean IG per Feature', fontsize=12, fontweight='bold')
+    axes[1, 0].set_xlabel('Top-K Features', fontsize=11, fontweight='bold')
+    axes[1, 0].set_ylabel('Mean IG', fontsize=11, fontweight='bold')
+    axes[1, 0].grid(alpha=0.3)
 
-    # Plot 4: Incremental Gain
-    fig.add_trace(
-        go.Bar(
-            x=df['top_k'],
-            y=df['ig_gain'].fillna(0),
-            name='IG Gain',
-            marker=dict(color='#3357FF', opacity=0.7),
-            hovertemplate='<b>Top-%{x}</b><br>Gain: %{y:.4f}<extra></extra>'
-        ),
-        row=2, col=2
-    )
+    axes[1, 1].bar(df['top_k'], df['ig_gain'].fillna(0), width=40, color='#3357FF', alpha=0.7)
+    axes[1, 1].set_title('Incremental IG Gain (per 50)', fontsize=12, fontweight='bold')
+    axes[1, 1].set_xlabel('Top-K Features', fontsize=11, fontweight='bold')
+    axes[1, 1].set_ylabel('IG Gain', fontsize=11, fontweight='bold')
+    axes[1, 1].grid(alpha=0.3, axis='y')
 
-    # Update axes labels
-    fig.update_xaxes(title_text="Number of Features (Top-K)", row=1, col=1)
-    fig.update_xaxes(title_text="Number of Features (Top-K)", row=1, col=2)
-    fig.update_xaxes(title_text="Number of Features (Top-K)", row=2, col=1)
-    fig.update_xaxes(title_text="Number of Features (Top-K)", row=2, col=2)
+    plt.tight_layout()
 
-    fig.update_yaxes(title_text="Cumulative IG", row=1, col=1)
-    fig.update_yaxes(title_text="Cumulative MI", row=1, col=2)
-    fig.update_yaxes(title_text="Mean IG", row=2, col=1)
-    fig.update_yaxes(title_text="IG Gain", row=2, col=2)
-
-    # Update layout
-    fig.update_layout(
-        title_text="Detailed Incremental Feature Analysis (Focus: Growth Phase)",
-        title_font_size=16,
-        showlegend=False,
-        height=800,
-        width=1400,
-        hovermode='closest'
-    )
-
-    # Save interactive HTML
-    html_file = output_path / "incremental_ig_analysis_detailed.html"
-    fig.write_html(html_file)
-    logger.info(f"✓ Interactive plot saved to {html_file}")
-
-    # Also save static PNG
+    # Save static PNG
     png_file = output_path / "incremental_ig_analysis_detailed.png"
-    fig.write_image(png_file, width=1400, height=800, scale=2)
-    logger.info(f"✓ Static plot saved to {png_file}")
+    plt.savefig(png_file, dpi=300, bbox_inches='tight')
+    plt.close(fig)
+    logger.info(f"✓ Plot saved to {png_file}")
+
 
 if __name__ == "__main__":
     # Paths
@@ -187,21 +123,8 @@ if __name__ == "__main__":
     # Analyze incremental IG with detailed steps
     incremental_df = analyze_incremental_ig_detailed(parquet_file, output_dir)
 
-    # Plot results (interactive + static)
-    try:
-        plot_interactive_analysis(incremental_df, output_dir)
-    except Exception as e:
-        logger.warning(f"Could not create interactive plot: {e}")
-        logger.info("Install kaleido for static image export: pip install kaleido")
-        # Fallback to just HTML
-        import plotly.graph_objects as go
-        from plotly.subplots import make_subplots
-        output_path = Path(output_dir)
-        fig = make_subplots(rows=2, cols=2)
-        # ... (same plotting code)
-        html_file = output_path / "incremental_ig_analysis_detailed.html"
-        fig.write_html(html_file)
-        logger.info(f"✓ Interactive HTML saved to {html_file}")
+    # Plot results (PNG only)
+    plot_incremental_analysis(incremental_df, output_dir)
 
     # Print summary
     print("\n" + "="*80)
@@ -219,5 +142,4 @@ if __name__ == "__main__":
     print(f"  - Total cumulative IG (top-{incremental_df['top_k'].max()}): {incremental_df['cumulative_ig'].iloc[-1]:.4f}")
     print(f"  - Average IG per feature: {incremental_df['mean_ig'].iloc[-1]:.6f}")
     print(f"  - Highest gain (per 50): {incremental_df['ig_gain'].max():.4f} at top-{incremental_df.loc[incremental_df['ig_gain'].idxmax(), 'top_k']:.0f}")
-    print(f"  - Growth phase captures: ~{incremental_df['cumulative_ig'].iloc[-1]/df_all_ig*100:.1f}% of total IG" if 'df_all_ig' in dir() else "")
     print("="*80)
