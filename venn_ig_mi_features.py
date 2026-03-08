@@ -88,6 +88,5 @@ fig.legend(
 )
 
 plt.tight_layout(rect=[0, 0.05, 1, 1])
-# plt.savefig("reports/feature_analysis/venn_ig_mi_comparison.pdf", bbox_inches='tight')
 plt.savefig("reports/feature_analysis/venn_ig_mi_comparison.png", dpi=300, bbox_inches='tight')
 print("\n✓ Venn diagrams saved to reports/feature_analysis/venn_ig_mi_comparison.png")

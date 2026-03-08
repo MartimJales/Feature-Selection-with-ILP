@@ -106,11 +106,9 @@ def plot_incremental_analysis(df, output_dir="./reports/feature_analysis"):
 
     # Save plots
     png_file = output_path / "incremental_ig_analysis.png"
-    pdf_file = output_path / "incremental_ig_analysis.pdf"
 
     plt.savefig(png_file, dpi=300, bbox_inches='tight')
-    plt.savefig(pdf_file, bbox_inches='tight')
-    logger.info(f"✓ Plots saved to {png_file} and {pdf_file}")
+    logger.info(f"✓ Plots saved to {png_file}")
 
 if __name__ == "__main__":
     # Paths
