@@ -15,24 +15,41 @@ from src.features.extractor import JSONFeatureExtractor
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
+PROJECT_ROOT = Path(__file__).resolve().parent
+
+
+def resolve_project_path(path_str: str) -> Path:
+    """Resolve absolute paths directly and relative paths from the project root."""
+    path = Path(path_str).expanduser()
+    if path.is_absolute():
+        return path
+    return (PROJECT_ROOT / path).resolve()
 
 
 def load_dataset(json_dir: str, labels_path: str, features_path: str | None = None):
     """Load feature matrix X and labels y, preferring a pre-extracted feature file when available."""
+    labels_file = resolve_project_path(labels_path)
+
     if features_path:
-        fp = Path(features_path)
+        fp = resolve_project_path(features_path)
         if fp.exists():
             logger.info(f"Loading pre-extracted features from {fp}")
-            return load_features_file(str(fp), labels_path)
+            return load_features_file(str(fp), str(labels_file))
         logger.warning(f"features_path not found: {fp}. Falling back to JSON extraction.")
 
-    extractor = JSONFeatureExtractor(json_dir)
-    return extractor.load_with_labels(labels_path)
+    json_path = resolve_project_path(json_dir)
+    if not json_path.exists():
+        raise FileNotFoundError(f"JSON directory not found: {json_path}")
+    if not labels_file.exists():
+        raise FileNotFoundError(f"Labels file not found: {labels_file}")
+
+    extractor = JSONFeatureExtractor(str(json_path))
+    return extractor.load_with_labels(str(labels_file))
 
 
 def load_top_features(ranking_path: str, top_k: int) -> list[str]:
     """Load ranked features and return top-k feature names."""
-    ranking_file = Path(ranking_path)
+    ranking_file = resolve_project_path(ranking_path)
     if not ranking_file.exists():
         raise FileNotFoundError(f"Ranking file not found: {ranking_file}")
 
@@ -93,8 +110,11 @@ def run_clustering(
     random_state: int = 42,
     features_path: str | None = None,
 ):
-    out = Path(output_dir)
+    out = resolve_project_path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
+
+    logger.info(f"Project root: {PROJECT_ROOT}")
+    logger.info(f"Output directory: {out}")
 
     X, y = load_dataset(json_dir=json_dir, labels_path=labels_path, features_path=features_path)
     logger.info(f"Dataset loaded: {X.shape[0]} samples x {X.shape[1]} features")
@@ -107,6 +127,8 @@ def run_clustering(
 
     if len(selected_features) < top_k:
         logger.warning(f"Only {len(selected_features)}/{top_k} ranked features found in dataset.")
+
+    pd.DataFrame({"feature": selected_features}).to_csv(out / f"selected_features_top{len(selected_features)}.csv", index=False)
 
     X_selected = X[selected_features]
 
@@ -157,26 +179,27 @@ def run_clustering(
     axes[1].set_ylabel("PC2")
 
     plt.tight_layout()
-    plt.savefig(out / "clustering_pca_top200.png", dpi=300, bbox_inches="tight")
+    plt.savefig(out / f"clustering_pca_top{len(selected_features)}.png", dpi=300, bbox_inches="tight")
+    plt.close(fig)
 
     logger.info(f"✓ Clustering report saved to {out}")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Unsupervised clustering with top-k ranked features")
-    parser.add_argument("--json-dir", default="./data/destino", help="Directory with JSON files")
-    parser.add_argument("--labels-path", default="./data/training_set.csv", help="Path to labels CSV")
+    parser.add_argument("--json-dir", default="data/destino", help="Directory with JSON files")
+    parser.add_argument("--labels-path", default="data/training_set.csv", help="Path to labels CSV")
     parser.add_argument(
         "--ranking-path",
-        default="./reports/feature_analysis/feature_rankings_all.parquet",
+        default="reports/feature_analysis/feature_rankings_all.parquet",
         help="Path to feature ranking file (.parquet or .csv)",
     )
     parser.add_argument(
         "--features-path",
-        default="./reports/extracted_features.parquet",
+        default="reports/extracted_features.parquet",
         help="Optional pre-extracted features file (.parquet or .csv)",
     )
-    parser.add_argument("--output-dir", default="./reports/clustering_top200", help="Output directory")
+    parser.add_argument("--output-dir", default="reports/clustering_top200", help="Output directory")
     parser.add_argument("--top-k", type=int, default=200, help="Number of top-ranked features to use")
     parser.add_argument("--n-clusters", type=int, default=2, help="Number of clusters for K-Means")
     parser.add_argument("--random-state", type=int, default=42, help="Random seed")
