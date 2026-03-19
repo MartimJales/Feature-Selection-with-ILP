@@ -21,6 +21,11 @@ def analyze_incremental_ig_from_parquet(parquet_file, labels_path, output_dir=".
     df_rankings = pd.read_parquet(parquet_file)
     logger.info(f"Loaded {len(df_rankings)} features with IG and MI scores")
 
+    # Optional metadata column for debugging
+    feature_col = 'feature' if 'feature' in df_rankings.columns else None
+    if feature_col is None:
+        logger.warning("Column 'feature' not found in ranking file; feature-name debugging columns will be empty.")
+
     # Calculate cumulative IG scores in steps of 100
     step_size = 100
     max_k = len(df_rankings)
@@ -41,6 +46,11 @@ def analyze_incremental_ig_from_parquet(parquet_file, labels_path, output_dir=".
         worst_ig = top_k_df.iloc[-1]['information_gain']
         worst_mi = top_k_df.iloc[-1]['mutual_information']
 
+        # Debug metadata: which features were added in this step
+        batch_start = max(0, top_k - step_size)
+        batch_df = df_rankings.iloc[batch_start:top_k]
+        batch_feature_names = "|".join(batch_df[feature_col].astype(str).tolist()) if feature_col is not None else None
+
         incremental_results.append({
             'top_k': top_k,
             'cumulative_ig': cumulative_ig,
@@ -48,7 +58,8 @@ def analyze_incremental_ig_from_parquet(parquet_file, labels_path, output_dir=".
             'mean_ig': mean_ig,
             'mean_mi': mean_mi,
             'worst_ig_in_batch': worst_ig,
-            'worst_mi_in_batch': worst_mi
+            'worst_mi_in_batch': worst_mi,
+            'batch_feature_names': batch_feature_names
         })
 
         logger.info(f"Top-{top_k}: Cumulative IG={cumulative_ig:.4f}, Mean IG={mean_ig:.4f}")
