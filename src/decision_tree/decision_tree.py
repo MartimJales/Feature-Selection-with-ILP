@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Iterable, List
 
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.metrics import (
 	accuracy_score,
 	balanced_accuracy_score,
@@ -14,7 +15,7 @@ from sklearn.metrics import (
 	roc_auc_score,
 )
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, plot_tree
 
 
 def parse_top_k(values: Iterable[str]) -> List[int]:
@@ -138,6 +139,30 @@ def export_feature_importance(
 	imp.to_csv(output_file, index=False)
 
 
+def export_tree_png(
+	clf: DecisionTreeClassifier,
+	feature_names: List[str],
+	output_file: Path,
+	plot_max_depth: int | None = None,
+) -> None:
+	# Scales reasonably with tree size while keeping readability.
+	fig, ax = plt.subplots(figsize=(36, 18))
+	plot_tree(
+		clf,
+		feature_names=feature_names,
+		class_names=["goodware", "malware"],
+		filled=True,
+		rounded=True,
+		fontsize=8,
+		max_depth=plot_max_depth,
+		ax=ax,
+	)
+	ax.set_title("Decision Tree (best model)", fontsize=14, fontweight="bold")
+	fig.tight_layout()
+	fig.savefig(output_file, dpi=250, bbox_inches="tight")
+	plt.close(fig)
+
+
 def main() -> None:
 	parser = argparse.ArgumentParser(description="Decision Tree comparison on top-K features")
 	parser.add_argument("--features", default="./reports/extracted_features.parquet")
@@ -145,6 +170,7 @@ def main() -> None:
 	parser.add_argument("--rankings", default="./reports/feature_analysis/feature_rankings_all.parquet")
 	parser.add_argument("--top-k", nargs="+", default=["200", "500", "1000"])
 	parser.add_argument("--depths", nargs="+", default=["5", "10", "20", "None"])
+	parser.add_argument("--plot-max-depth", type=int, default=6, help="Max depth to display in tree PNG (use -1 for full tree)")
 	parser.add_argument("--seed", type=int, default=42)
 	parser.add_argument("--output-dir", default="./reports/decision_tree")
 	args = parser.parse_args()
@@ -191,6 +217,10 @@ def main() -> None:
 		best_depth_str = best["max_depth"].lower() if isinstance(best["max_depth"], str) else str(best["max_depth"])
 		imp_file = output_dir / f"decision_tree_top{k}_best_depth_{best_depth_str}_feature_importance.csv"
 		export_feature_importance(best["model"], best["feature_names"], imp_file, top_n=30)
+
+		plot_depth = None if args.plot_max_depth < 0 else args.plot_max_depth
+		tree_png = output_dir / f"decision_tree_top{k}_best_depth_{best_depth_str}.png"
+		export_tree_png(best["model"], best["feature_names"], tree_png, plot_max_depth=plot_depth)
 
 	summary_df = pd.DataFrame(summary_rows).sort_values(["top_k", "f1"], ascending=[True, False])
 	summary_file = output_dir / "decision_tree_comparison_topk.csv"
