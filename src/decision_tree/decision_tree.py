@@ -145,21 +145,61 @@ def export_tree_png(
 	output_file: Path,
 	plot_max_depth: int | None = None,
 ) -> None:
-	# Scales reasonably with tree size while keeping readability.
-	fig, ax = plt.subplots(figsize=(36, 18))
+	# Dynamic sizing to avoid leaf overlap as tree gets wider/deeper.
+	full_depth = clf.get_depth()
+	shown_depth = full_depth if plot_max_depth is None else min(plot_max_depth, full_depth)
+	effective_leaves = min(clf.get_n_leaves(), 2 ** max(shown_depth, 1))
+
+	fig_w = max(24, min(220, effective_leaves * 1.4))
+	fig_h = max(12, min(80, (shown_depth + 1) * 2.8))
+	font_size = 8 if effective_leaves <= 64 else 6
+
+	fig, ax = plt.subplots(figsize=(fig_w, fig_h))
 	plot_tree(
 		clf,
 		feature_names=feature_names,
 		class_names=["goodware", "malware"],
 		filled=True,
 		rounded=True,
-		fontsize=8,
+		fontsize=font_size,
 		max_depth=plot_max_depth,
 		ax=ax,
 	)
 	ax.set_title("Decision Tree (best model)", fontsize=14, fontweight="bold")
 	fig.tight_layout()
 	fig.savefig(output_file, dpi=250, bbox_inches="tight")
+	plt.close(fig)
+
+
+def export_tree_svg(
+	clf: DecisionTreeClassifier,
+	feature_names: List[str],
+	output_file: Path,
+	plot_max_depth: int | None = None,
+) -> None:
+	# Same dynamic layout as PNG, but vector format allows deep zoom/pan.
+	full_depth = clf.get_depth()
+	shown_depth = full_depth if plot_max_depth is None else min(plot_max_depth, full_depth)
+	effective_leaves = min(clf.get_n_leaves(), 2 ** max(shown_depth, 1))
+
+	fig_w = max(24, min(260, effective_leaves * 1.6))
+	fig_h = max(12, min(100, (shown_depth + 1) * 3.0))
+	font_size = 8 if effective_leaves <= 64 else 6
+
+	fig, ax = plt.subplots(figsize=(fig_w, fig_h))
+	plot_tree(
+		clf,
+		feature_names=feature_names,
+		class_names=["goodware", "malware"],
+		filled=True,
+		rounded=True,
+		fontsize=font_size,
+		max_depth=plot_max_depth,
+		ax=ax,
+	)
+	ax.set_title("Decision Tree (best model)", fontsize=14, fontweight="bold")
+	fig.tight_layout()
+	fig.savefig(output_file, format="svg", bbox_inches="tight")
 	plt.close(fig)
 
 
@@ -221,6 +261,8 @@ def main() -> None:
 		plot_depth = None if args.plot_max_depth < 0 else args.plot_max_depth
 		tree_png = output_dir / f"decision_tree_top{k}_best_depth_{best_depth_str}.png"
 		export_tree_png(best["model"], best["feature_names"], tree_png, plot_max_depth=plot_depth)
+		tree_svg = output_dir / f"decision_tree_top{k}_best_depth_{best_depth_str}.svg"
+		export_tree_svg(best["model"], best["feature_names"], tree_svg, plot_max_depth=plot_depth)
 
 	summary_df = pd.DataFrame(summary_rows).sort_values(["top_k", "f1"], ascending=[True, False])
 	summary_file = output_dir / "decision_tree_comparison_topk.csv"
