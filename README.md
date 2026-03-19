@@ -29,41 +29,53 @@ The DREBIN feature set captures rich behavioural signals (permissions, API calls
 
 ```mermaid
 flowchart TD
-    A([Full Feature Matrix\n~75k samples · binary DREBIN]) --> B
+    A([Full Feature Matrix
+    ~75k samples · 80k features]) --> B
 
-    B["Feature Selection\nTop-200 by IG / MI\nno labels used"]
+    B["Feature Selection
+    Top-k by IG / MI"]
 
     B --> C["Unsupervised Clustering"]
 
-    C --> D["K-Means\nk=2"]
-    C --> E["HDBSCAN\nDBSCAN"]
-    C --> F["UMAP / PCA\nvisualisation"]
+    C --> D["K-Means
+    k=2"]
+    C --> F["UMAP / PCA
+    visualisation"]
 
     D --> G
-    E --> G
     F --> G
 
-    G["Post-hoc Evaluation\nARI · silhouette · composition"]
+    G["Post-hoc Evaluation
+    ARI · silhouette · composition"]
 
-    G --> H1["Ransomware\nWRITE_EXTERNAL_STORAGE\ncrypto API calls"]
-    G --> H2["Spyware\nREAD_CONTACTS · RECORD_AUDIO\nACCESS_FINE_LOCATION"]
-    G --> H3["Botnet\nC2 URLs\nRECEIVE_BOOT_COMPLETED"]
-    G --> H4["Trojan\nREAD_SMS · SEND_SMS\naccessibility intents"]
-    G --> H5["Adware\nadvertising SDK\nmany URLs"]
-
+    G --> H1["Ransomware
+    WRITE_EXTERNAL_STORAGE
+    API calls"]
+    G --> H2["Spyware
+    READ_CONTACTS · RECORD_AUDIO
+    ACCESS_FINE_LOCATION"]
+    G --> H3["Botnet
+    C2 URLs
+    RECEIVE_BOOT_COMPLETED"]
+    G --> H4["Trojan
+    READ_SMS · SEND_SMS
+    accessibility intents"]
+    G --> H5["Adware
+    advertising SDK
+    many URLs"]
     H1 --> I
     H2 --> I
     H3 --> I
     H4 --> I
     H5 --> I
 
-    I["ILP Rule Extraction\ndiscriminative features → logical rules"]
+    I["ILP Rule Extraction
+    logical rules"]
 
     style A fill:#1e1e2e,color:#cdd6f4,stroke:#89b4fa
     style B fill:#1e3a5f,color:#cdd6f4,stroke:#89b4fa
     style C fill:#1e3a5f,color:#cdd6f4,stroke:#89b4fa
     style D fill:#2d2d3f,color:#cdd6f4,stroke:#cba6f7
-    style E fill:#2d2d3f,color:#cdd6f4,stroke:#cba6f7
     style F fill:#2d2d3f,color:#cdd6f4,stroke:#cba6f7
     style G fill:#1e3a5f,color:#cdd6f4,stroke:#89b4fa
     style H1 fill:#3b1a1a,color:#f38ba8,stroke:#f38ba8
