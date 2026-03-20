@@ -19,3 +19,7 @@ Estrutura mínima para integrar PADTAI no projeto principal.
 
 ## Próximo passo
 Criar script de preparação da tabela top-200 em `src/padtai/` e um script runner para chamadas repetidas ao PADTAI.
+
+
+## ⚠️ Warning: setuptools compatibility issue
+If you encounter an error related to `setuptools` when running the PADTAI pipeline, please ensure that you have the correct version of `setuptools` installed. 81
