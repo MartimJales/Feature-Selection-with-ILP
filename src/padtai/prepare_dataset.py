@@ -148,7 +148,10 @@ def prepare_top200_dataset(
     logger.info("\nData type summary:")
     print(f"  Shape: {final_df.shape}")
     print(f"  Label distribution: {final_df['label'].value_counts().to_dict()}")
-    print(f"  Features with all 0/1 values: {sum(1 for col in cols_to_keep if set(final_df[col].unique()).issubset({0, 1, 0.0, 1.0}))}/{len(cols_to_keep)}")
+    print(
+        f"  Features with all 0/1 values: "
+        f"{sum(1 for col in sanitized_cols if set(final_df[col].unique()).issubset({0, 1, 0.0, 1.0}))}/{len(sanitized_cols)}"
+    )
 
     # 8. Save to CSV
     logger.info(f"\nSaving to {output_file}...")
