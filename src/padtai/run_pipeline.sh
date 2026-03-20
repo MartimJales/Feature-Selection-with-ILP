@@ -11,7 +11,7 @@ OUTPUT_DIR="./reports/padtai"
 PADTAI_DIR="./PADTAI"
 TOP_K="${1:-200}"
 TIMEOUT="${2:-1800}"
-SAMPLE_SIZE="${3:-3000}"
+SAMPLE_SIZE="${3:--1}"
 
 # Step 1: Prepare dataset
 echo "[1/2] Preparing top-${TOP_K} features..."

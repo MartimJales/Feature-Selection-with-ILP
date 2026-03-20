@@ -52,9 +52,14 @@ def create_run_temp_dataset(
     if not data_rows:
         raise ValueError(f"Dataset has no data rows: {source_dataset_path}")
 
+    # Match PADTAI behavior when sample_size is unset (-1): 3400 / #columns
+    effective_sample_size = sample_size
+    if effective_sample_size <= 0:
+        effective_sample_size = max(1, 3400 // len(header))
+
     rng = random.Random(1000 + run_id)
-    if sample_size > 0 and len(data_rows) > sample_size:
-        sampled_rows = rng.sample(data_rows, sample_size)
+    if len(data_rows) > effective_sample_size:
+        sampled_rows = rng.sample(data_rows, effective_sample_size)
     else:
         sampled_rows = data_rows.copy()
         rng.shuffle(sampled_rows)
@@ -66,7 +71,8 @@ def create_run_temp_dataset(
 
     logger.info(
         f"[Run {run_id}] Saved temp dataset: {temp_dataset_path} "
-        f"({len(sampled_rows)} rows from {len(data_rows)} total)"
+        f"({len(sampled_rows)} rows from {len(data_rows)} total, "
+        f"effective_sample_size={effective_sample_size})"
     )
 
     return str(temp_dataset_path)
@@ -227,7 +233,7 @@ def run_padtai_pipeline(
     output_dir: str = "./reports/padtai",
     solver: str = "nuwls",
     max_timeout: int = 1800,
-    sample_size: int = 3000
+    sample_size: int = -1
 ) -> None:
     """
     Run full PADTAI pipeline: 3 runs + consolidation.
@@ -373,8 +379,8 @@ if __name__ == "__main__":
                         help='Solver choice (default: nuwls)')
     parser.add_argument('--timeout', type=int, default=1800,
                         help='Max timeout per run in seconds (default: 1800)')
-    parser.add_argument('--sample-size', type=int, default=3000,
-                        help='Sample size for PADTAI (default: 3000)')
+    parser.add_argument('--sample-size', type=int, default=-1,
+                        help='Sample size for PADTAI (default: -1 => 3400/#columns)')
 
     args = parser.parse_args()
 
