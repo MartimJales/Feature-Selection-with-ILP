@@ -2,7 +2,7 @@
 
 Dataset: ./data/ilp/top200_ig_malware.csv
 Number of runs: 3
-Total elapsed time: 23.5s
+Total elapsed time: 23.3s
 Solver: nuwls
 
 === Rules per run ===
