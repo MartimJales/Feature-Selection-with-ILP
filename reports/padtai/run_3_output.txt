@@ -1,0 +1,94 @@
+WARNING: No solution found, exit combiner.
+[DEBUG] Testing batch 1...
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_15(V2)
+        Count: 1, Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_11(V2)
+        Count: 3, Coverage (%): 18.75, Recall (%): 300.00, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_30(V2)
+        Count: 1, Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_31(V2)
+        Count: 1, Coverage (%): 6.25, Recall (%): 100.00, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- attr_label_0(V1),perm_android_permission_change_wifi_state(V0,V2),attr_perm_android_permission_change_wifi_state_1(V2)
+        Count: 2, Coverage (%): 12.50, Recall (%): 200.00, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_3(V2)
+        Count: 1, Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_17(V2)
+        Count: 2, Coverage (%): 12.50, Recall (%): 13.33, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- attr_n_permissions_12(V2),attr_label_0(V1),n_permissions(V0,V2)
+        Count: 2, Coverage (%): 12.50, Recall (%): 13.33, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_10(V2)
+        Count: 1, Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_5(V2)
+        Count: 1, Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- attr_n_urls_29(V2),attr_label_1(V1),n_urls(V0,V2)
+        Count: 1, Coverage (%): 6.25, Recall (%): 100.00, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_2(V2)
+        Count: 1, Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_11(V2)
+Coverage (%): 18.75, Recall (%): 300.00, Precision (%): 100.00
+Rule: label(V0,V1):- attr_label_0(V1),perm_android_permission_change_wifi_state(V0,V2),attr_perm_android_permission_change_wifi_state_1(V2)
+Coverage (%): 12.50, Recall (%): 200.00, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_17(V2)
+Coverage (%): 12.50, Recall (%): 13.33, Precision (%): 100.00
+Rule: label(V0,V1):- attr_n_permissions_12(V2),attr_label_0(V1),n_permissions(V0,V2)
+Coverage (%): 12.50, Recall (%): 13.33, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_15(V2)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_11(V2)
+Coverage (%): 18.75, Recall (%): 300.00, Precision (%): 100.00
+Rule: label(V0,V1):- attr_label_0(V1),perm_android_permission_change_wifi_state(V0,V2),attr_perm_android_permission_change_wifi_state_1(V2)
+Coverage (%): 12.50, Recall (%): 200.00, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_31(V2)
+Coverage (%): 6.25, Recall (%): 100.00, Precision (%): 100.00
+Rule: label(V0,V1):- attr_n_urls_29(V2),attr_label_1(V1),n_urls(V0,V2)
+Coverage (%): 6.25, Recall (%): 100.00, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_17(V2)
+Coverage (%): 12.50, Recall (%): 13.33, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_15(V2)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_11(V2)
+Coverage (%): 18.75, Recall (%): 300.00, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_30(V2)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_31(V2)
+Coverage (%): 6.25, Recall (%): 100.00, Precision (%): 100.00
+Rule: label(V0,V1):- attr_label_0(V1),perm_android_permission_change_wifi_state(V0,V2),attr_perm_android_permission_change_wifi_state_1(V2)
+Coverage (%): 12.50, Recall (%): 200.00, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_15(V2)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_11(V2)
+Coverage (%): 18.75, Recall (%): 300.00, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_30(V2)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_31(V2)
+Coverage (%): 6.25, Recall (%): 100.00, Precision (%): 100.00
+Rule: label(V0,V1):- attr_label_0(V1),perm_android_permission_change_wifi_state(V0,V2),attr_perm_android_permission_change_wifi_state_1(V2)
+Coverage (%): 12.50, Recall (%): 200.00, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_11(V2)
+label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_31(V2)
+label(V0,V1):- attr_label_0(V1),perm_android_permission_change_wifi_state(V0,V2),attr_perm_android_permission_change_wifi_state_1(V2)
+label(V0,V1):- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_17(V2)
+label(V0,V1):- attr_n_permissions_12(V2),attr_label_0(V1),n_permissions(V0,V2)
+label(V0,V1):- attr_n_urls_29(V2),attr_label_1(V1),n_urls(V0,V2)
+
+Avg. Coverage (%): 11.46, Avg. Recall (%): 121.11, Avg. Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+

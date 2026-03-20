@@ -2,14 +2,25 @@
 
 Dataset: ./data/ilp/top200_ig_malware.csv
 Number of runs: 3
-Total elapsed time: 23.3s
+Total elapsed time: 68.7s
 Solver: nuwls
 
 === Rules per run ===
-Run 1: 0 rules
-Run 2: 0 rules
-Run 3: 0 rules
+Run 1: 6 rules
+Run 2: 12 rules
+Run 3: 44 rules
 
 === Stable rules (2+ runs) ===
-Count: 0
+Count: 11
 
+1. [5/3] label(V0,V1) :- perm_android_permission_receive_boot_completed(V0,V2),attr_label_0(V1)
+2. [5/3] label(V0,V1) :- n_activities(V0,V2),attr_n_activities_20(V2),attr_label_1(V1)
+3. [5/3] label(V0,V1) :- attr_intent_android_intent_action_screen_on_0(V2),intent_android_intent_action_screen_on(V0,V2),attr_label_0(V1)
+4. [5/3] label(V0,V1) :- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_11(V2)
+5. [5/3] label(V0,V1) :- attr_label_0(V1),perm_android_permission_change_wifi_state(V0,V2),attr_perm_android_permission_change_wifi_state_1(V2)
+6. [4/3] label(V0,V1) :- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_15(V2)
+7. [4/3] label(V0,V1) :- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_31(V2)
+8. [3/3] label(V0,V1) :- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_30(V2)
+9. [3/3] label(V0,V1) :- n_permissions(V0,V2),attr_label_0(V1),attr_n_permissions_17(V2)
+10. [2/3] label(V0,V1) :- attr_n_permissions_12(V2),attr_label_0(V1),n_permissions(V0,V2)
+11. [2/3] label(V0,V1) :- attr_n_urls_29(V2),attr_label_1(V1),n_urls(V0,V2)

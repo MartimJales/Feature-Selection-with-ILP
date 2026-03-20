@@ -1,0 +1,49 @@
+WARNING: No solution found, exit combiner.
+label(V0,V1):- suspicious_getcelllocation(V0,V2),attr_label_0(V1),attr_suspicious_getcelllocation_1(V2).
+1
+frozenbitarray('1000000000000000')
+True
+[DEBUG] Testing batch 1...
+[DEBUG] Rule: label(V0,V1):- n_activities(V0,V2),attr_n_activities_20(V2),attr_label_1(V1)
+        Count: 1, Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+[DEBUG] Rule: label(V0,V1):- attr_intent_android_intent_action_screen_on_0(V2),intent_android_intent_action_screen_on(V0,V2),attr_label_0(V1)
+        Count: 15, Coverage (%): 93.75, Recall (%): 100.00, Precision (%): 100.00
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- attr_intent_android_intent_action_screen_on_0(V2),intent_android_intent_action_screen_on(V0,V2),attr_label_0(V1)
+Coverage (%): 93.75, Recall (%): 100.00, Precision (%): 100.00
+Rule: label(V0,V1):- n_activities(V0,V2),attr_n_activities_20(V2),attr_label_1(V1)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- attr_intent_android_intent_action_screen_on_0(V2),intent_android_intent_action_screen_on(V0,V2),attr_label_0(V1)
+Coverage (%): 93.75, Recall (%): 100.00, Precision (%): 100.00
+Rule: label(V0,V1):- n_activities(V0,V2),attr_n_activities_20(V2),attr_label_1(V1)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- n_activities(V0,V2),attr_n_activities_20(V2),attr_label_1(V1)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+Rule: label(V0,V1):- attr_intent_android_intent_action_screen_on_0(V2),intent_android_intent_action_screen_on(V0,V2),attr_label_0(V1)
+Coverage (%): 93.75, Recall (%): 100.00, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- n_activities(V0,V2),attr_n_activities_20(V2),attr_label_1(V1)
+Coverage (%): 6.25, Recall (%): 6.67, Precision (%): 100.00
+Rule: label(V0,V1):- attr_intent_android_intent_action_screen_on_0(V2),intent_android_intent_action_screen_on(V0,V2),attr_label_0(V1)
+Coverage (%): 93.75, Recall (%): 100.00, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- attr_intent_android_intent_action_screen_on_0(V2),intent_android_intent_action_screen_on(V0,V2),attr_label_0(V1)
+
+Avg. Coverage (%): 93.75, Avg. Recall (%): 100.00, Avg. Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+

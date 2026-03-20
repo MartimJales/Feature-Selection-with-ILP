@@ -1,0 +1,34 @@
+[DEBUG] Testing batch 1...
+[DEBUG] Rule: label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),attr_label_0(V1)
+        Count: 16, Coverage (%): 100.00, Recall (%): 100.00, Precision (%): 100.00
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),attr_label_0(V1)
+Coverage (%): 100.00, Recall (%): 100.00, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),attr_label_0(V1)
+Coverage (%): 100.00, Recall (%): 100.00, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),attr_label_0(V1)
+Coverage (%): 100.00, Recall (%): 100.00, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),attr_label_0(V1)
+Coverage (%): 100.00, Recall (%): 100.00, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),attr_label_0(V1)
+
+Avg. Coverage (%): 100.00, Avg. Recall (%): 100.00, Avg. Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
