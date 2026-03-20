@@ -11,11 +11,40 @@ Prepare top-200 IG features for PADTAI.
 
 import pandas as pd
 import numpy as np
+import re
 from pathlib import Path
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger(__name__)
+
+
+def _sanitize_symbol(name: str) -> str:
+    """Convert a column name to a PADTAI-safe symbol."""
+    safe = str(name).strip().lower()
+    safe = re.sub(r"[^a-z0-9_]", "_", safe)
+    safe = re.sub(r"_+", "_", safe).strip("_")
+    if not safe:
+        safe = "feature"
+    if safe[0].isdigit():
+        safe = f"f_{safe}"
+    return safe
+
+
+def _sanitize_feature_columns(cols):
+    """Sanitize and deduplicate selected feature names."""
+    out = []
+    used = set()
+    for col in cols:
+        base = _sanitize_symbol(col)
+        candidate = base
+        i = 2
+        while candidate in used:
+            candidate = f"{base}_{i}"
+            i += 1
+        used.add(candidate)
+        out.append(candidate)
+    return out
 
 
 def prepare_top200_dataset(
@@ -105,10 +134,15 @@ def prepare_top200_dataset(
     # Build final dataframe
     final_df = merged_df[cols_to_keep + ['label']].copy()
 
+    # Sanitize feature names to avoid PADTAI/Popper/Clingo syntax issues
+    sanitized_cols = _sanitize_feature_columns(cols_to_keep)
+    final_df.columns = sanitized_cols + ['label']
+
     # Reorder: top features + label in last column
-    final_df = final_df[cols_to_keep + ['label']]
+    final_df = final_df[sanitized_cols + ['label']]
 
     logger.info(f"✓ Final dataset: {final_df.shape[0]} samples × {final_df.shape[1]} features (including label)")
+    logger.info(f"✓ Sanitized feature names for PADTAI compatibility")
 
     # 7. Check data types (should be binary for top features)
     logger.info("\nData type summary:")
