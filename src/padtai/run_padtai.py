@@ -15,6 +15,8 @@ import json
 import logging
 import re
 import sys
+import csv
+import random
 from pathlib import Path
 from collections import Counter
 from typing import List, Dict, Tuple
@@ -22,6 +24,52 @@ import time
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger(__name__)
+
+
+def create_run_temp_dataset(
+    source_dataset_path: str,
+    run_id: int,
+    output_dir: str,
+    sample_size: int
+) -> str:
+    """Create and save the exact per-run CSV used as PADTAI input."""
+
+    source_path = Path(source_dataset_path)
+    temp_dir = Path(output_dir) / "temp_datasets"
+    temp_dir.mkdir(parents=True, exist_ok=True)
+
+    temp_dataset_path = temp_dir / f"run_{run_id}_input.csv"
+
+    with open(source_path, "r", newline="") as f:
+        reader = csv.reader(f)
+        rows = list(reader)
+
+    if not rows:
+        raise ValueError(f"Dataset is empty: {source_dataset_path}")
+
+    header = rows[0]
+    data_rows = rows[1:]
+    if not data_rows:
+        raise ValueError(f"Dataset has no data rows: {source_dataset_path}")
+
+    rng = random.Random(1000 + run_id)
+    if sample_size > 0 and len(data_rows) > sample_size:
+        sampled_rows = rng.sample(data_rows, sample_size)
+    else:
+        sampled_rows = data_rows.copy()
+        rng.shuffle(sampled_rows)
+
+    with open(temp_dataset_path, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+        writer.writerows(sampled_rows)
+
+    logger.info(
+        f"[Run {run_id}] Saved temp dataset: {temp_dataset_path} "
+        f"({len(sampled_rows)} rows from {len(data_rows)} total)"
+    )
+
+    return str(temp_dataset_path)
 
 
 def run_padtai_once(
@@ -209,6 +257,7 @@ def run_padtai_pipeline(
     logger.info(f"Solver: {solver}")
     logger.info(f"Max timeout: {max_timeout}s")
     logger.info(f"Sample size: {sample_size}")
+    logger.info(f"Temp datasets: {output_path / 'temp_datasets'}")
 
     # Run PADTAI multiple times
     all_rules = {}
@@ -217,8 +266,15 @@ def run_padtai_pipeline(
     start_time = time.time()
 
     for run_id in range(1, n_runs + 1):
+        run_dataset_path = create_run_temp_dataset(
+            source_dataset_path=dataset_path,
+            run_id=run_id,
+            output_dir=output_dir,
+            sample_size=sample_size
+        )
+
         rules, output = run_padtai_once(
-            dataset_path=dataset_path,
+            dataset_path=run_dataset_path,
             run_id=run_id,
             padtai_dir=padtai_dir,
             solver=solver,
