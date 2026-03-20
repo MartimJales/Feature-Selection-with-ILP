@@ -1,0 +1,15 @@
+=== PADTAI ILP Pipeline Summary ===
+
+Dataset: ./data/ilp/top200_ig_malware.csv
+Number of runs: 3
+Total elapsed time: 20.8s
+Solver: nuwls
+
+=== Rules per run ===
+Run 1: 0 rules
+Run 2: 0 rules
+Run 3: 0 rules
+
+=== Stable rules (2+ runs) ===
+Count: 0
+
