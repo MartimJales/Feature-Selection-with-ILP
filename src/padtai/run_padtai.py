@@ -137,7 +137,7 @@ def run_padtai_once(
 
         if result.returncode != 0:
             logger.warning(f"[Run {run_id}] Non-zero exit code. stderr:")
-            print(stderr[:500])
+            print(stderr)
 
         # Extract rules from output
         rules = extract_rules_from_output(stdout)
@@ -148,14 +148,14 @@ def run_padtai_once(
         if len(rules) > 3:
             print(f"  ... and {len(rules) - 3} more")
 
-        return rules, stdout
+        return rules, stdout, stderr
 
     except subprocess.TimeoutExpired:
         logger.error(f"[Run {run_id}] PADTAI timed out (>{max_timeout}s)")
-        return [], ""
+        return [], "", ""
     except Exception as e:
         logger.error(f"[Run {run_id}] Error running PADTAI: {e}")
-        return [], ""
+        return [], "", ""
 
 
 def extract_rules_from_output(output: str) -> List[str]:
@@ -279,7 +279,7 @@ def run_padtai_pipeline(
             sample_size=sample_size
         )
 
-        rules, output = run_padtai_once(
+        rules, output, stderr = run_padtai_once(
             dataset_path=run_dataset_path,
             run_id=run_id,
             padtai_dir=padtai_dir,
@@ -296,6 +296,11 @@ def run_padtai_pipeline(
         with open(run_output_file, 'w') as f:
             f.write(output)
         logger.info(f"✓ Saved output to {run_output_file}")
+
+        run_stderr_file = output_path / f"run_{run_id}_stderr.txt"
+        with open(run_stderr_file, 'w') as f:
+            f.write(stderr)
+        logger.info(f"✓ Saved stderr to {run_stderr_file}")
 
         if run_id < n_runs:
             logger.info(f"Waiting 10s before next run...")
@@ -333,7 +338,6 @@ def run_padtai_pipeline(
             rule: info for rule, info in stable_rules.items()
         }
     }
-
     results_file = output_path / "consolidated_results.json"
     with open(results_file, 'w') as f:
         json.dump(results, f, indent=2)
