@@ -4,9 +4,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_DIR="${LOG_DIR:-$ROOT_DIR/logs/decision_tree}"
 REPORTS_DIR="${REPORTS_DIR:-$ROOT_DIR/reports/decision_tree}"
-TIMESTAMP="$(date +"%Y%m%d_%H%M%S")"
-LOG_FILE="$LOG_DIR/decision_tree_${TIMESTAMP}.log"
-PID_FILE="$LOG_DIR/decision_tree_${TIMESTAMP}.pid"
+TIMESTAMP="${TIMESTAMP:-$(date +"%Y%m%d_%H%M%S")}"
+LOG_FILE="${LOG_FILE:-$LOG_DIR/decision_tree_${TIMESTAMP}.log}"
 
 PYTHON_BIN="${PYTHON_BIN:-$ROOT_DIR/.venv/bin/python}"
 FEATURES_PATH="${FEATURES_PATH:-$ROOT_DIR/reports/extracted_features.parquet}"
@@ -17,12 +16,6 @@ DEPTH_VALUES="${DEPTH_VALUES:-2 3 4 5 6 8 10 12 15 20 25 30 None}"
 PLOT_MAX_DEPTH="${PLOT_MAX_DEPTH:-6}"
 TOP_N_IMPORTANCES="${TOP_N_IMPORTANCES:-30}"
 SEED="${SEED:-42}"
-
-RUN_IN_BACKGROUND=1
-if [[ "${1:-}" == "--foreground" ]]; then
-	RUN_IN_BACKGROUND=0
-	shift
-fi
 
 if [[ ! -x "$PYTHON_BIN" ]]; then
 	PYTHON_BIN="$(command -v python3 || true)"
@@ -60,22 +53,34 @@ fi
 echo "=================================================" | tee -a "$LOG_FILE"
 echo "=== Decision Tree batch started: $TIMESTAMP ===" | tee -a "$LOG_FILE"
 echo "Python: $PYTHON_BIN" | tee -a "$LOG_FILE"
+echo "Mode: foreground" | tee -a "$LOG_FILE"
 echo "Output dir: $REPORTS_DIR" | tee -a "$LOG_FILE"
 echo "Top-k: $TOP_K_VALUES" | tee -a "$LOG_FILE"
 echo "Depths: $DEPTH_VALUES" | tee -a "$LOG_FILE"
 echo "=================================================" | tee -a "$LOG_FILE"
 
-if [[ "$RUN_IN_BACKGROUND" -eq 1 ]]; then
-	nohup "${CMD[@]}" >> "$LOG_FILE" 2>&1 &
-	PID=$!
-	echo "$PID" > "$PID_FILE"
-	echo "[OK] Processo iniciado em background"
-	echo "PID: $PID"
-	echo "PID file: $PID_FILE"
-	echo "Log: $LOG_FILE"
-	echo "Para acompanhar: tail -f $LOG_FILE"
-else
-	echo "[INFO] A correr em foreground..."
-	echo "Log: $LOG_FILE"
-	"${CMD[@]}" 2>&1 | tee -a "$LOG_FILE"
-fi
+run_job() {
+	local started_at finished_at duration status
+	started_at="$(date +"%Y-%m-%d %H:%M:%S")"
+	echo "[INFO] Job started at $started_at"
+	echo "[INFO] Command: ${CMD[*]}"
+
+	set +e
+	"${CMD[@]}"
+	status=$?
+	set -e
+
+	finished_at="$(date +"%Y-%m-%d %H:%M:%S")"
+	duration="$SECONDS"
+	if [[ "$status" -eq 0 ]]; then
+		echo "[SUCESSO] Decision Tree batch terminado com sucesso em $finished_at (duracao: ${duration}s)"
+		echo "[SUCESSO] Tabela por depth: $REPORTS_DIR/decision_tree_comparison_by_depth.csv"
+	else
+		echo "[ERRO] Decision Tree batch terminou com erro (exit code $status) em $finished_at (duracao: ${duration}s)"
+	fi
+	return "$status"
+}
+
+echo "[INFO] A correr em foreground..." | tee -a "$LOG_FILE"
+echo "Log: $LOG_FILE" | tee -a "$LOG_FILE"
+run_job 2>&1 | tee -a "$LOG_FILE"
