@@ -25,10 +25,23 @@ def parse_top_k(values: Iterable[str]) -> List[int]:
 def parse_depths(values: Iterable[str]) -> List[int | None]:
 	parsed: List[int | None] = []
 	for v in values:
-		if v.lower() == "none":
+		token = v.strip().lower()
+		if token == "none":
 			parsed.append(None)
+		elif ":" in token:
+			parts = token.split(":")
+			if len(parts) not in {2, 3}:
+				raise ValueError(f"Invalid depth range '{v}'. Use start:end or start:end:step")
+			start = int(parts[0])
+			end = int(parts[1])
+			step = int(parts[2]) if len(parts) == 3 else 1
+			if step <= 0:
+				raise ValueError(f"Depth step must be > 0 in '{v}'")
+			if end < start:
+				raise ValueError(f"Depth range end must be >= start in '{v}'")
+			parsed.extend(range(start, end + 1, step))
 		else:
-			parsed.append(int(v))
+			parsed.append(int(token))
 	# keep original order but remove duplicates
 	unique: List[int | None] = []
 	for v in parsed:
@@ -203,15 +216,32 @@ def export_tree_svg(
 	plt.close(fig)
 
 
+def depth_sort_key(depth_value: str) -> tuple[int, int]:
+	if depth_value.lower() == "none":
+		return (1, 10**9)
+	return (0, int(depth_value))
+
+
 def main() -> None:
 	parser = argparse.ArgumentParser(description="Decision Tree comparison on top-K features")
 	parser.add_argument("--features", default="./reports/extracted_features.parquet")
 	parser.add_argument("--labels", default="./data/training_set.csv")
 	parser.add_argument("--rankings", default="./reports/feature_analysis/feature_rankings_all.parquet")
 	parser.add_argument("--top-k", nargs="+", default=["200", "500", "1000"])
-	parser.add_argument("--depths", nargs="+", default=["5", "10", "20", "None"])
+	parser.add_argument(
+		"--depths",
+		nargs="+",
+		default=["2", "3", "4", "5", "6", "8", "10", "12", "15", "20", "25", "30", "None"],
+		help="Depth values to test. Accepts explicit values (e.g., 5 10 None) and ranges (e.g., 2:20 or 2:20:2)",
+	)
 	parser.add_argument("--plot-max-depth", type=int, default=6, help="Max depth to display in tree PNG (use -1 for full tree)")
 	parser.add_argument("--seed", type=int, default=42)
+	parser.add_argument(
+		"--export-all-trees",
+		action="store_true",
+		help="Export PNG/SVG and feature importances for every tested depth (not only the best depth)",
+	)
+	parser.add_argument("--top-n-importances", type=int, default=30, help="Top-N feature importances to export per model")
 	parser.add_argument("--output-dir", default="./reports/decision_tree")
 	args = parser.parse_args()
 
@@ -229,11 +259,26 @@ def main() -> None:
 	for k in top_k_values:
 		selected_features = load_top_features(rankings_path, k)
 		X, y = load_selected_dataset(features_path, labels_path, selected_features)
+		topk_dir = output_dir / f"top{k}"
+		topk_dir.mkdir(parents=True, exist_ok=True)
 
 		run_results = []
 		for depth in depths:
 			result = evaluate_tree(X, y, max_depth=depth, seed=args.seed)
 			run_results.append(result)
+			if args.export_all_trees:
+				depth_tag = "none" if depth is None else str(depth)
+				depth_dir = topk_dir / f"depth_{depth_tag}"
+				depth_dir.mkdir(parents=True, exist_ok=True)
+				export_feature_importance(
+					result["model"],
+					result["feature_names"],
+					depth_dir / "feature_importance.csv",
+					top_n=args.top_n_importances,
+				)
+				plot_depth = None if args.plot_max_depth < 0 else args.plot_max_depth
+				export_tree_png(result["model"], result["feature_names"], depth_dir / "tree.png", plot_max_depth=plot_depth)
+				export_tree_svg(result["model"], result["feature_names"], depth_dir / "tree.svg", plot_max_depth=plot_depth)
 			summary_rows.append(
 				{
 					"top_k": k,
@@ -256,7 +301,7 @@ def main() -> None:
 		best = max(run_results, key=lambda r: r["f1"])
 		best_depth_str = best["max_depth"].lower() if isinstance(best["max_depth"], str) else str(best["max_depth"])
 		imp_file = output_dir / f"decision_tree_top{k}_best_depth_{best_depth_str}_feature_importance.csv"
-		export_feature_importance(best["model"], best["feature_names"], imp_file, top_n=30)
+		export_feature_importance(best["model"], best["feature_names"], imp_file, top_n=args.top_n_importances)
 
 		plot_depth = None if args.plot_max_depth < 0 else args.plot_max_depth
 		tree_png = output_dir / f"decision_tree_top{k}_best_depth_{best_depth_str}.png"
@@ -268,12 +313,22 @@ def main() -> None:
 	summary_file = output_dir / "decision_tree_comparison_topk.csv"
 	summary_df.to_csv(summary_file, index=False)
 
+	depth_table_df = summary_df.copy()
+	depth_table_df["_depth_rank"] = depth_table_df["max_depth"].astype(str).map(depth_sort_key)
+	depth_table_df = depth_table_df.sort_values(["top_k", "_depth_rank"]).drop(columns=["_depth_rank"])
+	depth_table_file = output_dir / "decision_tree_comparison_by_depth.csv"
+	depth_table_df.to_csv(depth_table_file, index=False)
+
 	print("\nDecision Tree comparison completed.")
 	print(f"Summary: {summary_file}")
+	print(f"Depth-ordered table: {depth_table_file}")
 	print(f"Output directory: {output_dir}")
 	print("\nTop results by top_k (best F1):")
 	best_per_k = summary_df.groupby("top_k", as_index=False).first()
 	print(best_per_k[["top_k", "max_depth", "f1", "balanced_accuracy", "roc_auc", "tree_depth", "n_leaves"]].to_string(index=False))
+
+	print("\nFull comparison ordered by depth (top_k, max_depth, accuracy, f1, roc_auc):")
+	print(depth_table_df[["top_k", "max_depth", "accuracy", "f1", "roc_auc", "tree_depth", "n_leaves"]].to_string(index=False))
 
 
 if __name__ == "__main__":
