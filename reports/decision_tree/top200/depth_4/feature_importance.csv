@@ -1,0 +1,14 @@
+feature,importance
+perm_android.permission.READ_PHONE_STATE,0.5863994021388415
+intent_com.google.android.c2dm.intent.RECEIVE,0.137046581634539
+suspicious_Base64,0.08617640604434285
+perm_android.permission.GET_TASKS,0.04583677120040989
+suspicious_getCellLocation,0.04335834232335045
+suspicious_getSubscriberId,0.03333863746325367
+suspicious_getSystemService,0.01967776771299198
+suspicious_Ldalvik/system/PathClassLoader;,0.017973472438317817
+intent_com.google.firebase.INSTANCE_ID_EVENT,0.010766931529332177
+suspicious_sendTextMessage,0.010646430523452472
+perm_com.android.launcher.permission.INSTALL_SHORTCUT,0.0035720472878177723
+intent_android.intent.action.USER_PRESENT,0.003169737640766226
+n_permissions,0.0020374720625841603

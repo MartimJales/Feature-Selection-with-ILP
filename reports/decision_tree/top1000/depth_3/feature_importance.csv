@@ -1,0 +1,8 @@
+feature,importance
+perm_android.permission.READ_PHONE_STATE,0.6422685396192058
+intent_com.google.android.c2dm.intent.RECEIVE,0.15010367937822597
+suspicious_Base64,0.09438685349585572
+perm_android.permission.GET_TASKS,0.03762428549996183
+suspicious_getCellLocation,0.03437818415936378
+suspicious_getSystemService,0.021552564831907376
+suspicious_Ldalvik/system/PathClassLoader;,0.019685893015479683

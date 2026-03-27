@@ -1,0 +1,4 @@
+feature,importance
+perm_android.permission.READ_PHONE_STATE,0.7242875314637341
+intent_com.google.android.c2dm.intent.RECEIVE,0.16927222290058702
+suspicious_Base64,0.10644024563567883
