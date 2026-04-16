@@ -18,12 +18,15 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from src.idea2.pipeline import Idea2Pipeline
 
+LOG_DIR = Path(__file__).parent / "logs" / "idea2"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s | %(name)s | %(levelname)s | %(message)s',
     handlers=[
-        logging.FileHandler('logs/idea2/idea2.log'),
+        logging.FileHandler(LOG_DIR / 'idea2.log'),
         logging.StreamHandler()
     ]
 )
