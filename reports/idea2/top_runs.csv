@@ -1,7 +1,7 @@
 window_id,sample_size,seed,n_features,n_rules,status,elapsed_time,solver_time,train_accuracy,train_precision,train_recall,train_f1,val_accuracy,val_precision,val_recall,val_f1,debug_output_path,error_message,score
-0,37500,0,30,0,no_solution,2.707183361053467,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/debug/ilp_w0_n37500_seed0_20260416_174551.log,,0.0
-0,37500,1,30,0,no_solution,0.8428807258605957,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/debug/ilp_w0_n37500_seed1_20260416_174556.log,,0.0
-1,37500,0,30,0,no_solution,0.6427927017211914,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/debug/ilp_w1_n37500_seed0_20260416_174600.log,,0.0
-1,37500,1,30,0,no_solution,0.6678714752197266,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/debug/ilp_w1_n37500_seed1_20260416_174605.log,,0.0
-2,37500,0,30,0,no_solution,0.6525783538818359,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/debug/ilp_w2_n37500_seed0_20260416_174610.log,,0.0
-2,37500,1,30,0,no_solution,0.6410865783691406,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/debug/ilp_w2_n37500_seed1_20260416_174614.log,,0.0
+0,37500,0,30,0,no_solution,1.2877731323242188,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w0_n37500_seed0_20260416_183848.txt,,0.0
+0,37500,1,30,0,no_solution,0.639218807220459,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w0_n37500_seed1_20260416_183853.txt,,0.0
+1,37500,0,30,0,no_solution,0.5443015098571777,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w1_n37500_seed0_20260416_183858.txt,,0.0
+1,37500,1,30,0,no_solution,0.5118913650512695,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w1_n37500_seed1_20260416_183902.txt,,0.0
+2,37500,0,30,0,no_solution,0.48915815353393555,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed0_20260416_183906.txt,,0.0
+2,37500,1,30,0,no_solution,0.4727468490600586,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed1_20260416_183911.txt,,0.0
