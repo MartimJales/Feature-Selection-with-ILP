@@ -57,6 +57,7 @@ class ResultsAggregator:
                 'val_recall': result.val_recall,
                 'val_f1': result.val_f1,
                 'debug_output_path': result.debug_output_path,
+                'feature_mapping_path': result.feature_mapping_path,
                 'error_message': result.error_message,
             }
             rows.append(row)

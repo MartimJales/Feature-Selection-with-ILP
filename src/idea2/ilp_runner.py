@@ -9,8 +9,9 @@ import logging
 import time
 import re
 import os
+import json
 from pathlib import Path
-from typing import List
+from typing import List, Dict, Tuple
 from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
@@ -49,6 +50,7 @@ class ILPRunResult:
     dataset_path: str = None
     output_path: str = None
     debug_output_path: str = None
+    feature_mapping_path: str = None
     error_message: str = None
 
 
@@ -149,14 +151,17 @@ class ILPRunner:
                 dataset_path = Path(temp_path)
 
             logger.info(f"Creating dataset at {dataset_path}...")
-            df_subset = X[features].copy()
-            df_subset[label_column] = y.values
+            original_to_sanitized, sanitized_to_original = self._build_feature_name_mapping(features)
+            df_subset = X[features].copy().rename(columns=original_to_sanitized)
+            safe_label_column = "label"
+            df_subset[safe_label_column] = y.values
             df_subset.to_csv(dataset_path, index=False)
 
             result.dataset_path = str(dataset_path)
             result.output_path = str(output_dir)
 
             logger.info(f"✓ Dataset created: {len(df_subset)} rows × {len(features)} cols")
+            logger.info("✓ Applied feature sanitization with feature-index mapping")
 
             # Execute PADTAI
             logger.info(f"Executing PADTAI (timeout={self.max_timeout}s)...")
@@ -174,8 +179,10 @@ class ILPRunner:
                     seed=seed,
                     n_rows=len(df_subset),
                     n_features=len(features),
+                    sanitized_to_original=sanitized_to_original,
                 )
                 result.debug_output_path = str(debug_file)
+                result.feature_mapping_path = str(debug_file.with_suffix(".map.json"))
 
             # Parse output
             rules = self._extract_rules(padtai_output)
@@ -220,6 +227,7 @@ class ILPRunner:
         seed: int,
         n_rows: int,
         n_features: int,
+        sanitized_to_original: Dict[str, str],
     ) -> Path:
         """Persist raw PADTAI output for debugging."""
         timestamp = time.strftime("%Y%m%d_%H%M%S")
@@ -227,12 +235,26 @@ class ILPRunner:
             f"ilp_w{window_id}_n{sample_size}_seed{seed}_{timestamp}.txt"
         )
         file_path = self.debug_output_dir / filename
+        mapping_path = file_path.with_suffix(".map.json")
 
         logger.info(f"💾 Saving debug output to: {file_path}")
         logger.info(f"   Directory exists: {self.debug_output_dir.exists()}")
         logger.info(f"   Directory is writable: {os.access(self.debug_output_dir, os.W_OK)}")
 
         try:
+            with open(mapping_path, "w", encoding="utf-8") as fmap:
+                json.dump(
+                    {
+                        "window_id": window_id,
+                        "sample_size": sample_size,
+                        "seed": seed,
+                        "sanitized_to_original": sanitized_to_original,
+                    },
+                    fmap,
+                    ensure_ascii=False,
+                    indent=2,
+                )
+
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write("=== IDEA2 ILP DEBUG OUTPUT ===\n")
                 f.write(f"window_id={window_id}\n")
@@ -242,6 +264,10 @@ class ILPRunner:
                 f.write(f"n_features={n_features}\n")
                 f.write(f"solver={self.solver}\n")
                 f.write(f"timeout={self.max_timeout}\n")
+                f.write(f"feature_mapping_path={mapping_path}\n")
+                f.write("\n=== FEATURE MAPPING (sanitized -> original) ===\n")
+                for sanitized, original in sanitized_to_original.items():
+                    f.write(f"{sanitized} -> {original}\n")
                 f.write("\n=== RAW PADTAI STDOUT/STDERR ===\n")
                 f.write(padtai_output or "")
 
@@ -262,7 +288,7 @@ class ILPRunner:
 
         Args:
             dataset_path: Path to CSV dataset
-            output_dir: Output directory for PADTAI
+            sample_size: Number of rows to use inside PADTAI parser
             timeout: Timeout in seconds
 
         Returns:
@@ -279,6 +305,7 @@ class ILPRunner:
             "--solver", self.solver,
             "--sample-size", str(sample_size),
             "--max-timeout", str(timeout),
+            "--debug", "all" if self.debug else "none",
         ]
 
         logger.debug(f"Command: {' '.join(cmd)}")
@@ -297,6 +324,17 @@ class ILPRunner:
                 logger.warning(f"STDERR: {result.stderr[:500]}")
 
         return result.stdout + result.stderr
+
+    def _build_feature_name_mapping(self, features: List[str]) -> Tuple[Dict[str, str], Dict[str, str]]:
+        """
+        Build stable feature mapping to Prolog-safe names.
+
+        Uses feature index (f0, f1, ...) to avoid syntax issues in PADTAI/Prolog.
+        Returns both directions for easier debugging and post-analysis.
+        """
+        original_to_sanitized = {name: f"f{i}" for i, name in enumerate(features)}
+        sanitized_to_original = {sanitized: original for original, sanitized in original_to_sanitized.items()}
+        return original_to_sanitized, sanitized_to_original
 
     def _extract_rules(self, output: str) -> List[str]:
         """
