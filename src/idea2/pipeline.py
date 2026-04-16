@@ -26,7 +26,8 @@ class Idea2Pipeline:
 
     def __init__(
         self,
-        training_set_path: str = "./data/training_set.csv",
+        features_path: str = "./reports/extracted_features.parquet",
+        labels_path: str = "./data/training_set.csv",
         rankings_path: str = "./reports/feature_analysis/feature_rankings_all.parquet",
         output_dir: str = "./reports/idea2",
         padtai_dir: str = "./PADTAI",
@@ -37,14 +38,16 @@ class Idea2Pipeline:
         Initialize pipeline.
 
         Args:
-            training_set_path: Path to training CSV
+            features_path: Path to extracted features file
+            labels_path: Path to labels CSV
             rankings_path: Path to rankings Parquet
             output_dir: Output directory
             padtai_dir: PADTAI installation directory
             max_timeout: Max ILP timeout per run (seconds)
             window_size: Feature window size (default: 30)
         """
-        self.training_set_path = training_set_path
+        self.features_path = features_path
+        self.labels_path = labels_path
         self.rankings_path = rankings_path
         self.output_dir = Path(output_dir)
         self.padtai_dir = padtai_dir
@@ -68,7 +71,7 @@ class Idea2Pipeline:
         logger.info("="*60)
 
         # Load data
-        loader = Idea2DataLoader(self.training_set_path, self.rankings_path)
+        loader = Idea2DataLoader(self.features_path, self.labels_path, self.rankings_path)
         self.X, self.y, self.df_rankings = loader.load()
         self.label_column = loader.get_label_column()
 
@@ -81,7 +84,15 @@ class Idea2Pipeline:
         logger.info("GENERATING FEATURE WINDOWS")
         logger.info("="*60)
 
-        ranked_features = self.df_rankings['feature'].tolist()
+        available_features = set(self.X.columns)
+        ranked_features = [
+            feature for feature in self.df_rankings['feature'].astype(str).tolist()
+            if feature in available_features
+        ]
+        missing_ranked = len(self.df_rankings) - len(ranked_features)
+        if missing_ranked:
+            logger.warning(f"⚠ Skipping {missing_ranked} ranked features not present in the extracted matrix")
+
         generator = FeatureWindowGenerator(ranked_features, window_size=self.window_size)
 
         self.windows = generator.generate_windows(n_windows=n_windows)
@@ -224,7 +235,8 @@ class Idea2Pipeline:
 
         # Save configuration
         config = {
-            'training_set_path': self.training_set_path,
+            'features_path': self.features_path,
+            'labels_path': self.labels_path,
             'rankings_path': self.rankings_path,
             'output_dir': str(self.output_dir),
             'padtai_dir': self.padtai_dir,

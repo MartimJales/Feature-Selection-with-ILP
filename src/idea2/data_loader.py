@@ -1,9 +1,8 @@
 """
-Data loader for Idea2: loads training set and feature rankings.
+Data loader for Idea2: loads extracted features, labels and feature rankings.
 """
 
 import pandas as pd
-import numpy as np
 from pathlib import Path
 from typing import Tuple, List
 import logging
@@ -12,24 +11,28 @@ logger = logging.getLogger(__name__)
 
 
 class Idea2DataLoader:
-    """Load and validate training set and feature rankings."""
+    """Load and validate extracted features, labels and feature rankings."""
 
     def __init__(
         self,
-        training_set_path: str = "./data/training_set.csv",
+        features_path: str = "./reports/extracted_features.parquet",
+        labels_path: str = "./data/training_set.csv",
         rankings_path: str = "./reports/feature_analysis/feature_rankings_all.parquet",
     ):
         """
         Initialize data loader.
 
         Args:
-            training_set_path: Path to training set CSV
+            features_path: Path to extracted features file (.parquet/.csv)
+            labels_path: Path to labels CSV
             rankings_path: Path to feature rankings Parquet
         """
-        self.training_set_path = Path(training_set_path)
+        self.features_path = Path(features_path)
+        self.labels_path = Path(labels_path)
         self.rankings_path = Path(rankings_path)
 
-        self.df_train = None
+        self.df_features = None
+        self.df_labels = None
         self.df_rankings = None
         self.feature_names = None
         self.label_column = None
@@ -44,20 +47,49 @@ class Idea2DataLoader:
             - y: labels series
             - rankings_df: feature rankings sorted by IG
         """
-        logger.info(f"Loading training set from {self.training_set_path}...")
-        self.df_train = pd.read_csv(self.training_set_path)
-        logger.info(f"✓ Loaded {len(self.df_train)} samples with {len(self.df_train.columns)} columns")
+        logger.info(f"Loading extracted features from {self.features_path}...")
+        self.df_features = self._load_features_file(self.features_path)
+        logger.info(
+            f"✓ Loaded {len(self.df_features)} samples with {len(self.df_features.columns)} columns"
+        )
 
-        # Identify label column
-        self.label_column = self._detect_label_column()
+        logger.info(f"Loading labels from {self.labels_path}...")
+        self.df_labels = pd.read_csv(self.labels_path)
+        logger.info(f"✓ Loaded {len(self.df_labels)} labels"
+        )
+
+        # Identify label / hash columns
+        label_column, hash_column = self._detect_label_and_hash_columns(self.df_labels)
+        self.label_column = label_column
         if self.label_column is None:
             raise ValueError("Could not detect label column (expected: 'Label', 'label', 'target', 'y')")
+        if hash_column is None:
+            raise ValueError("Could not detect hash column (expected: 'sha256', 'hash', 'file_hash' or 'file')")
 
         logger.info(f"✓ Detected label column: '{self.label_column}'")
+        logger.info(f"✓ Detected hash column: '{hash_column}'")
 
-        # Split X and y
-        y = self.df_train[self.label_column]
-        X = self.df_train.drop(columns=[self.label_column])
+        # Normalize join keys
+        features_df = self.df_features.copy()
+        labels_df = self.df_labels.copy()
+
+        if "file_hash" not in features_df.columns:
+            raise ValueError("Features file must contain a 'file_hash' column")
+
+        features_df["file_hash"] = features_df["file_hash"].astype(str).str.lower().str.strip()
+        labels_df[hash_column] = labels_df[hash_column].astype(str).str.lower().str.strip()
+
+        merged = features_df.merge(
+            labels_df[[hash_column, self.label_column]],
+            left_on="file_hash",
+            right_on=hash_column,
+            how="inner",
+        )
+        merged = merged.drop(columns=["file_hash", hash_column], errors="ignore")
+        merged = merged.dropna(subset=[self.label_column])
+
+        y = merged[self.label_column].astype(int)
+        X = merged.drop(columns=[self.label_column])
 
         logger.info(f"  Class distribution: {y.value_counts().to_dict()}")
 
@@ -72,17 +104,35 @@ class Idea2DataLoader:
         for idx, row in top_5.iterrows():
             logger.info(f"  {row['feature']}: IG={row['information_gain']:.6f}")
 
-        self.feature_names = self.df_rankings['feature'].tolist()
+        available_features = set(X.columns)
+        self.feature_names = [feat for feat in self.df_rankings['feature'].tolist() if feat in available_features]
+        missing_ranked = len(self.df_rankings) - len(self.feature_names)
+        if missing_ranked:
+            logger.warning(f"⚠ {missing_ranked} ranked features are not present in the extracted feature matrix")
+        logger.info(f"✓ Using {len(self.feature_names)} ranked features present in the extracted matrix")
 
         return X, y, self.df_rankings
 
-    def _detect_label_column(self) -> str:
-        """Auto-detect label column name."""
-        candidates = ['Label', 'label', 'target', 'y', 'class', 'Class']
-        for col in candidates:
-            if col in self.df_train.columns:
-                return col
-        return None
+    def _load_features_file(self, features_path: Path) -> pd.DataFrame:
+        if features_path.suffix == ".parquet":
+            return pd.read_parquet(features_path)
+        if features_path.suffix == ".csv":
+            return pd.read_csv(features_path)
+        raise ValueError(f"Unsupported features file format: {features_path.suffix}")
+
+    def _detect_label_and_hash_columns(self, labels_df: pd.DataFrame) -> tuple[str | None, str | None]:
+        """Auto-detect label and hash column names."""
+        label_candidates = ['label', 'Label', 'target', 'y', 'class', 'Class']
+        hash_candidates = ['sha256', 'SHA256', 'hash', 'file_hash', 'file']
+
+        label_column = next((col for col in label_candidates if col in labels_df.columns), None)
+        hash_column = next((col for col in hash_candidates if col in labels_df.columns), None)
+
+        if hash_column == 'file':
+            # The legacy CSV may store hashes in a file column ending in .json
+            labels_df['file'] = labels_df['file'].astype(str).str.replace('.json', '', regex=False)
+
+        return label_column, hash_column
 
     def validate_features(self, features: List[str], data: pd.DataFrame) -> bool:
         """

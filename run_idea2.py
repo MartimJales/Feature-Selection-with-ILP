@@ -86,7 +86,8 @@ def main():
 
     # Create pipeline
     pipeline = Idea2Pipeline(
-        training_set_path="./data/training_set.csv",
+        features_path="./reports/extracted_features.parquet",
+        labels_path="./data/training_set.csv",
         rankings_path="./reports/feature_analysis/feature_rankings_all.parquet",
         output_dir="./reports/idea2",
         padtai_dir="./PADTAI",
