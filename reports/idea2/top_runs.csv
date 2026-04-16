@@ -1,7 +1,7 @@
 window_id,sample_size,seed,n_features,n_rules,status,elapsed_time,solver_time,train_accuracy,train_precision,train_recall,train_f1,val_accuracy,val_precision,val_recall,val_f1,debug_output_path,feature_mapping_path,error_message,score
-0,37500,0,30,0,timeout,70.30843806266785,0.0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-0,37500,1,30,0,timeout,70.28942608833313,0.0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-1,37500,0,30,0,timeout,70.23987364768982,0.0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-1,37500,1,30,0,timeout,70.2795000076294,0.0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-2,37500,0,30,0,timeout,70.20525360107422,0.0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-2,37500,1,30,0,no_solution,68.78603839874268,0.0,,,,0.0,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed1_20260416_223642.txt,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed1_20260416_223642.map.json,,0.0
+0,37500,0,30,0,timeout,60.30521202087402,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,37500,1,30,0,timeout,60.279011964797974,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+1,37500,0,30,0,timeout,60.26402688026428,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+1,37500,1,30,0,timeout,60.268139123916626,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+2,37500,0,30,0,timeout,60.201366662979126,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+2,37500,1,30,0,timeout,60.171311140060425,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
