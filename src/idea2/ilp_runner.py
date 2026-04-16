@@ -162,7 +162,7 @@ class ILPRunner:
             logger.info(f"Executing PADTAI (timeout={self.max_timeout}s)...")
             padtai_output = self._run_padtai(
                 dataset_path=str(dataset_path),
-                output_dir=str(output_dir),
+                sample_size=len(df_subset),
                 timeout=self.max_timeout,
             )
 
@@ -254,7 +254,7 @@ class ILPRunner:
     def _run_padtai(
         self,
         dataset_path: str,
-        output_dir: str,
+        sample_size: int,
         timeout: int = 1800,
     ) -> str:
         """
@@ -275,10 +275,10 @@ class ILPRunner:
         cmd = [
             "python",
             str(padtai_script.resolve()),
-            "--table_path", dataset_path,
-            "--out_path", output_dir,
+            dataset_path,
             "--solver", self.solver,
-            "--timeout", str(timeout),
+            "--sample-size", str(sample_size),
+            "--max-timeout", str(timeout),
         ]
 
         logger.debug(f"Command: {' '.join(cmd)}")
