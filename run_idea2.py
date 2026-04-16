@@ -73,6 +73,12 @@ def main():
         help='Max ILP timeout per run in seconds (default: 1800)'
     )
 
+    parser.add_argument(
+        '--debug',
+        action='store_true',
+        help='Enable debug mode: save raw PADTAI stdout/stderr per run'
+    )
+
     args = parser.parse_args()
 
     logger.info("="*80)
@@ -82,6 +88,7 @@ def main():
     logger.info(f"Seeds (A): {args.seeds_a}, Seeds (B): {args.seeds_b}")
     logger.info(f"Window size: {args.window_size}")
     logger.info(f"Timeout: {args.timeout}s")
+    logger.info(f"Debug mode: {args.debug}")
     logger.info("="*80)
 
     # Create pipeline
@@ -93,6 +100,7 @@ def main():
         padtai_dir="./PADTAI",
         max_timeout=args.timeout,
         window_size=args.window_size,
+        debug=args.debug,
     )
 
     try:

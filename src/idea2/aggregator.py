@@ -56,6 +56,7 @@ class ResultsAggregator:
                 'val_precision': result.val_precision,
                 'val_recall': result.val_recall,
                 'val_f1': result.val_f1,
+                'debug_output_path': result.debug_output_path,
                 'error_message': result.error_message,
             }
             rows.append(row)

@@ -5,13 +5,12 @@ ILP Runner: executes PADTAI on feature windows with logging and metric capture.
 import pandas as pd
 import subprocess
 import tempfile
-import json
 import logging
 import time
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
-from dataclasses import dataclass, asdict
+from typing import List
+from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 
@@ -48,6 +47,7 @@ class ILPRunResult:
     # Metadata
     dataset_path: str = None
     output_path: str = None
+    debug_output_path: str = None
     error_message: str = None
 
 
@@ -59,6 +59,8 @@ class ILPRunner:
         padtai_dir: str = "./PADTAI",
         max_timeout: int = 600,  # 10 minutes
         solver: str = "nuwls",
+        debug: bool = False,
+        debug_output_dir: str | None = None,
     ):
         """
         Initialize ILP runner.
@@ -67,10 +69,17 @@ class ILPRunner:
             padtai_dir: Path to PADTAI installation
             max_timeout: Max timeout per run (seconds)
             solver: Solver to use (nuwls or rc2)
+            debug: If True, save raw PADTAI output per run
+            debug_output_dir: Directory for debug logs (used only when debug=True)
         """
         self.padtai_dir = Path(padtai_dir).resolve()
         self.max_timeout = max_timeout
         self.solver = solver
+        self.debug = debug
+        self.debug_output_dir = Path(debug_output_dir).resolve() if debug_output_dir else None
+
+        if self.debug and self.debug_output_dir is not None:
+            self.debug_output_dir.mkdir(parents=True, exist_ok=True)
 
         if not self.padtai_dir.exists():
             raise FileNotFoundError(f"PADTAI directory not found: {self.padtai_dir}")
@@ -151,6 +160,17 @@ class ILPRunner:
                 timeout=self.max_timeout,
             )
 
+            if self.debug and self.debug_output_dir is not None:
+                debug_file = self._save_debug_output(
+                    padtai_output=padtai_output,
+                    window_id=window_id,
+                    sample_size=sample_size,
+                    seed=seed,
+                    n_rows=len(df_subset),
+                    n_features=len(features),
+                )
+                result.debug_output_path = str(debug_file)
+
             # Parse output
             rules = self._extract_rules(padtai_output)
             solver_time = self._extract_time(padtai_output)
@@ -185,6 +205,37 @@ class ILPRunner:
         logger.info(f"Total time: {result.elapsed_time:.1f}s | Status: {result.status}")
 
         return result
+
+    def _save_debug_output(
+        self,
+        padtai_output: str,
+        window_id: int,
+        sample_size: int,
+        seed: int,
+        n_rows: int,
+        n_features: int,
+    ) -> Path:
+        """Persist raw PADTAI output for debugging."""
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        filename = (
+            f"ilp_w{window_id}_n{sample_size}_seed{seed}_{timestamp}.log"
+        )
+        file_path = self.debug_output_dir / filename
+
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write("=== IDEA2 ILP DEBUG OUTPUT ===\n")
+            f.write(f"window_id={window_id}\n")
+            f.write(f"sample_size={sample_size}\n")
+            f.write(f"seed={seed}\n")
+            f.write(f"rows={n_rows}\n")
+            f.write(f"n_features={n_features}\n")
+            f.write(f"solver={self.solver}\n")
+            f.write(f"timeout={self.max_timeout}\n")
+            f.write("\n=== RAW PADTAI STDOUT/STDERR ===\n")
+            f.write(padtai_output or "")
+
+        logger.info(f"🪲 Debug output saved to {file_path}")
+        return file_path
 
     def _run_padtai(
         self,

@@ -33,6 +33,7 @@ class Idea2Pipeline:
         padtai_dir: str = "./PADTAI",
         max_timeout: int = 1800,
         window_size: int = 30,
+        debug: bool = False,
     ):
         """
         Initialize pipeline.
@@ -45,6 +46,7 @@ class Idea2Pipeline:
             padtai_dir: PADTAI installation directory
             max_timeout: Max ILP timeout per run (seconds)
             window_size: Feature window size (default: 30)
+            debug: Enable ILP raw-output debug logging
         """
         self.features_path = features_path
         self.labels_path = labels_path
@@ -53,6 +55,7 @@ class Idea2Pipeline:
         self.padtai_dir = padtai_dir
         self.max_timeout = max_timeout
         self.window_size = window_size
+        self.debug = debug
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -129,6 +132,8 @@ class Idea2Pipeline:
         runner = ILPRunner(
             padtai_dir=self.padtai_dir,
             max_timeout=self.max_timeout,
+            debug=self.debug,
+            debug_output_dir=str(self.output_dir / "debug"),
         )
 
         for window_id, features in enumerate(windows_to_test):
@@ -185,6 +190,8 @@ class Idea2Pipeline:
         runner = ILPRunner(
             padtai_dir=self.padtai_dir,
             max_timeout=self.max_timeout,
+            debug=self.debug,
+            debug_output_dir=str(self.output_dir / "debug"),
         )
 
         run_count = 0
@@ -242,6 +249,7 @@ class Idea2Pipeline:
             'padtai_dir': self.padtai_dir,
             'max_timeout': self.max_timeout,
             'window_size': self.window_size,
+            'debug': self.debug,
             'n_windows': len(self.windows),
             'n_results': len(self.all_results),
             'n_successful': len([r for r in self.all_results if r.status == 'success']),
