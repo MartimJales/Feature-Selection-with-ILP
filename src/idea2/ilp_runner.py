@@ -224,7 +224,7 @@ class ILPRunner:
         """Persist raw PADTAI output for debugging."""
         timestamp = time.strftime("%Y%m%d_%H%M%S")
         filename = (
-            f"ilp_w{window_id}_n{sample_size}_seed{seed}_{timestamp}.log"
+            f"ilp_w{window_id}_n{sample_size}_seed{seed}_{timestamp}.txt"
         )
         file_path = self.debug_output_dir / filename
 
