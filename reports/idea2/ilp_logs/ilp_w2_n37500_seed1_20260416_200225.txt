@@ -1,0 +1,30 @@
+=== IDEA2 ILP DEBUG OUTPUT ===
+window_id=2
+sample_size=37500
+seed=1
+rows=37500
+n_features=30
+solver=nuwls
+timeout=1800
+
+=== RAW PADTAI STDOUT/STDERR ===
+[DEBUG] Testing batch 1...
+/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+TIMEOUT OF 1800 SECONDS EXCEEDED
+Traceback (most recent call last):
+  File "/data/tmpC/Feature-Selection-with-ILP/PADTAI/padtai.py", line 7, in <module>
+    run()
+  File "/data/tmpC/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 528, in main
+    batch_size, offset = load_table(table_path, batch_size, offset, line_offset,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/tmpC/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 234, in load_table
+    rowP = normalize(row.split(',')[:-1], rebinds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/tmpC/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 69, in normalize
+    if is_number(strlist[i]):
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/data/tmpC/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py", line 39, in is_number
+    return str.replace('.', '', 1).isdigit() or (str[0] == '-' and str[1:].replace('.', '', 1).isdigit())
+                                                 ~~~^^^
+IndexError: string index out of range

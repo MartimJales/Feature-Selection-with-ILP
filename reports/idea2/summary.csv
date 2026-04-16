@@ -1,7 +1,7 @@
 window_id,sample_size,seed,n_features,n_rules,status,elapsed_time,solver_time,train_accuracy,train_precision,train_recall,train_f1,val_accuracy,val_precision,val_recall,val_f1,debug_output_path,error_message
-0,37500,0,30,0,no_solution,1.2877731323242188,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w0_n37500_seed0_20260416_183848.txt,
-0,37500,1,30,0,no_solution,0.639218807220459,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w0_n37500_seed1_20260416_183853.txt,
-1,37500,0,30,0,no_solution,0.5443015098571777,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w1_n37500_seed0_20260416_183858.txt,
-1,37500,1,30,0,no_solution,0.5118913650512695,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w1_n37500_seed1_20260416_183902.txt,
-2,37500,0,30,0,no_solution,0.48915815353393555,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed0_20260416_183906.txt,
-2,37500,1,30,0,no_solution,0.4727468490600586,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed1_20260416_183911.txt,
+0,37500,0,30,0,no_solution,7.631939888000488,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w0_n37500_seed0_20260416_190100.txt,
+0,37500,1,30,0,no_solution,6.994571924209595,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w0_n37500_seed1_20260416_190111.txt,
+1,37500,0,30,0,no_solution,18.882155179977417,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w1_n37500_seed0_20260416_190134.txt,
+1,37500,1,30,0,no_solution,19.627421379089355,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w1_n37500_seed1_20260416_190157.txt,
+2,37500,0,30,0,timeout,1810.2742052078247,0.0,,,,,,,,,,PADTAI timeout (1800s)
+2,37500,1,30,0,no_solution,1809.3735706806183,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed1_20260416_200225.txt,
