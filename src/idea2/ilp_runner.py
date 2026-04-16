@@ -9,8 +9,8 @@ import logging
 import time
 import re
 import os
-import json
 import signal
+import shutil
 from pathlib import Path
 from typing import List, Dict, Tuple
 from dataclasses import dataclass
@@ -85,7 +85,14 @@ class ILPRunner:
         if self.debug and self.debug_output_dir is not None:
             try:
                 self.debug_output_dir.mkdir(parents=True, exist_ok=True)
+                # Keep debug folder clean: remove previous contents at start.
+                for item in self.debug_output_dir.iterdir():
+                    if item.is_file() or item.is_symlink():
+                        item.unlink(missing_ok=True)
+                    elif item.is_dir():
+                        shutil.rmtree(item)
                 logger.info(f"✓ Debug output dir created: {self.debug_output_dir}")
+                logger.info("✓ Cleared previous debug files; only latest run output will be kept")
             except Exception as e:
                 logger.error(f"✗ Failed to create debug dir {self.debug_output_dir}: {e}")
                 raise
@@ -183,7 +190,7 @@ class ILPRunner:
                     sanitized_to_original=sanitized_to_original,
                 )
                 result.debug_output_path = str(debug_file)
-                result.feature_mapping_path = str(debug_file.with_suffix(".map.json"))
+                result.feature_mapping_path = None
 
             # Parse output
             rules = self._extract_rules(padtai_output)
@@ -231,31 +238,14 @@ class ILPRunner:
         sanitized_to_original: Dict[str, str],
     ) -> Path:
         """Persist raw PADTAI output for debugging."""
-        timestamp = time.strftime("%Y%m%d_%H%M%S")
-        filename = (
-            f"ilp_w{window_id}_n{sample_size}_seed{seed}_{timestamp}.txt"
-        )
+        filename = "latest_run.txt"
         file_path = self.debug_output_dir / filename
-        mapping_path = file_path.with_suffix(".map.json")
 
         logger.info(f"💾 Saving debug output to: {file_path}")
         logger.info(f"   Directory exists: {self.debug_output_dir.exists()}")
         logger.info(f"   Directory is writable: {os.access(self.debug_output_dir, os.W_OK)}")
 
         try:
-            with open(mapping_path, "w", encoding="utf-8") as fmap:
-                json.dump(
-                    {
-                        "window_id": window_id,
-                        "sample_size": sample_size,
-                        "seed": seed,
-                        "sanitized_to_original": sanitized_to_original,
-                    },
-                    fmap,
-                    ensure_ascii=False,
-                    indent=2,
-                )
-
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write("=== IDEA2 ILP DEBUG OUTPUT ===\n")
                 f.write(f"window_id={window_id}\n")
@@ -265,7 +255,6 @@ class ILPRunner:
                 f.write(f"n_features={n_features}\n")
                 f.write(f"solver={self.solver}\n")
                 f.write(f"timeout={self.max_timeout}\n")
-                f.write(f"feature_mapping_path={mapping_path}\n")
                 f.write("\n=== FEATURE MAPPING (sanitized -> original) ===\n")
                 for sanitized, original in sanitized_to_original.items():
                     f.write(f"{sanitized} -> {original}\n")
