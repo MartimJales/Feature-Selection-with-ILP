@@ -79,6 +79,20 @@ def main():
         help='Enable debug mode: save raw PADTAI stdout/stderr per run'
     )
 
+    parser.add_argument(
+        '--max-ilp-rows',
+        type=int,
+        default=150,
+        help='Maximum rows per ILP call (default: 150)'
+    )
+
+    parser.add_argument(
+        '--subsamples-per-seed',
+        type=int,
+        default=5,
+        help='Number of ILP micro-calls per seed (default: 5)'
+    )
+
     args = parser.parse_args()
 
     logger.info("="*80)
@@ -89,6 +103,8 @@ def main():
     logger.info(f"Window size: {args.window_size}")
     logger.info(f"Timeout: {args.timeout}s")
     logger.info(f"Debug mode: {args.debug}")
+    logger.info(f"Max ILP rows/run: {args.max_ilp_rows}")
+    logger.info(f"Subsamples per seed: {args.subsamples_per_seed}")
     logger.info("="*80)
 
     # Create pipeline
@@ -101,6 +117,8 @@ def main():
         max_timeout=args.timeout,
         window_size=args.window_size,
         debug=args.debug,
+        max_ilp_rows=args.max_ilp_rows,
+        subsamples_per_seed=args.subsamples_per_seed,
     )
 
     try:

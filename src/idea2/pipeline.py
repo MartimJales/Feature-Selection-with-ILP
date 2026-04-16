@@ -34,6 +34,8 @@ class Idea2Pipeline:
         max_timeout: int = 1800,
         window_size: int = 30,
         debug: bool = False,
+        max_ilp_rows: int = 150,
+        subsamples_per_seed: int = 5,
     ):
         """
         Initialize pipeline.
@@ -47,6 +49,8 @@ class Idea2Pipeline:
             max_timeout: Max ILP timeout per run (seconds)
             window_size: Feature window size (default: 30)
             debug: Enable ILP raw-output debug logging
+            max_ilp_rows: Maximum rows per ILP call
+            subsamples_per_seed: Number of ILP calls per seed (micro-samples)
         """
         self.features_path = features_path
         self.labels_path = labels_path
@@ -56,6 +60,8 @@ class Idea2Pipeline:
         self.max_timeout = max_timeout
         self.window_size = window_size
         self.debug = debug
+        self.max_ilp_rows = max_ilp_rows
+        self.subsamples_per_seed = subsamples_per_seed
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -127,7 +133,9 @@ class Idea2Pipeline:
         logger.info(f"Windows: {len(windows_to_test)}")
         logger.info(f"Sample size: {medium_sample_size} ({medium_sample_size/len(self.X):.1%})")
         logger.info(f"Seeds: {n_seeds}")
-        logger.info(f"Total runs: {len(windows_to_test) * n_seeds}")
+        logger.info(f"Max ILP rows/run: {self.max_ilp_rows}")
+        logger.info(f"Subsamples per seed: {self.subsamples_per_seed}")
+        logger.info(f"Total runs: {len(windows_to_test) * n_seeds * self.subsamples_per_seed}")
 
         runner = ILPRunner(
             padtai_dir=self.padtai_dir,
@@ -138,25 +146,32 @@ class Idea2Pipeline:
 
         for window_id, features in enumerate(windows_to_test):
             for seed in range(n_seeds):
-                # Sample with seed
+                # Base pool sample with seed
                 sampler_seed = SamplingStrategy(random_seed=42 + seed)
-                X_sample, y_sample, indices = sampler_seed.stratified_sample(
+                X_pool, y_pool, _ = sampler_seed.stratified_sample(
                     self.X, self.y, medium_sample_size
                 )
 
-                # Run ILP
-                result = runner.run(
-                    X=X_sample,
-                    y=y_sample,
-                    features=features,
-                    window_id=window_id,
-                    sample_size=medium_sample_size,
-                    seed=seed,
-                    output_dir=self.output_dir,
-                    label_column=self.label_column,
-                )
+                ilp_rows = min(self.max_ilp_rows, len(X_pool))
+                for sub_idx in range(self.subsamples_per_seed):
+                    micro_seed = (seed * 1000) + sub_idx
+                    sampler_micro = SamplingStrategy(random_seed=4242 + micro_seed)
+                    X_sample, y_sample, _ = sampler_micro.stratified_sample(
+                        X_pool, y_pool, ilp_rows
+                    )
 
-                self.all_results.append(result)
+                    result = runner.run(
+                        X=X_sample,
+                        y=y_sample,
+                        features=features,
+                        window_id=window_id,
+                        sample_size=len(X_sample),
+                        seed=micro_seed,
+                        output_dir=self.output_dir,
+                        label_column=self.label_column,
+                    )
+
+                    self.all_results.append(result)
 
         logger.info(f"\n✓ Phase A complete: {len([r for r in self.all_results if r.status == 'success'])} successful runs")
 
@@ -184,7 +199,9 @@ class Idea2Pipeline:
         logger.info(f"Windows: {len(windows_to_test)}")
         logger.info(f"Sample sizes: {sample_sizes}")
         logger.info(f"Seeds: {n_seeds}")
-        total_runs = len(windows_to_test) * len(sample_sizes) * n_seeds
+        logger.info(f"Max ILP rows/run: {self.max_ilp_rows}")
+        logger.info(f"Subsamples per seed: {self.subsamples_per_seed}")
+        total_runs = len(windows_to_test) * len(sample_sizes) * n_seeds * self.subsamples_per_seed
         logger.info(f"Total runs: {total_runs}")
 
         runner = ILPRunner(
@@ -198,26 +215,37 @@ class Idea2Pipeline:
         for window_id, features in enumerate(windows_to_test):
             for sample_size in sample_sizes:
                 for seed in range(n_seeds):
-                    run_count += 1
-                    logger.info(f"\n[{run_count}/{total_runs}] Window {window_id}, Size {sample_size}, Seed {seed}")
-
                     sampler_seed = SamplingStrategy(random_seed=42 + seed)
-                    X_sample, y_sample, indices = sampler_seed.stratified_sample(
+                    X_pool, y_pool, _ = sampler_seed.stratified_sample(
                         self.X, self.y, sample_size
                     )
 
-                    result = runner.run(
-                        X=X_sample,
-                        y=y_sample,
-                        features=features,
-                        window_id=window_id,
-                        sample_size=sample_size,
-                        seed=seed,
-                        output_dir=self.output_dir,
-                        label_column=self.label_column,
-                    )
+                    ilp_rows = min(self.max_ilp_rows, len(X_pool))
+                    for sub_idx in range(self.subsamples_per_seed):
+                        run_count += 1
+                        micro_seed = (seed * 1000) + sub_idx
+                        logger.info(
+                            f"\n[{run_count}/{total_runs}] Window {window_id}, Size {sample_size}, "
+                            f"Seed {seed}, Micro {sub_idx+1}/{self.subsamples_per_seed}"
+                        )
 
-                    self.all_results.append(result)
+                        sampler_micro = SamplingStrategy(random_seed=4242 + micro_seed)
+                        X_sample, y_sample, _ = sampler_micro.stratified_sample(
+                            X_pool, y_pool, ilp_rows
+                        )
+
+                        result = runner.run(
+                            X=X_sample,
+                            y=y_sample,
+                            features=features,
+                            window_id=window_id,
+                            sample_size=len(X_sample),
+                            seed=micro_seed,
+                            output_dir=self.output_dir,
+                            label_column=self.label_column,
+                        )
+
+                        self.all_results.append(result)
 
         logger.info(f"\n✓ Phase B complete: {len([r for r in self.all_results if r.status == 'success'])} successful runs")
 
@@ -250,6 +278,8 @@ class Idea2Pipeline:
             'max_timeout': self.max_timeout,
             'window_size': self.window_size,
             'debug': self.debug,
+            'max_ilp_rows': self.max_ilp_rows,
+            'subsamples_per_seed': self.subsamples_per_seed,
             'n_windows': len(self.windows),
             'n_results': len(self.all_results),
             'n_successful': len([r for r in self.all_results if r.status == 'success']),
