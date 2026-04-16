@@ -1,0 +1,4 @@
+window_id,n_features_first,n_rules_mean,n_rules_std,n_rules_min,n_rules_max,status_<lambda>,elapsed_time_mean,elapsed_time_max,train_accuracy_mean,train_f1_mean
+0,30,0.0,0.0,0,0,0.0,0.0016,0.002,,
+1,30,0.0,0.0,0,0,0.0,0.0012,0.0012,,
+2,30,0.0,0.0,0,0,0.0,0.0012,0.0012,,
