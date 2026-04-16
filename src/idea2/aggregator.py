@@ -114,11 +114,20 @@ class ResultsAggregator:
         """Save top runs by success + rules quality."""
         df = self.to_dataframe()
 
+        if df.empty:
+            path = self.output_dir / filename
+            df.to_csv(path, index=False)
+            logger.warning(f"No runs available; wrote empty top-runs file to {path}")
+            return path
+
+        df['n_rules'] = pd.to_numeric(df['n_rules'], errors='coerce').fillna(0)
+        df['train_f1'] = pd.to_numeric(df['train_f1'], errors='coerce').fillna(0)
+
         # Score: success * n_rules * mean_f1
         df['score'] = (
             (df['status'] == 'success').astype(int) *
             df['n_rules'] *
-            df['train_f1'].fillna(0)
+            df['train_f1']
         )
 
         top = df.nlargest(top_k, 'score')
