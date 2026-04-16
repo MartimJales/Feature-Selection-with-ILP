@@ -1,7 +1,7 @@
-window_id,sample_size,seed,n_features,n_rules,status,elapsed_time,solver_time,train_accuracy,train_precision,train_recall,train_f1,val_accuracy,val_precision,val_recall,val_f1,debug_output_path,error_message
-0,37500,0,30,0,no_solution,7.631939888000488,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w0_n37500_seed0_20260416_190100.txt,
-0,37500,1,30,0,no_solution,6.994571924209595,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w0_n37500_seed1_20260416_190111.txt,
-1,37500,0,30,0,no_solution,18.882155179977417,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w1_n37500_seed0_20260416_190134.txt,
-1,37500,1,30,0,no_solution,19.627421379089355,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w1_n37500_seed1_20260416_190157.txt,
-2,37500,0,30,0,timeout,1810.2742052078247,0.0,,,,,,,,,,PADTAI timeout (1800s)
-2,37500,1,30,0,no_solution,1809.3735706806183,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed1_20260416_200225.txt,
+window_id,sample_size,seed,n_features,n_rules,status,elapsed_time,solver_time,train_accuracy,train_precision,train_recall,train_f1,val_accuracy,val_precision,val_recall,val_f1,debug_output_path,feature_mapping_path,error_message
+0,37500,0,30,0,timeout,70.30843806266785,0.0,,,,,,,,,,,PADTAI timeout (60s)
+0,37500,1,30,0,timeout,70.28942608833313,0.0,,,,,,,,,,,PADTAI timeout (60s)
+1,37500,0,30,0,timeout,70.23987364768982,0.0,,,,,,,,,,,PADTAI timeout (60s)
+1,37500,1,30,0,timeout,70.2795000076294,0.0,,,,,,,,,,,PADTAI timeout (60s)
+2,37500,0,30,0,timeout,70.20525360107422,0.0,,,,,,,,,,,PADTAI timeout (60s)
+2,37500,1,30,0,no_solution,68.78603839874268,0.0,,,,,,,,,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed1_20260416_223642.txt,/data/tmpC/Feature-Selection-with-ILP/reports/idea2/ilp_logs/ilp_w2_n37500_seed1_20260416_223642.map.json,

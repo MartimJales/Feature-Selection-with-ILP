@@ -1,2 +1,2 @@
 sample_size,n_rules_mean,n_rules_std,n_rules_min,n_rules_max,status_<lambda>,elapsed_time_mean,elapsed_time_max,train_accuracy_mean,train_f1_mean
-37500,0.0,0.0,0,0,0.0,612.1306,1810.2742,,
+37500,0.0,0.0,0,0,0.0,70.0181,70.3084,,
