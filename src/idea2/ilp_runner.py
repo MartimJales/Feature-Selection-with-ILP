@@ -8,6 +8,7 @@ import tempfile
 import logging
 import time
 import re
+import os
 from pathlib import Path
 from typing import List
 from dataclasses import dataclass
@@ -79,7 +80,12 @@ class ILPRunner:
         self.debug_output_dir = Path(debug_output_dir).resolve() if debug_output_dir else None
 
         if self.debug and self.debug_output_dir is not None:
-            self.debug_output_dir.mkdir(parents=True, exist_ok=True)
+            try:
+                self.debug_output_dir.mkdir(parents=True, exist_ok=True)
+                logger.info(f"✓ Debug output dir created: {self.debug_output_dir}")
+            except Exception as e:
+                logger.error(f"✗ Failed to create debug dir {self.debug_output_dir}: {e}")
+                raise
 
         if not self.padtai_dir.exists():
             raise FileNotFoundError(f"PADTAI directory not found: {self.padtai_dir}")
@@ -222,20 +228,28 @@ class ILPRunner:
         )
         file_path = self.debug_output_dir / filename
 
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write("=== IDEA2 ILP DEBUG OUTPUT ===\n")
-            f.write(f"window_id={window_id}\n")
-            f.write(f"sample_size={sample_size}\n")
-            f.write(f"seed={seed}\n")
-            f.write(f"rows={n_rows}\n")
-            f.write(f"n_features={n_features}\n")
-            f.write(f"solver={self.solver}\n")
-            f.write(f"timeout={self.max_timeout}\n")
-            f.write("\n=== RAW PADTAI STDOUT/STDERR ===\n")
-            f.write(padtai_output or "")
+        logger.info(f"💾 Saving debug output to: {file_path}")
+        logger.info(f"   Directory exists: {self.debug_output_dir.exists()}")
+        logger.info(f"   Directory is writable: {os.access(self.debug_output_dir, os.W_OK)}")
 
-        logger.info(f"🪲 Debug output saved to {file_path}")
-        return file_path
+        try:
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write("=== IDEA2 ILP DEBUG OUTPUT ===\n")
+                f.write(f"window_id={window_id}\n")
+                f.write(f"sample_size={sample_size}\n")
+                f.write(f"seed={seed}\n")
+                f.write(f"rows={n_rows}\n")
+                f.write(f"n_features={n_features}\n")
+                f.write(f"solver={self.solver}\n")
+                f.write(f"timeout={self.max_timeout}\n")
+                f.write("\n=== RAW PADTAI STDOUT/STDERR ===\n")
+                f.write(padtai_output or "")
+
+            logger.info(f"✓ Debug output saved successfully to {file_path}")
+            return file_path
+        except Exception as e:
+            logger.error(f"✗ Failed to save debug output to {file_path}: {e}")
+            raise
 
     def _run_padtai(
         self,
