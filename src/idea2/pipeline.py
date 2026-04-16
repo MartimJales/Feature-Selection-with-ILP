@@ -133,7 +133,7 @@ class Idea2Pipeline:
             padtai_dir=self.padtai_dir,
             max_timeout=self.max_timeout,
             debug=self.debug,
-            debug_output_dir=str(self.output_dir / "ilp_debug_logs"),
+            debug_output_dir=str(self.output_dir / "ilp_logs"),
         )
 
         for window_id, features in enumerate(windows_to_test):
@@ -191,7 +191,7 @@ class Idea2Pipeline:
             padtai_dir=self.padtai_dir,
             max_timeout=self.max_timeout,
             debug=self.debug,
-            debug_output_dir=str(self.output_dir / "ilp_debug_logs"),
+            debug_output_dir=str(self.output_dir / "ilp_logs"),
         )
 
         run_count = 0
