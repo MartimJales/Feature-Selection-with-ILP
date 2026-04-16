@@ -68,7 +68,7 @@ class ILPRunner:
             max_timeout: Max timeout per run (seconds)
             solver: Solver to use (nuwls or rc2)
         """
-        self.padtai_dir = Path(padtai_dir)
+        self.padtai_dir = Path(padtai_dir).resolve()
         self.max_timeout = max_timeout
         self.solver = solver
 
@@ -209,7 +209,7 @@ class ILPRunner:
 
         cmd = [
             "python",
-            str(padtai_script),
+            str(padtai_script.resolve()),
             "--table_path", dataset_path,
             "--out_path", output_dir,
             "--solver", self.solver,
