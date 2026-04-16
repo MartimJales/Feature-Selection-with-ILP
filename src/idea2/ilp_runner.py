@@ -10,6 +10,7 @@ import time
 import re
 import os
 import json
+import signal
 from pathlib import Path
 from typing import List, Dict, Tuple
 from dataclasses import dataclass
@@ -310,13 +311,42 @@ class ILPRunner:
 
         logger.debug(f"Command: {' '.join(cmd)}")
 
-        result = subprocess.run(
+        # Run PADTAI in its own process group so timeout can kill child processes too.
+        proc = subprocess.Popen(
             cmd,
             cwd=str(self.padtai_dir),
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            timeout=timeout + 10,  # Add 10s buffer
+            start_new_session=True,
         )
+
+        try:
+            stdout, stderr = proc.communicate(timeout=timeout)
+        except subprocess.TimeoutExpired as exc:
+            logger.warning(f"PADTAI hard timeout reached ({timeout}s). Killing process tree...")
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)
+            except Exception as kill_err:
+                logger.warning(f"Failed to kill PADTAI process group cleanly: {kill_err}")
+
+            # Ensure process is reaped and collect any partial output
+            stdout, stderr = proc.communicate()
+            partial_output = (stdout or "") + (stderr or "")
+            raise subprocess.TimeoutExpired(
+                cmd=cmd,
+                timeout=timeout,
+                output=partial_output,
+                stderr=stderr,
+            ) from exc
+
+        class _Completed:
+            def __init__(self, returncode: int, stdout: str, stderr: str):
+                self.returncode = returncode
+                self.stdout = stdout
+                self.stderr = stderr
+
+        result = _Completed(proc.returncode, stdout, stderr)
 
         if result.returncode != 0:
             logger.warning(f"PADTAI returned code {result.returncode}")
