@@ -51,7 +51,7 @@ class Idea1KNNExperiment:
         self,
         top_features: int = 1000,
         n_clusters: int = 100,
-        cluster_size: int = 500,
+        cluster_size: int = 150,
         top_local_features: int = 30,
         min_cluster_rows: int = 150,
         random_seed: int = 42,
