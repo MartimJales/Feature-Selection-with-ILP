@@ -25,9 +25,11 @@ class KNNClusterResult:
     n_samples: int
     class_0: int
     class_1: int
-    ig_sum: float
-    ig_top30_sum: float
-    ig_top30_ratio: float
+    mi_mean_all: float
+    mi_mean_top30: float
+    mi_mean_rest: float
+    mi_delta_top30_rest: float
+    mi_ratio_top30_all: float
     acc_top30: float | None
     f1_top30: float | None
     top30_features: List[str]
@@ -118,9 +120,11 @@ class Idea1KNNExperiment:
                         n_samples=len(Xc),
                         class_0=n0,
                         class_1=n1,
-                        ig_sum=0.0,
-                        ig_top30_sum=0.0,
-                        ig_top30_ratio=0.0,
+                        mi_mean_all=0.0,
+                        mi_mean_top30=0.0,
+                        mi_mean_rest=0.0,
+                        mi_delta_top30_rest=0.0,
+                        mi_ratio_top30_all=0.0,
                         acc_top30=None,
                         f1_top30=None,
                         top30_features=[],
@@ -132,9 +136,13 @@ class Idea1KNNExperiment:
             ig_series = pd.Series(ig, index=Xc.columns).sort_values(ascending=False)
 
             topk = ig_series.head(top_local_features)
-            ig_sum = float(ig_series.sum())
-            ig_top = float(topk.sum())
-            ig_ratio = float(ig_top / ig_sum) if ig_sum > 0 else 0.0
+            rest = ig_series.iloc[top_local_features:]
+
+            mi_mean_all = float(ig_series.mean())
+            mi_mean_top = float(topk.mean())
+            mi_mean_rest = float(rest.mean()) if len(rest) > 0 else 0.0
+            mi_delta = float(mi_mean_top - mi_mean_rest)
+            mi_ratio = float(mi_mean_top / mi_mean_all) if mi_mean_all > 0 else 0.0
 
             acc, f1 = self._evaluate_local_topk(Xc[topk.index], yc, random_seed)
 
@@ -145,9 +153,11 @@ class Idea1KNNExperiment:
                     n_samples=len(Xc),
                     class_0=n0,
                     class_1=n1,
-                    ig_sum=ig_sum,
-                    ig_top30_sum=ig_top,
-                    ig_top30_ratio=ig_ratio,
+                    mi_mean_all=mi_mean_all,
+                    mi_mean_top30=mi_mean_top,
+                    mi_mean_rest=mi_mean_rest,
+                    mi_delta_top30_rest=mi_delta,
+                    mi_ratio_top30_all=mi_ratio,
                     acc_top30=acc,
                     f1_top30=f1,
                     top30_features=list(topk.index),
@@ -171,9 +181,11 @@ class Idea1KNNExperiment:
             "cluster_size": int(cluster_size),
             "min_cluster_rows": int(min_cluster_rows),
             "top_local_features": int(top_local_features),
-            "ig_ratio_mean": float(df["ig_top30_ratio"].fillna(0).mean()),
-            "ig_ratio_median": float(df["ig_top30_ratio"].fillna(0).median()),
-            "ig_ratio_ge_0_90": int((df["ig_top30_ratio"].fillna(0) >= 0.90).sum()),
+            "mi_ratio_mean": float(df["mi_ratio_top30_all"].fillna(0).mean()),
+            "mi_ratio_median": float(df["mi_ratio_top30_all"].fillna(0).median()),
+            "mi_delta_mean": float(df["mi_delta_top30_rest"].fillna(0).mean()),
+            "mi_delta_median": float(df["mi_delta_top30_rest"].fillna(0).median()),
+            "mi_ratio_ge_1_5": int((df["mi_ratio_top30_all"].fillna(0) >= 1.5).sum()),
             "acc_top30_mean": float(pd.to_numeric(df["acc_top30"], errors="coerce").dropna().mean()),
             "f1_top30_mean": float(pd.to_numeric(df["f1_top30"], errors="coerce").dropna().mean()),
             "output_csv": str(out_csv),
@@ -186,8 +198,12 @@ class Idea1KNNExperiment:
         logger.info(f"✓ Saved cluster results: {out_csv}")
         logger.info(f"✓ Saved summary: {out_json}")
         logger.info(
-            "IG top30 ratio (mean/median): "
-            f"{summary['ig_ratio_mean']:.3f}/{summary['ig_ratio_median']:.3f}"
+            "MI top30/all ratio (mean/median): "
+            f"{summary['mi_ratio_mean']:.3f}/{summary['mi_ratio_median']:.3f}"
+        )
+        logger.info(
+            "MI top30-rest delta (mean/median): "
+            f"{summary['mi_delta_mean']:.6f}/{summary['mi_delta_median']:.6f}"
         )
 
         return summary
