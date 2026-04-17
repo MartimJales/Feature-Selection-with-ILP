@@ -47,7 +47,7 @@ class Idea1KNNExperiment:
 
     def run(
         self,
-        top_features: int = 2000,
+        top_features: int = 1000,
         n_clusters: int = 100,
         cluster_size: int = 500,
         top_local_features: int = 30,
@@ -62,6 +62,11 @@ class Idea1KNNExperiment:
         selected_features = ranked_available[:top_features]
         if not selected_features:
             raise ValueError("No ranked features available in extracted feature matrix")
+
+        logger.info(
+            f"Ranked available features in matrix: {len(ranked_available)} | "
+            f"Using top-{len(selected_features)} by global IG"
+        )
 
         X_sel = X[selected_features].copy()
         y = y.reset_index(drop=True)
@@ -206,8 +211,12 @@ class Idea1KNNExperiment:
         if y_train.nunique() < 2 or y_test.nunique() < 2:
             return None, None
 
-        clf = LogisticRegression(max_iter=500, random_state=random_seed)
-        clf.fit(X_train, y_train)
-        y_pred = clf.predict(X_test)
+        scaler = StandardScaler()
+        X_train_scaled = scaler.fit_transform(X_train)
+        X_test_scaled = scaler.transform(X_test)
+
+        clf = LogisticRegression(max_iter=2000, random_state=random_seed)
+        clf.fit(X_train_scaled, y_train)
+        y_pred = clf.predict(X_test_scaled)
 
         return float(accuracy_score(y_test, y_pred)), float(f1_score(y_test, y_pred))

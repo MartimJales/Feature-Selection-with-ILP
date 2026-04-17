@@ -18,7 +18,7 @@ def main() -> None:
     parser.add_argument("--rankings-path", default="./reports/feature_analysis/feature_rankings_all.parquet")
     parser.add_argument("--output-dir", default="./reports/idea1")
 
-    parser.add_argument("--top-features", type=int, default=2000)
+    parser.add_argument("--top-features", type=int, default=1000)
     parser.add_argument("--n-clusters", type=int, default=100)
     parser.add_argument("--cluster-size", type=int, default=500)
     parser.add_argument("--top-local-features", type=int, default=30)
