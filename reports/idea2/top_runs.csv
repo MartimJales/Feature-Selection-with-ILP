@@ -1,7 +1,16 @@
 window_id,sample_size,seed,n_features,n_rules,status,elapsed_time,solver_time,train_accuracy,train_precision,train_recall,train_f1,val_accuracy,val_precision,val_recall,val_f1,debug_output_path,feature_mapping_path,error_message,score
-0,37500,0,30,0,timeout,60.30521202087402,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-0,37500,1,30,0,timeout,60.279011964797974,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-1,37500,0,30,0,timeout,60.26402688026428,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-1,37500,1,30,0,timeout,60.268139123916626,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-2,37500,0,30,0,timeout,60.201366662979126,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
-2,37500,1,30,0,timeout,60.171311140060425,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,0,30,0,timeout,60.079856157302856,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,1,30,0,timeout,60.032203912734985,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,2,30,0,timeout,60.081377267837524,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,3,30,0,timeout,60.07934236526489,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,4,30,0,timeout,60.065306425094604,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,1000,30,0,timeout,60.04314661026001,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,1001,30,0,timeout,60.07997131347656,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,1002,30,0,timeout,60.024842262268066,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,1003,30,0,timeout,60.08206129074097,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+0,150,1004,30,0,timeout,60.044182777404785,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+1,150,0,30,0,timeout,60.062965631484985,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+1,150,1,30,0,timeout,60.0334312915802,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+1,150,2,30,0,timeout,60.031375885009766,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+1,150,3,30,0,timeout,60.040276765823364,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0
+1,150,4,30,0,timeout,60.03753066062927,0,,,,0.0,,,,,,,PADTAI timeout (60s),0.0

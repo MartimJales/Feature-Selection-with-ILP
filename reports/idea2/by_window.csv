@@ -1,4 +1,4 @@
 window_id,n_features_first,n_rules_mean,n_rules_std,n_rules_min,n_rules_max,status_<lambda>,elapsed_time_mean,elapsed_time_max,train_accuracy_mean,train_f1_mean
-0,30,0.0,0.0,0,0,0.0,60.2921,60.3052,,
-1,30,0.0,0.0,0,0,0.0,60.2661,60.2681,,
-2,30,0.0,0.0,0,0,0.0,60.1863,60.2014,,
+0,30,0.0,0.0,0,0,0.0,60.0612,60.0821,,
+1,30,0.0,0.0,0,0,0.0,60.0373,60.063,,
+2,30,0.0,0.0,0,0,0.0,60.0355,60.0443,,
