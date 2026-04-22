@@ -1,0 +1,372 @@
+"""Main orchestration for the Entropy KNN pipeline."""
+
+from __future__ import annotations
+
+import json
+import logging
+import time
+from dataclasses import asdict, dataclass
+from pathlib import Path
+
+import pandas as pd
+
+from .clustering import EntropyCluster, EntropyKNNClusterer
+from .data_loader import EntropyKNNDataBundle, EntropyKNNDataLoader
+from .selection import ClusterSelectionSummary, EntropyFeatureSelector
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass(slots=True)
+class EntropyKNNRunResult:
+    """Result of one pipeline configuration."""
+
+    cluster_size: int
+    threshold: float
+    top_features_global: int
+    top_k: int
+    seed: int
+    n_clusters_requested: int
+    n_clusters_valid: int
+    n_selected_features_total: int
+    selected_features_unique: int
+    mean_cluster_size: float
+    mean_selected_per_cluster: float
+    mean_entropy_reduction_ratio: float
+    mean_conditional_entropy: float
+    runtime_seconds: float
+    status: str
+    error_message: str | None
+    summary_csv: str | None
+    selected_features_csv: str | None
+
+
+class EntropyKNNPipeline:
+    """Entropy-driven KNN feature selection pipeline."""
+
+    def __init__(
+        self,
+        features_path: str = "./reports/extracted_features.parquet",
+        labels_path: str = "./data/training_set.csv",
+        rankings_path: str = "./reports/feature_analysis/feature_rankings_all.parquet",
+        output_dir: str = "./reports/entropy_knn",
+    ) -> None:
+        self.loader = EntropyKNNDataLoader(
+            features_path=features_path,
+            labels_path=labels_path,
+            rankings_path=rankings_path,
+        )
+        self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.bundle: EntropyKNNDataBundle | None = None
+
+    def run_sweep(
+        self,
+        cluster_sizes: list[int],
+        thresholds: list[float],
+        top_features_global: int = 1000,
+        top_k: int = 30,
+        seeds: list[int] | None = None,
+        scale_features: bool = False,
+        base_n_clusters: int = 100,
+        cluster_schedule: str = "inverse-size",
+    ) -> tuple[pd.DataFrame, pd.DataFrame]:
+        seeds = seeds or [42]
+        run_rows: list[dict] = []
+        cluster_rows: list[dict] = []
+
+        for cluster_size in cluster_sizes:
+            n_clusters = self._resolve_n_clusters(cluster_size, cluster_sizes[0], base_n_clusters, cluster_schedule)
+            for threshold in thresholds:
+                for seed in seeds:
+                    result, cluster_details = self._run_single_configuration(
+                        cluster_size=cluster_size,
+                        threshold=threshold,
+                        top_features_global=top_features_global,
+                        top_k=top_k,
+                        seed=seed,
+                        n_clusters=n_clusters,
+                        scale_features=scale_features,
+                    )
+                    run_rows.append(asdict(result))
+                    cluster_rows.extend(cluster_details)
+
+        run_df = pd.DataFrame(run_rows)
+        cluster_df = pd.DataFrame(cluster_rows)
+
+        self._save_sweep_outputs(run_df, cluster_df)
+        return run_df, cluster_df
+
+    def _run_single_configuration(
+        self,
+        cluster_size: int,
+        threshold: float,
+        top_features_global: int,
+        top_k: int,
+        seed: int,
+        n_clusters: int,
+        scale_features: bool,
+    ) -> tuple[EntropyKNNRunResult, list[dict]]:
+        start_time = time.time()
+        run_dir = self.output_dir / f"cluster_{cluster_size}" / f"threshold_{self._format_threshold(threshold)}" / f"seed_{seed}"
+        run_dir.mkdir(parents=True, exist_ok=True)
+
+        try:
+            bundle = self._load_bundle()
+            X_global = self._select_global_features(bundle, top_features_global)
+            clusterer = EntropyKNNClusterer(
+                cluster_size=cluster_size,
+                n_clusters=n_clusters,
+                scale_features=scale_features,
+                random_seed=seed,
+            )
+            clusters = clusterer.cluster(X_global)
+            selector = EntropyFeatureSelector()
+
+            cluster_summaries = self._score_clusters(
+                bundle=bundle,
+                clusters=clusters,
+                selector=selector,
+                top_k=top_k,
+                threshold=threshold,
+            )
+
+            summary_csv, selected_csv = self._save_run_outputs(run_dir, cluster_summaries)
+            result = self._build_run_result(
+                cluster_size=cluster_size,
+                threshold=threshold,
+                top_features_global=top_features_global,
+                top_k=top_k,
+                seed=seed,
+                n_clusters=n_clusters,
+                cluster_summaries=cluster_summaries,
+                runtime_seconds=time.time() - start_time,
+                status="ok",
+                error_message=None,
+                summary_csv=summary_csv,
+                selected_features_csv=selected_csv,
+            )
+            cluster_details = self._build_cluster_rows(cluster_summaries, result)
+            return result, cluster_details
+        except Exception as exc:  # pragma: no cover - surfaced in output CSV
+            logger.exception("Entropy KNN configuration failed")
+            result = EntropyKNNRunResult(
+                cluster_size=cluster_size,
+                threshold=threshold,
+                top_features_global=top_features_global,
+                top_k=top_k,
+                seed=seed,
+                n_clusters_requested=n_clusters,
+                n_clusters_valid=0,
+                n_selected_features_total=0,
+                selected_features_unique=0,
+                mean_cluster_size=0.0,
+                mean_selected_per_cluster=0.0,
+                mean_entropy_reduction_ratio=0.0,
+                mean_conditional_entropy=0.0,
+                runtime_seconds=time.time() - start_time,
+                status="error",
+                error_message=str(exc),
+                summary_csv=None,
+                selected_features_csv=None,
+            )
+            return result, []
+
+    def _load_bundle(self) -> EntropyKNNDataBundle:
+        if self.bundle is None:
+            self.bundle = self.loader.load()
+        return self.bundle
+
+    @staticmethod
+    def _select_global_features(bundle: EntropyKNNDataBundle, top_features_global: int) -> pd.DataFrame:
+        selected = bundle.ranked_features[:top_features_global]
+        if not selected:
+            raise ValueError("No ranked features available in the extracted feature matrix")
+        return bundle.X[selected].copy()
+
+    @staticmethod
+    def _score_clusters(
+        bundle: EntropyKNNDataBundle,
+        clusters: list[EntropyCluster],
+        selector: EntropyFeatureSelector,
+        top_k: int,
+        threshold: float,
+    ) -> list[ClusterSelectionSummary]:
+        cluster_summaries: list[ClusterSelectionSummary] = []
+        for cluster in clusters:
+            X_cluster = bundle.X.iloc[cluster.row_indices].reset_index(drop=True)
+            y_cluster = bundle.y.iloc[cluster.row_indices].reset_index(drop=True)
+            if X_cluster.empty or y_cluster.empty:
+                continue
+
+            scores = selector.score_cluster(X_cluster, y_cluster)
+            selected_features = selector.select_features(scores, top_k=top_k, threshold=threshold)
+            class_counts = y_cluster.value_counts().to_dict()
+
+            cluster_summaries.append(
+                ClusterSelectionSummary(
+                    cluster_id=cluster.cluster_id,
+                    anchor_index=cluster.anchor_index,
+                    n_samples=cluster.n_samples,
+                    class_0=int(class_counts.get(0, 0)),
+                    class_1=int(class_counts.get(1, 0)),
+                    base_entropy=float(scores["base_entropy"].iloc[0]) if not scores.empty else 0.0,
+                    selected_features=selected_features,
+                    mean_reduction_ratio=float(scores["entropy_reduction_ratio"].mean()) if not scores.empty else 0.0,
+                    mean_conditional_entropy=float(scores["conditional_entropy"].mean()) if not scores.empty else 0.0,
+                    scores=scores,
+                )
+            )
+
+        return cluster_summaries
+
+    def _build_run_result(
+        self,
+        cluster_size: int,
+        threshold: float,
+        top_features_global: int,
+        top_k: int,
+        seed: int,
+        n_clusters: int,
+        cluster_summaries: list[ClusterSelectionSummary],
+        runtime_seconds: float,
+        status: str,
+        error_message: str | None,
+        summary_csv: str | None,
+        selected_features_csv: str | None,
+    ) -> EntropyKNNRunResult:
+        selected_counts = [len(summary.selected_features) for summary in cluster_summaries]
+        unique_features = sorted({feature for summary in cluster_summaries for feature in summary.selected_features})
+        cluster_sizes = [summary.n_samples for summary in cluster_summaries]
+
+        return EntropyKNNRunResult(
+            cluster_size=cluster_size,
+            threshold=threshold,
+            top_features_global=top_features_global,
+            top_k=top_k,
+            seed=seed,
+            n_clusters_requested=n_clusters,
+            n_clusters_valid=len(cluster_summaries),
+            n_selected_features_total=int(sum(selected_counts)),
+            selected_features_unique=len(unique_features),
+            mean_cluster_size=float(pd.Series(cluster_sizes).mean()) if cluster_sizes else 0.0,
+            mean_selected_per_cluster=float(pd.Series(selected_counts).mean()) if selected_counts else 0.0,
+            mean_entropy_reduction_ratio=float(pd.Series([summary.mean_reduction_ratio for summary in cluster_summaries]).mean()) if cluster_summaries else 0.0,
+            mean_conditional_entropy=float(pd.Series([summary.mean_conditional_entropy for summary in cluster_summaries]).mean()) if cluster_summaries else 0.0,
+            runtime_seconds=runtime_seconds,
+            status=status,
+            error_message=error_message,
+            summary_csv=summary_csv,
+            selected_features_csv=selected_features_csv,
+        )
+
+    def _save_run_outputs(self, run_dir: Path, cluster_summaries: list[ClusterSelectionSummary]) -> tuple[str, str]:
+        summary_df = self._cluster_summary_frame(cluster_summaries)
+        selected_df = self._selected_features_frame(cluster_summaries)
+
+        summary_csv = run_dir / "cluster_summary.csv"
+        selected_csv = run_dir / "selected_features_by_cluster.csv"
+        summary_df.to_csv(summary_csv, index=False)
+        selected_df.to_csv(selected_csv, index=False)
+        return str(summary_csv), str(selected_csv)
+
+    @staticmethod
+    def _cluster_summary_frame(cluster_summaries: list[ClusterSelectionSummary]) -> pd.DataFrame:
+        rows = []
+        for summary in cluster_summaries:
+            rows.append(
+                {
+                    "cluster_id": summary.cluster_id,
+                    "anchor_index": summary.anchor_index,
+                    "n_samples": summary.n_samples,
+                    "class_0": summary.class_0,
+                    "class_1": summary.class_1,
+                    "base_entropy": summary.base_entropy,
+                    "n_selected_features": len(summary.selected_features),
+                    "mean_reduction_ratio": summary.mean_reduction_ratio,
+                    "mean_conditional_entropy": summary.mean_conditional_entropy,
+                }
+            )
+        return pd.DataFrame(rows)
+
+    @staticmethod
+    def _selected_features_frame(cluster_summaries: list[ClusterSelectionSummary]) -> pd.DataFrame:
+        rows = []
+        for summary in cluster_summaries:
+            for rank, feature in enumerate(summary.selected_features, start=1):
+                rows.append(
+                    {
+                        "cluster_id": summary.cluster_id,
+                        "anchor_index": summary.anchor_index,
+                        "rank": rank,
+                        "feature": feature,
+                    }
+                )
+        return pd.DataFrame(rows)
+
+    def _build_cluster_rows(self, cluster_summaries: list[ClusterSelectionSummary], result: EntropyKNNRunResult) -> list[dict]:
+        rows = []
+        for summary in cluster_summaries:
+            rows.append(
+                {
+                    "cluster_size": result.cluster_size,
+                    "threshold": result.threshold,
+                    "top_features_global": result.top_features_global,
+                    "top_k": result.top_k,
+                    "seed": result.seed,
+                    "cluster_id": summary.cluster_id,
+                    "anchor_index": summary.anchor_index,
+                    "n_samples": summary.n_samples,
+                    "class_0": summary.class_0,
+                    "class_1": summary.class_1,
+                    "base_entropy": summary.base_entropy,
+                    "n_selected_features": len(summary.selected_features),
+                    "mean_reduction_ratio": summary.mean_reduction_ratio,
+                    "mean_conditional_entropy": summary.mean_conditional_entropy,
+                    "selected_features": summary.selected_features,
+                }
+            )
+        return rows
+
+    def _save_sweep_outputs(self, run_df: pd.DataFrame, cluster_df: pd.DataFrame) -> None:
+        detailed_path = self.output_dir / "sweep_results.csv"
+        cluster_path = self.output_dir / "cluster_results.csv"
+        summary_path = self.output_dir / "sweep_summary.csv"
+
+        run_df.to_csv(detailed_path, index=False)
+        cluster_df.to_csv(cluster_path, index=False)
+
+        if run_df.empty:
+            summary_df = pd.DataFrame()
+        else:
+            summary_df = (
+                run_df.groupby(["cluster_size", "threshold", "top_features_global", "top_k", "n_clusters_requested"], as_index=False)
+                .agg(
+                    runs=("seed", "count"),
+                    runtime_seconds_mean=("runtime_seconds", "mean"),
+                    n_clusters_valid_mean=("n_clusters_valid", "mean"),
+                    n_selected_features_total_mean=("n_selected_features_total", "mean"),
+                    selected_features_unique_mean=("selected_features_unique", "mean"),
+                    mean_cluster_size_mean=("mean_cluster_size", "mean"),
+                    mean_selected_per_cluster_mean=("mean_selected_per_cluster", "mean"),
+                    mean_entropy_reduction_ratio_mean=("mean_entropy_reduction_ratio", "mean"),
+                    mean_conditional_entropy_mean=("mean_conditional_entropy", "mean"),
+                )
+                .sort_values(["cluster_size", "threshold"], ascending=[False, True])
+            )
+
+        summary_df.to_csv(summary_path, index=False)
+
+        config_path = self.output_dir / "sweep_config.json"
+        with open(config_path, "w", encoding="utf-8") as handle:
+            json.dump({"runs": int(len(run_df)), "clusters": int(len(cluster_df))}, handle, indent=2)
+
+    @staticmethod
+    def _resolve_n_clusters(cluster_size: int, base_size: int, base_n_clusters: int, cluster_schedule: str) -> int:
+        if cluster_schedule == "inverse-size":
+            return max(1, int(round(base_n_clusters * (base_size / cluster_size))))
+        return int(base_n_clusters)
+
+    @staticmethod
+    def _format_threshold(threshold: float) -> str:
+        return f"{threshold:.3f}".rstrip("0").rstrip(".")
