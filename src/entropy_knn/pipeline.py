@@ -74,11 +74,32 @@ class EntropyKNNPipeline:
         seeds = seeds or [42]
         run_rows: list[dict] = []
         cluster_rows: list[dict] = []
+        total_runs = len(cluster_sizes) * len(thresholds) * len(seeds)
+        run_index = 0
+
+        logger.info("Starting Entropy KNN sweep")
+        logger.info(
+            "Runs=%d | cluster_sizes=%s | thresholds=%s | seeds=%s",
+            total_runs,
+            cluster_sizes,
+            thresholds,
+            seeds,
+        )
 
         for cluster_size in cluster_sizes:
             n_clusters = self._resolve_n_clusters(cluster_size, cluster_sizes[0], base_n_clusters, cluster_schedule)
             for threshold in thresholds:
                 for seed in seeds:
+                    run_index += 1
+                    logger.info(
+                        "[%d/%d] Running config: cluster_size=%d | n_clusters=%d | threshold=%.3f | seed=%d",
+                        run_index,
+                        total_runs,
+                        cluster_size,
+                        n_clusters,
+                        threshold,
+                        seed,
+                    )
                     result, cluster_details = self._run_single_configuration(
                         cluster_size=cluster_size,
                         threshold=threshold,
@@ -90,6 +111,15 @@ class EntropyKNNPipeline:
                     )
                     run_rows.append(asdict(result))
                     cluster_rows.extend(cluster_details)
+                    logger.info(
+                        "[%d/%d] Finished: status=%s | runtime=%.1fs | valid_clusters=%d | selected_unique=%d",
+                        run_index,
+                        total_runs,
+                        result.status,
+                        result.runtime_seconds,
+                        result.n_clusters_valid,
+                        result.selected_features_unique,
+                    )
 
         run_df = pd.DataFrame(run_rows)
         cluster_df = pd.DataFrame(cluster_rows)
@@ -124,11 +154,13 @@ class EntropyKNNPipeline:
             selector = EntropyFeatureSelector()
 
             cluster_summaries = self._score_clusters(
-                bundle=bundle,
+                X_global=X_global,
+                y=bundle.y,
                 clusters=clusters,
                 selector=selector,
                 top_k=top_k,
                 threshold=threshold,
+                progress_every=10,
             )
 
             summary_csv, selected_csv = self._save_run_outputs(run_dir, cluster_summaries)
@@ -186,16 +218,19 @@ class EntropyKNNPipeline:
 
     @staticmethod
     def _score_clusters(
-        bundle: EntropyKNNDataBundle,
+        X_global: pd.DataFrame,
+        y: pd.Series,
         clusters: list[EntropyCluster],
         selector: EntropyFeatureSelector,
         top_k: int,
         threshold: float,
+        progress_every: int = 10,
     ) -> list[ClusterSelectionSummary]:
         cluster_summaries: list[ClusterSelectionSummary] = []
-        for cluster in clusters:
-            X_cluster = bundle.X.iloc[cluster.row_indices].reset_index(drop=True)
-            y_cluster = bundle.y.iloc[cluster.row_indices].reset_index(drop=True)
+        total_clusters = len(clusters)
+        for index, cluster in enumerate(clusters, start=1):
+            X_cluster = X_global.iloc[cluster.row_indices].reset_index(drop=True)
+            y_cluster = y.iloc[cluster.row_indices].reset_index(drop=True)
             if X_cluster.empty or y_cluster.empty:
                 continue
 
@@ -217,6 +252,16 @@ class EntropyKNNPipeline:
                     scores=scores,
                 )
             )
+
+            if index == 1 or index % progress_every == 0 or index == total_clusters:
+                logger.info(
+                    "  Cluster progress: %d/%d | cluster_id=%d | rows=%d | selected=%d",
+                    index,
+                    total_clusters,
+                    cluster.cluster_id,
+                    cluster.n_samples,
+                    len(selected_features),
+                )
 
         return cluster_summaries
 

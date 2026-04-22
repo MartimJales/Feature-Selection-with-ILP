@@ -8,34 +8,55 @@ import pandas as pd
 
 def shannon_entropy(values: pd.Series | np.ndarray) -> float:
     """Compute Shannon entropy in bits."""
-    series = pd.Series(values).dropna()
-    if series.empty:
+    arr = np.asarray(values)
+    if arr.ndim > 1:
+        arr = arr.ravel()
+
+    valid_mask = pd.notna(arr)
+    arr = arr[valid_mask]
+    if arr.size == 0:
         return 0.0
 
-    probabilities = series.value_counts(normalize=True)
-    return float(-(probabilities * np.log2(probabilities)).sum())
+    _, counts = np.unique(arr, return_counts=True)
+    probabilities = counts / counts.sum()
+    entropy = -np.sum(np.where(probabilities > 0, probabilities * np.log2(probabilities), 0.0))
+    return float(entropy)
 
 
 def conditional_entropy(target: pd.Series | np.ndarray, feature: pd.Series | np.ndarray) -> float:
     """Compute H(target | feature)."""
-    y = pd.Series(target).reset_index(drop=True)
-    x = pd.Series(feature).reset_index(drop=True)
+    y = np.asarray(target)
+    x = np.asarray(feature)
 
-    valid_mask = x.notna() & y.notna()
+    if y.ndim > 1:
+        y = y.ravel()
+    if x.ndim > 1:
+        x = x.ravel()
+
+    valid_mask = pd.notna(x) & pd.notna(y)
     x = x[valid_mask]
     y = y[valid_mask]
 
-    if x.empty:
+    if x.size == 0:
         return 0.0
 
-    total = len(x)
-    conditional = 0.0
+    contingency = pd.crosstab(pd.Series(x, name="x"), pd.Series(y, name="y"), dropna=True)
+    if contingency.empty:
+        return 0.0
 
-    for _, group_index in x.groupby(x).groups.items():
-        group_y = y.loc[group_index]
-        conditional += (len(group_y) / total) * shannon_entropy(group_y)
+    matrix = contingency.to_numpy(dtype=float)
+    row_totals = matrix.sum(axis=1)
+    total = row_totals.sum()
+    if total <= 0.0:
+        return 0.0
 
-    return float(conditional)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        probs = matrix / row_totals[:, None]
+        log_probs = np.where(probs > 0, np.log2(probs), 0.0)
+        row_entropy = -np.sum(probs * log_probs, axis=1)
+
+    weights = row_totals / total
+    return float(np.sum(weights * row_entropy))
 
 
 def entropy_reduction_ratio(target: pd.Series | np.ndarray, feature: pd.Series | np.ndarray) -> float:
