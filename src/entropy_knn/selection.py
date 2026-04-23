@@ -20,9 +20,22 @@ class ClusterSelectionSummary:
     class_1: int
     base_entropy: float
     selected_features: list[str]
+    threshold_pass_count: int
+    used_fallback: bool
+    selection_mode: str
     mean_reduction_ratio: float
     mean_conditional_entropy: float
     scores: pd.DataFrame
+
+
+@dataclass(slots=True)
+class SelectionOutcome:
+    """Selection result together with decision metadata."""
+
+    selected_features: list[str]
+    threshold_pass_count: int
+    used_fallback: bool
+    selection_mode: str
 
 
 class EntropyFeatureSelector:
@@ -58,14 +71,25 @@ class EntropyFeatureSelector:
         top_k: int,
         threshold: float,
         fallback_to_top_k: bool = True,
-    ) -> list[str]:
+    ) -> SelectionOutcome:
         if scores.empty:
-            return []
+            return SelectionOutcome([], 0, False, "empty")
 
         filtered = scores[scores["entropy_reduction_ratio"] >= threshold]
+        threshold_pass_count = int(len(filtered))
+
         if filtered.empty and fallback_to_top_k:
             filtered = scores.head(top_k)
+            selection_mode = "fallback_top_k"
+            used_fallback = True
         else:
             filtered = filtered.head(top_k)
+            selection_mode = "threshold_top_k" if threshold_pass_count > 0 else "threshold_empty"
+            used_fallback = False
 
-        return filtered["feature"].astype(str).tolist()
+        return SelectionOutcome(
+            selected_features=filtered["feature"].astype(str).tolist(),
+            threshold_pass_count=threshold_pass_count,
+            used_fallback=used_fallback,
+            selection_mode=selection_mode,
+        )

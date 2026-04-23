@@ -29,9 +29,12 @@ class EntropyKNNRunResult:
     n_clusters_requested: int
     n_clusters_valid: int
     n_selected_features_total: int
+    n_selected_features_total_raw: int
     selected_features_unique: int
+    selected_features_unique_raw: int
     mean_cluster_size: float
     mean_selected_per_cluster: float
+    mean_selected_per_cluster_raw: float
     mean_entropy_reduction_ratio: float
     mean_conditional_entropy: float
     runtime_seconds: float
@@ -235,7 +238,7 @@ class EntropyKNNPipeline:
                 continue
 
             scores = selector.score_cluster(X_cluster, y_cluster)
-            selected_features = selector.select_features(scores, top_k=top_k, threshold=threshold)
+            selection = selector.select_features(scores, top_k=top_k, threshold=threshold)
             class_counts = y_cluster.value_counts().to_dict()
 
             cluster_summaries.append(
@@ -246,7 +249,10 @@ class EntropyKNNPipeline:
                     class_0=int(class_counts.get(0, 0)),
                     class_1=int(class_counts.get(1, 0)),
                     base_entropy=float(scores["base_entropy"].iloc[0]) if not scores.empty else 0.0,
-                    selected_features=selected_features,
+                    selected_features=selection.selected_features,
+                    threshold_pass_count=selection.threshold_pass_count,
+                    used_fallback=selection.used_fallback,
+                    selection_mode=selection.selection_mode,
                     mean_reduction_ratio=float(scores["entropy_reduction_ratio"].mean()) if not scores.empty else 0.0,
                     mean_conditional_entropy=float(scores["conditional_entropy"].mean()) if not scores.empty else 0.0,
                     scores=scores,
@@ -260,7 +266,7 @@ class EntropyKNNPipeline:
                     total_clusters,
                     cluster.cluster_id,
                     cluster.n_samples,
-                    len(selected_features),
+                    len(selection.selected_features),
                 )
 
         return cluster_summaries
@@ -280,8 +286,17 @@ class EntropyKNNPipeline:
         summary_csv: str | None,
         selected_features_csv: str | None,
     ) -> EntropyKNNRunResult:
-        selected_counts = [len(summary.selected_features) for summary in cluster_summaries]
-        unique_features = sorted({feature for summary in cluster_summaries for feature in summary.selected_features})
+        selected_counts_raw = [len(summary.selected_features) for summary in cluster_summaries]
+        selected_counts_analysis = [self._analysis_selected_count(summary) for summary in cluster_summaries]
+        unique_features_raw = sorted({feature for summary in cluster_summaries for feature in summary.selected_features})
+        unique_features_analysis = sorted(
+            {
+                feature
+                for summary in cluster_summaries
+                if not summary.used_fallback
+                for feature in summary.selected_features
+            }
+        )
         cluster_sizes = [summary.n_samples for summary in cluster_summaries]
 
         return EntropyKNNRunResult(
@@ -292,10 +307,13 @@ class EntropyKNNPipeline:
             seed=seed,
             n_clusters_requested=n_clusters,
             n_clusters_valid=len(cluster_summaries),
-            n_selected_features_total=int(sum(selected_counts)),
-            selected_features_unique=len(unique_features),
+            n_selected_features_total=int(sum(selected_counts_analysis)),
+            n_selected_features_total_raw=int(sum(selected_counts_raw)),
+            selected_features_unique=len(unique_features_analysis),
+            selected_features_unique_raw=len(unique_features_raw),
             mean_cluster_size=float(pd.Series(cluster_sizes).mean()) if cluster_sizes else 0.0,
-            mean_selected_per_cluster=float(pd.Series(selected_counts).mean()) if selected_counts else 0.0,
+            mean_selected_per_cluster=float(pd.Series(selected_counts_analysis).mean()) if selected_counts_analysis else 0.0,
+            mean_selected_per_cluster_raw=float(pd.Series(selected_counts_raw).mean()) if selected_counts_raw else 0.0,
             mean_entropy_reduction_ratio=float(pd.Series([summary.mean_reduction_ratio for summary in cluster_summaries]).mean()) if cluster_summaries else 0.0,
             mean_conditional_entropy=float(pd.Series([summary.mean_conditional_entropy for summary in cluster_summaries]).mean()) if cluster_summaries else 0.0,
             runtime_seconds=runtime_seconds,
@@ -319,6 +337,8 @@ class EntropyKNNPipeline:
     def _cluster_summary_frame(cluster_summaries: list[ClusterSelectionSummary]) -> pd.DataFrame:
         rows = []
         for summary in cluster_summaries:
+            n_selected_raw = len(summary.selected_features)
+            n_selected_analysis = EntropyKNNPipeline._analysis_selected_count(summary)
             rows.append(
                 {
                     "cluster_id": summary.cluster_id,
@@ -327,7 +347,12 @@ class EntropyKNNPipeline:
                     "class_0": summary.class_0,
                     "class_1": summary.class_1,
                     "base_entropy": summary.base_entropy,
-                    "n_selected_features": len(summary.selected_features),
+                    "n_selected_features": n_selected_analysis,
+                    "n_selected_features_raw": n_selected_raw,
+                    "n_selected_features_analysis": n_selected_analysis,
+                    "threshold_pass_count": summary.threshold_pass_count,
+                    "used_fallback": summary.used_fallback,
+                    "selection_mode": summary.selection_mode,
                     "mean_reduction_ratio": summary.mean_reduction_ratio,
                     "mean_conditional_entropy": summary.mean_conditional_entropy,
                 }
@@ -343,6 +368,9 @@ class EntropyKNNPipeline:
                     {
                         "cluster_id": summary.cluster_id,
                         "anchor_index": summary.anchor_index,
+                        "used_fallback": summary.used_fallback,
+                        "selection_mode": summary.selection_mode,
+                        "threshold_pass_count": summary.threshold_pass_count,
                         "rank": rank,
                         "feature": feature,
                     }
@@ -352,6 +380,8 @@ class EntropyKNNPipeline:
     def _build_cluster_rows(self, cluster_summaries: list[ClusterSelectionSummary], result: EntropyKNNRunResult) -> list[dict]:
         rows = []
         for summary in cluster_summaries:
+            n_selected_raw = len(summary.selected_features)
+            n_selected_analysis = self._analysis_selected_count(summary)
             rows.append(
                 {
                     "cluster_size": result.cluster_size,
@@ -365,13 +395,22 @@ class EntropyKNNPipeline:
                     "class_0": summary.class_0,
                     "class_1": summary.class_1,
                     "base_entropy": summary.base_entropy,
-                    "n_selected_features": len(summary.selected_features),
+                    "n_selected_features": n_selected_analysis,
+                    "n_selected_features_raw": n_selected_raw,
+                    "n_selected_features_analysis": n_selected_analysis,
+                    "threshold_pass_count": summary.threshold_pass_count,
+                    "used_fallback": summary.used_fallback,
+                    "selection_mode": summary.selection_mode,
                     "mean_reduction_ratio": summary.mean_reduction_ratio,
                     "mean_conditional_entropy": summary.mean_conditional_entropy,
                     "selected_features": summary.selected_features,
                 }
             )
         return rows
+
+    @staticmethod
+    def _analysis_selected_count(summary: ClusterSelectionSummary) -> int:
+        return 0 if summary.used_fallback else len(summary.selected_features)
 
     def _save_sweep_outputs(self, run_df: pd.DataFrame, cluster_df: pd.DataFrame) -> None:
         detailed_path = self.output_dir / "sweep_results.csv"
