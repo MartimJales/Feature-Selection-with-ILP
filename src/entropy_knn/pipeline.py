@@ -194,9 +194,12 @@ class EntropyKNNPipeline:
                 n_clusters_requested=n_clusters,
                 n_clusters_valid=0,
                 n_selected_features_total=0,
+                n_selected_features_total_raw=0,
                 selected_features_unique=0,
+                selected_features_unique_raw=0,
                 mean_cluster_size=0.0,
                 mean_selected_per_cluster=0.0,
+                mean_selected_per_cluster_raw=0.0,
                 mean_entropy_reduction_ratio=0.0,
                 mean_conditional_entropy=0.0,
                 runtime_seconds=time.time() - start_time,
@@ -206,6 +209,157 @@ class EntropyKNNPipeline:
                 selected_features_csv=None,
             )
             return result, []
+
+    def run_score_sweep(
+        self,
+        cluster_sizes: list[int],
+        top_features_global: int = 1000,
+        seeds: list[int] | None = None,
+        scale_features: bool = False,
+        base_n_clusters: int = 100,
+        cluster_schedule: str = "inverse-size",
+    ) -> pd.DataFrame:
+        """Run scoring-only sweep (no threshold, no feature filtering)."""
+        seeds = seeds or [42]
+        total_runs = len(cluster_sizes) * len(seeds)
+        run_index = 0
+        rows: list[dict] = []
+
+        logger.info("Starting Entropy KNN score-only sweep")
+        logger.info("Runs=%d | cluster_sizes=%s | seeds=%s", total_runs, cluster_sizes, seeds)
+
+        for cluster_size in cluster_sizes:
+            n_clusters = self._resolve_n_clusters(cluster_size, cluster_sizes[0], base_n_clusters, cluster_schedule)
+            for seed in seeds:
+                run_index += 1
+                logger.info(
+                    "[%d/%d] Score-only config: cluster_size=%d | n_clusters=%d | seed=%d",
+                    run_index,
+                    total_runs,
+                    cluster_size,
+                    n_clusters,
+                    seed,
+                )
+                row = self._run_score_only_configuration(
+                    cluster_size=cluster_size,
+                    top_features_global=top_features_global,
+                    seed=seed,
+                    n_clusters=n_clusters,
+                    scale_features=scale_features,
+                )
+                rows.append(row)
+
+        result_df = pd.DataFrame(rows)
+        result_df.to_csv(self.output_dir / "score_sweep_results.csv", index=False)
+        return result_df
+
+    def _run_score_only_configuration(
+        self,
+        cluster_size: int,
+        top_features_global: int,
+        seed: int,
+        n_clusters: int,
+        scale_features: bool,
+    ) -> dict:
+        start_time = time.time()
+        run_dir = self.output_dir / "score_only" / f"cluster_{cluster_size}" / f"seed_{seed}"
+        run_dir.mkdir(parents=True, exist_ok=True)
+
+        try:
+            bundle = self._load_bundle()
+            X_global = self._select_global_features(bundle, top_features_global)
+            clusterer = EntropyKNNClusterer(
+                cluster_size=cluster_size,
+                n_clusters=n_clusters,
+                scale_features=scale_features,
+                random_seed=seed,
+            )
+            clusters = clusterer.cluster(X_global)
+            selector = EntropyFeatureSelector()
+
+            feature_rows: list[pd.DataFrame] = []
+            cluster_rows: list[dict] = []
+            total_clusters = len(clusters)
+
+            for index, cluster in enumerate(clusters, start=1):
+                X_cluster = X_global.iloc[cluster.row_indices].reset_index(drop=True)
+                y_cluster = bundle.y.iloc[cluster.row_indices].reset_index(drop=True)
+                if X_cluster.empty or y_cluster.empty:
+                    continue
+
+                scores = selector.score_cluster(X_cluster, y_cluster)
+                if scores.empty:
+                    continue
+
+                class_counts = y_cluster.value_counts().to_dict()
+                scores = scores.copy()
+                scores.insert(0, "feature_rank", range(1, len(scores) + 1))
+                scores.insert(0, "cluster_id", cluster.cluster_id)
+                scores.insert(1, "anchor_index", cluster.anchor_index)
+                scores.insert(2, "n_samples", cluster.n_samples)
+                scores.insert(3, "class_0", int(class_counts.get(0, 0)))
+                scores.insert(4, "class_1", int(class_counts.get(1, 0)))
+                feature_rows.append(scores)
+
+                cluster_rows.append(
+                    {
+                        "cluster_id": cluster.cluster_id,
+                        "anchor_index": cluster.anchor_index,
+                        "n_samples": cluster.n_samples,
+                        "class_0": int(class_counts.get(0, 0)),
+                        "class_1": int(class_counts.get(1, 0)),
+                        "base_entropy": float(scores["base_entropy"].iloc[0]),
+                        "n_features_scored": int(len(scores)),
+                        "max_reduction_ratio": float(scores["entropy_reduction_ratio"].max()),
+                        "mean_reduction_ratio": float(scores["entropy_reduction_ratio"].mean()),
+                        "mean_conditional_entropy": float(scores["conditional_entropy"].mean()),
+                    }
+                )
+
+                if index == 1 or index % 10 == 0 or index == total_clusters:
+                    logger.info(
+                        "  Cluster progress: %d/%d | cluster_id=%d | rows=%d | features_scored=%d",
+                        index,
+                        total_clusters,
+                        cluster.cluster_id,
+                        cluster.n_samples,
+                        len(scores),
+                    )
+
+            feature_scores_df = pd.concat(feature_rows, ignore_index=True) if feature_rows else pd.DataFrame()
+            cluster_summary_df = pd.DataFrame(cluster_rows)
+
+            feature_scores_path = run_dir / "cluster_feature_scores.csv"
+            cluster_summary_path = run_dir / "cluster_entropy_summary.csv"
+            feature_scores_df.to_csv(feature_scores_path, index=False)
+            cluster_summary_df.to_csv(cluster_summary_path, index=False)
+
+            return {
+                "cluster_size": cluster_size,
+                "seed": seed,
+                "top_features_global": top_features_global,
+                "n_clusters_requested": n_clusters,
+                "n_clusters_valid": int(len(cluster_summary_df)),
+                "runtime_seconds": float(time.time() - start_time),
+                "status": "ok",
+                "error_message": None,
+                "cluster_entropy_summary_csv": str(cluster_summary_path),
+                "cluster_feature_scores_csv": str(feature_scores_path),
+            }
+        except Exception as exc:  # pragma: no cover
+            logger.exception("Entropy KNN score-only configuration failed")
+            return {
+                "cluster_size": cluster_size,
+                "seed": seed,
+                "top_features_global": top_features_global,
+                "n_clusters_requested": n_clusters,
+                "n_clusters_valid": 0,
+                "runtime_seconds": float(time.time() - start_time),
+                "status": "error",
+                "error_message": str(exc),
+                "cluster_entropy_summary_csv": None,
+                "cluster_feature_scores_csv": None,
+            }
 
     def _load_bundle(self) -> EntropyKNNDataBundle:
         if self.bundle is None:
