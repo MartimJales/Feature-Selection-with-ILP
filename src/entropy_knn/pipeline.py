@@ -12,6 +12,7 @@ import pandas as pd
 
 from .clustering import EntropyCluster, EntropyKNNClusterer
 from .data_loader import EntropyKNNDataBundle, EntropyKNNDataLoader
+from .report_io import write_tabular_report
 from .selection import ClusterSelectionSummary, EntropyFeatureSelector
 
 logger = logging.getLogger(__name__)
@@ -329,10 +330,10 @@ class EntropyKNNPipeline:
             feature_scores_df = pd.concat(feature_rows, ignore_index=True) if feature_rows else pd.DataFrame()
             cluster_summary_df = pd.DataFrame(cluster_rows)
 
-            feature_scores_path = run_dir / "cluster_feature_scores.csv"
-            cluster_summary_path = run_dir / "cluster_entropy_summary.csv"
-            feature_scores_df.to_csv(feature_scores_path, index=False)
-            cluster_summary_df.to_csv(cluster_summary_path, index=False)
+            feature_scores_path = run_dir / "cluster_feature_scores.parquet"
+            cluster_summary_path = run_dir / "cluster_entropy_summary.parquet"
+            write_tabular_report(feature_scores_df, feature_scores_path)
+            write_tabular_report(cluster_summary_df, cluster_summary_path)
 
             return {
                 "cluster_size": cluster_size,
@@ -343,8 +344,8 @@ class EntropyKNNPipeline:
                 "runtime_seconds": float(time.time() - start_time),
                 "status": "ok",
                 "error_message": None,
-                "cluster_entropy_summary_csv": str(cluster_summary_path),
-                "cluster_feature_scores_csv": str(feature_scores_path),
+                "cluster_entropy_summary_parquet": str(cluster_summary_path),
+                "cluster_feature_scores_parquet": str(feature_scores_path),
             }
         except Exception as exc:  # pragma: no cover
             logger.exception("Entropy KNN score-only configuration failed")
@@ -357,8 +358,8 @@ class EntropyKNNPipeline:
                 "runtime_seconds": float(time.time() - start_time),
                 "status": "error",
                 "error_message": str(exc),
-                "cluster_entropy_summary_csv": None,
-                "cluster_feature_scores_csv": None,
+                "cluster_entropy_summary_parquet": None,
+                "cluster_feature_scores_parquet": None,
             }
 
     def _load_bundle(self) -> EntropyKNNDataBundle:
