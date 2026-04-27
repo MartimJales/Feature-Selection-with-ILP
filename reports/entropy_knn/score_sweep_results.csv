@@ -1,0 +1,7 @@
+cluster_size,seed,top_features_global,n_clusters_requested,n_clusters_valid,runtime_seconds,status,error_message,cluster_entropy_summary_csv,cluster_feature_scores_csv
+500,42,1000,100,100,857.7864394187927,ok,,reports/entropy_knn/score_only/cluster_500/seed_42/cluster_entropy_summary.csv,reports/entropy_knn/score_only/cluster_500/seed_42/cluster_feature_scores.csv
+250,42,1000,200,200,1567.3895161151886,ok,,reports/entropy_knn/score_only/cluster_250/seed_42/cluster_entropy_summary.csv,reports/entropy_knn/score_only/cluster_250/seed_42/cluster_feature_scores.csv
+150,42,1000,333,333,2436.4322843551636,ok,,reports/entropy_knn/score_only/cluster_150/seed_42/cluster_entropy_summary.csv,reports/entropy_knn/score_only/cluster_150/seed_42/cluster_feature_scores.csv
+100,42,1000,500,500,3379.482998609543,ok,,reports/entropy_knn/score_only/cluster_100/seed_42/cluster_entropy_summary.csv,reports/entropy_knn/score_only/cluster_100/seed_42/cluster_feature_scores.csv
+50,42,1000,1000,1000,6009.72567152977,ok,,reports/entropy_knn/score_only/cluster_50/seed_42/cluster_entropy_summary.csv,reports/entropy_knn/score_only/cluster_50/seed_42/cluster_feature_scores.csv
+30,42,1000,1667,1667,9553.78478550911,ok,,reports/entropy_knn/score_only/cluster_30/seed_42/cluster_entropy_summary.csv,reports/entropy_knn/score_only/cluster_30/seed_42/cluster_feature_scores.csv
