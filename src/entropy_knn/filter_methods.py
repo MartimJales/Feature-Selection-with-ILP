@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import warnings
 from typing import Any
 
 import numpy as np
@@ -130,7 +131,18 @@ class FilterMethodScorer:
             y_np = y_cluster.values
 
             # sklearn's f_classif handles both continuous and discrete features
-            f_array, pval_array = f_classif(X_np, y_np)
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore")
+                f_array, pval_array = f_classif(X_np, y_np)
+
+            f_array = np.asarray(f_array, dtype=float)
+            pval_array = np.asarray(pval_array, dtype=float)
+
+            # Replace invalid numbers (nan/inf) with neutral values
+            bad_mask = ~np.isfinite(f_array)
+            if bad_mask.any():
+                f_array[bad_mask] = 0.0
+                pval_array[bad_mask] = 1.0
 
             return {
                 feature: {"stat": float(f_stat), "pvalue": float(pval)}
@@ -150,10 +162,27 @@ class FilterMethodScorer:
             try:
                 feature_vals = X_cluster[feature_name].values
 
-                # Point-biserial correlation (same as Pearson for binary target)
-                r, pval = pointbiserialr(y_np, feature_vals)
+                # If the feature is constant in this cluster, correlation is undefined.
+                # Return neutral values and avoid calling scipy which emits warnings.
+                try:
+                    unique_count = pd.Series(feature_vals).nunique(dropna=False)
+                except Exception:
+                    unique_count = len(np.unique(feature_vals))
 
-                results[feature_name] = {"r": float(r), "pvalue": float(pval)}
+                if unique_count <= 1 or np.nanstd(feature_vals) == 0:
+                    results[feature_name] = {"r": 0.0, "pvalue": 1.0}
+                    continue
+
+                # Point-biserial correlation (same as Pearson for binary target)
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore")
+                    r, pval = pointbiserialr(y_np, feature_vals)
+
+                # If scipy returns non-finite values, map to neutral values
+                if not np.isfinite(r) or not np.isfinite(pval):
+                    results[feature_name] = {"r": 0.0, "pvalue": 1.0}
+                else:
+                    results[feature_name] = {"r": float(r), "pvalue": float(pval)}
             except Exception as e:
                 logger.debug(f"Pearson failed for {feature_name}: {e}")
                 results[feature_name] = {"r": 0.0, "pvalue": 1.0}
