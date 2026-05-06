@@ -12,6 +12,7 @@ import pandas as pd
 
 from .clustering import EntropyCluster, EntropyKNNClusterer
 from .data_loader import EntropyKNNDataBundle, EntropyKNNDataLoader
+from .entropy import shannon_entropy
 from .filter_methods import FilterMethodScorer
 from .report_io import write_tabular_report
 from .selection import ClusterSelectionSummary, EntropyFeatureSelector
@@ -277,7 +278,6 @@ class EntropyKNNPipeline:
                 random_seed=seed,
             )
             clusters = clusterer.cluster(X_global)
-            selector = EntropyFeatureSelector()
 
             feature_rows: list[pd.DataFrame] = []
             cluster_rows: list[dict] = []
@@ -289,19 +289,27 @@ class EntropyKNNPipeline:
                 if X_cluster.empty or y_cluster.empty:
                     continue
 
-                scores = selector.score_cluster(X_cluster, y_cluster)
-                if scores.empty:
-                    continue
-
                 class_counts = y_cluster.value_counts().to_dict()
-                base_entropy = float(scores["base_entropy"].iloc[0])
+                base_entropy = float(shannon_entropy(y_cluster))
 
                 filter_scores = FilterMethodScorer.compute_all_scores(
                     X_cluster=X_cluster,
                     y_cluster=y_cluster,
                     base_entropy=base_entropy,
                 )
+                if not filter_scores:
+                    continue
+
                 filter_ranks = FilterMethodScorer.rank_features_by_method(filter_scores)
+
+                scores = pd.DataFrame.from_dict(filter_scores, orient="index").reset_index().rename(columns={"index": "feature"})
+                if scores.empty:
+                    continue
+                scores = scores.sort_values(
+                    ["entropy_reduction_ratio", "conditional_entropy", "feature"],
+                    ascending=[False, True, True],
+                ).reset_index(drop=True)
+                scores["base_entropy"] = base_entropy
 
                 top_features_by_method: dict[str, dict[str, float | str]] = {}
                 for method in ["entropy_reduction_ratio", "mutual_information", "chi2_stat", "f_stat", "pearson_r"]:

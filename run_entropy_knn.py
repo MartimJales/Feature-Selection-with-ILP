@@ -7,6 +7,7 @@ import argparse
 import logging
 import os
 import sys
+import time
 from pathlib import Path
 
 import requests
@@ -45,19 +46,37 @@ def send_discord(msg: str, url: str, user_id: str | None = None) -> None:
     """Send a Discord notification message via webhook."""
     if not url:
         return
-
     mention = f"<@{user_id}> " if user_id else ""
     content = f"{mention}{msg}"
-    response = requests.post(url, json={"content": content}, timeout=15)
 
-    if response.status_code != 204:
-        logging.getLogger(__name__).warning(
-            "Discord notification failed: %s - %s",
-            response.status_code,
-            response.text,
-        )
-    else:
-        logging.getLogger(__name__).info("Discord notification sent successfully")
+    logger = logging.getLogger(__name__)
+    max_retries = 3
+    backoff = 2.0
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = requests.post(url, json={"content": content}, timeout=15)
+            if response.status_code in (200, 204):
+                logger.info("Discord notification sent (attempt %d)", attempt)
+                return
+            else:
+                logger.warning(
+                    "Discord notification attempt %d failed: %s - %s",
+                    attempt,
+                    response.status_code,
+                    response.text,
+                )
+        except Exception as exc:
+            logger.warning("Discord notification attempt %d exception: %s", attempt, exc)
+
+        # backoff before next attempt
+        if attempt < max_retries:
+            try:
+                time.sleep(backoff * attempt)
+            except Exception:
+                pass
+
+    logger.error("Discord notification failed after %d attempts", max_retries)
 
 
 def main() -> None:
@@ -88,13 +107,17 @@ def main() -> None:
 
     log_dir = Path(__file__).parent / "logs" / "entropy_knn"
     log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / "pipeline_debug.log"
+
+    handlers: list[logging.Handler] = [logging.FileHandler(log_file)]
+    # Avoid broken-pipe issues on non-interactive terminals (SSH pipe/client disconnect).
+    if sys.stdout.isatty():
+        handlers.append(logging.StreamHandler())
+
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
-        handlers=[
-            logging.FileHandler(log_dir / "entropy_knn.log"),
-            logging.StreamHandler(),
-        ],
+        handlers=handlers,
     )
 
     pipeline = EntropyKNNPipeline(

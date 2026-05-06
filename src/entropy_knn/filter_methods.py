@@ -8,7 +8,8 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-from scipy.stats import chi2_contingency, f_oneway, pointbiserialr
+from scipy.stats import pointbiserialr
+from sklearn.feature_selection import chi2 as sklearn_chi2
 from sklearn.feature_selection import f_classif, mutual_info_classif
 
 logger = logging.getLogger(__name__)
@@ -102,26 +103,30 @@ class FilterMethodScorer:
     @staticmethod
     def _chi2_all(X_cluster: pd.DataFrame, y_cluster: pd.Series) -> dict[str, dict[str, float]]:
         """Compute chi-squared statistic for each feature vs target."""
-        results = {}
+        try:
+            X_np = np.nan_to_num(np.asarray(X_cluster.values, dtype=float), nan=0.0)
+            y_np = np.asarray(y_cluster.values)
 
-        for feature_name in X_cluster.columns:
-            try:
-                feature_vals = X_cluster[feature_name].values
-                target_vals = y_cluster.values
+            # sklearn chi2 is vectorized and much faster than per-feature crosstab loops.
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore")
+                chi2_arr, pval_arr = sklearn_chi2(X_np, y_np)
 
-                # Create contingency table
-                # For binary features (0/1), this is straightforward
-                contingency = pd.crosstab(feature_vals, target_vals)
+            chi2_arr = np.asarray(chi2_arr, dtype=float)
+            pval_arr = np.asarray(pval_arr, dtype=float)
 
-                # Chi-squared test
-                chi2, pval, _, _ = chi2_contingency(contingency.values)
+            bad_mask = ~np.isfinite(chi2_arr)
+            if bad_mask.any():
+                chi2_arr[bad_mask] = 0.0
+                pval_arr[bad_mask] = 1.0
 
-                results[feature_name] = {"stat": float(chi2), "pvalue": float(pval)}
-            except Exception as e:
-                logger.debug(f"Chi2 failed for {feature_name}: {e}")
-                results[feature_name] = {"stat": 0.0, "pvalue": 1.0}
-
-        return results
+            return {
+                feature: {"stat": float(stat), "pvalue": float(pval)}
+                for feature, stat, pval in zip(X_cluster.columns, chi2_arr, pval_arr)
+            }
+        except Exception as e:
+            logger.debug(f"Chi2 computation failed: {e}")
+            return {feature: {"stat": 0.0, "pvalue": 1.0} for feature in X_cluster.columns}
 
     @staticmethod
     def _f_stat_all(X_cluster: pd.DataFrame, y_cluster: pd.Series) -> dict[str, dict[str, float]]:
