@@ -23,6 +23,16 @@ from .common import (
 logger = logging.getLogger(__name__)
 
 
+def _safe_spearman(values_a: pd.Series, values_b: pd.Series) -> float | None:
+    if values_a.nunique(dropna=False) <= 1 or values_b.nunique(dropna=False) <= 1:
+        return None
+
+    correlation = spearmanr(values_a, values_b).correlation
+    if correlation is None or np.isnan(correlation):
+        return None
+    return float(correlation)
+
+
 def generate_spearman_heatmap(cluster_json_dir: Path, output_path: Path) -> pd.DataFrame:
     """Generate a heatmap with the mean Spearman rank correlation between methods."""
     json_files = list_cluster_json_files(cluster_json_dir)
@@ -44,12 +54,12 @@ def generate_spearman_heatmap(cluster_json_dir: Path, output_path: Path) -> pd.D
 
         for i, method_a in enumerate(feature_columns):
             for method_b in feature_columns[i:]:
-                correlation = spearmanr(rank_frame[method_a], rank_frame[method_b]).correlation
-                if correlation is None or np.isnan(correlation):
+                correlation = _safe_spearman(rank_frame[method_a], rank_frame[method_b])
+                if correlation is None:
                     continue
-                pairwise_values[(method_a, method_b)].append(float(correlation))
+                pairwise_values[(method_a, method_b)].append(correlation)
                 if method_a != method_b:
-                    pairwise_values[(method_b, method_a)].append(float(correlation))
+                    pairwise_values[(method_b, method_a)].append(correlation)
 
     matrix = pd.DataFrame(index=METHODS, columns=METHODS, dtype=float)
     for method_a in METHODS:
