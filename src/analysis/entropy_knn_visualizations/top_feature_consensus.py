@@ -9,7 +9,6 @@ Outputs per-cluster CSV files and a combined summary CSV.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
@@ -21,14 +20,7 @@ workspace_root = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(workspace_root))
 
 from src.entropy_knn.visualizations.common import METHODS
-
-
-def _load_scores(path: Path) -> pd.DataFrame:
-    if not path.exists():
-        raise FileNotFoundError(path)
-    if path.suffix == ".parquet":
-        return pd.read_parquet(path)
-    return pd.read_csv(path)
+from src.analysis.entropy_knn_visualizations.data_sources import load_scores_for_analysis
 
 
 def _minmax(series: pd.Series) -> pd.Series:
@@ -150,9 +142,11 @@ def compute_consensus(
 
 def _parse_args() -> argparse.Namespace:
     workspace_root = Path(__file__).resolve().parents[3]
-    default_scores = workspace_root / "reports" / "entropy_knn" / "score_only" / "cluster_500" / "seed_42" / "cluster_feature_scores.parquet"
+    default_json_dir = workspace_root / "reports" / "entropy_knn" / "score_only" / "cluster_500" / "seed_42"
+    default_scores = default_json_dir / "cluster_feature_scores.parquet"
     parser = argparse.ArgumentParser(description="Compute top-feature consensus candidates for ILP")
-    parser.add_argument("--scores", type=Path, default=default_scores, help="Path to cluster_feature_scores.parquet or .csv")
+    parser.add_argument("--cluster-json-dir", type=Path, default=default_json_dir, help="Directory with cluster_*.json (preferred)")
+    parser.add_argument("--scores", type=Path, default=default_scores, help="Fallback path to cluster_feature_scores.parquet or .csv")
     parser.add_argument("--output-dir", type=Path, default=workspace_root / "reports" / "entropy_knn" / "analysis", help="Output base dir")
     parser.add_argument("--top-k", type=int, default=5, help="Top-K per method to consider for consensus")
     parser.add_argument("--top-n", type=int, default=50, help="Number of candidates to export per cluster")
@@ -162,7 +156,7 @@ def _parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = _parse_args()
-    scores_df = _load_scores(args.scores)
+    scores_df = load_scores_for_analysis(cluster_json_dir=args.cluster_json_dir, scores_path=args.scores)
     compute_consensus(scores_df=scores_df, output_dir=args.output_dir, top_k=args.top_k, top_n=args.top_n, normalize=args.normalize)
 
 

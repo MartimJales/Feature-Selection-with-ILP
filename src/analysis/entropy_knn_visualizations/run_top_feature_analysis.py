@@ -17,18 +17,21 @@ from pathlib import Path
 workspace_root = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(workspace_root))
 
-from src.analysis.entropy_knn_visualizations.top_feature_consensus import compute_consensus, _load_scores
+from src.analysis.entropy_knn_visualizations.top_feature_consensus import compute_consensus
 from src.analysis.entropy_knn_visualizations.feature_agreement_by_feature import generate_feature_agreement_bars
 from src.analysis.entropy_knn_visualizations.feature_pair_heatmap import generate_feature_pair_heatmap
 from src.analysis.entropy_knn_visualizations.scatter_feature_distribution import generate_scatter_feature_distribution
 from src.analysis.entropy_knn_visualizations.venn_by_methods import generate_venn_by_methods
+from src.analysis.entropy_knn_visualizations.data_sources import load_scores_for_analysis
 
 
 def _parse_args():
     workspace_root = Path(__file__).resolve().parents[3]
-    default_scores = workspace_root / "reports" / "entropy_knn" / "score_only" / "cluster_500" / "seed_42" / "cluster_feature_scores.parquet"
+    default_json_dir = workspace_root / "reports" / "entropy_knn" / "score_only" / "cluster_500" / "seed_42"
+    default_scores = default_json_dir / "cluster_feature_scores.parquet"
     parser = argparse.ArgumentParser(description="Run full top-feature analysis pipeline for ILP")
-    parser.add_argument("--scores", type=Path, default=default_scores, help="Path to cluster_feature_scores.parquet or CSV")
+    parser.add_argument("--cluster-json-dir", type=Path, default=default_json_dir, help="Directory with cluster_*.json (preferred)")
+    parser.add_argument("--scores", type=Path, default=default_scores, help="Fallback path to cluster_feature_scores.parquet or CSV")
     parser.add_argument("--output-dir", type=Path, default=workspace_root / "reports" / "entropy_knn" / "analysis", help="Base output dir")
     parser.add_argument("--top-k", type=int, default=5, help="Top-K per method for consensus")
     parser.add_argument("--top-n", type=int, default=50, help="Number of candidates to export per cluster")
@@ -46,12 +49,13 @@ def main():
     vis_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"[run_top_feature_analysis] Starting analysis pipeline...")
-    print(f"[run_top_feature_analysis] Scores: {args.scores}")
+    print(f"[run_top_feature_analysis] Cluster JSON dir: {args.cluster_json_dir}")
+    print(f"[run_top_feature_analysis] Fallback scores file: {args.scores}")
     print(f"[run_top_feature_analysis] Output dir: {args.output_dir}")
 
     # Step 1: Consensus
     print(f"[run_top_feature_analysis] Step 1/5: Computing consensus candidates...")
-    scores_df = _load_scores(args.scores)
+    scores_df = load_scores_for_analysis(cluster_json_dir=args.cluster_json_dir, scores_path=args.scores)
     compute_consensus(scores_df=scores_df, output_dir=args.output_dir, top_k=args.top_k, top_n=args.top_n, normalize=args.normalize)
 
     if args.skip_visualizations:

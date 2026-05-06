@@ -16,14 +16,7 @@ workspace_root = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(workspace_root))
 
 from src.entropy_knn.visualizations.common import METHODS
-
-
-def _load_scores(path: Path) -> pd.DataFrame:
-    if not path.exists():
-        raise FileNotFoundError(path)
-    if path.suffix == ".parquet":
-        return pd.read_parquet(path)
-    return pd.read_csv(path)
+from src.analysis.entropy_knn_visualizations.data_sources import load_scores_for_analysis
 
 
 def _minmax(series: pd.Series) -> pd.Series:
@@ -86,9 +79,11 @@ def generate_scatter_feature_distribution(scores_df: pd.DataFrame, output_path: 
 
 def _parse_args():
     workspace_root = Path(__file__).resolve().parents[3]
-    default_scores = workspace_root / "reports" / "entropy_knn" / "score_only" / "cluster_500" / "seed_42" / "cluster_feature_scores.parquet"
+    default_json_dir = workspace_root / "reports" / "entropy_knn" / "score_only" / "cluster_500" / "seed_42"
+    default_scores = default_json_dir / "cluster_feature_scores.parquet"
     parser = argparse.ArgumentParser(description="Generate feature distribution scatter plot")
-    parser.add_argument("--scores", type=Path, default=default_scores, help="Path to cluster_feature_scores.parquet or CSV")
+    parser.add_argument("--cluster-json-dir", type=Path, default=default_json_dir, help="Directory with cluster_*.json (preferred)")
+    parser.add_argument("--scores", type=Path, default=default_scores, help="Fallback path to cluster_feature_scores.parquet or CSV")
     parser.add_argument("--output-path", type=Path, default=workspace_root / "reports" / "entropy_knn" / "analysis" / "visualizations" / "scatter_feature_distribution.png")
     parser.add_argument("--top-n", type=int, default=10)
     return parser.parse_args()
@@ -96,7 +91,7 @@ def _parse_args():
 
 def main():
     args = _parse_args()
-    scores_df = _load_scores(args.scores)
+    scores_df = load_scores_for_analysis(cluster_json_dir=args.cluster_json_dir, scores_path=args.scores)
     generate_scatter_feature_distribution(scores_df, args.output_path, top_n_features=args.top_n)
 
 
