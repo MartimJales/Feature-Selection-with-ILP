@@ -6,6 +6,7 @@ overlap of top-K features selected by each filter method.
 from __future__ import annotations
 
 import argparse
+import math
 import sys
 from pathlib import Path
 
@@ -55,10 +56,15 @@ def generate_venn_by_methods(scores_df: pd.DataFrame, output_path: Path, cluster
         top_features = cluster_df.nlargest(top_k, method)["feature"].astype(str).tolist()
         feature_sets[method] = set(top_features)
 
+    if len(methods_present) < 2:
+        print("[venn_by_methods] Need at least 2 methods to generate a Venn diagram.")
+        return
+
     # pairwise Venn diagrams
     n_methods = len(methods_present)
     n_cols = min(3, n_methods)
-    n_rows = (n_methods * (n_methods - 1) // 2 + n_cols - 1) // n_cols
+    pair_count = n_methods * (n_methods - 1) // 2
+    n_rows = max(1, math.ceil(pair_count / n_cols))
 
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
     if n_rows * n_cols == 1:
