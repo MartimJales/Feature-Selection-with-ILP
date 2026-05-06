@@ -4,6 +4,12 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+import sys
+
+# Ensure the repository root is on sys.path so `src` imports work when running
+# this script directly (python src/analysis/entropy_knn_visualizations/run_all.py)
+workspace_root = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(workspace_root))
 
 from src.analysis.generate_entropy_knn_visualizations import generate_visualizations
 
