@@ -20,20 +20,26 @@ from src.entropy_knn.visualizations import (
 def generate_visualizations(cluster_json_dir: Path, output_dir: Path, venn_cluster_json: Path | None = None) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    print("[visualizations] Generating heatmap...", flush=True)
     generate_spearman_heatmap(
         cluster_json_dir=cluster_json_dir,
         output_path=output_dir / "heatmaps" / f"{cluster_json_dir.name}_spearman_heatmap.png",
     )
+    print("[visualizations] Heatmap done.", flush=True)
 
+    print("[visualizations] Generating scatter grid...", flush=True)
     generate_top1_scatter_grid(
         cluster_json_dir=cluster_json_dir,
         output_path=output_dir / "scatter" / f"{cluster_json_dir.name}_top1_scatter_grid.png",
     )
+    print("[visualizations] Scatter grid done.", flush=True)
 
+    print("[visualizations] Generating agreement bars...", flush=True)
     generate_agreement_bars(
         cluster_json_dir=cluster_json_dir,
         output_path=output_dir / "bars" / f"{cluster_json_dir.name}_agreement_bars.png",
     )
+    print("[visualizations] Agreement bars done.", flush=True)
 
     venn_source = venn_cluster_json
     if venn_source is None:
@@ -42,11 +48,15 @@ def generate_visualizations(cluster_json_dir: Path, output_dir: Path, venn_clust
             venn_source = cluster_json_files[0]
 
     if venn_source is not None:
+        print(f"[visualizations] Generating venn diagram from {venn_source.name}...", flush=True)
         generate_venn_grid(
             cluster_json_path=venn_source,
             output_path=output_dir / "venn" / f"{venn_source.stem}_top5_venn.png",
             top_k=5,
         )
+        print("[visualizations] Venn diagram done.", flush=True)
+    else:
+        print("[visualizations] Skipping venn diagram (no cluster JSON found).", flush=True)
 
 
 def _parse_args() -> argparse.Namespace:

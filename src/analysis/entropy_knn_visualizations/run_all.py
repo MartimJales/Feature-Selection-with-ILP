@@ -45,6 +45,7 @@ def main() -> None:
         output_dir=args.output_dir,
         venn_cluster_json=args.venn_cluster_json,
     )
+    print(f"[visualizations] Done. Outputs written to: {args.output_dir}", flush=True)
 
 
 if __name__ == "__main__":
