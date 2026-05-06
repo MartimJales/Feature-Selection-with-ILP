@@ -42,7 +42,15 @@ def generate_agreement_bars(cluster_json_dir: Path, output_path: Path, top_k: in
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(12, 6))
-    sns.barplot(data=summary_df, x="mean_jaccard", y="pair", palette="viridis")
+    sns.barplot(
+        data=summary_df,
+        x="mean_jaccard",
+        y="pair",
+        hue="pair",
+        palette="viridis",
+        dodge=False,
+        legend=False,
+    )
     plt.xlabel(f"Mean top-{top_k} Jaccard overlap")
     plt.ylabel("Method pair")
     plt.title(f"Top-{top_k} overlap between filter methods\n{cluster_json_dir.name}")
