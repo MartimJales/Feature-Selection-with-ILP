@@ -161,8 +161,14 @@ cython_debug/
 *.out
 *.pkl
 *.zip
-*.json
 *.apk
 
 # Auxiliar script to generate reports for teacher
 generate_professor_reports.py
+
+# Ignore generic JSON files but allow cluster JSONs produced by the pipeline
+*.json
+
+# Do not ignore anything under reports/ (we want to track generated reports)
+!reports/
+!reports/**
