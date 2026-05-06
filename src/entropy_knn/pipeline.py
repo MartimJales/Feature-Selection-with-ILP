@@ -12,6 +12,7 @@ import pandas as pd
 
 from .clustering import EntropyCluster, EntropyKNNClusterer
 from .data_loader import EntropyKNNDataBundle, EntropyKNNDataLoader
+from .filter_methods import FilterMethodScorer
 from .report_io import write_tabular_report
 from .selection import ClusterSelectionSummary, EntropyFeatureSelector
 
@@ -293,6 +294,46 @@ class EntropyKNNPipeline:
                     continue
 
                 class_counts = y_cluster.value_counts().to_dict()
+                base_entropy = float(scores["base_entropy"].iloc[0])
+
+                filter_scores = FilterMethodScorer.compute_all_scores(
+                    X_cluster=X_cluster,
+                    y_cluster=y_cluster,
+                    base_entropy=base_entropy,
+                )
+                filter_ranks = FilterMethodScorer.rank_features_by_method(filter_scores)
+
+                top_features_by_method: dict[str, dict[str, float | str]] = {}
+                for method in ["entropy_reduction_ratio", "mutual_information", "chi2_stat", "f_stat", "pearson_r"]:
+                    if not filter_scores:
+                        continue
+                    feature_name, method_scores = max(
+                        filter_scores.items(),
+                        key=lambda item: item[1].get(method, float("-inf")),
+                    )
+                    top_features_by_method[method] = {
+                        "feature": str(feature_name),
+                        "value": float(method_scores.get(method, 0.0)),
+                    }
+
+                cluster_json_path = run_dir / f"cluster_{cluster.cluster_id}.json"
+                cluster_json_payload = {
+                    "cluster_id": int(cluster.cluster_id),
+                    "cluster_size": int(cluster_size),
+                    "seed": int(seed),
+                    "anchor_index": int(cluster.anchor_index),
+                    "n_samples": int(cluster.n_samples),
+                    "class_0": int(class_counts.get(0, 0)),
+                    "class_1": int(class_counts.get(1, 0)),
+                    "base_entropy": float(base_entropy),
+                    "sample_indices": [int(idx) for idx in cluster.row_indices],
+                    "top_features_by_method": top_features_by_method,
+                    "feature_scores": filter_scores,
+                    "feature_ranks": filter_ranks,
+                }
+                with open(cluster_json_path, "w", encoding="utf-8") as handle:
+                    json.dump(cluster_json_payload, handle, ensure_ascii=False, indent=2)
+
                 scores = scores.copy()
                 scores.insert(0, "feature_rank", range(1, len(scores) + 1))
                 scores.insert(0, "cluster_id", cluster.cluster_id)
@@ -309,7 +350,7 @@ class EntropyKNNPipeline:
                         "n_samples": cluster.n_samples,
                         "class_0": int(class_counts.get(0, 0)),
                         "class_1": int(class_counts.get(1, 0)),
-                        "base_entropy": float(scores["base_entropy"].iloc[0]),
+                        "base_entropy": base_entropy,
                         "n_features_scored": int(len(scores)),
                         "max_reduction_ratio": float(scores["entropy_reduction_ratio"].max()),
                         "mean_reduction_ratio": float(scores["entropy_reduction_ratio"].mean()),
