@@ -1,0 +1,2 @@
+cluster_id,cluster_json,candidate_count,top_feature,top_method_count,top_aggregated_score,output_dir
+0,cluster_0.json,50,intent_com.google.android.gms.iid.InstanceID,5,0.8864349833765045,reports/entropy_knn/analysis/per_cluster
