@@ -34,7 +34,7 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run per-cluster top-feature analysis")
     parser.add_argument("--cluster-json-dir", type=Path, default=default_json_dir, help="Directory with cluster_*.json")
     parser.add_argument("--output-dir", type=Path, default=default_output_dir, help="Base output directory")
-    parser.add_argument("--top-k", type=int, default=5, help="Top-K threshold used to count feature agreement per method")
+    parser.add_argument("--top-k", type=int, default=25, help="Top-K threshold used to count feature agreement per method")
     parser.add_argument("--top-n", type=int, default=50, help="Number of candidate rows to keep per cluster")
     parser.add_argument("--normalize", choices=["minmax", "z", "none"], default="minmax", help="Normalization for per-method scores")
     parser.add_argument("--max-clusters", type=int, default=None, help="Optional cap on the number of clusters to process")
