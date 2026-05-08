@@ -84,6 +84,14 @@ def _build_feature_summary(score_frame: pd.DataFrame, top_k: int, normalize: str
         if method in normalized_frame.columns:
             rank_frame[method] = normalized_frame[method].rank(method="average", ascending=False)
 
+    # precompute top-k sets from the original score_frame (pre-normalization)
+    topk_sets: dict[str, set[str]] = {}
+    for method in METHODS:
+        if method in score_frame.columns:
+            topk_sets[method] = set(score_frame.sort_values(method, ascending=False)["feature"].head(top_k).astype(str).tolist())
+        else:
+            topk_sets[method] = set()
+
     summary_rows: list[dict] = []
     for row_index, feature in enumerate(normalized_frame["feature"].astype(str).tolist()):
         row_values = normalized_frame.iloc[row_index]
@@ -91,10 +99,8 @@ def _build_feature_summary(score_frame: pd.DataFrame, top_k: int, normalize: str
         ranked_methods = sorted(method_values.items(), key=lambda item: item[1], reverse=True)
         top_methods = [method for method, _ in ranked_methods[: min(3, len(ranked_methods))]]
 
-        method_count = 0
-        for method in METHODS:
-            if method in rank_frame.columns and float(rank_frame.iloc[row_index][method]) <= top_k:
-                method_count += 1
+        # count how many methods include this feature in their top-K (based on original scores)
+        method_count = sum(1 for method in METHODS if feature in topk_sets.get(method, set()))
 
         values_series = pd.Series(method_values)
         ranks_series = pd.Series({method: float(rank_frame.iloc[row_index].get(method, 0.0)) for method in METHODS})
@@ -153,7 +159,7 @@ def _save_feature_method_heatmap(top_features: pd.DataFrame, output_path: Path, 
         fmt=".2f",
         cbar_kws={"label": f"{normalize} score" if normalize != "none" else "score"},
     )
-    ax.set_title(f"Cluster {cluster_id} - Feature vs Method Heatmap")
+    ax.set_title("Feature by Method Heatmap")
     ax.set_xlabel("Method")
     ax.set_ylabel("Feature")
     ax.set_xticklabels([METHOD_LABELS.get(method, method) for method in heatmap_data.columns], rotation=20, ha="right")
@@ -220,7 +226,13 @@ def _save_score_spread(top_features: pd.DataFrame, output_path: Path, cluster_id
         edgecolor="black",
     )
     for _, row in top_features.iterrows():
-        ax.text(float(row["score_std"]) + 0.002, float(row["aggregated_score"]) + 0.002, str(row["feature"]), fontsize=8)
+        # annotate only when the feature is selected by at least one method
+        try:
+            mcount = int(row.get("method_count", 0))
+        except Exception:
+            mcount = 0
+        if mcount > 0:
+            ax.text(float(row["score_std"]) + 0.002, float(row["aggregated_score"]) + 0.002, str(row["feature"]), fontsize=8)
     ax.set_title(f"Cluster {cluster_id} - Feature Score Spread")
     ax.set_xlabel("Score standard deviation across methods")
     ax.set_ylabel("Mean normalized score")
