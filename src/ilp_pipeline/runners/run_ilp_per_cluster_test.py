@@ -13,6 +13,8 @@ import argparse
 import pandas as pd
 import requests
 import time
+import re
+from typing import List
 import logging
 from pathlib import Path
 from datetime import datetime
@@ -109,44 +111,71 @@ def get_cluster_dirs(base_dir: Path, cluster_ids: list = None):
     return cluster_dirs
 
 def extract_top_features(csv_path: Path, top_n: int = DEFAULT_TOP_N):
-    """Extract top-N features from cluster CSV."""
+    """Extract top-N feature names from cluster CSV."""
     if not csv_path.exists():
         return None
 
     try:
         df = pd.read_csv(csv_path)
-        return df.head(top_n)[['feature']].values.flatten().tolist()
+        # Extract feature names from first column
+        features = df.iloc[:top_n, 0].tolist()
+        return features
     except Exception as e:
-        print(f"Error reading {csv_path}: {e}")
+        logger.error(f"Error reading {csv_path}: {e}")
         return None
 
 def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOUT):
     """
-    Execute PADTAI with given input and timeout.
-    Returns (success: bool, stdout: str, stderr: str)
+    Execute PADTAI with CSV containing binary features + label column.
+
+    Args:
+        input_file: Path to CSV with features (binary 0/1) + 'label' column
+        output_dir: Output directory for results
+        timeout: Timeout in seconds
+
+    Returns:
+        (success: bool, stdout: str, stderr: str)
     """
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Build command (matching src/idea2/ilp_runner.py pattern)
+    # PADTAI command with EXACT arguments per README:
+    # --grounded none       → No arithmetic operations
+    # --intcols none        → All columns as binary (feature columns)
+    # --solver rc2          → SAT solver (stable)
+    # --sample-size 100     → Use 100 samples
+    # --max-timeout <int>   → Timeout in seconds
+    # --debug none          → No debug output
+    # --min-coverage 5      → Min coverage 5%
+    # --min-recall 10       → Min recall 10%
+    # --min-precision 75    → Min precision 75%
+
     cmd = [
         "python3",
         str(PADTAI_PATH),
         str(input_file),
+        "--grounded", "none",
+        "--intcols", "none",
         "--solver", "rc2",
         "--sample-size", "100",
         "--max-timeout", str(timeout),
         "--debug", "none",
+        "--min-coverage", "5",
+        "--min-recall", "10",
+        "--min-precision", "75",
     ]
+
+    logger.info(f"PADTAI command: {' '.join(cmd)}")
 
     try:
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
-            timeout=timeout + 30,  # Allow 30s overhead
+            timeout=timeout + 30,  # Allow 30s overhead for cleanup
             cwd=str(REPO_ROOT / "PADTAI")
         )
-        return result.returncode == 0, result.stdout, result.stderr
+        success = result.returncode == 0
+        return success, result.stdout, result.stderr
     except subprocess.TimeoutExpired:
         return False, "", "PADTAI execution timed out"
     except Exception as e:
@@ -155,7 +184,17 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
 def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool = False):
     """
     Run ILP for a single cluster.
-    Returns dict with metadata and results.
+
+    Flow:
+    1. Extract top-N feature names from cluster CSV
+    2. Load binary feature data from extracted_features.parquet
+    3. Load labels from training_set.csv
+    4. Merge: keep only top-N features + label column
+    5. Save as CSV (features must be 0/1, label in last column)
+    6. Execute PADTAI
+
+    Returns:
+        dict with metadata and results
     """
     cluster_id = int(cluster_dir.name.split("_")[1])
 
@@ -170,51 +209,177 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         "top_n": top_n,
         "timeout": timeout,
         "status": "pending",
-        "features": None,
+        "features_selected": None,
+        "n_features": 0,
+        "n_samples": 0,
         "padtai_stdout": "",
         "padtai_stderr": "",
         "error": None
     }
 
-    # Extract features
+    # Step 1: Extract top-N feature names
     features = extract_top_features(csv_path, top_n)
     if not features:
         result["status"] = "error"
         result["error"] = f"Could not extract features from {csv_path}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
         return result
 
-    result["features"] = features
-    print(f"[cluster_{cluster_id}] Extracted {len(features)} features")
+    result["features_selected"] = features
+    result["n_features"] = len(features)
+    logger.info(f"[cluster_{cluster_id}] ✓ Extracted {len(features)} feature names")
 
     if dry_run:
         result["status"] = "dry_run"
         return result
 
-    # Format for PADTAI (simple CSV with features)
-    temp_input = ilp_output_dir / "input_features.csv"
-    try:
-        df = pd.DataFrame({"feature": features})
-        df.to_csv(temp_input, index=False)
-        print(f"[cluster_{cluster_id}] Formatted input: {temp_input}")
-    except Exception as e:
+    # Step 2: Load extracted features (binary 0/1 values)
+    features_file = REPO_ROOT / "reports" / "extracted_features.parquet"
+    if not features_file.exists():
         result["status"] = "error"
-        result["error"] = f"Error formatting input: {e}"
+        result["error"] = f"Features file not found: {features_file}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
         return result
 
-    # Run PADTAI
-    print(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout}s)...")
-    success, stdout, stderr = run_padtai(temp_input, ilp_output_dir, timeout)
+    try:
+        logger.info(f"[cluster_{cluster_id}] Loading features from parquet...")
+        features_df = pd.read_parquet(features_file)
+        logger.info(f"[cluster_{cluster_id}] ✓ Loaded {features_df.shape[0]} samples × {features_df.shape[1]} columns")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = f"Error loading features: {str(e)[:200]}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
 
-    result["padtai_stdout"] = stdout[:500] if stdout else ""  # Truncate
-    result["padtai_stderr"] = stderr[:500] if stderr else ""
+    # Step 3: Load training labels
+    labels_file = REPO_ROOT / "data" / "training_set.csv"
+    if not labels_file.exists():
+        result["status"] = "error"
+        result["error"] = f"Labels file not found: {labels_file}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
+
+    try:
+        logger.info(f"[cluster_{cluster_id}] Loading labels...")
+        labels_df = pd.read_csv(labels_file)
+        logger.info(f"[cluster_{cluster_id}] ✓ Loaded {len(labels_df)} labels")
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = f"Error loading labels: {str(e)[:200]}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
+
+    # Step 4: Build final CSV with top-N features + label
+    try:
+        # Filter features to only those that exist in data
+        available_features = [f for f in features if f in features_df.columns]
+        missing = set(features) - set(available_features)
+
+        if missing:
+            logger.warning(f"[cluster_{cluster_id}] {len(missing)} features not found: {list(missing)[:3]}")
+
+        if not available_features:
+            result["status"] = "error"
+            result["error"] = "No requested features found in dataset"
+            logger.error(f"[cluster_{cluster_id}] {result['error']}")
+            return result
+
+        # Build dataset: select features + add label
+        final_df = features_df[available_features].copy()
+
+        # Match samples with labels (assume same row order)
+        if len(final_df) != len(labels_df):
+            logger.warning(f"[cluster_{cluster_id}] Row count mismatch: features={len(final_df)}, labels={len(labels_df)}")
+            min_len = min(len(final_df), len(labels_df))
+            final_df = final_df.iloc[:min_len]
+            labels_df = labels_df.iloc[:min_len]
+
+        # Add label column (PADTAI expects 'label' or last column as target)
+        final_df['label'] = labels_df['label'].values
+
+        # Remove any NaN values
+        initial_count = len(final_df)
+        final_df = final_df.dropna()
+        if len(final_df) < initial_count:
+            logger.warning(f"[cluster_{cluster_id}] Dropped {initial_count - len(final_df)} NaN rows")
+
+        result["n_samples"] = len(final_df)
+        logger.info(f"[cluster_{cluster_id}] ✓ Final dataset: {len(final_df)} samples × {len(available_features)} features + label")
+
+        # Step 5: Save to CSV for PADTAI
+        padtai_input = ilp_output_dir / "padtai_input.csv"
+        final_df.to_csv(padtai_input, index=False)
+        logger.info(f"[cluster_{cluster_id}] ✓ Saved input CSV: {padtai_input}")
+
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = f"Error building dataset: {str(e)[:200]}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
+
+    # Step 6: Run PADTAI
+    logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout}s)...")
+    success, stdout, stderr = run_padtai(padtai_input, ilp_output_dir, timeout)
+
+    result["padtai_stdout"] = stdout[:2000] if stdout else ""
+    result["padtai_stderr"] = stderr[:2000] if stderr else ""
     result["status"] = "success" if success else "failed"
 
+    # Save full stderr to file for debugging
+    if stderr:
+        stderr_file = ilp_output_dir / "padtai_stderr.log"
+        with open(stderr_file, "w") as f:
+            f.write(stderr)
+        logger.info(f"[cluster_{cluster_id}] Full stderr → {stderr_file}")
+
+    # Extract rules from PADTAI stdout and save
+    try:
+        def extract_rules_from_output(output: str) -> List[str]:
+            rules = []
+            pattern = r"Rule:\s*(.+?)\s*:-\s*(.+?)(?:\n|$)"
+            for match in re.finditer(pattern, output, re.MULTILINE | re.IGNORECASE):
+                head = match.group(1).strip()
+                body = match.group(2).strip()
+                rule = f"{head} :- {body}"
+                rules.append(rule)
+            # Also check for lines containing ':-' as fallback
+            for line in output.splitlines():
+                if ':-' in line and 'Rule:' not in line:
+                    candidate = line.strip()
+                    if candidate and candidate not in rules:
+                        rules.append(candidate)
+            return rules
+
+        full_out = (stdout or "") + "\n" + (stderr or "")
+        rules = extract_rules_from_output(full_out)
+        rules_file = ilp_output_dir / "padtai_rules.json"
+        with open(rules_file, "w") as rf:
+            json.dump({"n_rules": len(rules), "rules": rules}, rf, indent=2)
+        logger.info(f"[cluster_{cluster_id}] Saved extracted rules → {rules_file}")
+
+        # Send Discord notification with rules summary
+        webhook = os.getenv("DISCORD_WEBHOOK_URL")
+        mention_id = os.getenv("DISCORD_USER_ID")
+        if webhook:
+            if rules:
+                top_rules = "\n".join(rules[:10])
+                msg = f"✅ PADTAI finished for cluster {cluster_id}: {len(rules)} rules found.\nTop rules:\n{top_rules}"
+            else:
+                msg = f"✅ PADTAI finished for cluster {cluster_id}: no rules found."
+            send_discord(msg, url=webhook, user_id=mention_id or None)
+    except Exception as e:
+        logger.warning(f"[cluster_{cluster_id}] Failed to extract/send rules: {e}")
+
     if success:
-        print(f"[cluster_{cluster_id}] PADTAI succeeded")
+        logger.info(f"[cluster_{cluster_id}] ✅ PADTAI completed successfully")
     else:
-        print(f"[cluster_{cluster_id}] PADTAI failed: {stderr[:100]}")
+        logger.warning(f"[cluster_{cluster_id}] ❌ PADTAI failed")
+        if stderr:
+            logger.warning(f"    Error: {stderr[:300]}")
 
     return result
+
+
 
 def main():
     parser = argparse.ArgumentParser(description="Run ILP per cluster (test mode)")
