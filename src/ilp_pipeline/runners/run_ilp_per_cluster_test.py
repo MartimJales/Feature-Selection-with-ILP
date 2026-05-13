@@ -127,13 +127,15 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
     """
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Build command
+    # Build command (matching src/idea2/ilp_runner.py pattern)
     cmd = [
         "python3",
         str(PADTAI_PATH),
         str(input_file),
-        "--grounded", "none",
-        "--timeout", str(timeout)
+        "--solver", "rc2",
+        "--sample-size", "100",
+        "--max-timeout", str(timeout),
+        "--debug", "none",
     ]
 
     try:
@@ -141,7 +143,8 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
             cmd,
             capture_output=True,
             text=True,
-            timeout=timeout + 30  # Allow 30s overhead
+            timeout=timeout + 30,  # Allow 30s overhead
+            cwd=str(REPO_ROOT / "PADTAI")
         )
         return result.returncode == 0, result.stdout, result.stderr
     except subprocess.TimeoutExpired:
