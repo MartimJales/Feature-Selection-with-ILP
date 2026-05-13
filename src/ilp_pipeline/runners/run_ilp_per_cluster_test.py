@@ -11,13 +11,80 @@ import json
 import subprocess
 import argparse
 import pandas as pd
+import requests
+import time
+import logging
 from pathlib import Path
 from datetime import datetime
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # Defaults
 DEFAULT_TIMEOUT = 600  # 10 minutes per cluster
 DEFAULT_TOP_N = 30
 PADTAI_PATH = Path(__file__).parent.parent.parent.parent / "PADTAI" / "padtai.py"
+
+
+def resolve_cluster_base_dir(explicit_dir: Path | None = None) -> Path:
+    """Resolve the cluster base directory from an explicit path or repo-relative defaults."""
+    candidates = []
+
+    if explicit_dir is not None:
+        candidates.append(explicit_dir)
+
+    repo_root = Path(__file__).resolve().parents[3]
+    candidates.extend(
+        [
+            repo_root / "reports" / "entropy_knn" / "analysis" / "per_cluster_feature_vs_method",
+            Path.cwd() / "reports" / "entropy_knn" / "analysis" / "per_cluster_feature_vs_method",
+        ]
+    )
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate.resolve()
+
+    raise FileNotFoundError(
+        "Could not find cluster base directory. Tried: "
+        + ", ".join(str(path) for path in candidates)
+    )
+
+def send_discord(msg: str, url: str, user_id: str | None = None) -> None:
+    """Send a Discord notification message via webhook."""
+    if not url:
+        return
+    mention = f"<@{user_id}> " if user_id else ""
+    content = f"{mention}{msg}"
+
+    max_retries = 3
+    backoff = 2.0
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = requests.post(url, json={"content": content}, timeout=15)
+            if response.status_code in (200, 204):
+                logger.info("Discord notification sent (attempt %d)", attempt)
+                return
+            else:
+                logger.warning(
+                    "Discord notification attempt %d failed: %s - %s",
+                    attempt,
+                    response.status_code,
+                    response.text,
+                )
+        except Exception as exc:
+            logger.warning("Discord notification attempt %d exception: %s", attempt, exc)
+
+        # backoff before next attempt
+        if attempt < max_retries:
+            try:
+                time.sleep(backoff * attempt)
+            except Exception:
+                pass
+
+    logger.error("Discord notification failed after %d attempts", max_retries)
 
 def get_cluster_dirs(base_dir: Path, cluster_ids: list = None):
     """List cluster directories, optionally filtered by IDs."""
@@ -139,8 +206,8 @@ def main():
     parser.add_argument(
         "--cluster-dir",
         type=Path,
-        default=Path("/home/jales/IST/Tese/Feature-Selection-with-ILP/reports/entropy_knn/analysis/per_cluster_feature_vs_method"),
-        help="Base directory containing cluster folders"
+        default=None,
+        help="Base directory containing cluster folders (optional; auto-detected if omitted)"
     )
     parser.add_argument(
         "--cluster-ids",
@@ -166,6 +233,16 @@ def main():
         action="store_true",
         help="Parse input but don't execute PADTAI"
     )
+    parser.add_argument(
+        "--discord-webhook-url",
+        default=os.getenv("DISCORD_WEBHOOK_URL", ""),
+        help="Discord webhook URL for notifications (env: DISCORD_WEBHOOK_URL)"
+    )
+    parser.add_argument(
+        "--discord-user-id",
+        default=os.getenv("DISCORD_USER_ID", ""),
+        help="Discord user ID to mention (env: DISCORD_USER_ID)"
+    )
 
     args = parser.parse_args()
 
@@ -177,17 +254,45 @@ def main():
     print(f"Dry run: {args.dry_run}")
     print()
 
+    try:
+        args.cluster_dir = resolve_cluster_base_dir(args.cluster_dir)
+    except FileNotFoundError as exc:
+        print(f"Error: {exc}")
+        send_discord(
+            f"❌ ILP Runner ERROR: {exc}",
+            url=args.discord_webhook_url,
+            user_id=args.discord_user_id or None,
+        )
+        sys.exit(1)
+
+    print(f"Resolved cluster dir: {args.cluster_dir}")
+
+    # Discord notification: start
+    send_discord(
+        f"🚀 ILP Runner started for clusters {args.cluster_ids}",
+        url=args.discord_webhook_url,
+        user_id=args.discord_user_id or None,
+    )
+
     if not args.cluster_dir.exists():
         print(f"Error: Cluster dir not found: {args.cluster_dir}")
+        send_discord(
+            f"❌ ILP Runner ERROR: Cluster dir not found {args.cluster_dir}",
+            url=args.discord_webhook_url,
+            user_id=args.discord_user_id or None,
+        )
         sys.exit(1)
 
     # Find clusters
     cluster_dirs = get_cluster_dirs(args.cluster_dir, args.cluster_ids)
     if not cluster_dirs:
         print(f"Error: No clusters found matching IDs {args.cluster_ids}")
+        send_discord(
+            f"❌ ILP Runner ERROR: No clusters found for IDs {args.cluster_ids}",
+            url=args.discord_webhook_url,
+            user_id=args.discord_user_id or None,
+        )
         sys.exit(1)
-
-    print(f"Found {len(cluster_dirs)} cluster(s) to process\n")
 
     # Process each cluster
     results = []
@@ -218,6 +323,17 @@ def main():
 
     successful = sum(1 for r in results if r["status"] == "success")
     print(f"\nSuccessful: {successful}/{len(results)}")
+
+    # Discord notification: completion
+    summary_msg = f"✅ ILP Runner completed: {successful}/{len(results)} successful"
+    if successful < len(results):
+        summary_msg = f"⚠️ ILP Runner completed with issues: {successful}/{len(results)} successful"
+
+    send_discord(
+        summary_msg,
+        url=args.discord_webhook_url,
+        user_id=args.discord_user_id or None,
+    )
 
 if __name__ == "__main__":
     main()
