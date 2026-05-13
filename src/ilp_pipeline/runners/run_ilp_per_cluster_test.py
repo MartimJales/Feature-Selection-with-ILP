@@ -24,7 +24,19 @@ logger = logging.getLogger(__name__)
 # Defaults
 DEFAULT_TIMEOUT = 600  # 10 minutes per cluster
 DEFAULT_TOP_N = 30
-PADTAI_PATH = Path(__file__).parent.parent.parent.parent / "PADTAI" / "padtai.py"
+
+
+def find_repo_root() -> Path:
+    """Find the repository root by walking up from this script."""
+    current = Path(__file__).resolve()
+    for candidate in current.parents:
+        if (candidate / "PADTAI").exists() and (candidate / "reports").exists():
+            return candidate
+    return current.parents[3]
+
+
+REPO_ROOT = find_repo_root()
+PADTAI_PATH = REPO_ROOT / "PADTAI" / "padtai.py"
 
 
 def resolve_cluster_base_dir(explicit_dir: Path | None = None) -> Path:
@@ -34,7 +46,7 @@ def resolve_cluster_base_dir(explicit_dir: Path | None = None) -> Path:
     if explicit_dir is not None:
         candidates.append(explicit_dir)
 
-    repo_root = Path(__file__).resolve().parents[3]
+    repo_root = REPO_ROOT
     candidates.extend(
         [
             repo_root / "reports" / "entropy_knn" / "analysis" / "per_cluster_feature_vs_method",
