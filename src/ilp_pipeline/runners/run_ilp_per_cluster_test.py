@@ -124,6 +124,69 @@ def extract_top_features(csv_path: Path, top_n: int = DEFAULT_TOP_N):
         logger.error(f"Error reading {csv_path}: {e}")
         return None
 
+
+def sanitize_feature_name(name: str) -> str:
+    """
+    Convert feature name to valid Prolog identifier.
+    Replaces invalid characters with underscores.
+    """
+    # Replace invalid characters with underscores
+    # Valid Prolog identifiers: start with lowercase/underscore, contain alphanumeric + underscore
+    sanitized = re.sub(r'[^A-Za-z0-9_]', '_', name)
+
+    # Ensure it starts with a letter or underscore (not a digit)
+    if sanitized and sanitized[0].isdigit():
+        sanitized = '_' + sanitized
+
+    # Avoid empty strings
+    if not sanitized:
+        sanitized = '_unknown_'
+
+    return sanitized
+
+
+def is_probable_prolog_rule(line: str) -> bool:
+    """Return True for lines that look like a valid Prolog rule."""
+    candidate = line.strip()
+    if not candidate or ':-' not in candidate:
+        return False
+
+    # Ignore obvious non-rules / artefacts.
+    banned_prefixes = (
+        'traceback', 'error', 'warning', 'exception', 'time', 'nohup',
+        'padtai command', 'loading ', 'saved ', 'metadata ', 'summary',
+        'cluster_', 'ilp runner', 'rowp =', 'import ', 'from '
+    )
+    lower = candidate.lower()
+    if lower.startswith(banned_prefixes):
+        return False
+
+    if '=' in candidate and ':-' not in candidate.split('=', 1)[0]:
+        return False
+
+    # Basic Prolog rule shape: head(args) :- body(args).
+    return bool(re.match(r'^[A-Za-z_][A-Za-z0-9_]*\([^()]*\)\s*:-\s*.+', candidate))
+
+
+def extract_rules_from_output(output: str) -> List[str]:
+    """Extract only valid Prolog rules from PADTAI output."""
+    rules = []
+    seen = set()
+
+    # Prefer explicit rule lines.
+    for raw_line in output.splitlines():
+        candidate = raw_line.strip()
+        if not is_probable_prolog_rule(candidate):
+            continue
+
+        # Normalize terminal period while keeping the rule text.
+        candidate = candidate.rstrip('.')
+        if candidate not in seen:
+            seen.add(candidate)
+            rules.append(candidate)
+
+    return rules
+
 def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOUT):
     """
     Execute PADTAI with CSV containing binary features + label column.
@@ -212,6 +275,7 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         "features_selected": None,
         "n_features": 0,
         "n_samples": 0,
+        "elapsed_seconds": None,
         "padtai_stdout": "",
         "padtai_stderr": "",
         "error": None
@@ -289,6 +353,8 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         except Exception as e:
             logger.warning(f"[cluster_{cluster_id}] Failed to parse cluster JSON {cluster_json}: {e}; proceeding without subsetting")
 
+            cluster_start = time.time()
+
     # Step 4: Build final CSV with top-N features + label
     try:
         # Filter features to only those that exist in data
@@ -326,10 +392,15 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         result["n_samples"] = len(final_df)
         logger.info(f"[cluster_{cluster_id}] ✓ Final dataset: {len(final_df)} samples × {len(available_features)} features + label")
 
-        # Step 5: Save to CSV for PADTAI
+        # Step 5: Sanitize feature names for Prolog compatibility and save to CSV for PADTAI
+        final_df_prolog = final_df.copy()
+        # Rename columns to valid Prolog identifiers (except 'label')
+        rename_map = {col: sanitize_feature_name(col) for col in final_df_prolog.columns if col != 'label'}
+        final_df_prolog = final_df_prolog.rename(columns=rename_map)
+
         padtai_input = ilp_output_dir / "padtai_input.csv"
-        final_df.to_csv(padtai_input, index=False)
-        logger.info(f"[cluster_{cluster_id}] ✓ Saved input CSV: {padtai_input}")
+        final_df_prolog.to_csv(padtai_input, index=False)
+        logger.info(f"[cluster_{cluster_id}] ✓ Sanitized {len(rename_map)} feature names and saved input CSV: {padtai_input}")
 
     except Exception as e:
         result["status"] = "error"
@@ -340,6 +411,7 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
     # Step 6: Run PADTAI
     logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout}s)...")
     success, stdout, stderr = run_padtai(padtai_input, ilp_output_dir, timeout)
+    result["elapsed_seconds"] = round(time.time() - cluster_start, 2)
 
     result["padtai_stdout"] = stdout[:2000] if stdout else ""
     result["padtai_stderr"] = stderr[:2000] if stderr else ""
@@ -352,29 +424,13 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
             f.write(stderr)
         logger.info(f"[cluster_{cluster_id}] Full stderr → {stderr_file}")
 
-    # Extract rules from PADTAI stdout and save
+    # Extract rules from PADTAI stdout/stderr and save
     try:
-        def extract_rules_from_output(output: str) -> List[str]:
-            rules = []
-            pattern = r"Rule:\s*(.+?)\s*:-\s*(.+?)(?:\n|$)"
-            for match in re.finditer(pattern, output, re.MULTILINE | re.IGNORECASE):
-                head = match.group(1).strip()
-                body = match.group(2).strip()
-                rule = f"{head} :- {body}"
-                rules.append(rule)
-            # Also check for lines containing ':-' as fallback
-            for line in output.splitlines():
-                if ':-' in line and 'Rule:' not in line:
-                    candidate = line.strip()
-                    if candidate and candidate not in rules:
-                        rules.append(candidate)
-            return rules
-
         full_out = (stdout or "") + "\n" + (stderr or "")
         rules = extract_rules_from_output(full_out)
         rules_file = ilp_output_dir / "padtai_rules.json"
         with open(rules_file, "w") as rf:
-            json.dump({"n_rules": len(rules), "rules": rules}, rf, indent=2)
+            json.dump({"n_rules": len(rules), "rules": rules, "elapsed_seconds": result["elapsed_seconds"]}, rf, indent=2)
         logger.info(f"[cluster_{cluster_id}] Saved extracted rules → {rules_file}")
 
         # Send Discord notification with rules summary
@@ -391,9 +447,9 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         logger.warning(f"[cluster_{cluster_id}] Failed to extract/send rules: {e}")
 
     if success:
-        logger.info(f"[cluster_{cluster_id}] ✅ PADTAI completed successfully")
+        logger.info(f"[cluster_{cluster_id}] ✅ PADTAI completed successfully in {result['elapsed_seconds']}s")
     else:
-        logger.warning(f"[cluster_{cluster_id}] ❌ PADTAI failed")
+        logger.warning(f"[cluster_{cluster_id}] ❌ PADTAI failed after {result['elapsed_seconds']}s")
         if stderr:
             logger.warning(f"    Error: {stderr[:300]}")
 
