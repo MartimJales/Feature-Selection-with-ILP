@@ -269,6 +269,26 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         logger.error(f"[cluster_{cluster_id}] {result['error']}")
         return result
 
+    # If cluster JSON lists sample indices, subset the datasets to those samples
+    cluster_json = cluster_dir / f"cluster_{cluster_id}.json"
+    if cluster_json.exists():
+        try:
+            with open(cluster_json, 'r') as cjf:
+                cj = json.load(cjf)
+            sample_indices = cj.get('sample_indices')
+            if sample_indices:
+                max_idx = len(features_df) - 1
+                # keep only integer indices within bounds
+                valid_indices = [int(i) for i in sample_indices if isinstance(i, int) and 0 <= i <= max_idx]
+                if not valid_indices:
+                    logger.warning(f"[cluster_{cluster_id}] cluster JSON has no valid sample indices; skipping subsetting")
+                else:
+                    features_df = features_df.iloc[valid_indices].reset_index(drop=True)
+                    labels_df = labels_df.iloc[valid_indices].reset_index(drop=True)
+                    logger.info(f"[cluster_{cluster_id}] ✓ Subset to {len(valid_indices)} cluster samples")
+        except Exception as e:
+            logger.warning(f"[cluster_{cluster_id}] Failed to parse cluster JSON {cluster_json}: {e}; proceeding without subsetting")
+
     # Step 4: Build final CSV with top-N features + label
     try:
         # Filter features to only those that exist in data
@@ -499,7 +519,9 @@ def main():
     print("SUMMARY")
     print("="*60)
     for r in results:
-        print(f"cluster_{r['cluster_id']:03d}: {r['status'].upper():12s} ({len(r['features'] or [])} features)")
+        n_feats = len(r.get('features_selected') or [])
+        n_samps = r.get('n_samples', 0)
+        print(f"cluster_{r['cluster_id']:03d}: {r['status'].upper():12s} ({n_feats} features, {n_samps} samples)")
 
     successful = sum(1 for r in results if r["status"] == "success")
     print(f"\nSuccessful: {successful}/{len(results)}")
