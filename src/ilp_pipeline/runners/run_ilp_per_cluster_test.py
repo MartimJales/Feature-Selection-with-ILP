@@ -281,6 +281,8 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         "error": None
     }
 
+    cluster_start = time.time()
+
     # Step 1: Extract top-N feature names
     features = extract_top_features(csv_path, top_n)
     if not features:
