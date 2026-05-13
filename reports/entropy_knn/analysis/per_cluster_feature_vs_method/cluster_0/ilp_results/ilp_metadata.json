@@ -1,10 +1,10 @@
 {
   "cluster_id": 0,
-  "timestamp": "2026-05-13T02:14:35.975866",
+  "timestamp": "2026-05-13T16:39:28.065741",
   "top_n": 30,
-  "timeout": 600,
+  "timeout": 900,
   "status": "failed",
-  "features": [
+  "features_selected": [
     "intent_com.google.android.gms.iid.InstanceID",
     "intent_android.intent.action.ACTION_POWER_CONNECTED",
     "perm_android.permission.BLUETOOTH_ADMIN",
@@ -36,7 +36,9 @@
     "n_used_permissions",
     "intent_android.intent.action.DOWNLOAD_COMPLETE"
   ],
-  "padtai_stdout": "",
-  "padtai_stderr": "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n  import pkg_resources\nusage: padtai.py [-h] [-d {none,padtai,popper,all}] [-c] [-s {rc2,nuwls}]\n                 [--sample-size int] [--max-timeout int]\n              ",
+  "n_features": 30,
+  "n_samples": 500,
+  "padtai_stdout": "label(V0,V1):- attr_n_permissions_10(V3),attr_label_1(V1),attr_n_providers_0(V2),n_providers(V0,V2),n_permissions(V0,V3).\n1\nfrozenbitarray('0000000000000000000000000000000000000000000000000100')\nTrue\nlabel(V0,V1):- attr_n_permissions_10(V3),attr_label_1(V1),n_providers(V0,V2),n_permissions(V0,V3),attr_n_providers_2(V2).\n1\nfrozenbitarray('0000000000000000000001000000000000000000000000000000')\nTrue\nlabel(V0,V1):- attr_n_permissions_10(V3),n_services(V0,V2),attr_label_1(V1),n_permissions(V0,V3),attr_n_services_5(V2).\n1\nfrozenbitarray('0000000000000000001000000000000000000000000000000000')\nTrue\nlabel(V0,V1):- attr_n_permissions_10(V3),attr_label_1(V1),intent_android_intent_action_view(V0,V2),n_permissions(V0,V3),attr_intent_android_intent_action_view_1(V2).\n1\nfrozenbitarray('0000000000000000000001000000000000000000000000000000')\nTrue\nlabel(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),attr_n_permissions_10(V3),attr_label_1(V1),n_permissions(V0,V3),attr_intent_com_google_android_gms_iid_instanceid_1(V2).\n1\nfrozenbitarray('0000000000000000000001000000000000000000000000000000')\nTrue\nlabel(V0,V1):- attr_n_permissions_10(V3),attr_label_1(V1),attr_suspicious_getcelllocation_0(V2),n_permissions(V0,V3),suspicious_getcelllocation(V0,V2).\n1\nfrozenbitarray('0000000000000000001000000000000000000000000000000000')\nTrue\nlabel(V0,V1):- attr_n_permissions_10(V3),attr_perm_android_permission_vibrate_0(V2),attr_label_1(V1),n_permissions(V0,V3),perm_android_permission_vibrate(V0,V2).\n1\nfrozenbitarray('0000000000000000000001000000000000000000000000000000')\nTrue\nlabel(V0,V1):- attr_n_permissions_10(V3),attr_label_1(V1),perm_android_permission_access_fine_location(V0,V2),n_permissions(V0,V3),attr_perm_android_permission_access_fine_location_0(V2).\n1\nfrozenbitarray('0000000000000000001000000000000000000000000000000000')\nTrue\nlabel(V0,V1):- attr_n_permissions_10(V3),attr_label_1(V1),attr_suspicious_getcellsignalstrength_0(V2),suspicious_getcellsignalstrength(V0,V2),n_permissions(",
+  "padtai_stderr": "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n  import pkg_resources\nTraceback (most recent call last):\n  File \"/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py\", line 7, in <module>\n    run()\n  File \"/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py\", line 528, in main\n    batch_size, offset = load_table(table_path, batch_size, offset, line_offset,\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py\", line 234, in load_table\n    rowP = normalize(row.split(',')[:-1], rebinds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py\", line 69, in normalize\n    if is_number(strlist[i]):\n       ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py\", line 39, in is_number\n    return str.replace('.', '', 1).isdigit() or (str[0] == '-' and str[1:].replace('.', '', 1).isdigit())\n                                                 ~~~^^^\nIndexError: string index out of range\n",
   "error": null
 }

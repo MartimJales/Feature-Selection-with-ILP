@@ -1,0 +1,18 @@
+/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+Traceback (most recent call last):
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py", line 7, in <module>
+    run()
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 528, in main
+    batch_size, offset = load_table(table_path, batch_size, offset, line_offset,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 234, in load_table
+    rowP = normalize(row.split(',')[:-1], rebinds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 69, in normalize
+    if is_number(strlist[i]):
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py", line 39, in is_number
+    return str.replace('.', '', 1).isdigit() or (str[0] == '-' and str[1:].replace('.', '', 1).isdigit())
+                                                 ~~~^^^
+IndexError: string index out of range

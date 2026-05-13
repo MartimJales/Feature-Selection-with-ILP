@@ -1,0 +1,71 @@
+/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:71:67: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1290:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1291:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1292:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1293:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1294:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1295:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1296:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1297:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1298:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1299:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1300:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1301:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1302:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1303:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1304:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1305:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1306:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1307:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1308:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1309:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1310:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1311:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1312:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1313:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1314:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1315:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1316:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1317:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1318:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1319:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1320:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1321:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1322:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1323:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1324:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1325:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1326:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1327:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1328:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1329:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1330:60: Syntax error: Operator expected
+ERROR: [Thread main] /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai_input/bk.pl:1331:60: Syntax error: Operator expected
+Traceback (most recent call last):
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py", line 7, in <module>
+    run()
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 504, in main
+    prog, _, _ = learn_solution(settings)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/loop.py", line 1716, in learn_solution
+    timeout(settings, popper, (settings, tester, bkcons), timeout_duration=int(settings.timeout-time_so_far),)
+  File "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/util.py", line 81, in timeout
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/loop.py", line 1641, in popper
+    Popper(settings, tester).run(bkcons)
+  File "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/loop.py", line 254, in run
+    pos_covered = tester.test_prog_pos(prog)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py", line 121, in test_prog_pos
+    pos_covered = query_once(q)['S']
+                  ^^^^^^^^^^^^^
+  File "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/janus_swi/janus.py", line 245, in query_once
+    return _swipl.call(query, inputs, keep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+janus_swi.janus.PrologError: Syntax error: Operator expected
+findall(_ID, (pos_index(_ID, label(_V0,_V1)),( __gt_getmessagebod
+** here **
+y(_V1,_V0)->  true)), S) . 
