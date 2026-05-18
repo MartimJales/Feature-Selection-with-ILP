@@ -1,0 +1,12 @@
+{
+  "n_rules": 6,
+  "rules": [
+    "label(V0,V1):- attr_label_0(V1),attr_n_permissions_3(V2),n_permissions(V0,V2)",
+    "label(V0,V1):- attr_n_activities_7(V2),attr_label_0(V1),n_activities(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_urls_15(V2),n_urls(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),n_api_calls(V0,V2),attr_n_api_calls_19(V2)",
+    "label(V0,V1):- attr_n_urls_17(V2),attr_label_0(V1),n_urls(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_android_permission_access_wifi_state_1(V2),perm_android_permission_access_wifi_state(V0,V2)"
+  ],
+  "elapsed_seconds": 118.42
+}

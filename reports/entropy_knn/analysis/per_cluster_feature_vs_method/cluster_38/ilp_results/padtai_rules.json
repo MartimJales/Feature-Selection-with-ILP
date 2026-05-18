@@ -1,0 +1,13 @@
+{
+  "n_rules": 7,
+  "rules": [
+    "label(V0,V1):- attr_intent_android_net_conn_connectivity_change_1(V3),attr_perm_android_permission_read_phone_state_0(V2),attr_label_1(V1),intent_android_net_conn_connectivity_change(V0,V3),perm_android_permission_read_phone_state(V0,V2)",
+    "label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),attr_label_1(V1),attr_intent_android_net_conn_connectivity_change_1(V3),attr_perm_android_permission_mount_unmount_filesystems_0(V2),intent_android_net_conn_connectivity_change(V0,V3)",
+    "label(V0,V1):- attr_perm_android_permission_get_tasks_0(V3),attr_label_1(V1),perm_android_permission_get_tasks(V0,V3),attr_intent_android_net_conn_connectivity_change_1(V2),intent_android_net_conn_connectivity_change(V0,V2)",
+    "label(V0,V1):- attr_intent_android_net_conn_connectivity_change_1(V3),attr_label_1(V1),n_providers(V0,V2),attr_n_providers_2(V2),intent_android_net_conn_connectivity_change(V0,V3)",
+    "label(V0,V1):- attr_intent_android_net_conn_connectivity_change_1(V3),attr_label_1(V1),attr_perm_android_permission_interact_across_users_full_0(V2),perm_android_permission_interact_across_users_full(V0,V2),intent_android_net_conn_connectivity_change(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),attr_suspicious_getsubscriberid_0(V3),suspicious_getsubscriberid(V0,V3),attr_intent_android_net_conn_connectivity_change_1(V2),intent_android_net_conn_connectivity_change(V0,V2)",
+    "label(V0,V1):- attr_intent_android_net_conn_connectivity_change_1(V3),attr_label_1(V1),perm_android_permission_system_alert_window(V0,V2),attr_perm_android_permission_system_alert_window_0(V2),intent_android_net_conn_connectivity_change(V0,V3)"
+  ],
+  "elapsed_seconds": 122.86
+}

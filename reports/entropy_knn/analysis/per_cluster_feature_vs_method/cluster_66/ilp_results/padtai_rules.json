@@ -1,0 +1,15 @@
+{
+  "n_rules": 9,
+  "rules": [
+    "label(V0,V1):- n_api_calls(V0,V2),attr_label_0(V1),n_used_permissions(V0,V3),attr_n_used_permissions_9(V3),attr_n_api_calls_18(V2)",
+    "label(V0,V1):- n_api_calls(V0,V2),attr_label_0(V1),n_used_permissions(V0,V3),attr_n_used_permissions_9(V3),attr_n_api_calls_17(V2)",
+    "label(V0,V1):- n_api_calls(V0,V2),attr_label_0(V1),n_used_permissions(V0,V3),attr_n_api_calls_18(V2),attr_n_used_permissions_8(V3)",
+    "label(V0,V1):- attr_label_0(V1),n_used_permissions(V0,V3),attr_n_used_permissions_9(V3),perm_android_permission_read_external_storage(V0,V2),attr_perm_android_permission_read_external_storage_1(V2)",
+    "label(V0,V1):- attr_n_used_permissions_6(V3),perm_com_android_vending_billing(V0,V2),attr_perm_com_android_vending_billing_1(V2),attr_label_0(V1),n_used_permissions(V0,V3)",
+    "label(V0,V1):- attr_perm_com_android_vending_billing_1(V2),perm_com_android_vending_billing(V0,V2),attr_label_0(V1),n_api_calls(V0,V3),attr_n_api_calls_15(V3)",
+    "label(V0,V1):- intent_com_google_vr_vrcore_action_none(V0,V2),attr_intent_com_google_vr_vrcore_action_none_1(V2),attr_label_0(V1),n_api_calls(V0,V3),attr_n_api_calls_17(V3)",
+    "label(V0,V1):- intent_com_google_vr_vrcore_action_none(V0,V2),attr_intent_com_google_vr_vrcore_action_none_1(V2),attr_label_0(V1),suspicious_getdeviceid(V0,V3),attr_suspicious_getdeviceid_1(V3)",
+    "label(V0,V1):- intent_com_google_vr_vrcore_action_none(V0,V2),attr_intent_com_google_vr_vrcore_action_none_1(V2),attr_label_0(V1),attr_perm_android_permission_write_external_storage_1(V3),perm_android_permission_write_external_storage(V0,V3)"
+  ],
+  "elapsed_seconds": 152.68
+}

@@ -1,0 +1,20 @@
+{
+  "n_rules": 14,
+  "rules": [
+    "label(V0,V1):- attr_intent_com_inmobi_share_id_0(V3),attr_n_services_5(V2),n_services(V0,V2),intent_com_inmobi_share_id(V0,V3),attr_label_1(V1)",
+    "label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V3),attr_intent_android_net_conn_connectivity_change_0(V3),attr_n_services_11(V2),n_services(V0,V2),attr_label_1(V1)",
+    "label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V3),attr_n_services_11(V2),n_services(V0,V2),attr_intent_android_net_conn_connectivity_change_1(V3),attr_label_1(V1)",
+    "label(V0,V1):- attr_intent_com_inmobi_share_id_0(V3),n_receivers(V0,V2),intent_com_inmobi_share_id(V0,V3),attr_n_receivers_3(V2),attr_label_1(V1)",
+    "label(V0,V1):- n_receivers(V0,V2),attr_perm_android_permission_read_phone_state_0(V3),perm_android_permission_read_phone_state(V0,V3),attr_n_receivers_3(V2),attr_label_1(V1)",
+    "label(V0,V1):- attr_perm_android_permission_read_phone_state_1(V3),n_receivers(V0,V2),perm_android_permission_read_phone_state(V0,V3),attr_n_receivers_3(V2),attr_label_1(V1)",
+    "label(V0,V1):- n_receivers(V0,V2),suspicious_system_bin_su(V0,V3),attr_suspicious_system_bin_su_0(V3),attr_n_receivers_3(V2),attr_label_1(V1)",
+    "label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V3),attr_intent_com_google_firebase_messaging_event_0(V3),attr_n_receivers_6(V2),n_receivers(V0,V2),attr_label_1(V1)",
+    "label(V0,V1):- attr_perm_android_permission_read_phone_state_1(V3),attr_n_receivers_6(V2),n_receivers(V0,V2),perm_android_permission_read_phone_state(V0,V3),attr_label_1(V1)",
+    "label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V3),attr_n_receivers_6(V2),n_receivers(V0,V2),attr_intent_android_net_conn_connectivity_change_1(V3),attr_label_1(V1)",
+    "label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V3),attr_perm_com_google_android_c2dm_permission_receive_1(V3),n_receivers(V0,V2),attr_n_receivers_3(V2),attr_label_1(V1)",
+    "label(V0,V1):- attr_perm_android_permission_read_phone_state_0(V3),perm_android_permission_read_phone_state(V0,V3),intent_com_google_firebase_messaging_event(V0,V2),attr_intent_com_google_firebase_messaging_event_1(V2),attr_label_1(V1)",
+    "label(V0,V1):- attr_perm_android_permission_read_phone_state_1(V3),attr_intent_com_google_firebase_messaging_event_0(V2),intent_com_google_firebase_messaging_event(V0,V2),perm_android_permission_read_phone_state(V0,V3),attr_label_1(V1)",
+    "label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V3),attr_perm_android_permission_receive_sms_0(V2),attr_intent_android_net_conn_connectivity_change_1(V3),attr_label_1(V1),perm_android_permission_receive_sms(V0,V2)"
+  ],
+  "elapsed_seconds": 167.98
+}

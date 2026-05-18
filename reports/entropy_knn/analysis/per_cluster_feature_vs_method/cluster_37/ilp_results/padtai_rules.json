@@ -1,0 +1,27 @@
+{
+  "n_rules": 21,
+  "rules": [
+    "label(V0,V1):- n_urls(V0,V3),attr_n_urls_124(V3),perm_android_permission_read_phone_state(V0,V2),attr_label_1(V1),attr_perm_android_permission_read_phone_state_0(V2)",
+    "label(V0,V1):- n_urls(V0,V3),attr_n_urls_124(V3),attr_label_1(V1),attr_suspicious_getsubscriberid_0(V2),suspicious_getsubscriberid(V0,V2)",
+    "label(V0,V1):- n_urls(V0,V3),attr_n_urls_124(V3),attr_label_1(V1),attr_suspicious_getcelllocation_0(V2),suspicious_getcelllocation(V0,V2)",
+    "label(V0,V1):- n_used_permissions(V0,V3),attr_suspicious_system_bin_su_0(V2),suspicious_system_bin_su(V0,V2),attr_n_used_permissions_7(V3),attr_label_1(V1)",
+    "label(V0,V1):- n_used_permissions(V0,V3),suspicious_system_bin_su(V0,V2),attr_suspicious_system_bin_su_1(V2),attr_n_used_permissions_7(V3),attr_label_1(V1)",
+    "label(V0,V1):- n_used_permissions(V0,V3),attr_label_1(V1),attr_n_used_permissions_7(V3),attr_n_receivers_4(V2),n_receivers(V0,V2)",
+    "label(V0,V1):- perm_android_permission_system_alert_window(V0,V3),attr_label_1(V1),n_receivers(V0,V2),attr_perm_android_permission_system_alert_window_0(V3),attr_n_receivers_0(V2)",
+    "label(V0,V1):- n_api_calls(V0,V2),attr_n_api_calls_25(V2),perm_android_permission_system_alert_window(V0,V3),attr_label_1(V1),attr_perm_android_permission_system_alert_window_0(V3)",
+    "label(V0,V1):- suspicious_system_bin_su(V0,V2),attr_suspicious_system_bin_su_1(V2),perm_android_permission_system_alert_window(V0,V3),attr_label_1(V1),attr_perm_android_permission_system_alert_window_0(V3)",
+    "label(V0,V1):- n_receivers(V0,V3),attr_n_receivers_0(V3),n_api_calls(V0,V2),attr_n_api_calls_25(V2),attr_label_1(V1)",
+    "label(V0,V1):- n_activities(V0,V3),attr_n_receivers_4(V2),attr_n_activities_14(V3),attr_label_1(V1),n_receivers(V0,V2)",
+    "label(V0,V1):- n_activities(V0,V3),attr_label_1(V1),attr_n_activities_14(V3),attr_suspicious_getcelllocation_0(V2),suspicious_getcelllocation(V0,V2)",
+    "label(V0,V1):- suspicious_getcelllocation(V0,V2),attr_label_1(V1),attr_suspicious_getcelllocation_0(V2),n_permissions(V0,V3),attr_n_permissions_9(V3)",
+    "label(V0,V1):- attr_suspicious_system_bin_su_0(V2),suspicious_system_bin_su(V0,V2),n_activities(V0,V3),attr_n_activities_14(V3),attr_label_1(V1)",
+    "label(V0,V1):- suspicious_system_bin_su(V0,V2),attr_suspicious_system_bin_su_1(V2),n_activities(V0,V3),attr_n_activities_14(V3),attr_label_1(V1)",
+    "label(V0,V1):- n_activities(V0,V3),attr_n_activities_14(V3),attr_label_1(V1),attr_suspicious_getsubscriberid_0(V2),suspicious_getsubscriberid(V0,V2)",
+    "label(V0,V1):- n_receivers(V0,V3),suspicious_system_bin_su(V0,V2),attr_suspicious_system_bin_su_1(V2),attr_n_receivers_4(V3),attr_label_1(V1)",
+    "label(V0,V1):- n_receivers(V0,V3),attr_suspicious_system_bin_su_0(V2),suspicious_system_bin_su(V0,V2),attr_n_receivers_0(V3),attr_label_1(V1)",
+    "label(V0,V1):- attr_n_api_calls_25(V3),attr_suspicious_system_bin_su_0(V2),suspicious_system_bin_su(V0,V2),n_api_calls(V0,V3),attr_label_1(V1)",
+    "label(V0,V1):- attr_n_api_calls_25(V3),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V3),attr_label_1(V1),attr_perm_android_permission_read_phone_state_0(V2)",
+    "label(V0,V1):- attr_n_api_calls_25(V3),n_api_calls(V0,V3),attr_label_1(V1),attr_suspicious_getsubscriberid_0(V2),suspicious_getsubscriberid(V0,V2)"
+  ],
+  "elapsed_seconds": 176.79
+}

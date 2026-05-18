@@ -1,0 +1,22 @@
+{
+  "n_rules": 16,
+  "rules": [
+    "label(V0,V1):- n_activities(V0,V2),n_used_permissions(V0,V3),attr_n_used_permissions_9(V3),attr_label_1(V1),attr_n_activities_3(V2)",
+    "label(V0,V1):- n_activities(V0,V2),n_used_permissions(V0,V3),attr_n_activities_4(V2),attr_n_used_permissions_9(V3),attr_label_1(V1)",
+    "label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V3),attr_n_used_permissions_9(V3),attr_perm_android_permission_read_phone_state_0(V2),attr_label_1(V1)",
+    "label(V0,V1):- suspicious_getdeviceid(V0,V2),suspicious_ljava_lang_system___load(V0,V3),attr_label_1(V1),attr_suspicious_ljava_lang_system___load_1(V3),attr_suspicious_getdeviceid_1(V2)",
+    "label(V0,V1):- n_activities(V0,V2),suspicious_ljava_lang_system___load(V0,V3),attr_label_1(V1),attr_suspicious_ljava_lang_system___load_1(V3),attr_n_activities_3(V2)",
+    "label(V0,V1):- n_activities(V0,V2),attr_n_activities_4(V2),suspicious_ljava_lang_system___load(V0,V3),attr_label_1(V1),attr_suspicious_ljava_lang_system___load_1(V3)",
+    "label(V0,V1):- intent_android_intent_action_send(V0,V2),suspicious_ljava_lang_system___load(V0,V3),attr_label_1(V1),attr_suspicious_ljava_lang_system___load_1(V3),attr_intent_android_intent_action_send_0(V2)",
+    "label(V0,V1):- perm_com_android_vending_billing(V0,V2),suspicious_ljava_lang_system___load(V0,V3),attr_perm_com_android_vending_billing_0(V2),attr_label_1(V1),attr_suspicious_ljava_lang_system___load_1(V3)",
+    "label(V0,V1):- n_receivers(V0,V2),suspicious_ljava_lang_system___load(V0,V3),attr_label_1(V1),attr_suspicious_ljava_lang_system___load_1(V3),attr_n_receivers_0(V2)",
+    "label(V0,V1):- n_activities(V0,V2),suspicious_ljava_lang_system___load(V0,V3),attr_label_1(V1),attr_suspicious_ljava_lang_system___load_0(V3),attr_n_activities_3(V2)",
+    "label(V0,V1):- n_receivers(V0,V2),attr_label_1(V1),attr_n_activities_3(V3),attr_n_receivers_0(V2),n_activities(V0,V3)",
+    "label(V0,V1):- intent_android_intent_action_send(V0,V2),attr_label_1(V1),attr_intent_android_intent_action_send_0(V2),attr_n_activities_3(V3),n_activities(V0,V3)",
+    "label(V0,V1):- intent_android_intent_action_send(V0,V2),attr_n_providers_1(V3),n_providers(V0,V3),attr_label_1(V1),attr_intent_android_intent_action_send_0(V2)",
+    "label(V0,V1):- n_receivers(V0,V2),attr_n_providers_1(V3),n_providers(V0,V3),attr_label_1(V1),attr_n_receivers_0(V2)",
+    "label(V0,V1):- intent_android_intent_action_send(V0,V3),perm_android_permission_write_external_storage(V0,V2),attr_intent_android_intent_action_send_0(V3),attr_label_1(V1),attr_perm_android_permission_write_external_storage_1(V2)",
+    "label(V0,V1):- n_receivers(V0,V3),perm_android_permission_write_external_storage(V0,V2),attr_label_1(V1),attr_perm_android_permission_write_external_storage_1(V2),attr_n_receivers_0(V3)"
+  ],
+  "elapsed_seconds": 130.47
+}

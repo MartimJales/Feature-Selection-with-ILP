@@ -1,0 +1,10 @@
+{
+  "n_rules": 4,
+  "rules": [
+    "label(V0,V1):- attr_label_0(V1),n_urls(V0,V2),attr_n_urls_20(V2)",
+    "label(V0,V1):- attr_label_0(V1),n_urls(V0,V2),attr_n_urls_22(V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_permissions_2(V2),n_permissions(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),n_urls(V0,V3),attr_n_urls_21(V3),attr_n_used_permissions_9(V2),n_used_permissions(V0,V2)"
+  ],
+  "elapsed_seconds": 98.15
+}

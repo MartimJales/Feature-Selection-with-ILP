@@ -1,0 +1,8 @@
+{
+  "n_rules": 2,
+  "rules": [
+    "label(V0,V1):- attr_perm_android_permission_system_alert_window_0(V3),perm_android_permission_system_alert_window(V0,V3),attr_label_1(V1),perm_android_permission_read_phone_state(V0,V2),attr_perm_android_permission_read_phone_state_1(V2)",
+    "label(V0,V1):- attr_perm_android_permission_system_alert_window_0(V3),perm_android_permission_system_alert_window(V0,V3),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_label_1(V1),attr_perm_com_google_android_c2dm_permission_receive_1(V2)"
+  ],
+  "elapsed_seconds": 92.08
+}

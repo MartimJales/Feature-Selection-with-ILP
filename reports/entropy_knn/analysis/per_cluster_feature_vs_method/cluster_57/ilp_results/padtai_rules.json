@@ -1,0 +1,19 @@
+{
+  "n_rules": 13,
+  "rules": [
+    "label(V0,V1):- n_urls(V0,V2),attr_n_urls_68(V2),attr_n_permissions_6(V3),attr_label_0(V1),n_permissions(V0,V3)",
+    "label(V0,V1):- n_api_calls(V0,V3),n_urls(V0,V2),attr_n_urls_60(V2),attr_label_0(V1),attr_n_api_calls_26(V3)",
+    "label(V0,V1):- n_urls(V0,V2),attr_perm_android_permission_access_coarse_location_1(V3),perm_android_permission_access_coarse_location(V0,V3),attr_label_0(V1),attr_n_urls_60(V2)",
+    "label(V0,V1):- attr_n_permissions_10(V3),perm_android_permission_access_coarse_location(V0,V2),attr_label_0(V1),n_permissions(V0,V3),attr_perm_android_permission_access_coarse_location_0(V2)",
+    "label(V0,V1):- n_activities(V0,V3),attr_perm_android_permission_access_coarse_location_1(V2),perm_android_permission_access_coarse_location(V0,V2),attr_label_0(V1),attr_n_activities_18(V3)",
+    "label(V0,V1):- attr_label_0(V1),n_permissions(V0,V3),attr_n_permissions_14(V3),perm_android_permission_system_alert_window(V0,V2),attr_perm_android_permission_system_alert_window_1(V2)",
+    "label(V0,V1):- attr_perm_android_permission_access_fine_location_1(V3),attr_label_0(V1),perm_android_permission_access_fine_location(V0,V3),perm_android_permission_system_alert_window(V0,V2),attr_perm_android_permission_system_alert_window_1(V2)",
+    "label(V0,V1):- attr_n_permissions_6(V3),attr_label_0(V1),n_permissions(V0,V3),attr_n_api_calls_26(V2),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_n_activities_14(V3),n_activities(V0,V3),attr_label_0(V1),attr_n_api_calls_26(V2),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_perm_android_permission_access_fine_location_1(V3),attr_label_0(V1),perm_android_permission_access_fine_location(V0,V3),attr_n_activities_18(V2),n_activities(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),n_permissions(V0,V3),attr_n_permissions_14(V3),attr_n_activities_18(V2),n_activities(V0,V2)",
+    "label(V0,V1):- attr_n_permissions_8(V3),attr_label_0(V1),n_permissions(V0,V3),n_activities(V0,V2),attr_n_activities_10(V2)",
+    "label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__1(V2),attr_label_0(V1),n_permissions(V0,V3),attr_n_permissions_14(V3)"
+  ],
+  "elapsed_seconds": 128.72
+}

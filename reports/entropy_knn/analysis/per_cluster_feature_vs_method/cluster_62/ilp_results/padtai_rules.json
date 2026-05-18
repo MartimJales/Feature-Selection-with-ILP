@@ -1,0 +1,17 @@
+{
+  "n_rules": 11,
+  "rules": [
+    "label(V0,V1):- attr_perm_android_permission_write_settings_0(V3),attr_suspicious_ljava_lang_system___load_0(V2),suspicious_ljava_lang_system___load(V0,V2),attr_label_1(V1),perm_android_permission_write_settings(V0,V3)",
+    "label(V0,V1):- perm_android_permission_access_wifi_state(V0,V3),attr_suspicious_ljava_lang_system___load_0(V2),attr_label_1(V1),attr_perm_android_permission_access_wifi_state_1(V3),suspicious_ljava_lang_system___load(V0,V2)",
+    "label(V0,V1):- attr_suspicious_ljava_lang_system___load_0(V2),attr_label_1(V1),perm_android_permission_read_external_storage(V0,V3),suspicious_ljava_lang_system___load(V0,V2),attr_perm_android_permission_read_external_storage_1(V3)",
+    "label(V0,V1):- n_api_calls(V0,V3),attr_n_permissions_10(V2),attr_n_api_calls_26(V3),attr_label_0(V1),n_permissions(V0,V2)",
+    "label(V0,V1):- n_api_calls(V0,V3),attr_label_0(V1),attr_n_used_permissions_8(V2),attr_n_api_calls_23(V3),n_used_permissions(V0,V2)",
+    "label(V0,V1):- attr_perm_android_permission_read_phone_state_1(V2),n_api_calls(V0,V3),attr_n_api_calls_23(V3),attr_label_0(V1),perm_android_permission_read_phone_state(V0,V2)",
+    "label(V0,V1):- n_api_calls(V0,V3),attr_n_urls_31(V2),n_urls(V0,V2),attr_label_0(V1),attr_n_api_calls_28(V3)",
+    "label(V0,V1):- attr_n_urls_30(V2),attr_suspicious_ljava_lang_system___loadlibrary_0(V3),n_urls(V0,V2),attr_label_0(V1),suspicious_ljava_lang_system___loadlibrary(V0,V3)",
+    "label(V0,V1):- attr_n_urls_34(V2),n_urls(V0,V2),perm_android_permission_read_external_storage(V0,V3),attr_label_0(V1),attr_perm_android_permission_read_external_storage_1(V3)",
+    "label(V0,V1):- attr_n_used_permissions_8(V3),attr_n_urls_30(V2),n_urls(V0,V2),n_used_permissions(V0,V3),attr_label_0(V1)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_used_permissions_7(V2),perm_android_permission_read_external_storage(V0,V3),n_used_permissions(V0,V2),attr_perm_android_permission_read_external_storage_1(V3)"
+  ],
+  "elapsed_seconds": 113.13
+}

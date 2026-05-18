@@ -1,0 +1,17 @@
+{
+  "n_rules": 11,
+  "rules": [
+    "label(V0,V1):- n_receivers(V0,V3),attr_n_receivers_0(V3),attr_perm_android_permission_read_external_storage_0(V2),attr_label_1(V1),perm_android_permission_read_external_storage(V0,V2)",
+    "label(V0,V1):- n_receivers(V0,V3),perm_android_permission_access_fine_location(V0,V2),attr_n_receivers_0(V3),attr_perm_android_permission_access_fine_location_0(V2),attr_label_1(V1)",
+    "label(V0,V1):- perm_android_permission_access_fine_location(V0,V2),attr_perm_android_permission_access_fine_location_0(V2),attr_suspicious_ldalvik_system_dexclassloader__0(V3),suspicious_ldalvik_system_dexclassloader_(V0,V3),attr_label_1(V1)",
+    "label(V0,V1):- suspicious_ldalvik_system_dexclassloader_(V0,V3),attr_suspicious_ldalvik_system_dexclassloader__0(V3),attr_perm_android_permission_read_external_storage_0(V2),attr_label_1(V1),perm_android_permission_read_external_storage(V0,V2)",
+    "label(V0,V1):- perm_android_permission_access_fine_location(V0,V3),attr_suspicious_ljava_lang_system___loadlibrary_1(V2),suspicious_ljava_lang_system___loadlibrary(V0,V2),attr_perm_android_permission_access_fine_location_0(V3),attr_label_1(V1)",
+    "label(V0,V1):- perm_android_permission_access_fine_location(V0,V3),attr_perm_android_permission_access_fine_location_0(V3),attr_perm_android_permission_read_external_storage_0(V2),attr_label_1(V1),perm_android_permission_read_external_storage(V0,V2)",
+    "label(V0,V1):- perm_android_permission_access_fine_location(V0,V3),attr_perm_android_permission_set_wallpaper_0(V2),attr_perm_android_permission_access_fine_location_0(V3),perm_android_permission_set_wallpaper(V0,V2),attr_label_1(V1)",
+    "label(V0,V1):- perm_android_permission_access_fine_location(V0,V3),attr_suspicious_ljava_lang_system___load_1(V2),suspicious_ljava_lang_system___load(V0,V2),attr_perm_android_permission_access_fine_location_0(V3),attr_label_1(V1)",
+    "label(V0,V1):- attr_suspicious_ljava_lang_system___loadlibrary_1(V3),suspicious_ljava_lang_system___loadlibrary(V0,V3),attr_perm_android_permission_read_external_storage_0(V2),attr_label_1(V1),perm_android_permission_read_external_storage(V0,V2)",
+    "label(V0,V1):- attr_perm_android_permission_set_wallpaper_0(V2),attr_perm_android_permission_read_external_storage_0(V3),perm_android_permission_read_external_storage(V0,V3),perm_android_permission_set_wallpaper(V0,V2),attr_label_1(V1)",
+    "label(V0,V1):- attr_suspicious_ljava_lang_system___load_1(V2),perm_android_permission_read_external_storage(V0,V3),attr_perm_android_permission_read_external_storage_0(V3),suspicious_ljava_lang_system___load(V0,V2),attr_label_1(V1)"
+  ],
+  "elapsed_seconds": 115.63
+}

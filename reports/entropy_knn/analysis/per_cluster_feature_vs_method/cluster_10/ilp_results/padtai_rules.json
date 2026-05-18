@@ -1,0 +1,13 @@
+{
+  "n_rules": 7,
+  "rules": [
+    "label(V0,V1):- attr_n_api_calls_15(V2),attr_label_0(V1),n_api_calls(V0,V2)",
+    "label(V0,V1):- n_urls(V0,V2),attr_label_0(V1),attr_n_urls_20(V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_permissions_5(V2),n_permissions(V0,V2)",
+    "label(V0,V1):- attr_n_providers_1(V2),attr_label_0(V1),n_providers(V0,V2)",
+    "label(V0,V1):- n_urls(V0,V2),attr_n_urls_17(V2),attr_label_0(V1)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_permissions_3(V3),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__1(V2),n_permissions(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_api_calls_18(V3),n_permissions(V0,V2),n_api_calls(V0,V3),attr_n_permissions_2(V2)"
+  ],
+  "elapsed_seconds": 121.74
+}

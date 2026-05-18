@@ -1,0 +1,7 @@
+{
+  "n_rules": 1,
+  "rules": [
+    "label(V0,V1):- attr_n_permissions_5(V3),attr_label_0(V1),n_urls(V0,V2),attr_n_urls_34(V2),n_permissions(V0,V3)"
+  ],
+  "elapsed_seconds": 92.98
+}

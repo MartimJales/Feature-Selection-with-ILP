@@ -1,0 +1,31 @@
+{
+  "n_rules": 25,
+  "rules": [
+    "label(V0,V1):- n_urls(V0,V2),attr_n_urls_64(V2),attr_label_0(V1),suspicious_getcellsignalstrength(V0,V3),attr_suspicious_getcellsignalstrength_1(V3)",
+    "label(V0,V1):- attr_label_0(V1),n_api_calls(V0,V2),suspicious_getcellsignalstrength(V0,V3),attr_n_api_calls_31(V2),attr_suspicious_getcellsignalstrength_1(V3)",
+    "label(V0,V1):- attr_n_api_calls_28(V2),attr_label_0(V1),attr_n_urls_74(V3),n_urls(V0,V3),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_n_api_calls_29(V2),attr_n_urls_65(V3),attr_label_0(V1),n_urls(V0,V3),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_n_urls_64(V3),attr_label_0(V1),attr_n_api_calls_31(V2),n_urls(V0,V3),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_n_urls_68(V3),attr_label_0(V1),n_activities(V0,V2),attr_n_activities_21(V2),n_urls(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_urls_76(V3),n_used_permissions(V0,V2),attr_n_used_permissions_10(V2),n_urls(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_used_permissions_13(V2),n_used_permissions(V0,V2),attr_n_urls_74(V3),n_urls(V0,V3)",
+    "label(V0,V1):- attr_n_urls_64(V3),attr_label_0(V1),attr_n_used_permissions_12(V2),n_used_permissions(V0,V2),n_urls(V0,V3)",
+    "label(V0,V1):- attr_n_urls_64(V3),attr_label_0(V1),n_used_permissions(V0,V2),n_urls(V0,V3),attr_n_used_permissions_11(V2)",
+    "label(V0,V1):- attr_n_urls_64(V3),attr_label_0(V1),n_activities(V0,V2),attr_n_activities_22(V2),n_urls(V0,V3)",
+    "label(V0,V1):- attr_n_urls_64(V3),suspicious_getcelllocation(V0,V2),attr_label_0(V1),attr_suspicious_getcelllocation_1(V2),n_urls(V0,V3)",
+    "label(V0,V1):- attr_n_urls_65(V3),attr_label_0(V1),attr_n_activities_19(V2),n_activities(V0,V2),n_urls(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_suspicious_getcelllocation_1(V3),suspicious_getcelllocation(V0,V3),attr_n_api_calls_31(V2),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_suspicious_getcelllocation_1(V3),n_used_permissions(V0,V2),suspicious_getcelllocation(V0,V3),attr_n_used_permissions_10(V2)",
+    "label(V0,V1):- attr_n_api_calls_34(V2),attr_label_0(V1),attr_suspicious_getcelllocation_0(V3),suspicious_getcelllocation(V0,V3),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_n_api_calls_29(V2),attr_label_0(V1),n_activities(V0,V3),attr_n_activities_22(V3),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_n_api_calls_29(V2),attr_label_0(V1),n_used_permissions(V0,V3),attr_n_used_permissions_10(V3),n_api_calls(V0,V2)",
+    "label(V0,V1):- perm_com_android_vending_billing(V0,V3),attr_label_0(V1),attr_n_api_calls_28(V2),attr_perm_com_android_vending_billing_1(V3),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),n_used_permissions(V0,V3),attr_n_used_permissions_10(V3),attr_n_api_calls_31(V2),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),n_used_permissions(V0,V3),attr_n_api_calls_31(V2),attr_n_used_permissions_12(V3),n_api_calls(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),n_activities(V0,V2),attr_n_activities_22(V2),attr_n_used_permissions_11(V3),n_used_permissions(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),n_activities(V0,V2),attr_n_activities_21(V2),attr_n_used_permissions_14(V3),n_used_permissions(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),n_activities(V0,V2),attr_n_activities_23(V2),attr_n_used_permissions_13(V3),n_used_permissions(V0,V3)",
+    "label(V0,V1):- perm_com_android_vending_billing(V0,V3),attr_label_0(V1),attr_n_activities_30(V2),n_activities(V0,V2),attr_perm_com_android_vending_billing_1(V3)"
+  ],
+  "elapsed_seconds": 141.67
+}

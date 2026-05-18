@@ -1,0 +1,10 @@
+{
+  "n_rules": 4,
+  "rules": [
+    "label(V0,V1):- attr_label_0(V1),n_urls(V0,V3),n_permissions(V0,V2),attr_n_permissions_4(V2),attr_n_urls_22(V3)",
+    "label(V0,V1):- attr_label_0(V1),n_api_calls(V0,V2),n_urls(V0,V3),attr_n_api_calls_19(V2),attr_n_urls_25(V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_used_permissions_8(V2),attr_n_permissions_5(V3),n_permissions(V0,V3),n_used_permissions(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),n_api_calls(V0,V3),attr_n_api_calls_18(V3),n_used_permissions(V0,V2),attr_n_used_permissions_6(V2)"
+  ],
+  "elapsed_seconds": 112.42
+}

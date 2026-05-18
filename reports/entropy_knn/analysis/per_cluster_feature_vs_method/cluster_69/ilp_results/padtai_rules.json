@@ -1,0 +1,14 @@
+{
+  "n_rules": 8,
+  "rules": [
+    "label(V0,V1):- intent_android_net_wifi_state_change(V0,V3),attr_intent_android_net_wifi_state_change_1(V3),attr_label_0(V1),attr_perm_android_permission_mount_unmount_filesystems_0(V2),perm_android_permission_mount_unmount_filesystems(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),n_permissions(V0,V3),perm_android_permission_broadcast_sticky(V0,V2),attr_n_permissions_35(V3),attr_perm_android_permission_broadcast_sticky_1(V2)",
+    "label(V0,V1):- attr_perm_android_permission_write_internal_storage_0(V3),perm_android_permission_write_internal_storage(V0,V3),perm_android_permission_interact_across_users_full(V0,V2),attr_label_0(V1),attr_perm_android_permission_interact_across_users_full_1(V2)",
+    "label(V0,V1):- attr_perm_android_permission_change_configuration_0(V3),perm_android_permission_interact_across_users_full(V0,V2),attr_label_0(V1),attr_perm_android_permission_interact_across_users_full_1(V2),perm_android_permission_change_configuration(V0,V3)",
+    "label(V0,V1):- attr_perm_android_permission_broadcast_sticky_0(V2),attr_label_0(V1),perm_android_permission_broadcast_sticky(V0,V2),perm_android_permission_interact_across_users_full(V0,V3),attr_perm_android_permission_interact_across_users_full_1(V3)",
+    "label(V0,V1):- attr_perm_android_permission_read_internal_storage_0(V2),attr_label_0(V1),perm_android_permission_interact_across_users_full(V0,V3),attr_perm_android_permission_interact_across_users_full_1(V3),perm_android_permission_read_internal_storage(V0,V2)",
+    "label(V0,V1):- perm_android_permission_receive_sms(V0,V2),attr_label_0(V1),perm_android_permission_interact_across_users_full(V0,V3),attr_perm_android_permission_receive_sms_0(V2),attr_perm_android_permission_interact_across_users_full_1(V3)",
+    "label(V0,V1):- attr_label_0(V1),perm_android_permission_send_sms(V0,V2),attr_perm_android_permission_send_sms_0(V2),perm_android_permission_interact_across_users_full(V0,V3),attr_perm_android_permission_interact_across_users_full_1(V3)"
+  ],
+  "elapsed_seconds": 206.31
+}
