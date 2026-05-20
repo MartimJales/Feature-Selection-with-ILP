@@ -200,6 +200,8 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
         (success: bool, stdout: str, stderr: str)
     """
     output_dir.mkdir(parents=True, exist_ok=True)
+    prolog_artifacts_dir = output_dir / "padtai_artifacts"
+    prolog_artifacts_dir.mkdir(parents=True, exist_ok=True)
 
     # PADTAI command with EXACT arguments per README:
     # --grounded none       → No arithmetic operations
@@ -216,6 +218,8 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
         "python3",
         str(PADTAI_PATH),
         str(input_file),
+        "--out", str(prolog_artifacts_dir),
+        "--keep-prolog-files",
         "--grounded", "none",
         "--intcols", "none",
         "--solver", "rc2",
