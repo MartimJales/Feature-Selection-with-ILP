@@ -14,6 +14,7 @@ import json
 import logging
 import os
 import sys
+import subprocess
 from pathlib import Path
 
 import pandas as pd
@@ -56,6 +57,95 @@ def _iter_run_dirs(output_dir: Path, cluster_sizes: list[int], seeds: list[int])
             run_dir = output_dir / "score_only" / f"cluster_{cluster_size}" / f"seed_{seed}"
             runs.append((cluster_size, seed, run_dir))
     return runs
+
+
+def _analyze_clusters_with_malware(output_dir: Path, pipeline: str = "balanced") -> list[int]:
+    """
+    Analyze clusters and return list of cluster IDs that contain malware.
+    Runs the analyzer script and reads the output file.
+
+    Returns:
+        List of cluster IDs with malware, or empty list if analysis fails
+    """
+    import subprocess
+
+    repo_root = Path(__file__).resolve().parents[3]
+    script_path = repo_root / "scripts" / "analyze_clusters_with_malware.py"
+
+    if not script_path.exists():
+        logging.warning(f"Analyzer script not found: {script_path}")
+        return []
+
+    try:
+        # Run the analyzer
+        result = subprocess.run(
+            ["python3", str(script_path), "--pipeline", pipeline],
+            capture_output=True,
+            text=True,
+            timeout=300,
+        )
+
+        if result.returncode != 0:
+            logging.warning(f"Analyzer script failed: {result.stderr}")
+            return []
+
+        # Read the output file
+        output_file = repo_root / "scripts" / f"clusters_with_malware_{pipeline}.txt"
+        if not output_file.exists():
+            logging.warning(f"Analyzer output file not found: {output_file}")
+            return []
+
+        cluster_ids = [int(line.strip()) for line in output_file.read_text().splitlines() if line.strip()]
+        return cluster_ids
+
+    except Exception as e:
+        logging.warning(f"Failed to analyze clusters: {e}")
+
+
+        def _analyze_clusters_in_dir(analysis_dir: Path) -> list[int]:
+            """
+            Analyze clusters in a specific analysis directory and return IDs with malware.
+            Looks for padtai_input.csv in each cluster's ilp_results/ subdirectory.
+
+            Returns:
+                List of cluster IDs with malware
+            """
+            clusters_with_malware = []
+
+            if not analysis_dir.exists():
+                logging.warning(f"Analysis directory not found: {analysis_dir}")
+                return []
+
+            try:
+                # Find all cluster directories
+                cluster_dirs = sorted(
+                    [d for d in analysis_dir.glob("cluster_*") if d.is_dir()],
+                    key=lambda x: int(x.name.split("_")[1])
+                )
+
+                for cluster_dir in cluster_dirs:
+                    cluster_id = int(cluster_dir.name.split("_")[1])
+                    padtai_input = cluster_dir / "ilp_results" / "padtai_input.csv"
+
+                    if not padtai_input.exists():
+                        continue
+
+                    try:
+                        df = pd.read_csv(padtai_input)
+                        if 'label' in df.columns:
+                            malware_count = int((df['label'] == 1).sum())
+                            if malware_count > 0:
+                                clusters_with_malware.append(cluster_id)
+                    except Exception as e:
+                        logging.debug(f"Error reading cluster {cluster_id}: {e}")
+                        continue
+
+                return sorted(clusters_with_malware)
+
+            except Exception as e:
+                logging.warning(f"Failed to analyze clusters in dir: {e}")
+                return []
+        return []
 
 
 def _notify(args: argparse.Namespace, msg: str) -> None:
@@ -261,11 +351,69 @@ def main() -> None:
                 (
                     f"⚠️ No clusters for ILP (run {run_index}/{len(run_dirs)})\n"
                     f"path={analysis_out_dir}"
+
+                        # Analyze which clusters contain malware and filter for ILP
+                        logger.info("Analyzing clusters to filter those with malware...")
+                        clusters_with_malware = _analyze_clusters_with_malware(analysis_out_dir, pipeline="balanced")
+
+                        if clusters_with_malware:
+                            logger.info("Found %d clusters with malware in analysis_out_dir", len(clusters_with_malware))
+                            _notify(
+                                args,
+                                (
+                                    f"📊 Malware analysis complete (run {run_index}/{len(run_dirs)})\n"
+                                    f"clusters with malware: {len(clusters_with_malware)}"
+                                ),
+                            )
+                            # Filter cluster_dirs to only those with malware
+                            cluster_dirs = [d for d in cluster_dirs if int(d.name.split("_")[1]) in clusters_with_malware]
+
+                            if not cluster_dirs:
+                                logger.warning("No clusters with malware found for ILP - skipping this run")
+                                _notify(
+                                    args,
+                                    (
+                                        f"⚠️ No clusters with malware (run {run_index}/{len(run_dirs)})\n"
+                                        f"skipping ILP for this run"
+                                    ),
+                                )
+                                continue
+                        else:
+                            logger.warning("Malware analysis failed - will process all clusters as fallback")
                 ),
             )
             continue
-
         total_clusters_seen += len(cluster_dirs)
+                # Analyze which clusters contain malware and filter for ILP
+                logger.info("Analyzing clusters to filter those with malware...")
+                clusters_with_malware = _analyze_clusters_in_dir(analysis_out_dir)
+
+                if clusters_with_malware:
+                    logger.info("Found %d clusters with malware in this run", len(clusters_with_malware))
+                    _notify(
+                        args,
+                        (
+                            f"📊 Malware filter complete (run {run_index}/{len(run_dirs)})\n"
+                            f"clusters with malware: {len(clusters_with_malware)}"
+                        ),
+                    )
+                    # Filter cluster_dirs to only those with malware
+                    cluster_dirs = [d for d in cluster_dirs if int(d.name.split("_")[1]) in clusters_with_malware]
+
+                    if not cluster_dirs:
+                        logger.warning("No clusters with malware found for ILP - skipping this run")
+                        _notify(
+                            args,
+                            (
+                                f"⚠️ No clusters with malware (run {run_index}/{len(run_dirs)})\n"
+                                f"skipping ILP for this run"
+                            ),
+                        )
+                        continue
+                else:
+                    logger.warning("Malware analysis failed - will process all clusters as fallback")
+
+                total_clusters_seen += len(cluster_dirs)
         logger.info(
             "Starting ILP for %d clusters (cluster_size=%d seed=%d)",
             len(cluster_dirs),
