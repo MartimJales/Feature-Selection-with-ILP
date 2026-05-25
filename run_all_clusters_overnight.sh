@@ -38,8 +38,12 @@ git pull
 # Step 6: Load Discord environment variables from .env file
 echo "[6/6] Loading Discord environment variables..."
 if [ -f ".env" ]; then
-    export $(cat .env | grep -v '^#' | xargs)
+    set -a
+    source .env
+    set +a
     echo "✓ Environment variables loaded"
+    echo "  DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL:+set}"
+    echo "  DISCORD_USER_ID: ${DISCORD_USER_ID:+set}"
 else
     echo "Warning: .env file not found. Discord notifications may not work."
 fi
