@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Complete balanced 1:1 pipeline: clustering + PADTAI
+# Runs the full pipeline from feature selection to rule discovery
+
+set -e
+
+echo "========================================"
+echo "Complete Balanced 1:1 Pipeline"
+echo "Clustering + PADTAI Rule Discovery"
+echo "========================================"
+echo ""
+
+echo "[1/6] Setting up directories..."
+cd ..
+REPO_DIR="Feature-Selection-with-ILP"
+if [ ! -d "$REPO_DIR" ]; then
+    echo "Error: Repository directory '$REPO_DIR' not found!"
+    exit 1
+fi
+
+echo "[2/6] Initializing conda environment..."
+source ~/miniconda3/etc/profile.d/conda.sh
+
+echo "[3/6] Activating 'malware-ilp' conda environment..."
+conda activate malware-ilp
+
+echo "[4/6] Entering repository: $REPO_DIR"
+cd "$REPO_DIR"
+
+echo "[5/6] Pulling latest changes from git..."
+git pull
+
+echo "[6/6] Loading Discord environment variables..."
+if [ -f ".env" ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+    echo "✓ Environment variables loaded"
+else
+    echo "Warning: .env file not found. Discord notifications may not work."
+fi
+
+echo ""
+echo "========================================"
+echo "PHASE 1: Balanced 1:1 Clustering"
+echo "PHASE 2: PADTAI Rule Discovery"
+echo "Output: reports/entropy_knn_balanced/"
+echo "========================================"
+echo ""
+
+python3 src/entropy_knn_balanced/runners/run_complete_pipeline_balanced.py \
+    --cluster-sizes 500 \
+    --seeds 42 \
+    --top-features-global 1000 \
+    --balance-seed 42 \
+    --ilp-top-n 30 \
+    --ilp-timeout 900 \
+    --discord-webhook-url "${DISCORD_WEBHOOK_URL}" \
+    --discord-user-id "${DISCORD_USER_ID}"
+
+echo ""
+echo "========================================"
+echo "Complete pipeline execution finished!"
+echo "========================================"

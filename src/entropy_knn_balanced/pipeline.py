@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import logging
+import requests
+import time
+
 from dataclasses import replace
 
 import pandas as pd
@@ -22,6 +25,8 @@ class BalancedEntropyKNNPipeline(EntropyKNNPipeline):
         rankings_path: str = "./reports/feature_analysis/feature_rankings_all.parquet",
         output_dir: str = "./reports/entropy_knn_balanced",
         balance_seed: int = 42,
+        discord_webhook_url: str = "",
+        discord_user_id: str = "",
     ) -> None:
         super().__init__(
             features_path=features_path,
@@ -30,6 +35,8 @@ class BalancedEntropyKNNPipeline(EntropyKNNPipeline):
             output_dir=output_dir,
         )
         self.balance_seed = int(balance_seed)
+        self.discord_webhook_url = discord_webhook_url
+        self.discord_user_id = discord_user_id
 
     def _load_bundle(self):
         """Load and cache a balanced bundle with 1:1 class proportion."""
@@ -82,3 +89,75 @@ class BalancedEntropyKNNPipeline(EntropyKNNPipeline):
             y=y_balanced,
             ranked_features=ranked_features,
         )
+
+    @staticmethod
+    def _send_discord(msg: str, url: str, user_id: str | None = None) -> None:
+        """Send a Discord notification message via webhook."""
+        if not url:
+            return
+        mention = f"<@{user_id}> " if user_id else ""
+        content = f"{mention}{msg}"
+
+        max_retries = 3
+        backoff = 2.0
+
+        for attempt in range(1, max_retries + 1):
+            try:
+                response = requests.post(url, json={"content": content}, timeout=15)
+                if response.status_code in (200, 204):
+                    logger.info("Discord notification sent (attempt %d)", attempt)
+                    return
+                logger.warning(
+                    "Discord notification attempt %d failed: %s - %s",
+                    attempt,
+                    response.status_code,
+                    response.text,
+                )
+            except Exception as exc:
+                logger.warning("Discord notification attempt %d exception: %s", attempt, exc)
+
+            if attempt < max_retries:
+                try:
+                    time.sleep(backoff * attempt)
+                except Exception:
+                    pass
+
+        logger.error("Discord notification failed after %d attempts", max_retries)
+
+    def _run_score_only_configuration(
+        self,
+        cluster_size: int,
+        top_features_global: int,
+        seed: int,
+        n_clusters: int,
+        scale_features: bool,
+    ) -> dict:
+        """Override to add per-cluster Discord notifications."""
+        result = super()._run_score_only_configuration(
+            cluster_size=cluster_size,
+            top_features_global=top_features_global,
+            seed=seed,
+            n_clusters=n_clusters,
+            scale_features=scale_features,
+        )
+
+        # Send Discord notification for this configuration
+        if result["status"] == "ok":
+            self._send_discord(
+                f"✅ Balanced (1:1) score-only config completed: "
+                f"cluster_size={cluster_size}, seed={seed}, "
+                f"n_clusters={result.get('n_clusters_valid', 0)}, "
+                f"runtime={result.get('runtime_seconds', 0):.1f}s",
+                url=self.discord_webhook_url,
+                user_id=self.discord_user_id or None,
+            )
+        elif result["status"] == "error":
+            self._send_discord(
+                f"❌ Balanced (1:1) score-only config FAILED: "
+                f"cluster_size={cluster_size}, seed={seed}, "
+                f"error={result.get('error_message', 'unknown')[:200]}",
+                url=self.discord_webhook_url,
+                user_id=self.discord_user_id or None,
+            )
+
+        return result

@@ -116,6 +116,8 @@ def main() -> None:
         rankings_path=args.rankings_path,
         output_dir=args.output_dir,
         balance_seed=args.balance_seed,
+        discord_webhook_url=args.discord_webhook_url,
+        discord_user_id=args.discord_user_id,
     )
 
     cluster_sizes = _parse_csv_ints(args.cluster_sizes)

@@ -1,0 +1,297 @@
+#!/usr/bin/env python3
+"""
+Complete balanced 1:1 pipeline runner.
+Integrates:
+1) global feature filtering + balanced 1:1 clustering,
+2) per-cluster consensus feature analysis,
+3) PADTAI rule discovery per cluster.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import logging
+import os
+import sys
+from pathlib import Path
+
+import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+
+from src.analysis.entropy_knn_visualizations.run_cluster_top_feature_analysis import (
+    generate_per_cluster_analysis,
+)
+from src.entropy_knn_balanced.pipeline import BalancedEntropyKNNPipeline
+from src.ilp_pipeline.runners.run_ilp_per_cluster_test import (
+    get_cluster_dirs,
+    run_ilp_cluster,
+    send_discord,
+)
+
+
+def _parse_csv_ints(raw: str) -> list[int]:
+    return [int(value.strip()) for value in raw.split(",") if value.strip()]
+
+
+def _load_env_file(env_path: Path) -> None:
+    if not env_path.exists():
+        return
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+def _iter_run_dirs(output_dir: Path, cluster_sizes: list[int], seeds: list[int]) -> list[tuple[int, int, Path]]:
+    runs: list[tuple[int, int, Path]] = []
+    for cluster_size in cluster_sizes:
+        for seed in seeds:
+            run_dir = output_dir / "score_only" / f"cluster_{cluster_size}" / f"seed_{seed}"
+            runs.append((cluster_size, seed, run_dir))
+    return runs
+
+
+def main() -> None:
+    _load_env_file(Path(__file__).resolve().parents[3] / ".env")
+
+    parser = argparse.ArgumentParser(
+        description="Complete balanced 1:1 pipeline: clustering + PADTAI rule discovery"
+    )
+    parser.add_argument("--features-path", default="./reports/extracted_features.parquet")
+    parser.add_argument("--labels-path", default="./data/training_set.csv")
+    parser.add_argument("--rankings-path", default="./reports/feature_analysis/feature_rankings_all.parquet")
+    parser.add_argument("--output-dir", default="./reports/entropy_knn_balanced")
+    parser.add_argument("--cluster-sizes", default="500")
+    parser.add_argument("--seeds", default="42")
+    parser.add_argument("--top-features-global", type=int, default=1000)
+    parser.add_argument("--base-n-clusters", type=int, default=100)
+    parser.add_argument("--cluster-schedule", choices=["inverse-size", "fixed"], default="inverse-size")
+    parser.add_argument("--scale", action="store_true")
+    parser.add_argument("--balance-seed", type=int, default=42)
+    parser.add_argument("--consensus-top-k", type=int, default=25)
+    parser.add_argument("--consensus-top-n", type=int, default=50)
+    parser.add_argument("--consensus-normalize", choices=["minmax", "z", "none"], default="minmax")
+    parser.add_argument("--max-clusters", type=int, default=None)
+    parser.add_argument("--cluster-ids", type=int, nargs="+", default=None)
+    parser.add_argument("--ilp-top-n", type=int, default=30, help="Top N features for PADTAI")
+    parser.add_argument("--ilp-timeout", type=int, default=600, help="PADTAI timeout in seconds")
+    parser.add_argument("--ilp-dry-run", action="store_true", help="Prepare ILP inputs but do not execute PADTAI")
+    parser.add_argument("--discord-webhook-url", default=os.getenv("DISCORD_WEBHOOK_URL", ""))
+    parser.add_argument("--discord-user-id", default=os.getenv("DISCORD_USER_ID", ""))
+    args = parser.parse_args()
+
+    if args.discord_webhook_url:
+        os.environ["DISCORD_WEBHOOK_URL"] = args.discord_webhook_url
+    if args.discord_user_id:
+        os.environ["DISCORD_USER_ID"] = args.discord_user_id
+
+    log_dir = Path(__file__).resolve().parents[1] / "logs" / "entropy_knn_balanced_full"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / "pipeline_debug.log"
+
+    handlers: list[logging.Handler] = [logging.FileHandler(log_file)]
+    if sys.stdout.isatty():
+        handlers.append(logging.StreamHandler())
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
+        handlers=handlers,
+    )
+
+    logger = logging.getLogger(__name__)
+
+    logger.info("=" * 70)
+    logger.info("BALANCED 1:1 COMPLETE PIPELINE: Clustering + PADTAI")
+    logger.info("=" * 70)
+
+    # Phase 1: Balanced clustering + feature selection
+    logger.info("\n[PHASE 1] Running balanced 1:1 entropy KNN clustering...")
+    send_discord(
+        "🚀 Balanced 1:1 complete pipeline started (clustering phase)",
+        url=args.discord_webhook_url,
+        user_id=args.discord_user_id or None,
+    )
+
+    pipeline = BalancedEntropyKNNPipeline(
+        features_path=args.features_path,
+        labels_path=args.labels_path,
+        rankings_path=args.rankings_path,
+        output_dir=args.output_dir,
+        balance_seed=args.balance_seed,
+        discord_webhook_url=args.discord_webhook_url,
+        discord_user_id=args.discord_user_id,
+    )
+
+    cluster_sizes = _parse_csv_ints(args.cluster_sizes)
+    seeds = _parse_csv_ints(args.seeds)
+
+    try:
+        score_df = pipeline.run_score_sweep(
+            cluster_sizes=cluster_sizes,
+            top_features_global=args.top_features_global,
+            seeds=seeds,
+            scale_features=args.scale,
+            base_n_clusters=args.base_n_clusters,
+            cluster_schedule=args.cluster_schedule,
+        )
+        logger.info("Balanced clustering completed: %d runs", len(score_df))
+        send_discord(
+            f"✅ Balanced 1:1 clustering completed: {len(score_df)} runs",
+            url=args.discord_webhook_url,
+            user_id=args.discord_user_id or None,
+        )
+    except Exception as exc:
+        logger.exception("Balanced clustering failed")
+        send_discord(
+            f"❌ Balanced 1:1 clustering FAILED: {exc}",
+            url=args.discord_webhook_url,
+            user_id=args.discord_user_id or None,
+        )
+        sys.exit(1)
+
+    # Phase 2: Consensus analysis + PADTAI rule discovery on balanced clusters
+    logger.info("\n[PHASE 2] Running consensus analysis + PADTAI on balanced clusters...")
+    send_discord(
+        "🔍 Starting consensus + PADTAI phase on balanced clusters...",
+        url=args.discord_webhook_url,
+        user_id=args.discord_user_id or None,
+    )
+
+    output_dir = Path(args.output_dir)
+    run_dirs = _iter_run_dirs(output_dir=output_dir, cluster_sizes=cluster_sizes, seeds=seeds)
+
+    ilp_results: list[dict] = []
+    total_clusters_seen = 0
+
+    for run_index, (cluster_size, seed, cluster_json_dir) in enumerate(run_dirs, start=1):
+        logger.info(
+            "[RUN %d/%d] cluster_size=%d seed=%d | json_dir=%s",
+            run_index,
+            len(run_dirs),
+            cluster_size,
+            seed,
+            cluster_json_dir,
+        )
+
+        if not cluster_json_dir.exists():
+            logger.warning("Skipping missing score-only directory: %s", cluster_json_dir)
+            continue
+
+        analysis_out_dir = (
+            output_dir
+            / "analysis"
+            / "per_cluster_feature_vs_method"
+            / f"cluster_{cluster_size}"
+            / f"seed_{seed}"
+        )
+        analysis_out_dir.mkdir(parents=True, exist_ok=True)
+
+        try:
+            summary_df = generate_per_cluster_analysis(
+                cluster_json_dir=cluster_json_dir,
+                output_dir=analysis_out_dir,
+                top_k=args.consensus_top_k,
+                top_n=args.consensus_top_n,
+                normalize=args.consensus_normalize,
+                max_clusters=args.max_clusters,
+            )
+            logger.info(
+                "Consensus analysis complete: %d clusters in %s",
+                len(summary_df) if isinstance(summary_df, pd.DataFrame) else 0,
+                analysis_out_dir,
+            )
+        except Exception as exc:
+            logger.exception("Consensus analysis failed for cluster_size=%d seed=%d", cluster_size, seed)
+            send_discord(
+                f"❌ Consensus analysis failed (balanced 1:1): cluster_size={cluster_size}, seed={seed}, error={exc}",
+                url=args.discord_webhook_url,
+                user_id=args.discord_user_id or None,
+            )
+            continue
+
+        cluster_dirs = get_cluster_dirs(analysis_out_dir, args.cluster_ids)
+        if not cluster_dirs:
+            logger.warning("No cluster dirs found for ILP in %s", analysis_out_dir)
+            continue
+
+        total_clusters_seen += len(cluster_dirs)
+        logger.info(
+            "Starting ILP for %d clusters (cluster_size=%d seed=%d)",
+            len(cluster_dirs),
+            cluster_size,
+            seed,
+        )
+
+        for idx, cluster_dir in enumerate(cluster_dirs, start=1):
+            logger.info(
+                "  [ILP %d/%d] %s",
+                idx,
+                len(cluster_dirs),
+                cluster_dir.name,
+            )
+
+            result = run_ilp_cluster(
+                cluster_dir=cluster_dir,
+                top_n=args.ilp_top_n,
+                timeout=args.ilp_timeout,
+                dry_run=args.ilp_dry_run,
+            )
+            result["cluster_size"] = cluster_size
+            result["seed"] = seed
+            ilp_results.append(result)
+
+            metadata_file = cluster_dir / "ilp_results" / "ilp_metadata.json"
+            metadata_file.parent.mkdir(parents=True, exist_ok=True)
+            with open(metadata_file, "w", encoding="utf-8") as handle:
+                json.dump(result, handle, indent=2)
+
+    successful = sum(1 for r in ilp_results if r.get("status") == "success")
+    failed = sum(1 for r in ilp_results if r.get("status") == "failed")
+    dry_runs = sum(1 for r in ilp_results if r.get("status") == "dry_run")
+    errored = sum(1 for r in ilp_results if r.get("status") == "error")
+
+    summary_dir = output_dir / "analysis"
+    summary_dir.mkdir(parents=True, exist_ok=True)
+    ilp_summary_csv = summary_dir / "balanced_ilp_run_summary.csv"
+    pd.DataFrame(ilp_results).to_csv(ilp_summary_csv, index=False)
+
+    logger.info("\n[PHASE 2 SUMMARY]")
+    logger.info("Cluster groups processed: %d", len(run_dirs))
+    logger.info("Total clusters seen for ILP: %d", total_clusters_seen)
+    logger.info(
+        "ILP results: success=%d | failed=%d | error=%d | dry_run=%d | total=%d",
+        successful,
+        failed,
+        errored,
+        dry_runs,
+        len(ilp_results),
+    )
+    logger.info("ILP summary CSV: %s", ilp_summary_csv)
+
+    # Final notification
+    send_discord(
+        (
+            "✅ Balanced 1:1 complete pipeline finished! "
+            f"ILP success={successful}/{len(ilp_results)} "
+            f"(failed={failed}, error={errored}, dry_run={dry_runs})"
+        ),
+        url=args.discord_webhook_url,
+        user_id=args.discord_user_id or None,
+    )
+
+    logger.info("\n" + "=" * 70)
+    logger.info("PIPELINE COMPLETE")
+    logger.info("Output dir: %s", args.output_dir)
+    logger.info("=" * 70)
+
+
+if __name__ == "__main__":
+    main()
