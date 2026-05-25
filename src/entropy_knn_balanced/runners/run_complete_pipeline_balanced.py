@@ -58,6 +58,15 @@ def _iter_run_dirs(output_dir: Path, cluster_sizes: list[int], seeds: list[int])
     return runs
 
 
+def _notify(args: argparse.Namespace, msg: str) -> None:
+    """Small helper for Discord progress notifications."""
+    send_discord(
+        msg,
+        url=args.discord_webhook_url,
+        user_id=args.discord_user_id or None,
+    )
+
+
 def main() -> None:
     _load_env_file(Path(__file__).resolve().parents[3] / ".env")
 
@@ -112,13 +121,22 @@ def main() -> None:
     logger.info("BALANCED 1:1 COMPLETE PIPELINE: Clustering + PADTAI")
     logger.info("=" * 70)
 
+    cluster_sizes = _parse_csv_ints(args.cluster_sizes)
+    seeds = _parse_csv_ints(args.seeds)
+    run_dirs = _iter_run_dirs(output_dir=Path(args.output_dir), cluster_sizes=cluster_sizes, seeds=seeds)
+
+    _notify(
+        args,
+        (
+            "🚀 Balanced 1:1 pipeline started\n"
+            f"runs={len(run_dirs)} | cluster_sizes={cluster_sizes} | seeds={seeds}\n"
+            f"output={args.output_dir}"
+        ),
+    )
+
     # Phase 1: Balanced clustering + feature selection
     logger.info("\n[PHASE 1] Running balanced 1:1 entropy KNN clustering...")
-    send_discord(
-        "🚀 Balanced 1:1 complete pipeline started (clustering phase)",
-        url=args.discord_webhook_url,
-        user_id=args.discord_user_id or None,
-    )
+    _notify(args, "🧪 Phase 1/2 started: balanced clustering (score-only)")
 
     pipeline = BalancedEntropyKNNPipeline(
         features_path=args.features_path,
@@ -130,9 +148,6 @@ def main() -> None:
         discord_user_id=args.discord_user_id,
     )
 
-    cluster_sizes = _parse_csv_ints(args.cluster_sizes)
-    seeds = _parse_csv_ints(args.seeds)
-
     try:
         score_df = pipeline.run_score_sweep(
             cluster_sizes=cluster_sizes,
@@ -143,30 +158,23 @@ def main() -> None:
             cluster_schedule=args.cluster_schedule,
         )
         logger.info("Balanced clustering completed: %d runs", len(score_df))
-        send_discord(
-            f"✅ Balanced 1:1 clustering completed: {len(score_df)} runs",
-            url=args.discord_webhook_url,
-            user_id=args.discord_user_id or None,
+        _notify(
+            args,
+            (
+                "✅ Phase 1/2 completed\n"
+                f"balanced runs={len(score_df)}"
+            ),
         )
     except Exception as exc:
         logger.exception("Balanced clustering failed")
-        send_discord(
-            f"❌ Balanced 1:1 clustering FAILED: {exc}",
-            url=args.discord_webhook_url,
-            user_id=args.discord_user_id or None,
-        )
+        _notify(args, f"❌ Phase 1/2 FAILED: {exc}")
         sys.exit(1)
 
     # Phase 2: Consensus analysis + PADTAI rule discovery on balanced clusters
     logger.info("\n[PHASE 2] Running consensus analysis + PADTAI on balanced clusters...")
-    send_discord(
-        "🔍 Starting consensus + PADTAI phase on balanced clusters...",
-        url=args.discord_webhook_url,
-        user_id=args.discord_user_id or None,
-    )
+    _notify(args, "🔍 Phase 2/2 started: consensus + PADTAI")
 
     output_dir = Path(args.output_dir)
-    run_dirs = _iter_run_dirs(output_dir=output_dir, cluster_sizes=cluster_sizes, seeds=seeds)
 
     ilp_results: list[dict] = []
     total_clusters_seen = 0
@@ -180,9 +188,23 @@ def main() -> None:
             seed,
             cluster_json_dir,
         )
+        _notify(
+            args,
+            (
+                f"▶️ Run {run_index}/{len(run_dirs)} started\n"
+                f"cluster_size={cluster_size} | seed={seed}"
+            ),
+        )
 
         if not cluster_json_dir.exists():
             logger.warning("Skipping missing score-only directory: %s", cluster_json_dir)
+            _notify(
+                args,
+                (
+                    f"⚠️ Run {run_index}/{len(run_dirs)} skipped\n"
+                    f"missing dir: {cluster_json_dir}"
+                ),
+            )
             continue
 
         analysis_out_dir = (
@@ -208,18 +230,35 @@ def main() -> None:
                 len(summary_df) if isinstance(summary_df, pd.DataFrame) else 0,
                 analysis_out_dir,
             )
+            _notify(
+                args,
+                (
+                    f"🧩 Consensus done (run {run_index}/{len(run_dirs)})\n"
+                    f"cluster_size={cluster_size} | seed={seed} | clusters={len(summary_df)}"
+                ),
+            )
         except Exception as exc:
             logger.exception("Consensus analysis failed for cluster_size=%d seed=%d", cluster_size, seed)
-            send_discord(
-                f"❌ Consensus analysis failed (balanced 1:1): cluster_size={cluster_size}, seed={seed}, error={exc}",
-                url=args.discord_webhook_url,
-                user_id=args.discord_user_id or None,
+            _notify(
+                args,
+                (
+                    "❌ Consensus failed\n"
+                    f"cluster_size={cluster_size} | seed={seed}\n"
+                    f"error={exc}"
+                ),
             )
             continue
 
         cluster_dirs = get_cluster_dirs(analysis_out_dir, args.cluster_ids)
         if not cluster_dirs:
             logger.warning("No cluster dirs found for ILP in %s", analysis_out_dir)
+            _notify(
+                args,
+                (
+                    f"⚠️ No clusters for ILP (run {run_index}/{len(run_dirs)})\n"
+                    f"path={analysis_out_dir}"
+                ),
+            )
             continue
 
         total_clusters_seen += len(cluster_dirs)
@@ -229,6 +268,13 @@ def main() -> None:
             cluster_size,
             seed,
         )
+        _notify(
+            args,
+            (
+                f"🤖 ILP started (run {run_index}/{len(run_dirs)})\n"
+                f"cluster_size={cluster_size} | seed={seed} | total_clusters={len(cluster_dirs)}"
+            ),
+        )
 
         for idx, cluster_dir in enumerate(cluster_dirs, start=1):
             logger.info(
@@ -237,6 +283,14 @@ def main() -> None:
                 len(cluster_dirs),
                 cluster_dir.name,
             )
+            if idx == 1 or idx % 10 == 0 or idx == len(cluster_dirs):
+                _notify(
+                    args,
+                    (
+                        f"📍 ILP progress (run {run_index}/{len(run_dirs)})\n"
+                        f"cluster {idx}/{len(cluster_dirs)}: {cluster_dir.name}"
+                    ),
+                )
 
             result = run_ilp_cluster(
                 cluster_dir=cluster_dir,
@@ -252,6 +306,24 @@ def main() -> None:
             metadata_file.parent.mkdir(parents=True, exist_ok=True)
             with open(metadata_file, "w", encoding="utf-8") as handle:
                 json.dump(result, handle, indent=2)
+
+        run_success = sum(
+            1
+            for r in ilp_results
+            if r.get("cluster_size") == cluster_size and r.get("seed") == seed and r.get("status") == "success"
+        )
+        run_total = sum(
+            1
+            for r in ilp_results
+            if r.get("cluster_size") == cluster_size and r.get("seed") == seed
+        )
+        _notify(
+            args,
+            (
+                f"✅ Run {run_index}/{len(run_dirs)} finished\n"
+                f"cluster_size={cluster_size} | seed={seed} | ilp_success={run_success}/{run_total}"
+            ),
+        )
 
     successful = sum(1 for r in ilp_results if r.get("status") == "success")
     failed = sum(1 for r in ilp_results if r.get("status") == "failed")
@@ -275,16 +347,23 @@ def main() -> None:
         len(ilp_results),
     )
     logger.info("ILP summary CSV: %s", ilp_summary_csv)
+    _notify(
+        args,
+        (
+            "📊 Phase 2/2 summary\n"
+            f"clusters_seen={total_clusters_seen} | total_ilp={len(ilp_results)}\n"
+            f"success={successful} | failed={failed} | error={errored} | dry_run={dry_runs}"
+        ),
+    )
 
     # Final notification
-    send_discord(
+    _notify(
+        args,
         (
             "✅ Balanced 1:1 complete pipeline finished! "
             f"ILP success={successful}/{len(ilp_results)} "
             f"(failed={failed}, error={errored}, dry_run={dry_runs})"
         ),
-        url=args.discord_webhook_url,
-        user_id=args.discord_user_id or None,
     )
 
     logger.info("\n" + "=" * 70)
