@@ -100,51 +100,51 @@ def _analyze_clusters_with_malware(output_dir: Path, pipeline: str = "balanced")
 
     except Exception as e:
         logging.warning(f"Failed to analyze clusters: {e}")
+        return []
 
 
-        def _analyze_clusters_in_dir(analysis_dir: Path) -> list[int]:
-            """
-            Analyze clusters in a specific analysis directory and return IDs with malware.
-            Looks for padtai_input.csv in each cluster's ilp_results/ subdirectory.
+def _analyze_clusters_in_dir(analysis_dir: Path) -> list[int]:
+    """
+    Analyze clusters in a specific analysis directory and return IDs with malware.
+    Looks for padtai_input.csv in each cluster's ilp_results/ subdirectory.
 
-            Returns:
-                List of cluster IDs with malware
-            """
-            clusters_with_malware = []
+    Returns:
+        List of cluster IDs with malware
+    """
+    clusters_with_malware = []
 
-            if not analysis_dir.exists():
-                logging.warning(f"Analysis directory not found: {analysis_dir}")
-                return []
+    if not analysis_dir.exists():
+        logging.warning(f"Analysis directory not found: {analysis_dir}")
+        return []
+
+    try:
+        # Find all cluster directories
+        cluster_dirs = sorted(
+            [d for d in analysis_dir.glob("cluster_*") if d.is_dir()],
+            key=lambda x: int(x.name.split("_")[1])
+        )
+
+        for cluster_dir in cluster_dirs:
+            cluster_id = int(cluster_dir.name.split("_")[1])
+            padtai_input = cluster_dir / "ilp_results" / "padtai_input.csv"
+
+            if not padtai_input.exists():
+                continue
 
             try:
-                # Find all cluster directories
-                cluster_dirs = sorted(
-                    [d for d in analysis_dir.glob("cluster_*") if d.is_dir()],
-                    key=lambda x: int(x.name.split("_")[1])
-                )
-
-                for cluster_dir in cluster_dirs:
-                    cluster_id = int(cluster_dir.name.split("_")[1])
-                    padtai_input = cluster_dir / "ilp_results" / "padtai_input.csv"
-
-                    if not padtai_input.exists():
-                        continue
-
-                    try:
-                        df = pd.read_csv(padtai_input)
-                        if 'label' in df.columns:
-                            malware_count = int((df['label'] == 1).sum())
-                            if malware_count > 0:
-                                clusters_with_malware.append(cluster_id)
-                    except Exception as e:
-                        logging.debug(f"Error reading cluster {cluster_id}: {e}")
-                        continue
-
-                return sorted(clusters_with_malware)
-
+                df = pd.read_csv(padtai_input)
+                if 'label' in df.columns:
+                    malware_count = int((df['label'] == 1).sum())
+                    if malware_count > 0:
+                        clusters_with_malware.append(cluster_id)
             except Exception as e:
-                logging.warning(f"Failed to analyze clusters in dir: {e}")
-                return []
+                logging.debug(f"Error reading cluster {cluster_id}: {e}")
+                continue
+
+        return sorted(clusters_with_malware)
+
+    except Exception as e:
+        logging.warning(f"Failed to analyze clusters in dir: {e}")
         return []
 
 
