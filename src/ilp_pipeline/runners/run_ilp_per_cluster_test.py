@@ -263,6 +263,7 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
     Returns:
         dict with metadata and results
     """
+    cluster_dir = cluster_dir.resolve()
     cluster_id = int(cluster_dir.name.split("_")[1])
 
     # Paths
