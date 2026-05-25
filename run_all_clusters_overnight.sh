@@ -55,10 +55,23 @@ echo "Timeout: 900 seconds per cluster"
 echo "========================================"
 echo ""
 
+# Send Discord notification - pipeline started
+if [ -n "$DISCORD_WEBHOOK_URL" ] && [ -n "$DISCORD_USER_ID" ]; then
+    python3 scripts/test_discord_notifications.py \
+        --webhook-url "$DISCORD_WEBHOOK_URL" \
+        --user-id "$DISCORD_USER_ID" \
+        --message "🚀 **ILP All Clusters Pipeline** - Starting execution (100 clusters, 900s timeout each)" \
+        2>/dev/null || echo "Warning: Failed to send Discord notification"
+fi
+
+echo ""
+
 # Run the ILP pipeline for all clusters (0-99)
 python3 src/ilp_pipeline/runners/run_ilp_per_cluster_test.py \
     --cluster-ids $(seq 0 99) \
-    --timeout 900
+    --timeout 900 \
+    --discord-webhook-url "$DISCORD_WEBHOOK_URL" \
+    --discord-user-id "$DISCORD_USER_ID"
 
 echo ""
 echo "========================================"

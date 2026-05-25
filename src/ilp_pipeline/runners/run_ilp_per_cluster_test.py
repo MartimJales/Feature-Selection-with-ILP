@@ -558,7 +558,16 @@ def main():
 
     # Process each cluster
     results = []
-    for cluster_dir in cluster_dirs:
+    for idx, cluster_dir in enumerate(cluster_dirs, 1):
+        cluster_id = int(cluster_dir.name.split("_")[1])
+
+        # Discord notification: cluster processing started
+        send_discord(
+            f"🔄 **Cluster {cluster_id}** ({idx}/{len(cluster_dirs)}): Starting feature selection & PADTAI processing...",
+            url=args.discord_webhook_url,
+            user_id=args.discord_user_id or None,
+        )
+
         result = run_ilp_cluster(
             cluster_dir,
             args.top_n,
@@ -573,6 +582,29 @@ def main():
         with open(metadata_file, "w") as f:
             json.dump(result, f, indent=2)
 
+        # Discord notification: cluster completed with details
+        n_features = result.get("n_features", 0)
+        n_samples = result.get("n_samples", 0)
+        n_rules = len(result.get("padtai_rules", []))
+        elapsed = result.get("elapsed_seconds", 0)
+        status_emoji = "✅" if result["status"] == "success" else "❌"
+
+        details_msg = f"{status_emoji} **Cluster {cluster_id}** completed"
+        if n_features > 0:
+            details_msg += f"\n   • Features: {n_features}"
+        if n_samples > 0:
+            details_msg += f"\n   • Samples: {n_samples}"
+        if n_rules > 0:
+            details_msg += f"\n   • Rules discovered: {n_rules}"
+        if elapsed:
+            details_msg += f"\n   • Time: {elapsed:.1f}s"
+
+        send_discord(
+            details_msg,
+            url=args.discord_webhook_url,
+            user_id=args.discord_user_id or None,
+        )
+
         print(f"[cluster_{result['cluster_id']}] Metadata saved to {metadata_file}")
         print()
 
@@ -580,18 +612,29 @@ def main():
     print("\n" + "="*60)
     print("SUMMARY")
     print("="*60)
+
+    successful = sum(1 for r in results if r["status"] == "success")
+    total_rules = sum(len(r.get('padtai_rules', [])) for r in results)
+    total_features_used = sum(r.get('n_features', 0) for r in results)
+    total_samples = sum(r.get('n_samples', 0) for r in results)
+
     for r in results:
         n_feats = len(r.get('features_selected') or [])
         n_samps = r.get('n_samples', 0)
-        print(f"cluster_{r['cluster_id']:03d}: {r['status'].upper():12s} ({n_feats} features, {n_samps} samples)")
+        n_rules = len(r.get('padtai_rules', []))
+        print(f"cluster_{r['cluster_id']:03d}: {r['status'].upper():12s} ({n_feats} features, {n_samps} samples, {n_rules} rules)")
 
-    successful = sum(1 for r in results if r["status"] == "success")
     print(f"\nSuccessful: {successful}/{len(results)}")
+    print(f"Total features selected: {total_features_used}")
+    print(f"Total samples processed: {total_samples}")
+    print(f"Total rules discovered: {total_rules}")
 
-    # Discord notification: completion
-    summary_msg = f"✅ ILP Runner completed: {successful}/{len(results)} successful"
-    if successful < len(results):
-        summary_msg = f"⚠️ ILP Runner completed with issues: {successful}/{len(results)} successful"
+    # Discord notification: completion with detailed summary
+    if successful == len(results):
+        summary_msg = f"✅ **ILP Runner COMPLETED**\n   • Clusters: {successful}/{len(results)}\n   • Rules discovered: {total_rules}\n   • Features analyzed: {total_features_used}"
+    else:
+        failed = len(results) - successful
+        summary_msg = f"⚠️ **ILP Runner COMPLETED with issues**\n   • Successful: {successful}/{len(results)}\n   • Failed: {failed}\n   • Rules discovered: {total_rules}"
 
     send_discord(
         summary_msg,
