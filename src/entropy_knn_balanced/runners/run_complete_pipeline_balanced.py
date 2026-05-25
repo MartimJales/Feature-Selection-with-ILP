@@ -351,69 +351,39 @@ def main() -> None:
                 (
                     f"⚠️ No clusters for ILP (run {run_index}/{len(run_dirs)})\n"
                     f"path={analysis_out_dir}"
-
-                        # Analyze which clusters contain malware and filter for ILP
-                        logger.info("Analyzing clusters to filter those with malware...")
-                        clusters_with_malware = _analyze_clusters_with_malware(analysis_out_dir, pipeline="balanced")
-
-                        if clusters_with_malware:
-                            logger.info("Found %d clusters with malware in analysis_out_dir", len(clusters_with_malware))
-                            _notify(
-                                args,
-                                (
-                                    f"📊 Malware analysis complete (run {run_index}/{len(run_dirs)})\n"
-                                    f"clusters with malware: {len(clusters_with_malware)}"
-                                ),
-                            )
-                            # Filter cluster_dirs to only those with malware
-                            cluster_dirs = [d for d in cluster_dirs if int(d.name.split("_")[1]) in clusters_with_malware]
-
-                            if not cluster_dirs:
-                                logger.warning("No clusters with malware found for ILP - skipping this run")
-                                _notify(
-                                    args,
-                                    (
-                                        f"⚠️ No clusters with malware (run {run_index}/{len(run_dirs)})\n"
-                                        f"skipping ILP for this run"
-                                    ),
-                                )
-                                continue
-                        else:
-                            logger.warning("Malware analysis failed - will process all clusters as fallback")
                 ),
             )
             continue
+
+        # Analyze which clusters contain malware and filter for ILP
+        logger.info("Analyzing clusters to filter those with malware...")
+        clusters_with_malware = _analyze_clusters_in_dir(analysis_out_dir)
+
+        if clusters_with_malware:
+            logger.info("Found %d clusters with malware in this run", len(clusters_with_malware))
+            _notify(
+                args,
+                (
+                    f"📊 Malware filter complete (run {run_index}/{len(run_dirs)})\n"
+                    f"clusters with malware: {len(clusters_with_malware)}"
+                ),
+            )
+            cluster_dirs = [d for d in cluster_dirs if int(d.name.split("_")[1]) in clusters_with_malware]
+
+            if not cluster_dirs:
+                logger.warning("No clusters with malware found for ILP - skipping this run")
+                _notify(
+                    args,
+                    (
+                        f"⚠️ No clusters with malware (run {run_index}/{len(run_dirs)})\n"
+                        f"skipping ILP for this run"
+                    ),
+                )
+                continue
+        else:
+            logger.warning("Malware analysis failed - will process all clusters as fallback")
+
         total_clusters_seen += len(cluster_dirs)
-                # Analyze which clusters contain malware and filter for ILP
-                logger.info("Analyzing clusters to filter those with malware...")
-                clusters_with_malware = _analyze_clusters_in_dir(analysis_out_dir)
-
-                if clusters_with_malware:
-                    logger.info("Found %d clusters with malware in this run", len(clusters_with_malware))
-                    _notify(
-                        args,
-                        (
-                            f"📊 Malware filter complete (run {run_index}/{len(run_dirs)})\n"
-                            f"clusters with malware: {len(clusters_with_malware)}"
-                        ),
-                    )
-                    # Filter cluster_dirs to only those with malware
-                    cluster_dirs = [d for d in cluster_dirs if int(d.name.split("_")[1]) in clusters_with_malware]
-
-                    if not cluster_dirs:
-                        logger.warning("No clusters with malware found for ILP - skipping this run")
-                        _notify(
-                            args,
-                            (
-                                f"⚠️ No clusters with malware (run {run_index}/{len(run_dirs)})\n"
-                                f"skipping ILP for this run"
-                            ),
-                        )
-                        continue
-                else:
-                    logger.warning("Malware analysis failed - will process all clusters as fallback")
-
-                total_clusters_seen += len(cluster_dirs)
         logger.info(
             "Starting ILP for %d clusters (cluster_size=%d seed=%d)",
             len(cluster_dirs),
