@@ -1,0 +1,12 @@
+/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+Traceback (most recent call last):
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py", line 7, in <module>
+    run()
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 473, in main
+    random_n, rebinds = parse_table(table_path, int_cols, grounded_ops, sample_size, categorical, base_out_path)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py", line 349, in main
+    with open(table_path, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'reports/entropy_knn_balanced/analysis/per_cluster_feature_vs_method/cluster_500/seed_42/cluster_32/ilp_results/padtai_input.csv'
