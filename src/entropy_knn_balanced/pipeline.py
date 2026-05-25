@@ -43,6 +43,18 @@ class BalancedEntropyKNNPipeline(EntropyKNNPipeline):
         if self.bundle is None:
             raw_bundle = self.loader.load()
             self.bundle = self._balance_bundle(raw_bundle, self.balance_seed)
+
+            balanced_malware = int((self.bundle.y == 1).sum())
+            balanced_goodware = int((self.bundle.y == 0).sum())
+            self._send_discord(
+                (
+                    "📦 Balanced dataset ready\n"
+                    f"malware={balanced_malware} | goodware={balanced_goodware} | total={len(self.bundle.y)}\n"
+                    f"balance_seed={self.balance_seed}"
+                ),
+                url=self.discord_webhook_url,
+                user_id=self.discord_user_id or None,
+            )
         return self.bundle
 
     @staticmethod
@@ -133,6 +145,15 @@ class BalancedEntropyKNNPipeline(EntropyKNNPipeline):
         scale_features: bool,
     ) -> dict:
         """Override to add per-cluster Discord notifications."""
+        self._send_discord(
+            (
+                "🧪 Balanced score-only config started\n"
+                f"cluster_size={cluster_size} | seed={seed} | n_clusters={n_clusters} | top_features_global={top_features_global}"
+            ),
+            url=self.discord_webhook_url,
+            user_id=self.discord_user_id or None,
+        )
+
         result = super()._run_score_only_configuration(
             cluster_size=cluster_size,
             top_features_global=top_features_global,

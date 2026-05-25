@@ -230,7 +230,17 @@ def main() -> None:
 
     # Phase 1: Balanced clustering + feature selection
     logger.info("\n[PHASE 1] Running balanced 1:1 entropy KNN clustering...")
-    _notify(args, "🧪 Phase 1/2 started: balanced clustering (score-only)")
+    _notify(
+        args,
+        (
+            "🧪 Phase 1/2 started: balanced clustering (score-only)\n"
+            f"features_path={args.features_path}\n"
+            f"labels_path={args.labels_path}\n"
+            f"rankings_path={args.rankings_path}\n"
+            f"output_dir={args.output_dir}\n"
+            f"cluster_sizes={cluster_sizes} | seeds={seeds} | top_features_global={args.top_features_global}"
+        ),
+    )
 
     pipeline = BalancedEntropyKNNPipeline(
         features_path=args.features_path,
@@ -243,6 +253,15 @@ def main() -> None:
     )
 
     try:
+        _notify(
+            args,
+            (
+                "📌 Feature selection now running\n"
+                f"balance_seed={args.balance_seed} | base_n_clusters={args.base_n_clusters} | schedule={args.cluster_schedule}\n"
+                "Expect several minutes per configuration depending on cluster size and data volume"
+            ),
+        )
+
         score_df = pipeline.run_score_sweep(
             cluster_sizes=cluster_sizes,
             top_features_global=args.top_features_global,
@@ -256,7 +275,8 @@ def main() -> None:
             args,
             (
                 "✅ Phase 1/2 completed\n"
-                f"balanced runs={len(score_df)}"
+                f"balanced runs={len(score_df)}\n"
+                f"score-only outputs written to: {Path(args.output_dir) / 'score_only'}"
             ),
         )
     except Exception as exc:
