@@ -45,7 +45,7 @@ def _load_env_file(env_path: Path) -> None:
         key, value = line.split("=", 1)
         key = key.strip()
         value = value.strip().strip('"').strip("'")
-        if key and key not in os.environ:
+        if key and (key not in os.environ or not os.environ.get(key, "").strip()):
             os.environ[key] = value
 
 
@@ -95,6 +95,10 @@ def main() -> None:
     parser.add_argument("--discord-webhook-url", default=os.getenv("DISCORD_WEBHOOK_URL", ""))
     parser.add_argument("--discord-user-id", default=os.getenv("DISCORD_USER_ID", ""))
     args = parser.parse_args()
+
+    # Resolve Discord settings robustly (CLI if provided, else env/.env).
+    args.discord_webhook_url = (args.discord_webhook_url or os.getenv("DISCORD_WEBHOOK_URL", "")).strip()
+    args.discord_user_id = (args.discord_user_id or os.getenv("DISCORD_USER_ID", "")).strip()
 
     if args.discord_webhook_url:
         os.environ["DISCORD_WEBHOOK_URL"] = args.discord_webhook_url

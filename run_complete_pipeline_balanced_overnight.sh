@@ -33,8 +33,12 @@ git pull
 
 echo "[6/6] Loading Discord environment variables..."
 if [ -f ".env" ]; then
-    export $(cat .env | grep -v '^#' | xargs)
+    set -a
+    source .env
+    set +a
     echo "✓ Environment variables loaded"
+    echo "  DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL:+set}"
+    echo "  DISCORD_USER_ID: ${DISCORD_USER_ID:+set}"
 else
     echo "Warning: .env file not found. Discord notifications may not work."
 fi
@@ -53,9 +57,7 @@ python3 src/entropy_knn_balanced/runners/run_complete_pipeline_balanced.py \
     --top-features-global 1000 \
     --balance-seed 42 \
     --ilp-top-n 30 \
-    --ilp-timeout 900 \
-    --discord-webhook-url "${DISCORD_WEBHOOK_URL}" \
-    --discord-user-id "${DISCORD_USER_ID}"
+    --ilp-timeout 900
 
 echo ""
 echo "========================================"
