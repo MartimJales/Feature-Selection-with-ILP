@@ -51,13 +51,26 @@ echo "Output: reports/entropy_knn_balanced/"
 echo "========================================"
 echo ""
 
+# Send Discord notification - pipeline started
+if [ -n "$DISCORD_WEBHOOK_URL" ] && [ -n "$DISCORD_USER_ID" ]; then
+    python3 scripts/test_discord_notifications.py \
+        --webhook-url "$DISCORD_WEBHOOK_URL" \
+        --user-id "$DISCORD_USER_ID" \
+        --message "🚀 **Complete Balanced 1:1 Pipeline** - Starting clustering + PADTAI rule discovery" \
+        2>/dev/null || echo "Warning: Failed to send Discord notification"
+fi
+
+echo ""
+
 python3 src/entropy_knn_balanced/runners/run_complete_pipeline_balanced.py \
     --cluster-sizes 500 \
     --seeds 42 \
     --top-features-global 1000 \
     --balance-seed 42 \
     --ilp-top-n 30 \
-    --ilp-timeout 900
+    --ilp-timeout 900 \
+    --discord-webhook-url "$DISCORD_WEBHOOK_URL" \
+    --discord-user-id "$DISCORD_USER_ID"
 
 echo ""
 echo "========================================"
