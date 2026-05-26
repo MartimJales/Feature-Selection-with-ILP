@@ -1,5 +1,10 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 13.15
+  "n_rules": 4,
+  "rules": [
+    "label(V0,V1):- n_activities(V0,V2),attr_label_0(V1),attr_n_activities_16(V2)",
+    "label(V0,V1):- attr_perm_android_permission_receive_boot_completed_1(V2),attr_label_0(V1),perm_android_permission_receive_boot_completed(V0,V2)",
+    "label(V0,V1):- n_services(V0,V2),attr_label_0(V1),attr_n_services_0(V2)",
+    "label(V0,V1):- attr_perm_android_permission_write_external_storage_1(V2),attr_label_0(V1),perm_android_permission_write_external_storage(V0,V2)"
+  ],
+  "elapsed_seconds": 73.42
 }

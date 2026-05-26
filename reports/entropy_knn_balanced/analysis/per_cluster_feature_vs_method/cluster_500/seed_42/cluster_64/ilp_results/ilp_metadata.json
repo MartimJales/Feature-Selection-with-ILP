@@ -1,9 +1,9 @@
 {
   "cluster_id": 64,
-  "timestamp": "2026-05-25T17:02:34.190063",
+  "timestamp": "2026-05-25T21:50:52.449997",
   "top_n": 30,
   "timeout": 900,
-  "status": "failed",
+  "status": "success",
   "features_selected": [
     "n_api_calls",
     "suspicious_getCellLocation",
@@ -38,9 +38,9 @@
   ],
   "n_features": 30,
   "n_samples": 500,
-  "elapsed_seconds": 12.55,
-  "padtai_stdout": "",
-  "padtai_stderr": "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n  import pkg_resources\nTraceback (most recent call last):\n  File \"/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py\", line 7, in <module>\n    run()\n  File \"/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py\", line 473, in main\n    random_n, rebinds = parse_table(table_path, int_cols, grounded_ops, sample_size, categorical, base_out_path)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py\", line 349, in main\n    with open(table_path, 'r') as f:\n         ^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'reports/entropy_knn_balanced/analysis/per_cluster_feature_vs_method/cluster_500/seed_42/cluster_64/ilp_results/padtai_input.csv'\n",
+  "elapsed_seconds": 186.54,
+  "padtai_stdout": "label(V0,V1):- n_providers(V0,V2),attr_n_providers_1(V2),perm_android_permission_read_phone_state(V0,V3),attr_label_1(V1),attr_perm_android_permission_read_phone_state_0(V3).\n1\nfrozenbitarray('00000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000')\nTrue\nlabel(V0,V1):- n_providers(V0,V2),attr_n_providers_0(V2),perm_android_permission_read_phone_state(V0,V3),attr_label_1(V1),attr_perm_android_permission_read_phone_state_0(V3).\n1\nfrozenbitarray('00000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000')\nTrue\nlabel(V0,V1):- attr_perm_com_google_android_finsky_permission_bind_get_install_referrer_service_0(V3),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V3),attr_label_1(V1),n_services(V0,V2),attr_n_services_6(V2).\n1\nfrozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000')\nTrue\nlabel(V0,V1):- attr_suspicious_ldalvik_system_pathclassloader__1(V3),attr_label_1(V1),suspicious_ldalvik_system_pathclassloader_(V0,V3),n_services(V0,V2),attr_n_services_6(V2).\n1\nfrozenbitarray('00000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000')\nTrue\nlabel(V0,V1):- n_services(V0,V2),attr_label_1(V1),suspicious_ldalvik_system_pathclassloader_(V0,V3),attr_suspicious_ldalvik_system_pathclassloader__0(V3),attr_n_services_6(V2).\n1\nfrozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000')\nTrue\nlabel(V0,V1):- attr_label_1(V1),intent_android_bluetooth_adapter_action_state_changed(V0,V3),n_services(V0,V2),attr_intent_android_bluetooth_adapter_action_state_changed_0(V3),attr_n_services_6(V2).\n1\nfrozenbitarray('00000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000')\nTrue\nlabel(V0,V1):- intent_android_intent_action_action_power_connected(V0,V3),attr_label_1(V1),attr_intent_android",
+  "padtai_stderr": "/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n  import pkg_resources\n",
   "error": null,
   "cluster_size": 500,
   "seed": 42

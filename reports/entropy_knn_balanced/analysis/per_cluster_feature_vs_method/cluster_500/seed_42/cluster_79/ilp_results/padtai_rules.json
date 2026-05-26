@@ -1,5 +1,22 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 13.38
+  "n_rules": 16,
+  "rules": [
+    "label(V0,V1):- attr_label_0(V1),n_permissions(V0,V2),perm_android_permission_access_coarse_location(V0,V3),attr_n_permissions_11(V2),attr_perm_android_permission_access_coarse_location_1(V3)",
+    "label(V0,V1):- attr_perm_android_permission_access_coarse_location_0(V3),attr_label_0(V1),n_used_permissions(V0,V2),attr_n_used_permissions_3(V2),perm_android_permission_access_coarse_location(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_services_1(V3),attr_perm_android_permission_access_wifi_state_1(V2),n_services(V0,V3),perm_android_permission_access_wifi_state(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_services_1(V3),intent_android_intent_action_view(V0,V2),n_services(V0,V3),attr_intent_android_intent_action_view_1(V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_com_android_vending_billing_1(V3),perm_com_android_vending_billing(V0,V3),n_used_permissions(V0,V2),attr_n_used_permissions_11(V2)",
+    "label(V0,V1):- attr_label_0(V1),n_used_permissions(V0,V2),attr_perm_android_permission_bluetooth_1(V3),perm_android_permission_bluetooth(V0,V3),attr_n_used_permissions_10(V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_api_calls_17(V3),n_api_calls(V0,V3),attr_n_used_permissions_6(V2),n_used_permissions(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_used_permissions_6(V2),n_used_permissions(V0,V2),attr_n_activities_4(V3),n_activities(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),intent_android_intent_action_view(V0,V3),attr_n_used_permissions_6(V2),n_used_permissions(V0,V2),attr_intent_android_intent_action_view_1(V3)",
+    "label(V0,V1):- attr_label_0(V1),suspicious_getdeviceid(V0,V3),intent_android_intent_action_view(V0,V2),attr_suspicious_getdeviceid_0(V3),attr_intent_android_intent_action_view_1(V2)",
+    "label(V0,V1):- attr_label_0(V1),suspicious_getdeviceid(V0,V3),n_api_calls(V0,V2),attr_n_api_calls_18(V2),attr_suspicious_getdeviceid_0(V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_com_android_vending_billing_1(V3),intent_android_intent_action_send(V0,V2),perm_com_android_vending_billing(V0,V3),attr_intent_android_intent_action_send_1(V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_com_android_vending_billing_1(V3),n_activities(V0,V2),perm_com_android_vending_billing(V0,V3),attr_n_activities_4(V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_urls_1(V2),attr_perm_com_android_vending_billing_1(V3),perm_com_android_vending_billing(V0,V3),n_urls(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_api_calls_17(V3),n_api_calls(V0,V3),intent_android_intent_action_view(V0,V2),attr_intent_android_intent_action_view_1(V2)",
+    "label(V0,V1):- attr_label_0(V1),perm_android_permission_write_external_storage(V0,V3),attr_perm_android_permission_write_external_storage_1(V3),n_activities(V0,V2),attr_n_activities_4(V2)"
+  ],
+  "elapsed_seconds": 167.43
 }

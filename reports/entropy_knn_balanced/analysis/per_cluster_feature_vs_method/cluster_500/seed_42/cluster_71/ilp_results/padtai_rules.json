@@ -1,5 +1,10 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 13.06
+  "n_rules": 4,
+  "rules": [
+    "label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),attr_perm_android_permission_system_alert_window_1(V2),attr_label_0(V1),n_services(V0,V3),attr_n_services_2(V3)",
+    "label(V0,V1):- attr_n_services_2(V2),attr_label_0(V1),n_services(V0,V2),perm_com_google_android_c2dm_permission_receive(V0,V3),attr_perm_com_google_android_c2dm_permission_receive_1(V3)",
+    "label(V0,V1):- attr_n_services_2(V2),intent_android_net_conn_connectivity_change(V0,V3),attr_label_0(V1),n_services(V0,V2),attr_intent_android_net_conn_connectivity_change_1(V3)",
+    "label(V0,V1):- attr_n_urls_35(V3),attr_n_services_2(V2),attr_label_0(V1),n_urls(V0,V3),n_services(V0,V2)"
+  ],
+  "elapsed_seconds": 142.07
 }

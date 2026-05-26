@@ -1,5 +1,7 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 12.94
+  "n_rules": 1,
+  "rules": [
+    "label(V0,V1):- n_services(V0,V3),attr_label_1(V1),attr_n_providers_0(V2),attr_n_services_2(V3),n_providers(V0,V2)"
+  ],
+  "elapsed_seconds": 149.12
 }

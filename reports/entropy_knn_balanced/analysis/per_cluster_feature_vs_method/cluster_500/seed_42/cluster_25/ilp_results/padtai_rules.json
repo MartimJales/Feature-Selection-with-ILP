@@ -1,5 +1,19 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 12.73
+  "n_rules": 13,
+  "rules": [
+    "label(V0,V1):- attr_label_1(V1),attr_n_activities_6(V3),perm_android_permission_read_phone_state(V0,V2),attr_perm_android_permission_read_phone_state_1(V2),n_activities(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),attr_n_activities_6(V3),attr_perm_android_permission_access_wifi_state_1(V2),perm_android_permission_access_wifi_state(V0,V2),n_activities(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_n_activities_6(V3),attr_suspicious_ldalvik_system_pathclassloader__1(V2),n_activities(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),suspicious_ldalvik_system_pathclassloader_(V0,V3),perm_android_permission_access_wifi_state(V0,V2),attr_perm_android_permission_access_wifi_state_0(V2),attr_suspicious_ldalvik_system_pathclassloader__1(V3)",
+    "label(V0,V1):- attr_label_1(V1),perm_android_permission_read_phone_state(V0,V3),perm_android_permission_access_wifi_state(V0,V2),attr_perm_android_permission_access_wifi_state_0(V2),attr_perm_android_permission_read_phone_state_1(V3)",
+    "label(V0,V1):- attr_label_1(V1),attr_perm_android_permission_access_wifi_state_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V3),perm_android_permission_access_wifi_state(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__0(V3)",
+    "label(V0,V1):- attr_label_1(V1),attr_n_receivers_0(V3),attr_perm_android_permission_access_wifi_state_1(V2),n_receivers(V0,V3),perm_android_permission_access_wifi_state(V0,V2)",
+    "label(V0,V1):- attr_label_1(V1),attr_perm_android_permission_access_wifi_state_1(V2),perm_android_permission_access_wifi_state(V0,V2),attr_n_services_0(V3),n_services(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),perm_android_permission_read_phone_state(V0,V3),attr_perm_android_permission_access_wifi_state_1(V2),attr_perm_android_permission_read_phone_state_0(V3),perm_android_permission_access_wifi_state(V0,V2)",
+    "label(V0,V1):- attr_label_1(V1),perm_android_permission_read_phone_state(V0,V2),attr_n_services_0(V3),attr_perm_android_permission_read_phone_state_1(V2),n_services(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),attr_n_receivers_0(V3),n_receivers(V0,V3),perm_android_permission_read_phone_state(V0,V2),attr_perm_android_permission_read_phone_state_1(V2)",
+    "label(V0,V1):- attr_label_1(V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__1(V2),attr_n_services_0(V3),n_services(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_n_receivers_0(V3),n_receivers(V0,V3),attr_suspicious_ldalvik_system_pathclassloader__1(V2)"
+  ],
+  "elapsed_seconds": 152.3
 }

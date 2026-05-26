@@ -1,5 +1,35 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 12.96
+  "n_rules": 29,
+  "rules": [
+    "label(V0,V1):- attr_n_receivers_6(V3),attr_label_1(V1),n_receivers(V0,V3),attr_perm_android_permission_write_external_storage_1(V2),perm_android_permission_write_external_storage(V0,V2)",
+    "label(V0,V1):- attr_n_receivers_6(V3),perm_android_permission_read_phone_state(V0,V2),attr_perm_android_permission_read_phone_state_0(V2),attr_label_1(V1),n_receivers(V0,V3)",
+    "label(V0,V1):- attr_n_receivers_6(V3),attr_perm_android_permission_read_phone_state_1(V2),perm_android_permission_read_phone_state(V0,V2),attr_label_1(V1),n_receivers(V0,V3)",
+    "label(V0,V1):- suspicious_getcelllocation(V0,V2),attr_label_1(V1),attr_suspicious_getcelllocation_1(V2),attr_n_providers_0(V3),n_providers(V0,V3)",
+    "label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),attr_perm_android_permission_read_phone_state_0(V2),attr_label_1(V1),suspicious_getcelllocation(V0,V3),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),attr_perm_android_permission_read_phone_state_1(V2),attr_label_1(V1),suspicious_getcelllocation(V0,V3),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- suspicious_getcelllocation(V0,V3),attr_suspicious_getcelllocation_1(V3),attr_label_1(V1),attr_perm_android_permission_write_external_storage_1(V2),perm_android_permission_write_external_storage(V0,V2)",
+    "label(V0,V1):- attr_suspicious_getcelllocation_1(V3),attr_label_1(V1),attr_perm_android_permission_write_external_storage_0(V2),suspicious_getcelllocation(V0,V3),perm_android_permission_write_external_storage(V0,V2)",
+    "label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),attr_label_1(V1),attr_perm_android_permission_access_wifi_state_0(V2),suspicious_getcelllocation(V0,V3),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- attr_perm_android_permission_access_wifi_state_1(V2),perm_android_permission_access_wifi_state(V0,V2),attr_label_1(V1),suspicious_getcelllocation(V0,V3),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- attr_perm_com_android_launcher_permission_install_shortcut_0(V2),attr_label_1(V1),suspicious_getcelllocation(V0,V3),perm_com_android_launcher_permission_install_shortcut(V0,V2),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- perm_android_permission_read_logs(V0,V2),attr_perm_android_permission_read_logs_0(V2),attr_label_1(V1),suspicious_getcelllocation(V0,V3),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- attr_suspicious_getsubscriberid_0(V2),attr_label_1(V1),suspicious_getcelllocation(V0,V3),suspicious_getsubscriberid(V0,V2),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- attr_intent_android_intent_action_package_added_0(V2),attr_label_1(V1),intent_android_intent_action_package_added(V0,V2),suspicious_getcelllocation(V0,V3),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- attr_label_1(V1),attr_intent_android_net_conn_connectivity_change_0(V2),suspicious_getcelllocation(V0,V3),intent_android_net_conn_connectivity_change(V0,V2),attr_suspicious_getcelllocation_1(V3)",
+    "label(V0,V1):- attr_perm_android_permission_access_wifi_state_1(V3),perm_android_permission_access_wifi_state(V0,V3),attr_perm_android_permission_read_phone_state_1(V2),perm_android_permission_read_phone_state(V0,V2),attr_label_1(V1)",
+    "label(V0,V1):- attr_perm_android_permission_read_phone_state_1(V2),perm_android_permission_read_phone_state(V0,V2),attr_label_1(V1),attr_n_api_calls_18(V3),n_api_calls(V0,V3)",
+    "label(V0,V1):- perm_android_permission_write_external_storage(V0,V3),attr_perm_android_permission_read_phone_state_1(V2),perm_android_permission_read_phone_state(V0,V2),attr_label_1(V1),attr_perm_android_permission_write_external_storage_0(V3)",
+    "label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),attr_n_permissions_4(V3),attr_perm_android_permission_read_phone_state_0(V2),attr_label_1(V1),n_permissions(V0,V3)",
+    "label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),attr_perm_android_permission_read_phone_state_0(V2),attr_label_1(V1),attr_n_api_calls_18(V3),n_api_calls(V0,V3)",
+    "label(V0,V1):- attr_perm_android_permission_write_external_storage_1(V3),perm_android_permission_write_external_storage(V0,V3),perm_android_permission_access_wifi_state(V0,V2),attr_label_1(V1),attr_perm_android_permission_access_wifi_state_0(V2)",
+    "label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),attr_n_permissions_4(V3),attr_label_1(V1),attr_perm_android_permission_access_wifi_state_0(V2),n_permissions(V0,V3)",
+    "label(V0,V1):- attr_n_permissions_4(V3),attr_label_1(V1),attr_perm_android_permission_write_external_storage_1(V2),perm_android_permission_write_external_storage(V0,V2),n_permissions(V0,V3)",
+    "label(V0,V1):- suspicious_getcelllocation(V0,V2),attr_label_1(V1),attr_suspicious_getcelllocation_1(V2),attr_perm_android_permission_system_alert_window_0(V3),perm_android_permission_system_alert_window(V0,V3)",
+    "label(V0,V1):- perm_android_permission_restart_packages(V0,V3),attr_perm_android_permission_restart_packages_0(V3),suspicious_getcelllocation(V0,V2),attr_label_1(V1),attr_suspicious_getcelllocation_1(V2)",
+    "label(V0,V1):- attr_perm_android_permission_access_coarse_location_0(V3),perm_android_permission_access_coarse_location(V0,V3),suspicious_getcelllocation(V0,V2),attr_label_1(V1),attr_suspicious_getcelllocation_1(V2)",
+    "label(V0,V1):- attr_label_1(V1),n_receivers(V0,V3),attr_perm_android_permission_write_external_storage_1(V2),attr_n_receivers_0(V3),perm_android_permission_write_external_storage(V0,V2)",
+    "label(V0,V1):- attr_perm_android_permission_read_phone_state_1(V2),perm_android_permission_read_phone_state(V0,V2),attr_label_1(V1),n_receivers(V0,V3),attr_n_receivers_0(V3)",
+    "label(V0,V1):- attr_perm_android_permission_access_wifi_state_1(V2),perm_android_permission_access_wifi_state(V0,V2),attr_label_1(V1),n_receivers(V0,V3),attr_n_receivers_0(V3)"
+  ],
+  "elapsed_seconds": 206.15
 }

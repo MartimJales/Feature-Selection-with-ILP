@@ -1,5 +1,16 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 13.17
+  "n_rules": 10,
+  "rules": [
+    "label(V0,V1):- n_urls(V0,V3),attr_n_urls_37(V3),attr_suspicious_getdeviceid_1(V2),attr_label_0(V1),suspicious_getdeviceid(V0,V2)",
+    "label(V0,V1):- attr_perm_android_permission_write_external_storage_1(V2),n_urls(V0,V3),attr_n_urls_37(V3),attr_label_0(V1),perm_android_permission_write_external_storage(V0,V2)",
+    "label(V0,V1):- attr_suspicious_ljava_lang_system___load_0(V2),n_urls(V0,V3),attr_n_urls_37(V3),suspicious_ljava_lang_system___load(V0,V2),attr_label_0(V1)",
+    "label(V0,V1):- n_urls(V0,V3),n_permissions(V0,V2),attr_n_urls_37(V3),attr_label_0(V1),attr_n_permissions_9(V2)",
+    "label(V0,V1):- n_used_permissions(V0,V2),n_services(V0,V3),attr_label_0(V1),attr_n_services_7(V3),attr_n_used_permissions_10(V2)",
+    "label(V0,V1):- n_urls(V0,V3),attr_n_urls_37(V3),perm_android_permission_access_coarse_location(V0,V2),attr_perm_android_permission_access_coarse_location_1(V2),attr_label_0(V1)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_services_0(V2),n_services(V0,V2)",
+    "label(V0,V1):- attr_suspicious_ljava_lang_system___load_1(V2),attr_label_0(V1),suspicious_ljava_lang_system___load(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_suspicious_getdeviceid_0(V2),suspicious_getdeviceid(V0,V2)",
+    "label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),attr_label_0(V1),attr_perm_android_permission_access_coarse_location_0(V2)"
+  ],
+  "elapsed_seconds": 74.0
 }

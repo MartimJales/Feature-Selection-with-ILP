@@ -1,5 +1,32 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 13.18
+  "n_rules": 26,
+  "rules": [
+    "label(V0,V1):- attr_perm_android_permission_write_settings_0(V2),attr_label_1(V1),attr_perm_com_google_android_c2dm_permission_receive_0(V3),perm_android_permission_write_settings(V0,V2),perm_com_google_android_c2dm_permission_receive(V0,V3)",
+    "label(V0,V1):- attr_perm_android_permission_write_settings_0(V2),attr_label_1(V1),n_receivers(V0,V3),attr_n_receivers_0(V3),perm_android_permission_write_settings(V0,V2)",
+    "label(V0,V1):- attr_perm_android_permission_write_settings_0(V2),attr_label_1(V1),attr_suspicious_ldalvik_system_pathclassloader__0(V3),perm_android_permission_write_settings(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),perm_android_permission_read_phone_state(V0,V2),attr_perm_com_google_android_c2dm_permission_receive_0(V3),perm_com_google_android_c2dm_permission_receive(V0,V3),attr_perm_android_permission_read_phone_state_0(V2)",
+    "label(V0,V1):- attr_label_1(V1),perm_android_permission_read_phone_state(V0,V2),attr_n_receivers_0(V3),n_receivers(V0,V3),attr_perm_android_permission_read_phone_state_0(V2)",
+    "label(V0,V1):- attr_label_1(V1),perm_android_permission_read_phone_state(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__0(V3),attr_perm_android_permission_read_phone_state_0(V2),suspicious_ldalvik_system_pathclassloader_(V0,V3)",
+    "label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V3),attr_suspicious_ldalvik_system_pathclassloader__0(V3),attr_label_1(V1),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_perm_com_google_android_c2dm_permission_receive_1(V2)",
+    "label(V0,V1):- attr_intent_com_google_android_c2dm_intent_receive_0(V3),attr_label_1(V1),intent_com_google_android_c2dm_intent_receive(V0,V3),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_perm_com_google_android_c2dm_permission_receive_1(V2)",
+    "label(V0,V1):- attr_intent_com_google_firebase_instance_id_event_0(V3),attr_label_1(V1),perm_com_google_android_c2dm_permission_receive(V0,V2),intent_com_google_firebase_instance_id_event(V0,V3),attr_perm_com_google_android_c2dm_permission_receive_1(V2)",
+    "label(V0,V1):- attr_n_providers_0(V3),attr_label_1(V1),perm_com_google_android_c2dm_permission_receive(V0,V2),n_providers(V0,V3),attr_perm_com_google_android_c2dm_permission_receive_1(V2)",
+    "label(V0,V1):- attr_suspicious_ldalvik_system_pathclassloader__0(V3),attr_label_1(V1),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_perm_com_google_android_c2dm_permission_receive_0(V2),suspicious_ldalvik_system_pathclassloader_(V0,V3)",
+    "label(V0,V1):- attr_label_1(V1),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_perm_com_google_android_c2dm_permission_receive_0(V2),attr_suspicious_ldalvik_system_pathclassloader__1(V3),suspicious_ldalvik_system_pathclassloader_(V0,V3)",
+    "label(V0,V1):- attr_perm_android_permission_change_wifi_state_0(V3),attr_label_1(V1),perm_android_permission_change_wifi_state(V0,V3),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_perm_com_google_android_c2dm_permission_receive_0(V2)",
+    "label(V0,V1):- attr_label_1(V1),n_receivers(V0,V3),attr_n_receivers_0(V3),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_perm_com_google_android_c2dm_permission_receive_0(V2)",
+    "label(V0,V1):- attr_perm_android_permission_change_wifi_state_0(V2),attr_label_1(V1),perm_android_permission_change_wifi_state(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__0(V3),suspicious_ldalvik_system_pathclassloader_(V0,V3)",
+    "label(V0,V1):- attr_perm_android_permission_change_wifi_state_0(V2),attr_label_1(V1),n_receivers(V0,V3),perm_android_permission_change_wifi_state(V0,V2),attr_n_receivers_0(V3)",
+    "label(V0,V1):- attr_intent_com_google_firebase_messaging_event_0(V3),attr_label_1(V1),intent_com_google_firebase_instance_id_event(V0,V2),intent_com_google_firebase_messaging_event(V0,V3),attr_intent_com_google_firebase_instance_id_event_1(V2)",
+    "label(V0,V1):- perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V3),attr_label_1(V1),intent_com_google_firebase_instance_id_event(V0,V2),attr_intent_com_google_firebase_instance_id_event_1(V2),attr_perm_com_google_android_finsky_permission_bind_get_install_referrer_service_0(V3)",
+    "label(V0,V1):- attr_label_1(V1),intent_com_google_firebase_instance_id_event(V0,V2),perm_android_permission_system_alert_window(V0,V3),attr_intent_com_google_firebase_instance_id_event_1(V2),attr_perm_android_permission_system_alert_window_0(V3)",
+    "label(V0,V1):- attr_label_1(V1),intent_com_google_firebase_instance_id_event(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__1(V3),attr_intent_com_google_firebase_instance_id_event_0(V2),suspicious_ldalvik_system_pathclassloader_(V0,V3)",
+    "label(V0,V1):- attr_intent_com_google_firebase_messaging_event_0(V3),attr_label_1(V1),intent_com_google_firebase_messaging_event(V0,V3),intent_com_google_android_c2dm_intent_receive(V0,V2),attr_intent_com_google_android_c2dm_intent_receive_1(V2)",
+    "label(V0,V1):- perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V3),attr_label_1(V1),attr_intent_com_google_android_c2dm_intent_receive_1(V2),intent_com_google_android_c2dm_intent_receive(V0,V2),attr_perm_com_google_android_finsky_permission_bind_get_install_referrer_service_0(V3)",
+    "label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V2),attr_label_1(V1),perm_android_permission_system_alert_window(V0,V3),attr_perm_android_permission_system_alert_window_0(V3),attr_intent_com_google_android_c2dm_intent_receive_1(V2)",
+    "label(V0,V1):- attr_suspicious_ldalvik_system_pathclassloader__1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_n_providers_0(V3),attr_label_1(V1),n_providers(V0,V3)",
+    "label(V0,V1):- attr_suspicious_ldalvik_system_pathclassloader__1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_label_1(V1),intent_com_google_android_c2dm_intent_receive(V0,V3),attr_intent_com_google_android_c2dm_intent_receive_0(V3)",
+    "label(V0,V1):- intent_com_android_vending_install_referrer(V0,V2),attr_label_1(V1),intent_com_google_android_c2dm_intent_receive(V0,V3),attr_intent_com_google_android_c2dm_intent_receive_1(V3),attr_intent_com_android_vending_install_referrer_0(V2)"
+  ],
+  "elapsed_seconds": 153.55
 }

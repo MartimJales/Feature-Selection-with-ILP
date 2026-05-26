@@ -3,10 +3,16 @@
 Traceback (most recent call last):
   File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py", line 7, in <module>
     run()
-  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 473, in main
-    random_n, rebinds = parse_table(table_path, int_cols, grounded_ops, sample_size, categorical, base_out_path)
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py", line 349, in main
-    with open(table_path, 'r') as f:
-         ^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: 'reports/entropy_knn_balanced/analysis/per_cluster_feature_vs_method/cluster_500/seed_42/cluster_5/ilp_results/padtai_input.csv'
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 538, in main
+    batch_size, offset = load_table(table_path, batch_size, offset, line_offset,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 240, in load_table
+    rowP = normalize(row.split(',')[:-1], rebinds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 69, in normalize
+    if is_number(strlist[i]):
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py", line 39, in is_number
+    return str.replace('.', '', 1).isdigit() or (str[0] == '-' and str[1:].replace('.', '', 1).isdigit())
+                                                 ~~~^^^
+IndexError: string index out of range

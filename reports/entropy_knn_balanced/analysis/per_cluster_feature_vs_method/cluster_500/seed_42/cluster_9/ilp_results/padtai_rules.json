@@ -1,5 +1,21 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 13.37
+  "n_rules": 15,
+  "rules": [
+    "label(V0,V1):- attr_label_0(V1),intent_android_net_conn_connectivity_change(V0,V3),n_api_calls(V0,V2),attr_n_api_calls_0(V2),attr_intent_android_net_conn_connectivity_change_0(V3)",
+    "label(V0,V1):- attr_label_0(V1),n_api_calls(V0,V2),attr_suspicious_ljava_lang_runtime___exec_0(V3),attr_n_api_calls_0(V2),suspicious_ljava_lang_runtime___exec(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_n_api_calls_12(V2),suspicious_ldalvik_system_pathclassloader_(V0,V3),n_api_calls(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__1(V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_com_google_android_c2dm_permission_receive_1(V3),attr_n_permissions_9(V2),perm_com_google_android_c2dm_permission_receive(V0,V3),n_permissions(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_com_google_android_c2dm_permission_receive_1(V3),attr_n_providers_0(V2),perm_com_google_android_c2dm_permission_receive(V0,V3),n_providers(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_intent_com_google_android_c2dm_intent_receive_1(V3),attr_n_providers_0(V2),n_providers(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_android_permission_system_alert_window_1(V3),perm_android_permission_system_alert_window(V0,V3),n_permissions(V0,V2),attr_n_permissions_10(V2)",
+    "label(V0,V1):- attr_label_0(V1),suspicious_ljava_lang_runtime___exec(V0,V2),attr_perm_android_permission_system_alert_window_1(V3),perm_android_permission_system_alert_window(V0,V3),attr_suspicious_ljava_lang_runtime___exec_0(V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_android_permission_system_alert_window_1(V3),perm_android_permission_access_wifi_state(V0,V2),perm_android_permission_system_alert_window(V0,V3),attr_perm_android_permission_access_wifi_state_0(V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_suspicious_getsubscriberid_0(V2),suspicious_getsubscriberid(V0,V2),attr_intent_android_intent_action_user_present_1(V3),intent_android_intent_action_user_present(V0,V3)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_android_permission_read_phone_state_0(V2),attr_intent_android_intent_action_user_present_1(V3),intent_android_intent_action_user_present(V0,V3),perm_android_permission_read_phone_state(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),attr_perm_android_permission_system_alert_window_1(V3),perm_android_permission_system_alert_window(V0,V3),attr_perm_android_permission_read_phone_state_0(V2),perm_android_permission_read_phone_state(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),suspicious_ljava_lang_runtime___exec(V0,V3),attr_suspicious_ljava_lang_runtime___exec_0(V3),attr_perm_android_permission_mount_unmount_filesystems_1(V2),perm_android_permission_mount_unmount_filesystems(V0,V2)",
+    "label(V0,V1):- attr_label_0(V1),perm_android_permission_get_tasks(V0,V2),attr_perm_android_permission_get_tasks_1(V2),perm_android_permission_read_phone_state(V0,V3),attr_perm_android_permission_read_phone_state_0(V3)",
+    "label(V0,V1):- attr_label_0(V1),perm_android_permission_get_tasks(V0,V2),attr_perm_android_permission_get_tasks_1(V2),attr_suspicious_ljava_lang_runtime___exec_0(V3),suspicious_ljava_lang_runtime___exec(V0,V3)"
+  ],
+  "elapsed_seconds": 176.16
 }

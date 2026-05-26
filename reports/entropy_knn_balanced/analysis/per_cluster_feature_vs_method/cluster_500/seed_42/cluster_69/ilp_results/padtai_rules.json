@@ -1,5 +1,35 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 12.76
+  "n_rules": 29,
+  "rules": [
+    "label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),attr_perm_android_permission_receive_boot_completed_1(V2),n_providers(V0,V3),attr_n_providers_3(V3),attr_label_0(V1)",
+    "label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),n_used_permissions(V0,V3),attr_perm_android_permission_receive_boot_completed_1(V2),attr_label_0(V1),attr_n_used_permissions_5(V3)",
+    "label(V0,V1):- attr_n_services_7(V3),n_used_permissions(V0,V2),attr_n_used_permissions_11(V2),n_services(V0,V3),attr_label_0(V1)",
+    "label(V0,V1):- attr_n_permissions_6(V2),attr_n_services_9(V3),n_permissions(V0,V2),n_services(V0,V3),attr_label_0(V1)",
+    "label(V0,V1):- attr_n_services_9(V3),n_providers(V0,V2),n_services(V0,V3),attr_n_providers_0(V2),attr_label_0(V1)",
+    "label(V0,V1):- attr_n_permissions_6(V2),attr_n_services_3(V3),n_permissions(V0,V2),n_services(V0,V3),attr_label_0(V1)",
+    "label(V0,V1):- attr_n_services_6(V3),attr_n_providers_3(V2),n_providers(V0,V2),n_services(V0,V3),attr_label_0(V1)",
+    "label(V0,V1):- attr_n_permissions_8(V3),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_label_0(V1),attr_perm_com_google_android_c2dm_permission_receive_0(V2),n_permissions(V0,V3)",
+    "label(V0,V1):- n_used_permissions(V0,V3),attr_perm_com_google_android_c2dm_permission_receive_1(V2),attr_label_0(V1),perm_com_google_android_c2dm_permission_receive(V0,V2),attr_n_used_permissions_5(V3)",
+    "label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V2),n_used_permissions(V0,V3),attr_intent_com_google_android_c2dm_intent_receive_1(V2),attr_label_0(V1),attr_n_used_permissions_5(V3)",
+    "label(V0,V1):- intent_android_intent_action_boot_completed(V0,V2),n_used_permissions(V0,V3),attr_intent_android_intent_action_boot_completed_1(V2),attr_label_0(V1),attr_n_used_permissions_5(V3)",
+    "label(V0,V1):- attr_n_permissions_6(V2),n_permissions(V0,V2),attr_n_used_permissions_6(V3),attr_label_0(V1),n_used_permissions(V0,V3)",
+    "label(V0,V1):- attr_n_used_permissions_11(V3),n_permissions(V0,V2),attr_n_permissions_3(V2),attr_label_0(V1),n_used_permissions(V0,V3)",
+    "label(V0,V1):- attr_n_used_permissions_11(V3),attr_n_providers_1(V2),n_providers(V0,V2),attr_label_0(V1),n_used_permissions(V0,V3)",
+    "label(V0,V1):- attr_n_used_permissions_11(V3),attr_intent_com_android_vending_install_referrer_0(V2),attr_label_0(V1),intent_com_android_vending_install_referrer(V0,V2),n_used_permissions(V0,V3)",
+    "label(V0,V1):- attr_n_urls_38(V3),n_urls(V0,V3),n_permissions(V0,V2),attr_n_permissions_3(V2),attr_label_0(V1)",
+    "label(V0,V1):- attr_intent_com_android_vending_install_referrer_1(V3),intent_com_android_vending_install_referrer(V0,V3),n_permissions(V0,V2),attr_n_permissions_8(V2),attr_label_0(V1)",
+    "label(V0,V1):- n_permissions(V0,V2),n_providers(V0,V3),attr_n_providers_0(V3),attr_n_permissions_8(V2),attr_label_0(V1)",
+    "label(V0,V1):- n_permissions(V0,V2),n_providers(V0,V3),attr_n_providers_1(V3),attr_label_0(V1),attr_n_permissions_5(V2)",
+    "label(V0,V1):- attr_intent_com_android_vending_install_referrer_1(V3),intent_com_android_vending_install_referrer(V0,V3),attr_n_permissions_12(V2),n_permissions(V0,V2),attr_label_0(V1)",
+    "label(V0,V1):- n_permissions(V0,V2),attr_n_permissions_12(V2),attr_n_providers_1(V3),n_providers(V0,V3),attr_label_0(V1)",
+    "label(V0,V1):- attr_n_providers_1(V2),n_api_calls(V0,V3),attr_n_api_calls_17(V3),n_providers(V0,V2),attr_label_0(V1)",
+    "label(V0,V1):- attr_intent_android_intent_action_boot_completed_1(V3),attr_n_providers_3(V2),intent_android_intent_action_boot_completed(V0,V3),n_providers(V0,V2),attr_label_0(V1)",
+    "label(V0,V1):- intent_com_android_vending_install_referrer(V0,V3),attr_intent_com_android_vending_install_referrer_0(V3),attr_n_providers_3(V2),n_providers(V0,V2),attr_label_0(V1)",
+    "label(V0,V1):- attr_intent_com_android_vending_install_referrer_1(V2),n_api_calls(V0,V3),attr_n_api_calls_17(V3),attr_label_0(V1),intent_com_android_vending_install_referrer(V0,V2)",
+    "label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V2),n_api_calls(V0,V3),attr_n_api_calls_17(V3),attr_intent_com_google_android_c2dm_intent_receive_1(V2),attr_label_0(V1)",
+    "label(V0,V1):- attr_n_permissions_8(V3),attr_suspicious_ldalvik_system_pathclassloader__0(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_label_0(V1),n_permissions(V0,V3)",
+    "label(V0,V1):- attr_n_permissions_3(V3),attr_suspicious_ldalvik_system_pathclassloader__0(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_label_0(V1),n_permissions(V0,V3)",
+    "label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__1(V2),attr_label_0(V1),attr_n_permissions_12(V3),n_permissions(V0,V3)"
+  ],
+  "elapsed_seconds": 203.44
 }
