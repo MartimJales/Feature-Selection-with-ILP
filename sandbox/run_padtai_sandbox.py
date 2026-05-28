@@ -18,6 +18,9 @@ import argparse
 import subprocess
 import re
 from pathlib import Path
+import hashlib
+import time
+import traceback
 
 import pandas as pd
 
@@ -58,13 +61,21 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int) -> subprocess.C
         "75",
     ]
 
-    return subprocess.run(
-        cmd,
-        cwd=str(PADTAI_PATH.parent),
-        capture_output=True,
-        text=True,
-        timeout=timeout + 30,
-    )
+    try:
+        result = subprocess.run(
+            cmd,
+            cwd=str(PADTAI_PATH.parent),
+            capture_output=True,
+            text=True,
+            timeout=timeout + 30,
+        )
+        return result
+    except subprocess.TimeoutExpired as e:
+        stdout = e.stdout or ""
+        stderr = (e.stderr or "") + f"\n[ERROR] PADTAI timed out after {timeout + 30}s\n"
+        return subprocess.CompletedProcess(cmd, returncode=124, stdout=stdout, stderr=stderr)
+    except Exception as e:
+        return subprocess.CompletedProcess(cmd, returncode=1, stdout="", stderr=str(e))
 
 
 def sanitize_feature_name(name: str) -> str:
@@ -82,13 +93,24 @@ def preprocess_padtai_input(cluster_dir: Path) -> Path:
     dst = cluster_dir / "padtai_input.prepared.csv"
     df = pd.read_csv(src)
 
+    # Logging info about the raw input
+    with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - preprocess: loaded {src} size={src.stat().st_size} bytes\n")
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - preprocess: shape before dropna: {df.shape}\n")
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - preprocess: dtypes before: {dict(df.dtypes)}\n")
+
     # Pipeline uses dropna() before writing the CSV
     df = df.dropna()
+
+    with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - preprocess: shape after dropna: {df.shape}\n")
 
     # Sanitize feature column names (leave 'label' untouched)
     cols = list(df.columns)
     rename_map = {c: sanitize_feature_name(c) for c in cols if c != 'label'}
     if rename_map:
+        with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
+            rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - preprocess: rename_map sample: {dict(list(rename_map.items())[:10])}\n")
         df = df.rename(columns=rename_map)
 
     # Coerce feature columns to ints where possible
@@ -97,6 +119,7 @@ def preprocess_padtai_input(cluster_dir: Path) -> Path:
         try:
             df[c] = df[c].astype(int)
         except Exception:
+            # leave as-is
             pass
 
     # Ensure label is integer
@@ -105,6 +128,13 @@ def preprocess_padtai_input(cluster_dir: Path) -> Path:
             df['label'] = df['label'].astype(int)
         except Exception:
             df['label'] = pd.to_numeric(df['label'], errors='coerce').fillna(0).astype(int)
+
+    # write a small sample and checksum for quick inspection
+    sample_csv = cluster_dir / "padtai_input.sample.csv"
+    df.head(5).to_csv(sample_csv, index=False)
+    sha256 = hashlib.sha256(df.to_csv(index=False).encode('utf-8')).hexdigest()
+    with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - preprocess: wrote sample to {sample_csv.name}, sha256={sha256}\n")
 
     df.to_csv(dst, index=False)
     return dst
@@ -118,17 +148,37 @@ def run_cluster(cluster_id: int, timeout: int) -> int:
         return 1
 
     # Preprocess input to match pipeline behavior
-    prepared = preprocess_padtai_input(cluster_dir)
+    try:
+        prepared = preprocess_padtai_input(cluster_dir)
+    except Exception:
+        with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
+            rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - ERROR: preprocessing failed:\n{traceback.format_exc()}\n")
+        return 1
 
     output_dir = cluster_dir / "padtai_output"
-    result = run_padtai(prepared, output_dir, timeout)
 
-    (cluster_dir / "padtai_stdout.log").write_text(result.stdout, encoding="utf-8")
-    (cluster_dir / "padtai_stderr.log").write_text(result.stderr, encoding="utf-8")
+    cmd_preview = f"python3 {PADTAI_PATH} {prepared} --out {output_dir}"
+    with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - running PADTAI cmd: {cmd_preview}\n")
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - PADTAI cwd: {PADTAI_PATH.parent}\n")
+    try:
+        result = run_padtai(prepared, output_dir, timeout)
+    except Exception:
+        with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
+            rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - ERROR: run_padtai raised exception:\n{traceback.format_exc()}\n")
+        return 1
+
+    (cluster_dir / "padtai_stdout.log").write_text(result.stdout or "", encoding="utf-8")
+    (cluster_dir / "padtai_stderr.log").write_text(result.stderr or "", encoding="utf-8")
     (cluster_dir / "padtai_returncode.txt").write_text(f"{result.returncode}\n", encoding="utf-8")
 
+    with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - PADTAI returncode: {result.returncode}\n")
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - PADTAI stdout (truncated 1024 chars):\n{(result.stdout or '')[:1024]}\n")
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - PADTAI stderr (truncated 4096 chars):\n{(result.stderr or '')[:4096]}\n")
+
     status = "OK" if result.returncode == 0 else "FAIL"
-    print(f"[cluster_{cluster_id}] {status} -> {output_dir}")
+    print(f"[cluster_{cluster_id}] {status} -> {output_dir}. See {cluster_dir / 'run.log'}")
     return result.returncode
 
 
