@@ -169,17 +169,22 @@ def evaluate_cluster(cluster_dir: Path) -> dict:
 
 def iter_selected_clusters(base_dir: Path, cluster_ids: Iterable[int]) -> Iterable[Path]:
     wanted = {int(cluster_id) for cluster_id in cluster_ids}
-    for cluster_dir in sorted(base_dir.glob("cluster_*")):
-        if not cluster_dir.is_dir():
+    # Handle nested structure: base_dir/cluster_*/seed_*/cluster_*
+    for cluster_outer_dir in sorted(base_dir.glob("cluster_*")):
+        if not cluster_outer_dir.is_dir():
             continue
-        try:
-            cluster_id = int(cluster_dir.name.split("_", 1)[1])
-        except Exception:
-            continue
-        if cluster_id in wanted:
-            yield cluster_dir
-
-
+        for seed_dir in sorted(cluster_outer_dir.glob("seed_*")):
+            if not seed_dir.is_dir():
+                continue
+            for cluster_dir in sorted(seed_dir.glob("cluster_*")):
+                if not cluster_dir.is_dir():
+                    continue
+                try:
+                    cluster_id = int(cluster_dir.name.split("_", 1)[1])
+                except Exception:
+                    continue
+                if cluster_id in wanted:
+                    yield cluster_dir
 def main() -> int:
     parser = argparse.ArgumentParser(description="Evaluate selected clusters with label_1 rules.")
     parser.add_argument("--base-dir", type=Path, default=DEFAULT_BASE_DIR)
