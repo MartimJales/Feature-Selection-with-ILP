@@ -81,7 +81,7 @@ def extract_rules_from_output(output: str) -> list[str]:
     return rules
 
 
-def run_padtai(input_file: Path, output_dir: Path, timeout: int) -> subprocess.CompletedProcess[str]:
+def run_padtai(input_file: Path, output_dir: Path, timeout: int, intcols: str = "none", grounded: list[str] | None = None) -> subprocess.CompletedProcess[str]:
     output_dir.mkdir(parents=True, exist_ok=True)
     cmd = [
         "python3",
@@ -90,10 +90,18 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int) -> subprocess.C
         "--out",
         str(output_dir),
         "--keep-prolog-files",
-        "--grounded",
-        "none",
+    ]
+
+    # Add grounded operator arguments (allow multiple)
+    if grounded:
+        for g in grounded:
+            cmd += ["--grounded", str(g)]
+    else:
+        cmd += ["--grounded", "none"]
+
+    cmd += [
         "--intcols",
-        "none",
+        str(intcols),
         "--solver",
         "rc2",
         "--sample-size",
@@ -189,7 +197,7 @@ def preprocess_padtai_input(cluster_dir: Path) -> Path:
     return dst
 
 
-def run_cluster(cluster_id: int, timeout: int, intcols: str = "none") -> int:
+def run_cluster(cluster_id: int, timeout: int, intcols: str = "none", grounded: list[str] | None = None) -> int:
     global OUTPUT_DIR
 
     # Cluster dir is now in OUTPUT_DIR
@@ -216,7 +224,8 @@ def run_cluster(cluster_id: int, timeout: int, intcols: str = "none") -> int:
 
     output_dir = cluster_dir / "padtai_output"
 
-    cmd_preview = f"python3 {PADTAI_PATH} {prepared} --out {output_dir}"
+    grounded_preview = f" --grounded {grounded}" if grounded else " --grounded none"
+    cmd_preview = f"python3 {PADTAI_PATH} {prepared} --out {output_dir} --intcols {intcols}{grounded_preview}"
     with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
         rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - running PADTAI cmd: {cmd_preview}\n")
         rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - PADTAI cwd: {PADTAI_PATH.parent}\n")
@@ -226,7 +235,7 @@ def run_cluster(cluster_id: int, timeout: int, intcols: str = "none") -> int:
     start_time = time.time()
 
     try:
-        result = run_padtai(prepared, output_dir, timeout)
+        result = run_padtai(prepared, output_dir, timeout, intcols=intcols, grounded=grounded)
     except Exception:
         with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
             rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - ERROR: run_padtai raised exception:\n{traceback.format_exc()}\n")
@@ -438,6 +447,7 @@ def main() -> int:
     parser.add_argument("--clusters", nargs="*", type=int, default=list(DEFAULT_CLUSTERS))
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT)
     parser.add_argument("--intcols", type=str, default="none", help="PADTAI --intcols argument (e.g., 'none', 'auto', '4,5,6')")
+    parser.add_argument("--grounded", nargs="*", type=str, default=None, help="PADTAI --grounded argument(s) (e.g., 'sum:SumOperator' 'lt:LtOperator')")
     parser.add_argument("--no-eval", action="store_true", help="Skip automatic evaluation after PADTAI")
     args = parser.parse_args()
 
@@ -452,7 +462,7 @@ def main() -> int:
     # Run PADTAI on clusters
     failures = 0
     for cluster_id in args.clusters:
-        failures += 1 if run_cluster(cluster_id, args.timeout, args.intcols) != 0 else 0
+        failures += 1 if run_cluster(cluster_id, args.timeout, args.intcols, args.grounded) != 0 else 0
 
     # Evaluate clusters if requested
     if not args.no_eval:
