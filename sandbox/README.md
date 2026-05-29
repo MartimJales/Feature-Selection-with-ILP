@@ -52,7 +52,7 @@ python3 sandbox/run_padtai_sandbox.py \
   --clusters 0 1 \           # which clusters to run (default: 0, 1)
   --timeout 600 \            # PADTAI timeout in seconds (default: 600)
   --intcols auto \           # auto-detect numeric columns (default: none)
-  --grounded sum:SumOperator \ # grounded operator to include (e.g., sum:SumOperator or lt:LtOperator)
+  --grounded sum:SumOperator \ # grounded operator to include (e.g., sum:SumOperator or lt:LTOperator)
   --no-eval                  # skip automatic evaluation (optional)
 ```
 

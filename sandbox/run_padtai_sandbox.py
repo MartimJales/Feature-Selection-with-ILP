@@ -462,7 +462,7 @@ def main() -> int:
     parser.add_argument("--clusters", nargs="*", type=int, default=list(DEFAULT_CLUSTERS))
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT)
     parser.add_argument("--intcols", type=str, default="none", help="PADTAI --intcols argument (e.g., 'none', 'auto', '4,5,6')")
-    parser.add_argument("--grounded", nargs="*", type=str, default=None, help="PADTAI --grounded argument(s) (e.g., 'sum:SumOperator' 'lt:LtOperator')")
+    parser.add_argument("--grounded", nargs="*", type=str, default=None, help="PADTAI --grounded argument(s) (e.g., 'sum:SumOperator' 'lt:LTOperator')")
     parser.add_argument("--no-eval", action="store_true", help="Skip automatic evaluation after PADTAI")
     args = parser.parse_args()
 
