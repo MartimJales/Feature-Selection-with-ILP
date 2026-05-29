@@ -121,8 +121,15 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int, intcols: str = 
         )
         return result
     except subprocess.TimeoutExpired as e:
-        stdout = e.stdout or ""
-        stderr = (e.stderr or "") + f"\n[ERROR] PADTAI timed out after {timeout + 30}s\n"
+        def _to_text(value: object) -> str:
+            if value is None:
+                return ""
+            if isinstance(value, bytes):
+                return value.decode("utf-8", errors="replace")
+            return str(value)
+
+        stdout = _to_text(e.stdout)
+        stderr = _to_text(e.stderr) + f"\n[ERROR] PADTAI timed out after {timeout + 30}s\n"
         return subprocess.CompletedProcess(cmd, returncode=124, stdout=stdout, stderr=stderr)
     except Exception as e:
         return subprocess.CompletedProcess(cmd, returncode=1, stdout="", stderr=str(e))
