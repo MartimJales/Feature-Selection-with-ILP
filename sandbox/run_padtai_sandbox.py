@@ -275,8 +275,9 @@ def run_cluster(cluster_id: int, timeout: int, intcols: str = "none", grounded: 
         rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - PADTAI stdout (truncated 1024 chars):\n{(result.stdout or '')[:1024]}\n")
         rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - PADTAI stderr (truncated 4096 chars):\n{(result.stderr or '')[:4096]}\n")
 
-    # Extract rules and generate JSON
-    rules = extract_rules_from_output(result.stdout or "")
+    # Extract rules, but keep only positive (label_1) rules for the binary classifier
+    all_rules = extract_rules_from_output(result.stdout or "")
+    rules = [rule for rule in all_rules if "attr_label_1" in rule]
     rules_json = {
         "n_rules": len(rules),
         "rules": rules,
@@ -366,25 +367,13 @@ def rule_matches_row(rule: str, row: pd.Series, columns: list[str]) -> bool:
 
 
 def predict_from_rules(df: pd.DataFrame, rules: list[str]) -> pd.Series:
-    """Predict labels using extracted rules."""
+    """Predict malware if any positive rule fires; otherwise goodware."""
     feature_columns = [column for column in df.columns if column != "label"]
 
     predictions = []
     for _, row in df.iterrows():
-        fired_labels = [
-            extract_rule_label(rule)
-            for rule in rules
-            if rule_matches_row(rule, row, feature_columns)
-        ]
-        label_votes = Counter(label for label in fired_labels if label is not None)
-        if not label_votes:
-            predictions.append(0)
-        elif label_votes[1] > label_votes[0]:
-            predictions.append(1)
-        elif label_votes[0] > label_votes[1]:
-            predictions.append(0)
-        else:
-            predictions.append(1 if label_votes[1] else 0)
+        fired = any(rule_matches_row(rule, row, feature_columns) for rule in rules)
+        predictions.append(1 if fired else 0)
     return pd.Series(predictions, index=df.index, dtype=int)
 
 
@@ -432,7 +421,7 @@ def evaluate_clusters(cluster_ids: list[int]) -> None:
                 "n_samples": len(df),
                 "n_rules": len(rules),
                 "n_label1_rules": sum(1 for rule in rules if "attr_label_1" in rule),
-                "n_label0_rules": sum(1 for rule in rules if "attr_label_0" in rule),
+                "n_label0_rules": 0,
                 "accuracy": accuracy,
                 "recall": recall,
                 "precision": precision,
