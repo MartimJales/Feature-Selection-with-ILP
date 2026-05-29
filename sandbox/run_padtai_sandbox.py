@@ -83,6 +83,7 @@ def extract_rules_from_output(output: str) -> list[str]:
 
 def run_padtai(input_file: Path, output_dir: Path, timeout: int, intcols: str = "none", grounded: list[str] | None = None) -> subprocess.CompletedProcess[str]:
     output_dir.mkdir(parents=True, exist_ok=True)
+    grounded_arg = ",".join(grounded) if grounded else "none"
     cmd = [
         "python3",
         str(PADTAI_PATH),
@@ -90,16 +91,8 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int, intcols: str = 
         "--out",
         str(output_dir),
         "--keep-prolog-files",
-    ]
-
-    # Add grounded operator arguments (allow multiple)
-    if grounded:
-        for g in grounded:
-            cmd += ["--grounded", str(g)]
-    else:
-        cmd += ["--grounded", "none"]
-
-    cmd += [
+        "--grounded",
+        grounded_arg,
         "--intcols",
         str(intcols),
         "--solver",
@@ -142,6 +135,27 @@ def sanitize_feature_name(name: str) -> str:
     if not sanitized:
         sanitized = '_unknown_'
     return sanitized
+
+
+def resolve_intcols_arg(prepared_csv: Path, intcols: str) -> str:
+    """Convert sandbox intcols modes into PADTAI-compatible CSV index lists."""
+    if not intcols or intcols == "none":
+        return "none"
+
+    if intcols != "auto":
+        return intcols
+
+    df = pd.read_csv(prepared_csv)
+    feature_indices: list[str] = []
+    for index, column in enumerate(df.columns):
+        if column == "label":
+            continue
+        series = pd.to_numeric(df[column], errors="coerce")
+        unique_values = series.dropna().nunique()
+        if unique_values > 2:
+            feature_indices.append(str(index))
+
+    return ",".join(feature_indices) if feature_indices else "none"
 
 
 def preprocess_padtai_input(cluster_dir: Path) -> Path:
@@ -223,19 +237,20 @@ def run_cluster(cluster_id: int, timeout: int, intcols: str = "none", grounded: 
         return 1
 
     output_dir = cluster_dir / "padtai_output"
+    resolved_intcols = resolve_intcols_arg(prepared, intcols)
 
-    grounded_preview = f" --grounded {grounded}" if grounded else " --grounded none"
-    cmd_preview = f"python3 {PADTAI_PATH} {prepared} --out {output_dir} --intcols {intcols}{grounded_preview}"
+    grounded_preview = f" --grounded {','.join(grounded)}" if grounded else " --grounded none"
+    cmd_preview = f"python3 {PADTAI_PATH} {prepared} --out {output_dir} --intcols {resolved_intcols}{grounded_preview}"
     with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
         rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - running PADTAI cmd: {cmd_preview}\n")
         rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - PADTAI cwd: {PADTAI_PATH.parent}\n")
-        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - intcols: {intcols}\n")
+        rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - intcols: {intcols} -> {resolved_intcols}\n")
 
     # Store start time for elapsed_seconds calculation
     start_time = time.time()
 
     try:
-        result = run_padtai(prepared, output_dir, timeout, intcols=intcols, grounded=grounded)
+        result = run_padtai(prepared, output_dir, timeout, intcols=resolved_intcols, grounded=grounded)
     except Exception:
         with open(cluster_dir / "run.log", "a", encoding="utf-8") as rl:
             rl.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - ERROR: run_padtai raised exception:\n{traceback.format_exc()}\n")
