@@ -1,0 +1,97 @@
+2026-05-28 23:56:51 - preprocess: loaded /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_input.csv size=33561 bytes
+2026-05-28 23:56:51 - preprocess: shape before dropna: (500, 31)
+2026-05-28 23:56:51 - preprocess: dtypes before: {'suspicious_getSubscriberId': dtype('int64'), 'perm_android_permission_READ_PHONE_STATE': dtype('int64'), 'perm_android_permission_GET_TASKS': dtype('int64'), 'perm_android_permission_SEND_SMS': dtype('int64'), 'suspicious_Ljava_lang_Runtime___exec': dtype('int64'), 'n_providers': dtype('int64'), 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS': dtype('int64'), 'perm_com_google_android_c2dm_permission_RECEIVE': dtype('int64'), 'perm_android_permission_SYSTEM_ALERT_WINDOW': dtype('int64'), 'intent_com_google_android_c2dm_intent_RECEIVE': dtype('int64'), 'suspicious_Ldalvik_system_PathClassLoader_': dtype('int64'), 'suspicious_sendTextMessage': dtype('int64'), 'perm_com_android_launcher_permission_INSTALL_SHORTCUT': dtype('int64'), 'intent_android_intent_action_PACKAGE_ADDED': dtype('int64'), 'intent_com_google_firebase_INSTANCE_ID_EVENT': dtype('int64'), 'intent_android_intent_action_USER_PRESENT': dtype('int64'), 'n_activities': dtype('int64'), 'suspicious_getCellLocation': dtype('int64'), 'n_used_permissions': dtype('int64'), 'n_receivers': dtype('int64'), 'intent_com_google_firebase_MESSAGING_EVENT': dtype('int64'), 'intent_android_intent_action_PACKAGE_REMOVED': dtype('int64'), 'intent_com_google_android_c2dm_intent_REGISTRATION': dtype('int64'), 'n_api_calls': dtype('int64'), 'n_urls': dtype('int64'), 'n_permissions': dtype('int64'), 'perm_android_permission_CHANGE_CONFIGURATION': dtype('int64'), 'suspicious_Base64': dtype('int64'), 'intent_com_android_vending_INSTALL_REFERRER': dtype('int64'), 'intent_safiap_framework_ACTION_TO_INSTALL_IAP': dtype('int64'), 'label': dtype('int64')}
+2026-05-28 23:56:51 - preprocess: shape after dropna: (500, 31)
+2026-05-28 23:56:51 - preprocess: rename_map sample: {'suspicious_getSubscriberId': 'suspicious_getSubscriberId', 'perm_android_permission_READ_PHONE_STATE': 'perm_android_permission_READ_PHONE_STATE', 'perm_android_permission_GET_TASKS': 'perm_android_permission_GET_TASKS', 'perm_android_permission_SEND_SMS': 'perm_android_permission_SEND_SMS', 'suspicious_Ljava_lang_Runtime___exec': 'suspicious_Ljava_lang_Runtime___exec', 'n_providers': 'n_providers', 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS': 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS', 'perm_com_google_android_c2dm_permission_RECEIVE': 'perm_com_google_android_c2dm_permission_RECEIVE', 'perm_android_permission_SYSTEM_ALERT_WINDOW': 'perm_android_permission_SYSTEM_ALERT_WINDOW', 'intent_com_google_android_c2dm_intent_RECEIVE': 'intent_com_google_android_c2dm_intent_RECEIVE'}
+2026-05-28 23:56:51 - preprocess: wrote sample to padtai_input.sample.csv, sha256=3fd2450c4ca6900f86b66c17e5f31f4ec5e376ddb8cee873f7490b0c4dac564c
+2026-05-28 23:56:51 - running PADTAI cmd: python3 /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_input.prepared.csv --out /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_output
+2026-05-28 23:56:51 - PADTAI cwd: /home/mjales/Feature-Selection-with-ILP/PADTAI
+2026-05-28 23:59:50 - PADTAI returncode: 1
+2026-05-28 23:59:50 - PADTAI stdout (truncated 1024 chars):
+label(V0,V1):- attr_n_receivers_0(V3),attr_label_1(V1),n_receivers(V0,V3),attr_n_providers_1(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_android_intent_action_package_added(V0,V3),attr_label_0(V1),attr_n_receivers_15(V2),n_receivers(V0,V2),attr_intent_android_intent_action_package_added_0(V3).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),attr_label_0(V1),attr_intent_com_google_firebase_messaging_event_1(V3),attr_n_api_calls_20(V2),intent_com_google_firebase_messaging_event(V0,V3).
+1
+frozenbitarray('0000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- attr_label_0(V1),attr_n_receivers_15(V2),attr_intent_com_google_firebase_messaging_event_0(V3),n_receivers(V0,V2),intent_com_google_firebase_messaging_eve
+2026-05-28 23:59:50 - PADTAI stderr (truncated 4096 chars):
+/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+Traceback (most recent call last):
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py", line 7, in <module>
+    run()
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 538, in main
+    batch_size, offset = load_table(table_path, batch_size, offset, line_offset,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 240, in load_table
+    rowP = normalize(row.split(',')[:-1], rebinds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 69, in normalize
+    if is_number(strlist[i]):
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py", line 39, in is_number
+    return str.replace('.', '', 1).isdigit() or (str[0] == '-' and str[1:].replace('.', '', 1).isdigit())
+                                                 ~~~^^^
+IndexError: string index out of range
+
+2026-05-29 00:59:07 - preprocess: loaded /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_input.csv size=33561 bytes
+2026-05-29 00:59:07 - preprocess: shape before dropna: (500, 31)
+2026-05-29 00:59:07 - preprocess: dtypes before: {'suspicious_getSubscriberId': dtype('int64'), 'perm_android_permission_READ_PHONE_STATE': dtype('int64'), 'perm_android_permission_GET_TASKS': dtype('int64'), 'perm_android_permission_SEND_SMS': dtype('int64'), 'suspicious_Ljava_lang_Runtime___exec': dtype('int64'), 'n_providers': dtype('int64'), 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS': dtype('int64'), 'perm_com_google_android_c2dm_permission_RECEIVE': dtype('int64'), 'perm_android_permission_SYSTEM_ALERT_WINDOW': dtype('int64'), 'intent_com_google_android_c2dm_intent_RECEIVE': dtype('int64'), 'suspicious_Ldalvik_system_PathClassLoader_': dtype('int64'), 'suspicious_sendTextMessage': dtype('int64'), 'perm_com_android_launcher_permission_INSTALL_SHORTCUT': dtype('int64'), 'intent_android_intent_action_PACKAGE_ADDED': dtype('int64'), 'intent_com_google_firebase_INSTANCE_ID_EVENT': dtype('int64'), 'intent_android_intent_action_USER_PRESENT': dtype('int64'), 'n_activities': dtype('int64'), 'suspicious_getCellLocation': dtype('int64'), 'n_used_permissions': dtype('int64'), 'n_receivers': dtype('int64'), 'intent_com_google_firebase_MESSAGING_EVENT': dtype('int64'), 'intent_android_intent_action_PACKAGE_REMOVED': dtype('int64'), 'intent_com_google_android_c2dm_intent_REGISTRATION': dtype('int64'), 'n_api_calls': dtype('int64'), 'n_urls': dtype('int64'), 'n_permissions': dtype('int64'), 'perm_android_permission_CHANGE_CONFIGURATION': dtype('int64'), 'suspicious_Base64': dtype('int64'), 'intent_com_android_vending_INSTALL_REFERRER': dtype('int64'), 'intent_safiap_framework_ACTION_TO_INSTALL_IAP': dtype('int64'), 'label': dtype('int64')}
+2026-05-29 00:59:07 - preprocess: shape after dropna: (500, 31)
+2026-05-29 00:59:07 - preprocess: rename_map sample: {'suspicious_getSubscriberId': 'suspicious_getSubscriberId', 'perm_android_permission_READ_PHONE_STATE': 'perm_android_permission_READ_PHONE_STATE', 'perm_android_permission_GET_TASKS': 'perm_android_permission_GET_TASKS', 'perm_android_permission_SEND_SMS': 'perm_android_permission_SEND_SMS', 'suspicious_Ljava_lang_Runtime___exec': 'suspicious_Ljava_lang_Runtime___exec', 'n_providers': 'n_providers', 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS': 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS', 'perm_com_google_android_c2dm_permission_RECEIVE': 'perm_com_google_android_c2dm_permission_RECEIVE', 'perm_android_permission_SYSTEM_ALERT_WINDOW': 'perm_android_permission_SYSTEM_ALERT_WINDOW', 'intent_com_google_android_c2dm_intent_RECEIVE': 'intent_com_google_android_c2dm_intent_RECEIVE'}
+2026-05-29 00:59:07 - preprocess: wrote sample to padtai_input.sample.csv, sha256=3fd2450c4ca6900f86b66c17e5f31f4ec5e376ddb8cee873f7490b0c4dac564c
+2026-05-29 00:59:07 - running PADTAI cmd: python3 /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_input.prepared.csv --out /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_output
+2026-05-29 00:59:07 - PADTAI cwd: /home/mjales/Feature-Selection-with-ILP/PADTAI
+2026-05-29 00:59:07 - PADTAI returncode: 1
+2026-05-29 00:59:07 - PADTAI stdout (truncated 1024 chars):
+
+2026-05-29 00:59:07 - PADTAI stderr (truncated 4096 chars):
+/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py:299: SyntaxWarning: invalid escape sequence '\('
+  head_formatted = re.sub("[\(].*?[\)]", "", head)
+/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py:300: SyntaxWarning: invalid escape sequence '\('
+  rule_formatted = re.sub("[\(].*?[\)]", "", rule)
+/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/parsetable.py:267: SyntaxWarning: invalid escape sequence '\='
+  functest += ["\tB \= C."]
+Traceback (most recent call last):
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py", line 3, in <module>
+    from padtai.pipeline import main as run
+  File "/home/mjales/Feature-Selection-with-ILP/PADTAI/padtai/pipeline.py", line 9, in <module>
+    import janus_swi as janus
+ModuleNotFoundError: No module named 'janus_swi'
+
+2026-05-29 01:00:10 - preprocess: loaded /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_input.csv size=33561 bytes
+2026-05-29 01:00:10 - preprocess: shape before dropna: (500, 31)
+2026-05-29 01:00:10 - preprocess: dtypes before: {'suspicious_getSubscriberId': dtype('int64'), 'perm_android_permission_READ_PHONE_STATE': dtype('int64'), 'perm_android_permission_GET_TASKS': dtype('int64'), 'perm_android_permission_SEND_SMS': dtype('int64'), 'suspicious_Ljava_lang_Runtime___exec': dtype('int64'), 'n_providers': dtype('int64'), 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS': dtype('int64'), 'perm_com_google_android_c2dm_permission_RECEIVE': dtype('int64'), 'perm_android_permission_SYSTEM_ALERT_WINDOW': dtype('int64'), 'intent_com_google_android_c2dm_intent_RECEIVE': dtype('int64'), 'suspicious_Ldalvik_system_PathClassLoader_': dtype('int64'), 'suspicious_sendTextMessage': dtype('int64'), 'perm_com_android_launcher_permission_INSTALL_SHORTCUT': dtype('int64'), 'intent_android_intent_action_PACKAGE_ADDED': dtype('int64'), 'intent_com_google_firebase_INSTANCE_ID_EVENT': dtype('int64'), 'intent_android_intent_action_USER_PRESENT': dtype('int64'), 'n_activities': dtype('int64'), 'suspicious_getCellLocation': dtype('int64'), 'n_used_permissions': dtype('int64'), 'n_receivers': dtype('int64'), 'intent_com_google_firebase_MESSAGING_EVENT': dtype('int64'), 'intent_android_intent_action_PACKAGE_REMOVED': dtype('int64'), 'intent_com_google_android_c2dm_intent_REGISTRATION': dtype('int64'), 'n_api_calls': dtype('int64'), 'n_urls': dtype('int64'), 'n_permissions': dtype('int64'), 'perm_android_permission_CHANGE_CONFIGURATION': dtype('int64'), 'suspicious_Base64': dtype('int64'), 'intent_com_android_vending_INSTALL_REFERRER': dtype('int64'), 'intent_safiap_framework_ACTION_TO_INSTALL_IAP': dtype('int64'), 'label': dtype('int64')}
+2026-05-29 01:00:10 - preprocess: shape after dropna: (500, 31)
+2026-05-29 01:00:10 - preprocess: rename_map sample: {'suspicious_getSubscriberId': 'suspicious_getSubscriberId', 'perm_android_permission_READ_PHONE_STATE': 'perm_android_permission_READ_PHONE_STATE', 'perm_android_permission_GET_TASKS': 'perm_android_permission_GET_TASKS', 'perm_android_permission_SEND_SMS': 'perm_android_permission_SEND_SMS', 'suspicious_Ljava_lang_Runtime___exec': 'suspicious_Ljava_lang_Runtime___exec', 'n_providers': 'n_providers', 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS': 'perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS', 'perm_com_google_android_c2dm_permission_RECEIVE': 'perm_com_google_android_c2dm_permission_RECEIVE', 'perm_android_permission_SYSTEM_ALERT_WINDOW': 'perm_android_permission_SYSTEM_ALERT_WINDOW', 'intent_com_google_android_c2dm_intent_RECEIVE': 'intent_com_google_android_c2dm_intent_RECEIVE'}
+2026-05-29 01:00:10 - preprocess: wrote sample to padtai_input.sample.csv, sha256=3fd2450c4ca6900f86b66c17e5f31f4ec5e376ddb8cee873f7490b0c4dac564c
+2026-05-29 01:00:10 - running PADTAI cmd: python3 /home/mjales/Feature-Selection-with-ILP/PADTAI/padtai.py /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_input.prepared.csv --out /home/mjales/Feature-Selection-with-ILP/sandbox/cluster_0/padtai_output
+2026-05-29 01:00:10 - PADTAI cwd: /home/mjales/Feature-Selection-with-ILP/PADTAI
+2026-05-29 01:03:45 - PADTAI returncode: 0
+2026-05-29 01:03:45 - PADTAI stdout (truncated 1024 chars):
+label(V0,V1):- attr_label_1(V1),attr_n_used_permissions_6(V3),n_used_permissions(V0,V3),n_permissions(V0,V2),attr_n_permissions_2(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000')
+True
+label(V0,V1):- attr_label_1(V1),attr_n_permissions_8(V2),attr_n_used_permissions_6(V3),n_used_permissions(V0,V3),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- attr_label_1(V1),intent_com_google_firebase_instance_id_event(V0,V2),attr_n_api_calls_14(V3),attr_intent_com_google_firebase_instance_id_event_0(V2),n_api_calls(V0,V3).
+1
+frozenbitarray('0100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- attr_label_1(V1),attr_intent_com_google_firebase_instance_id_event_1(V2),intent_com_google_firebase_instance_id_event(V0,V2),attr_n_api_calls_14(V3),n_api_calls(V0,V3).
+1
+frozen
+2026-05-29 01:03:45 - PADTAI stderr (truncated 4096 chars):
+/home/mjales/miniconda3/envs/malware-ilp/lib/python3.11/site-packages/popper/tester.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+
