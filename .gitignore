@@ -175,3 +175,5 @@ PADTAI/
 # Do not ignore anything under reports/ (we want to track generated reports)
 !reports/
 !reports/**
+!sandbox/
+!sandbox/**
