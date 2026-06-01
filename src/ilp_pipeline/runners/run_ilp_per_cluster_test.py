@@ -24,7 +24,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Defaults
-DEFAULT_TIMEOUT = 600  # 10 minutes per cluster
+DEFAULT_TIMEOUT = 1200  # 20 minutes per cluster
 DEFAULT_TOP_N = 30
 
 

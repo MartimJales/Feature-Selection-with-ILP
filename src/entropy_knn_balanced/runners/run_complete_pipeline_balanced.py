@@ -180,7 +180,7 @@ def main() -> None:
     parser.add_argument("--max-clusters", type=int, default=None)
     parser.add_argument("--cluster-ids", type=int, nargs="+", default=None)
     parser.add_argument("--ilp-top-n", type=int, default=30, help="Top N features for PADTAI")
-    parser.add_argument("--ilp-timeout", type=int, default=600, help="PADTAI timeout in seconds")
+    parser.add_argument("--ilp-timeout", type=int, default=1200, help="PADTAI timeout in seconds")
     parser.add_argument("--ilp-dry-run", action="store_true", help="Prepare ILP inputs but do not execute PADTAI")
     parser.add_argument("--discord-webhook-url", default=os.getenv("DISCORD_WEBHOOK_URL", ""))
     parser.add_argument("--discord-user-id", default=os.getenv("DISCORD_USER_ID", ""))
