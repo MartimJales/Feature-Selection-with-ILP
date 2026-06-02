@@ -1,4 +1,0 @@
-deap
-numpy
-scipy
-scikit-learn
