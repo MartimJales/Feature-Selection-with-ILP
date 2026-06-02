@@ -203,9 +203,10 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
     prolog_artifacts_dir = output_dir / "padtai_artifacts"
     prolog_artifacts_dir.mkdir(parents=True, exist_ok=True)
 
-    # PADTAI command with EXACT arguments per README:
-    # --grounded none       → No arithmetic operations
-    # --intcols none        → All columns as binary (feature columns)
+    # PADTAI command pinned to the currently supported runner contract.
+    # Keep this list in sync with PADTAI/padtai/pipeline.py whenever a
+    # new PADTAI flag is added or removed.
+    # --grounded none       → Use the default grounded-operator setup
     # --solver rc2          → SAT solver (stable)
     # --sample-size 100     → Use 100 samples
     # --max-timeout <int>   → Timeout in seconds
@@ -218,7 +219,6 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
         "python3",
         str(PADTAI_PATH),
         str(input_file),
-        "--out", str(prolog_artifacts_dir),
         "--grounded", "none",
         "--solver", "rc2",
         "--sample-size", "100",
