@@ -169,9 +169,6 @@ generate_professor_reports.py
 # Ignore generic JSON files but allow cluster JSONs produced by the pipeline
 *.json
 
-# Ignore PADTAI submodule
-PADTAI/
-
 # Do not ignore anything under reports/ (we want to track generated reports)
 !reports/
 !reports/**
