@@ -17,6 +17,7 @@ class EntropyKNNDataBundle:
     y: pd.Series
     rankings: pd.DataFrame
     ranked_features: list[str]
+    original_indices: list[int] | None = None
 
 
 class EntropyKNNDataLoader:

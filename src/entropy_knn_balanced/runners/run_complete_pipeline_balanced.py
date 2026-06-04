@@ -27,7 +27,7 @@ from src.analysis.entropy_knn_visualizations.run_cluster_top_feature_analysis im
 from src.entropy_knn_balanced.pipeline import BalancedEntropyKNNPipeline
 from src.ilp_pipeline.runners.run_ilp_per_cluster_test import (
     get_cluster_dirs,
-    run_ilp_cluster,
+    run_ilp_cluster_from_data,
     send_discord,
 )
 
@@ -284,6 +284,19 @@ def main() -> None:
         _notify(args, f"❌ Phase 1/2 FAILED: {exc}")
         sys.exit(1)
 
+    if pipeline.bundle is None:
+        logger.error("Balanced bundle was not loaded after Phase 1")
+        _notify(args, "❌ Phase 1/2 FAILED: balanced bundle was not loaded")
+        sys.exit(1)
+
+    balanced_X = pipeline.bundle.X
+    balanced_y = pipeline.bundle.y
+    logger.info(
+        "Reusing in-memory balanced dataset for ILP: samples=%d | features=%d",
+        len(balanced_X),
+        len(balanced_X.columns),
+    )
+
     # Phase 2: Consensus analysis + PADTAI rule discovery on balanced clusters
     logger.info("\n[PHASE 2] Running consensus analysis + PADTAI on balanced clusters...")
     _notify(args, "🔍 Phase 2/2 started: consensus + PADTAI")
@@ -434,10 +447,12 @@ def main() -> None:
                     ),
                 )
 
-            result = run_ilp_cluster(
+            result = run_ilp_cluster_from_data(
                 cluster_dir=cluster_dir,
                 top_n=args.ilp_top_n,
                 timeout=args.ilp_timeout,
+                features_df=balanced_X,
+                labels=balanced_y,
                 dry_run=args.ilp_dry_run,
             )
             result["cluster_size"] = cluster_size

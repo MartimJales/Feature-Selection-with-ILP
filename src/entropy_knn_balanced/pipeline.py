@@ -83,8 +83,8 @@ class BalancedEntropyKNNPipeline(EntropyKNNPipeline):
         # Shuffle final selection to avoid class blocks.
         selected_indices = pd.Series(selected_indices).sample(frac=1.0, random_state=random_seed).tolist()
 
-        X_balanced = bundle.X.iloc[selected_indices].reset_index(drop=True)
-        y_balanced = y.iloc[selected_indices].reset_index(drop=True)
+        X_balanced = bundle.X.loc[selected_indices].reset_index(drop=True)
+        y_balanced = y.loc[selected_indices].reset_index(drop=True)
 
         logger.info(
             "Balanced dataset ready: malware=%d | goodware=%d | total=%d",
@@ -100,6 +100,7 @@ class BalancedEntropyKNNPipeline(EntropyKNNPipeline):
             X=X_balanced,
             y=y_balanced,
             ranked_features=ranked_features,
+            original_indices=[int(index) for index in selected_indices],
         )
 
     @staticmethod

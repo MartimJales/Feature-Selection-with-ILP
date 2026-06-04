@@ -325,6 +325,7 @@ class EntropyKNNPipeline:
                     }
 
                 cluster_json_path = run_dir / f"cluster_{cluster.cluster_id}.json"
+                original_indices = getattr(bundle, "original_indices", None)
                 cluster_json_payload = {
                     "cluster_id": int(cluster.cluster_id),
                     "cluster_size": int(cluster_size),
@@ -339,6 +340,10 @@ class EntropyKNNPipeline:
                     "feature_scores": filter_scores,
                     "feature_ranks": filter_ranks,
                 }
+                if original_indices is not None:
+                    cluster_json_payload["original_sample_indices"] = [
+                        int(original_indices[idx]) for idx in cluster.row_indices
+                    ]
                 with open(cluster_json_path, "w", encoding="utf-8") as handle:
                     json.dump(cluster_json_payload, handle, ensure_ascii=False, indent=2)
 

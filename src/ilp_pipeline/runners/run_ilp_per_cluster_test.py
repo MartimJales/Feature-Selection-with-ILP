@@ -246,6 +246,200 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
     except Exception as e:
         return False, "", str(e)
 
+
+def _label_series(labels) -> pd.Series:
+    """Normalize labels input from a Series or DataFrame to a Series."""
+    if isinstance(labels, pd.Series):
+        return labels.reset_index(drop=True)
+    if isinstance(labels, pd.DataFrame):
+        if "label" in labels.columns:
+            return labels["label"].reset_index(drop=True)
+        if "Label" in labels.columns:
+            return labels["Label"].reset_index(drop=True)
+    return pd.Series(labels).reset_index(drop=True)
+
+
+def run_ilp_cluster_from_data(
+    cluster_dir: Path,
+    top_n: int,
+    timeout: int,
+    features_df: pd.DataFrame,
+    labels,
+    dry_run: bool = False,
+):
+    """
+    Run ILP for a single cluster using an already loaded feature matrix and labels.
+
+    This is the preferred path for the complete balanced pipeline: sample_indices
+    are positional indices into the balanced in-memory dataset, not into the
+    original parquet file.
+    """
+    cluster_dir = cluster_dir.resolve()
+    cluster_id = int(cluster_dir.name.split("_")[1])
+
+    csv_path = cluster_dir / "top_feature_candidates.csv"
+    ilp_output_dir = cluster_dir / "ilp_results"
+    ilp_output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = {
+        "cluster_id": cluster_id,
+        "timestamp": datetime.now().isoformat(),
+        "top_n": top_n,
+        "timeout": timeout,
+        "status": "pending",
+        "data_source": "balanced_in_memory",
+        "features_selected": None,
+        "n_features": 0,
+        "n_samples": 0,
+        "balanced_sample_indices": None,
+        "original_sample_indices": None,
+        "elapsed_seconds": None,
+        "padtai_stdout": "",
+        "padtai_stderr": "",
+        "error": None,
+    }
+
+    cluster_start = time.time()
+
+    features = extract_top_features(csv_path, top_n)
+    if not features:
+        result["status"] = "error"
+        result["error"] = f"Could not extract features from {csv_path}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
+
+    result["features_selected"] = features
+    result["n_features"] = len(features)
+    logger.info(f"[cluster_{cluster_id}] Extracted {len(features)} feature names")
+
+    cluster_json = cluster_dir / f"cluster_{cluster_id}.json"
+    if not cluster_json.exists():
+        result["status"] = "error"
+        result["error"] = f"Cluster JSON not found: {cluster_json}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
+
+    try:
+        with open(cluster_json, "r", encoding="utf-8") as cjf:
+            cluster_payload = json.load(cjf)
+        sample_indices = cluster_payload.get("sample_indices") or []
+        original_sample_indices = cluster_payload.get("original_sample_indices")
+        max_idx = len(features_df) - 1
+        valid_indices = [int(i) for i in sample_indices if isinstance(i, int) and 0 <= i <= max_idx]
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = f"Failed to parse cluster JSON: {str(e)[:200]}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
+
+    if not valid_indices:
+        result["status"] = "error"
+        result["error"] = "Cluster JSON has no valid sample_indices for the in-memory dataset"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
+
+    result["balanced_sample_indices"] = valid_indices
+    result["original_sample_indices"] = original_sample_indices
+
+    labels_series = _label_series(labels)
+    features_cluster = features_df.iloc[valid_indices].reset_index(drop=True)
+    labels_cluster = labels_series.iloc[valid_indices].reset_index(drop=True)
+    logger.info(f"[cluster_{cluster_id}] Subset in-memory balanced data to {len(valid_indices)} cluster samples")
+
+    try:
+        available_features = [f for f in features if f in features_cluster.columns]
+        missing = set(features) - set(available_features)
+
+        if missing:
+            logger.warning(f"[cluster_{cluster_id}] {len(missing)} features not found: {list(missing)[:3]}")
+
+        if not available_features:
+            result["status"] = "error"
+            result["error"] = "No requested features found in in-memory dataset"
+            logger.error(f"[cluster_{cluster_id}] {result['error']}")
+            return result
+
+        final_df = features_cluster[available_features].copy()
+
+        if len(final_df) != len(labels_cluster):
+            logger.warning(f"[cluster_{cluster_id}] Row count mismatch: features={len(final_df)}, labels={len(labels_cluster)}")
+            min_len = min(len(final_df), len(labels_cluster))
+            final_df = final_df.iloc[:min_len]
+            labels_cluster = labels_cluster.iloc[:min_len]
+
+        final_df["label"] = labels_cluster.astype(int).values
+
+        initial_count = len(final_df)
+        final_df = final_df.dropna()
+        if len(final_df) < initial_count:
+            logger.warning(f"[cluster_{cluster_id}] Dropped {initial_count - len(final_df)} NaN rows")
+
+        result["n_samples"] = len(final_df)
+        logger.info(f"[cluster_{cluster_id}] Final dataset: {len(final_df)} samples x {len(available_features)} features + label")
+
+        final_df_prolog = final_df.copy()
+        rename_map = {col: sanitize_feature_name(col) for col in final_df_prolog.columns if col != "label"}
+        final_df_prolog = final_df_prolog.rename(columns=rename_map)
+
+        padtai_input = ilp_output_dir / "padtai_input.csv"
+        final_df_prolog.to_csv(padtai_input, index=False)
+        logger.info(f"[cluster_{cluster_id}] Saved in-memory PADTAI input CSV: {padtai_input}")
+
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = f"Error building in-memory dataset: {str(e)[:200]}"
+        logger.error(f"[cluster_{cluster_id}] {result['error']}")
+        return result
+
+    if dry_run:
+        result["status"] = "dry_run"
+        result["elapsed_seconds"] = round(time.time() - cluster_start, 2)
+        return result
+
+    logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout}s)...")
+    success, stdout, stderr = run_padtai(padtai_input, ilp_output_dir, timeout)
+    result["elapsed_seconds"] = round(time.time() - cluster_start, 2)
+
+    result["padtai_stdout"] = stdout[:2000] if stdout else ""
+    result["padtai_stderr"] = stderr[:2000] if stderr else ""
+    result["status"] = "success" if success else "failed"
+
+    if stderr:
+        stderr_file = ilp_output_dir / "padtai_stderr.log"
+        with open(stderr_file, "w", encoding="utf-8") as f:
+            f.write(stderr)
+        logger.info(f"[cluster_{cluster_id}] Full stderr -> {stderr_file}")
+
+    try:
+        full_out = (stdout or "") + "\n" + (stderr or "")
+        rules = extract_rules_from_output(full_out)
+        rules_file = ilp_output_dir / "padtai_rules.json"
+        with open(rules_file, "w", encoding="utf-8") as rf:
+            json.dump({"n_rules": len(rules), "rules": rules, "elapsed_seconds": result["elapsed_seconds"]}, rf, indent=2)
+        logger.info(f"[cluster_{cluster_id}] Saved extracted rules -> {rules_file}")
+
+        webhook = os.getenv("DISCORD_WEBHOOK_URL")
+        mention_id = os.getenv("DISCORD_USER_ID")
+        if webhook:
+            if rules:
+                top_rules = "\n".join(rules[:10])
+                msg = f"PADTAI finished for cluster {cluster_id}: {len(rules)} rules found.\nTop rules:\n{top_rules}"
+            else:
+                msg = f"PADTAI finished for cluster {cluster_id}: no rules found."
+            send_discord(msg, url=webhook, user_id=mention_id or None)
+    except Exception as e:
+        logger.warning(f"[cluster_{cluster_id}] Failed to extract/send rules: {e}")
+
+    if success:
+        logger.info(f"[cluster_{cluster_id}] PADTAI completed successfully in {result['elapsed_seconds']}s")
+    else:
+        logger.warning(f"[cluster_{cluster_id}] PADTAI failed after {result['elapsed_seconds']}s")
+        if stderr:
+            logger.warning(f"    Error: {stderr[:300]}")
+
+    return result
+
+
 def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool = False):
     """
     Run ILP for a single cluster.
