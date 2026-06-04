@@ -69,6 +69,7 @@ python3 src/entropy_knn_balanced/runners/run_complete_pipeline_balanced.py \
     --balance-seed 42 \
     --ilp-top-n 30 \
     --ilp-timeout 1200 \
+    --ilp-workers 25 \
     --discord-webhook-url "$DISCORD_WEBHOOK_URL" \
     --discord-user-id "$DISCORD_USER_ID"
 

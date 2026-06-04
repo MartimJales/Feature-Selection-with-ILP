@@ -296,6 +296,8 @@ def run_ilp_cluster_from_data(
         "elapsed_seconds": None,
         "padtai_stdout": "",
         "padtai_stderr": "",
+        "padtai_input": None,
+        "padtai_runtime_input": None,
         "error": None,
     }
 
@@ -385,6 +387,12 @@ def run_ilp_cluster_from_data(
         final_df_prolog.to_csv(padtai_input, index=False)
         logger.info(f"[cluster_{cluster_id}] Saved in-memory PADTAI input CSV: {padtai_input}")
 
+        padtai_runtime_input = ilp_output_dir / f"cluster_{cluster_id}_padtai_input.csv"
+        final_df_prolog.to_csv(padtai_runtime_input, index=False)
+        result["padtai_input"] = str(padtai_input)
+        result["padtai_runtime_input"] = str(padtai_runtime_input)
+        logger.info(f"[cluster_{cluster_id}] Saved PADTAI runtime CSV: {padtai_runtime_input}")
+
     except Exception as e:
         result["status"] = "error"
         result["error"] = f"Error building in-memory dataset: {str(e)[:200]}"
@@ -397,7 +405,7 @@ def run_ilp_cluster_from_data(
         return result
 
     logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout}s)...")
-    success, stdout, stderr = run_padtai(padtai_input, ilp_output_dir, timeout)
+    success, stdout, stderr = run_padtai(padtai_runtime_input, ilp_output_dir, timeout)
     result["elapsed_seconds"] = round(time.time() - cluster_start, 2)
 
     result["padtai_stdout"] = stdout[:2000] if stdout else ""

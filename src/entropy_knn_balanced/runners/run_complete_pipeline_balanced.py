@@ -15,6 +15,8 @@ import logging
 import os
 import sys
 import subprocess
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import pandas as pd
@@ -181,6 +183,7 @@ def main() -> None:
     parser.add_argument("--cluster-ids", type=int, nargs="+", default=None)
     parser.add_argument("--ilp-top-n", type=int, default=30, help="Top N features for PADTAI")
     parser.add_argument("--ilp-timeout", type=int, default=1200, help="PADTAI timeout in seconds")
+    parser.add_argument("--ilp-workers", type=int, default=1, help="Number of parallel PADTAI workers")
     parser.add_argument("--ilp-dry-run", action="store_true", help="Prepare ILP inputs but do not execute PADTAI")
     parser.add_argument("--discord-webhook-url", default=os.getenv("DISCORD_WEBHOOK_URL", ""))
     parser.add_argument("--discord-user-id", default=os.getenv("DISCORD_USER_ID", ""))
@@ -417,63 +420,88 @@ def main() -> None:
             logger.warning("Malware analysis failed - will process all clusters as fallback")
 
         total_clusters_seen += len(cluster_dirs)
+        ilp_workers = max(1, int(args.ilp_workers))
         logger.info(
-            "Starting ILP for %d clusters (cluster_size=%d seed=%d)",
+            "Starting ILP for %d clusters (cluster_size=%d seed=%d workers=%d)",
             len(cluster_dirs),
             cluster_size,
             seed,
+            ilp_workers,
         )
         _notify(
             args,
             (
                 f"🤖 ILP started (run {run_index}/{len(run_dirs)})\n"
-                f"cluster_size={cluster_size} | seed={seed} | total_clusters={len(cluster_dirs)}"
+                f"cluster_size={cluster_size} | seed={seed} | total_clusters={len(cluster_dirs)} | workers={ilp_workers}"
             ),
         )
 
-        for idx, cluster_dir in enumerate(cluster_dirs, start=1):
-            logger.info(
-                "  [ILP %d/%d] %s",
-                idx,
-                len(cluster_dirs),
-                cluster_dir.name,
-            )
-            if idx == 1 or idx % 10 == 0 or idx == len(cluster_dirs):
-                _notify(
-                    args,
-                    (
-                        f"📍 ILP progress (run {run_index}/{len(run_dirs)})\n"
-                        f"cluster {idx}/{len(cluster_dirs)}: {cluster_dir.name}"
-                    ),
+        run_results: list[dict] = []
+        with ThreadPoolExecutor(max_workers=ilp_workers) as executor:
+            future_to_cluster = {
+                executor.submit(
+                    run_ilp_cluster_from_data,
+                    cluster_dir=cluster_dir,
+                    top_n=args.ilp_top_n,
+                    timeout=args.ilp_timeout,
+                    features_df=balanced_X,
+                    labels=balanced_y,
+                    dry_run=args.ilp_dry_run,
+                ): cluster_dir
+                for cluster_dir in cluster_dirs
+            }
+
+            for completed, future in enumerate(as_completed(future_to_cluster), start=1):
+                cluster_dir = future_to_cluster[future]
+                cluster_id = int(cluster_dir.name.split("_")[1])
+
+                try:
+                    result = future.result()
+                except Exception as exc:
+                    logger.exception("ILP worker failed for %s", cluster_dir.name)
+                    result = {
+                        "cluster_id": cluster_id,
+                        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+                        "top_n": args.ilp_top_n,
+                        "timeout": args.ilp_timeout,
+                        "status": "error",
+                        "features_selected": None,
+                        "n_features": 0,
+                        "n_samples": 0,
+                        "elapsed_seconds": None,
+                        "padtai_stdout": "",
+                        "padtai_stderr": "",
+                        "error": str(exc)[:500],
+                    }
+
+                result["cluster_size"] = cluster_size
+                result["seed"] = seed
+                run_results.append(result)
+                ilp_results.append(result)
+
+                metadata_file = cluster_dir / "ilp_results" / "ilp_metadata.json"
+                metadata_file.parent.mkdir(parents=True, exist_ok=True)
+                with open(metadata_file, "w", encoding="utf-8") as handle:
+                    json.dump(result, handle, indent=2)
+
+                logger.info(
+                    "  [ILP done %d/%d] %s | status=%s",
+                    completed,
+                    len(cluster_dirs),
+                    cluster_dir.name,
+                    result.get("status"),
                 )
+                if completed == 1 or completed % 10 == 0 or completed == len(cluster_dirs):
+                    _notify(
+                        args,
+                        (
+                            f"📍 ILP progress (run {run_index}/{len(run_dirs)})\n"
+                            f"completed {completed}/{len(cluster_dirs)} | latest={cluster_dir.name} | status={result.get('status')}"
+                        ),
+                    )
 
-            result = run_ilp_cluster_from_data(
-                cluster_dir=cluster_dir,
-                top_n=args.ilp_top_n,
-                timeout=args.ilp_timeout,
-                features_df=balanced_X,
-                labels=balanced_y,
-                dry_run=args.ilp_dry_run,
-            )
-            result["cluster_size"] = cluster_size
-            result["seed"] = seed
-            ilp_results.append(result)
-
-            metadata_file = cluster_dir / "ilp_results" / "ilp_metadata.json"
-            metadata_file.parent.mkdir(parents=True, exist_ok=True)
-            with open(metadata_file, "w", encoding="utf-8") as handle:
-                json.dump(result, handle, indent=2)
-
-        run_success = sum(
-            1
-            for r in ilp_results
-            if r.get("cluster_size") == cluster_size and r.get("seed") == seed and r.get("status") == "success"
-        )
-        run_total = sum(
-            1
-            for r in ilp_results
-            if r.get("cluster_size") == cluster_size and r.get("seed") == seed
-        )
+        run_success = sum(1 for r in run_results if r.get("status") == "success")
+        run_total = len(run_results)
         _notify(
             args,
             (

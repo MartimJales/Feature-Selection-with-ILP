@@ -15,7 +15,7 @@ Lista de problemas e melhorias identificados para tratar incrementalmente.
 - [x] Evitar recarregar `extracted_features.parquet` e `training_set.csv` para cada cluster.
 - [x] Adicionar cache/reuso dos datasets durante a fase ILP.
 - [ ] Adicionar mecanismo de resume/skip para clusters ja concluidos.
-- [ ] Avaliar paralelizacao controlada do PADTAI por cluster.
+- [x] Avaliar paralelizacao controlada do PADTAI por cluster.
 - [ ] Rever timeout de 1200s por cluster e definir politica para falhas/timeouts.
 
 ## Prioridade Media - Qualidade das Regras PADTAI
@@ -35,6 +35,7 @@ Lista de problemas e melhorias identificados para tratar incrementalmente.
 
 ## Prioridade Baixa - Reprodutibilidade e Operacao
 
+- [ ] Separar claramente inputs e outputs: `reports/` deve ser output-only e nao deve servir como fonte implicita de input para novas execucoes.
 - [ ] Remover ou tornar opcional o `git pull` automatico no script overnight.
 - [ ] Parametrizar valores hardcoded no bash script.
 - [ ] Guardar config completa de cada execucao.
@@ -48,4 +49,5 @@ Lista de problemas e melhorias identificados para tratar incrementalmente.
 - [x] Adicionado `original_sample_indices` aos JSONs dos clusters quando existe mapeamento original.
 - [x] Adicionado caminho ILP `run_ilp_cluster_from_data(...)` para usar `features_df` e `labels` ja carregados em memoria.
 - [x] Atualizada a pipeline balanced completa para reutilizar `pipeline.bundle.X` e `pipeline.bundle.y` durante a fase ILP.
-- [ ] Ainda falta corrigir o filtro de clusters com malware, solver/sample-size PADTAI, resume, paralelizacao e melhorias de interpretabilidade.
+- [x] Adicionada paralelizacao do PADTAI com `--ilp-workers` e input runtime unico por cluster.
+- [ ] Ainda falta corrigir o filtro de clusters com malware, solver/sample-size PADTAI, resume e melhorias de interpretabilidade.
