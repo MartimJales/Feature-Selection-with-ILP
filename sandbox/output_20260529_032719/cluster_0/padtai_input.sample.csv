@@ -1,6 +1,0 @@
-suspicious_getSubscriberId,perm_android_permission_READ_PHONE_STATE,perm_android_permission_GET_TASKS,perm_android_permission_SEND_SMS,suspicious_Ljava_lang_Runtime___exec,n_providers,perm_android_permission_MOUNT_UNMOUNT_FILESYSTEMS,perm_com_google_android_c2dm_permission_RECEIVE,perm_android_permission_SYSTEM_ALERT_WINDOW,intent_com_google_android_c2dm_intent_RECEIVE,suspicious_Ldalvik_system_PathClassLoader_,suspicious_sendTextMessage,perm_com_android_launcher_permission_INSTALL_SHORTCUT,intent_android_intent_action_PACKAGE_ADDED,intent_com_google_firebase_INSTANCE_ID_EVENT,intent_android_intent_action_USER_PRESENT,n_activities,suspicious_getCellLocation,n_used_permissions,n_receivers,intent_com_google_firebase_MESSAGING_EVENT,intent_android_intent_action_PACKAGE_REMOVED,intent_com_google_android_c2dm_intent_REGISTRATION,n_api_calls,n_urls,n_permissions,perm_android_permission_CHANGE_CONFIGURATION,suspicious_Base64,intent_com_android_vending_INSTALL_REFERRER,intent_safiap_framework_ACTION_TO_INSTALL_IAP,label
-0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,16,0,22,5,0,0,0,53,95,28,0,1,0,0,0
-1,0,0,0,1,2,0,1,0,1,1,0,0,1,1,0,24,1,13,7,0,0,0,30,103,7,0,1,1,0,0
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,7,0,0,0,0,16,14,3,0,1,0,0,0
-0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,77,0,8,1,0,0,0,20,52,7,0,1,0,0,0
-0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,42,0,12,3,0,0,1,45,126,7,0,1,0,0,0
