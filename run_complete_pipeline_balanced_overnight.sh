@@ -47,7 +47,7 @@ echo ""
 echo "========================================"
 echo "PHASE 1: Balanced 1:1 Clustering"
 echo "PHASE 2: PADTAI Rule Discovery"
-echo "Output: reports/entropy_knn_balanced/"
+echo "Output: reports_parallel/entropy_knn_balanced/"
 echo "========================================"
 echo ""
 
@@ -63,6 +63,7 @@ fi
 echo ""
 
 python3 src/entropy_knn_balanced/runners/run_complete_pipeline_balanced.py \
+    --output-dir ./reports_parallel/entropy_knn_balanced \
     --cluster-sizes 500 \
     --seeds 42 \
     --top-features-global 1000 \
