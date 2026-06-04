@@ -1,5 +1,13 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 152.14
+  "n_rules": 7,
+  "rules": [
+    "label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V1),int_1(V2),perm_android_permission_write_settings(V0,V2)",
+    "label(V0,V1):- perm_com_android_launcher_permission_uninstall_shortcut(V0,V1),int_1(V2),n_receivers(V0,V2)",
+    "label(V0,V1):- perm_com_android_launcher_permission_uninstall_shortcut(V0,V1),int_1(V2),intent_android_intent_action_package_added(V0,V2)",
+    "label(V0,V1):- perm_com_android_launcher_permission_uninstall_shortcut(V0,V1),n_receivers(V0,V2),int_4(V2)",
+    "label(V0,V1):- n_services(V0,V2),perm_com_android_launcher_permission_uninstall_shortcut(V0,V1),perm_android_permission_access_coarse_location(V0,V2)",
+    "label(V0,V1):- perm_android_permission_access_coarse_location(V0,V1),n_services(V0,V2),int_0(V2)",
+    "label(V0,V1):- perm_com_android_launcher_permission_uninstall_shortcut(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),n_providers(V0,V2)"
+  ],
+  "elapsed_seconds": 1226.75
 }

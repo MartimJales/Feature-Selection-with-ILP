@@ -1,10 +1,12 @@
 {
-  "n_rules": 4,
+  "n_rules": 6,
   "rules": [
-    "label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),attr_perm_android_permission_system_alert_window_1(V2),attr_label_0(V1),n_services(V0,V3),attr_n_services_2(V3)",
-    "label(V0,V1):- attr_n_services_2(V2),attr_label_0(V1),n_services(V0,V2),perm_com_google_android_c2dm_permission_receive(V0,V3),attr_perm_com_google_android_c2dm_permission_receive_1(V3)",
-    "label(V0,V1):- attr_n_services_2(V2),intent_android_net_conn_connectivity_change(V0,V3),attr_label_0(V1),n_services(V0,V2),attr_intent_android_net_conn_connectivity_change_1(V3)",
-    "label(V0,V1):- attr_n_urls_35(V3),attr_n_services_2(V2),attr_label_0(V1),n_urls(V0,V3),n_services(V0,V2)"
+    "label(V0,V1):- perm_android_permission_get_tasks(V0,V2),suspicious_base64(V0,V2),intent_com_example_servicejar_action_start_assist(V0,V1)",
+    "label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_read_phone_state(V0,V2),intent_com_example_servicejar_action_start_assist(V0,V1)",
+    "label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2),intent_com_example_servicejar_action_start_assist(V0,V1)",
+    "label(V0,V1):- int_4(V2),n_receivers(V0,V2),intent_com_example_servicejar_action_start_assist(V0,V1)",
+    "label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_system_alert_window(V0,V2),intent_com_example_servicejar_action_start_assist(V0,V1)",
+    "label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_access_wifi_state(V0,V2),intent_com_example_servicejar_action_start_assist(V0,V1)"
   ],
-  "elapsed_seconds": 142.07
+  "elapsed_seconds": 1224.72
 }

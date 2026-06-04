@@ -1,5 +1,13 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 181.38
+  "n_rules": 7,
+  "rules": [
+    "label(V0,V1):- perm_com_anddoes_launcher_permission_update_count(V0,V1),suspicious_getsubscriberid(V0,V2),int_1(V2)",
+    "label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),int_1(V2)",
+    "label(V0,V1):- perm_android_permission_read_sms(V0,V1),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V2),int_1(V2)",
+    "label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),int_1(V2)",
+    "label(V0,V1):- n_providers(V0,V2),suspicious_getsubscriberid(V0,V1),perm_com_google_android_c2dm_permission_receive(V0,V2),int_1(V2)",
+    "label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_com_google_android_c2dm_permission_receive(V0,V2),int_1(V2)",
+    "label(V0,V1):- perm_com_oppo_launcher_permission_write_settings(V0,V1),intent_com_android_vending_install_referrer(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_read_phone_state(V0,V2)"
+  ],
+  "elapsed_seconds": 1225.69
 }

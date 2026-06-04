@@ -1,34 +1,7 @@
 {
-  "n_rules": 28,
+  "n_rules": 1,
   "rules": [
-    "label(V0,V1):- n_permissions(V0,V3),attr_label_0(V1),attr_intent_com_google_firebase_messaging_event_1(V2),intent_com_google_firebase_messaging_event(V0,V2),attr_n_permissions_15(V3)",
-    "label(V0,V1):- n_permissions(V0,V3),attr_label_0(V1),attr_perm_android_permission_access_wifi_state_0(V2),attr_n_permissions_15(V3),perm_android_permission_access_wifi_state(V0,V2)",
-    "label(V0,V1):- n_permissions(V0,V3),attr_label_0(V1),intent_com_google_firebase_instance_id_event(V0,V2),attr_n_permissions_15(V3),attr_intent_com_google_firebase_instance_id_event_1(V2)",
-    "label(V0,V1):- n_permissions(V0,V3),attr_label_0(V1),attr_n_permissions_4(V3),perm_android_permission_access_wifi_state(V0,V2),attr_perm_android_permission_access_wifi_state_1(V2)",
-    "label(V0,V1):- perm_android_permission_change_wifi_state(V0,V3),attr_label_0(V1),attr_perm_android_permission_change_wifi_state_1(V3),attr_perm_com_google_android_c2dm_permission_receive_0(V2),perm_com_google_android_c2dm_permission_receive(V0,V2)",
-    "label(V0,V1):- perm_android_permission_change_wifi_state(V0,V3),attr_label_0(V1),attr_perm_android_permission_read_phone_state_0(V2),attr_perm_android_permission_change_wifi_state_1(V3),perm_android_permission_read_phone_state(V0,V2)",
-    "label(V0,V1):- attr_intent_com_google_android_c2dm_intent_receive_0(V3),attr_label_0(V1),intent_com_google_android_c2dm_intent_receive(V0,V3),n_urls(V0,V2),attr_n_urls_6(V2)",
-    "label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V3),attr_label_0(V1),attr_intent_com_google_android_c2dm_intent_receive_1(V3),attr_n_api_calls_17(V2),n_api_calls(V0,V2)",
-    "label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V3),attr_label_0(V1),attr_intent_com_google_android_c2dm_intent_receive_1(V3),n_api_calls(V0,V2),attr_n_api_calls_20(V2)",
-    "label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V3),attr_label_0(V1),attr_n_activities_5(V2),attr_intent_com_google_android_c2dm_intent_receive_1(V3),n_activities(V0,V2)",
-    "label(V0,V1):- attr_n_api_calls_25(V3),attr_label_0(V1),n_api_calls(V0,V3),attr_perm_com_google_android_finsky_permission_bind_get_install_referrer_service_0(V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V2)",
-    "label(V0,V1):- attr_label_0(V1),n_api_calls(V0,V3),attr_perm_com_google_android_c2dm_permission_receive_1(V2),attr_n_api_calls_20(V3),perm_com_google_android_c2dm_permission_receive(V0,V2)",
-    "label(V0,V1):- attr_label_0(V1),n_api_calls(V0,V3),attr_n_api_calls_17(V3),attr_perm_com_google_android_c2dm_permission_receive_1(V2),perm_com_google_android_c2dm_permission_receive(V0,V2)",
-    "label(V0,V1):- attr_label_0(V1),attr_n_activities_5(V3),attr_perm_com_google_android_c2dm_permission_receive_1(V2),n_activities(V0,V3),perm_com_google_android_c2dm_permission_receive(V0,V2)",
-    "label(V0,V1):- attr_label_0(V1),attr_perm_com_google_android_c2dm_permission_receive_0(V2),attr_n_urls_6(V3),perm_com_google_android_c2dm_permission_receive(V0,V2),n_urls(V0,V3)",
-    "label(V0,V1):- attr_label_0(V1),attr_intent_android_intent_action_boot_completed_0(V3),intent_android_intent_action_boot_completed(V0,V3),attr_n_api_calls_25(V2),n_api_calls(V0,V2)",
-    "label(V0,V1):- attr_label_0(V1),attr_intent_android_intent_action_boot_completed_0(V3),intent_android_intent_action_boot_completed(V0,V3),n_urls(V0,V2),attr_n_urls_6(V2)",
-    "label(V0,V1):- attr_label_0(V1),attr_n_activities_2(V3),attr_n_api_calls_25(V2),n_activities(V0,V3),n_api_calls(V0,V2)",
-    "label(V0,V1):- attr_label_0(V1),attr_n_activities_5(V3),perm_android_permission_read_phone_state(V0,V2),n_activities(V0,V3),attr_perm_android_permission_read_phone_state_1(V2)",
-    "label(V0,V1):- attr_label_0(V1),suspicious_getcelllocation(V0,V3),attr_suspicious_getcelllocation_0(V3),attr_n_api_calls_25(V2),n_api_calls(V0,V2)",
-    "label(V0,V1):- attr_label_0(V1),n_api_calls(V0,V2),attr_n_api_calls_25(V2),attr_intent_com_android_vending_install_referrer_0(V3),intent_com_android_vending_install_referrer(V0,V3)",
-    "label(V0,V1):- attr_label_0(V1),perm_android_permission_access_wifi_state(V0,V2),attr_perm_android_permission_access_wifi_state_1(V2),attr_n_urls_6(V3),n_urls(V0,V3)",
-    "label(V0,V1):- attr_label_0(V1),perm_android_permission_get_tasks(V0,V2),attr_perm_android_permission_get_tasks_0(V2),attr_n_urls_6(V3),n_urls(V0,V3)",
-    "label(V0,V1):- attr_n_api_calls_25(V3),attr_label_0(V1),n_api_calls(V0,V3),perm_android_permission_access_wifi_state(V0,V2),attr_perm_android_permission_access_wifi_state_1(V2)",
-    "label(V0,V1):- attr_n_api_calls_25(V3),attr_label_0(V1),n_api_calls(V0,V3),attr_perm_android_permission_write_settings_0(V2),perm_android_permission_write_settings(V0,V2)",
-    "label(V0,V1):- attr_n_api_calls_25(V3),attr_label_0(V1),attr_perm_android_permission_read_phone_state_0(V2),n_api_calls(V0,V3),perm_android_permission_read_phone_state(V0,V2)",
-    "label(V0,V1):- attr_n_api_calls_25(V3),attr_label_0(V1),n_api_calls(V0,V3),attr_suspicious_getsubscriberid_0(V2),suspicious_getsubscriberid(V0,V2)",
-    "label(V0,V1):- attr_label_0(V1),attr_perm_android_permission_read_logs_0(V3),perm_android_permission_read_logs(V0,V3),attr_n_api_calls_25(V2),n_api_calls(V0,V2)"
+    "label(V0,V1):- n_activities(V0,V2),suspicious_setwifienabled(V0,V1),int_1(V2)"
   ],
-  "elapsed_seconds": 190.58
+  "elapsed_seconds": 1225.6
 }

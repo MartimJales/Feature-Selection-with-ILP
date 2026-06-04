@@ -1,5 +1,14 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 178.66
+  "n_rules": 8,
+  "rules": [
+    "label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),n_services(V0,V1)",
+    "label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),n_services(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1)",
+    "label(V0,V1):- n_services(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_read_phone_state(V0,V2)",
+    "label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_external_storage(V0,V1),perm_android_permission_read_sms(V0,V1)",
+    "label(V0,V1):- int_1(V2),intent_com_google_android_c2dm_intent_receive(V0,V1),intent_android_intent_action_package_removed(V0,V2)",
+    "label(V0,V1):- n_services(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),suspicious_getsimcountryiso(V0,V2)",
+    "label(V0,V1):- int_1(V2),perm_android_permission_read_logs(V0,V1),suspicious_adb_enabled(V0,V2)",
+    "label(V0,V1):- perm_android_permission_read_logs(V0,V1),n_services(V0,V2),perm_android_permission_change_network_state(V0,V2)"
+  ],
+  "elapsed_seconds": 1223.67
 }

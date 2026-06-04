@@ -1,5 +1,8 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 149.69
+  "n_rules": 2,
+  "rules": [
+    "label(V0,V1):- int_2(V2),suspicious_getsubscriberid(V0,V1),n_permissions(V0,V2)",
+    "label(V0,V1):- perm_android_permission_change_configuration(V0,V1),n_services(V0,V2),int_1(V2)"
+  ],
+  "elapsed_seconds": 1226.04
 }

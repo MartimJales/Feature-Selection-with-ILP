@@ -1,5 +1,14 @@
 {
-  "n_rules": 0,
-  "rules": [],
-  "elapsed_seconds": 186.49
+  "n_rules": 8,
+  "rules": [
+    "label(V0,V1):- suspicious_getdeviceid(V0,V1),int_0(V1)",
+    "label(V0,V1):- intent_android_intent_action_user_present(V0,V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),int_1(V2)",
+    "label(V0,V1):- perm_com_anddoes_launcher_permission_update_count(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V2)",
+    "label(V0,V1):- suspicious_getsubscriberid(V0,V1),perm_com_anddoes_launcher_permission_update_count(V0,V1),suspicious_ldalvik_system_dexclassloader_(V0,V1)",
+    "label(V0,V1):- suspicious_getsubscriberid(V0,V1),intent_com_google_firebase_instance_id_event(V0,V1),suspicious_getdeviceid(V0,V1)",
+    "label(V0,V1):- perm_com_anddoes_launcher_permission_update_count(V0,V1),n_providers(V0,V1),suspicious_ldalvik_system_dexclassloader_(V0,V1)",
+    "label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V1),perm_com_google_android_c2dm_permission_receive(V0,V2),perm_android_permission_access_wifi_state(V0,V2),int_1(V2)",
+    "label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_access_wifi_state(V0,V2),int_1(V2)"
+  ],
+  "elapsed_seconds": 1225.58
 }

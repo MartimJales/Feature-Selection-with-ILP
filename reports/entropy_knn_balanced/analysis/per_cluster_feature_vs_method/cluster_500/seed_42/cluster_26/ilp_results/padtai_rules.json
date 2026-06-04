@@ -1,9 +1,7 @@
 {
-  "n_rules": 3,
+  "n_rules": 1,
   "rules": [
-    "label(V0,V1):- attr_n_providers_2(V3),n_providers(V0,V3),suspicious_ldalvik_system_pathclassloader_(V0,V2),attr_suspicious_ldalvik_system_pathclassloader__0(V2),attr_label_0(V1)",
-    "label(V0,V1):- n_providers(V0,V2),perm_android_permission_access_wifi_state(V0,V3),attr_label_0(V1),attr_n_providers_2(V2),attr_perm_android_permission_access_wifi_state_0(V3)",
-    "label(V0,V1):- n_providers(V0,V2),attr_n_providers_2(V2),attr_label_0(V1),attr_suspicious_ldalvik_system_dexclassloader__0(V3),suspicious_ldalvik_system_dexclassloader_(V0,V3)"
+    "label(V0,V1):- int_2(V2),intent_android_intent_action_user_present(V0,V1),n_permissions(V0,V2)"
   ],
-  "elapsed_seconds": 134.76
+  "elapsed_seconds": 1224.32
 }
