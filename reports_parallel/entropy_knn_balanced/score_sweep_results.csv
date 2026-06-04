@@ -1,0 +1,2 @@
+cluster_size,seed,top_features_global,n_clusters_requested,n_clusters_valid,runtime_seconds,status,error_message,cluster_entropy_summary_parquet,cluster_feature_scores_parquet
+500,42,1000,100,100,742.9803130626678,ok,,reports_parallel/entropy_knn_balanced/score_only/cluster_500/seed_42/cluster_entropy_summary.parquet,reports_parallel/entropy_knn_balanced/score_only/cluster_500/seed_42/cluster_feature_scores.parquet
