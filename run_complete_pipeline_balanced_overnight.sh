@@ -43,11 +43,14 @@ else
     echo "Warning: .env file not found. Discord notifications may not work."
 fi
 
+RUN_TIMESTAMP="$(date '+%Y-%m-%d_%H')"
+OUTPUT_DIR="./reports_parallel/entropy_knn_balanced/run_${RUN_TIMESTAMP}"
+
 echo ""
 echo "========================================"
 echo "PHASE 1: Balanced 1:1 Clustering"
 echo "PHASE 2: PADTAI Rule Discovery"
-echo "Output: reports_parallel/entropy_knn_balanced/"
+echo "Output: $OUTPUT_DIR"
 echo "========================================"
 echo ""
 
@@ -63,7 +66,7 @@ fi
 echo ""
 
 python3 src/entropy_knn_balanced/runners/run_complete_pipeline_balanced.py \
-    --output-dir ./reports_parallel/entropy_knn_balanced \
+    --output-dir "$OUTPUT_DIR" \
     --cluster-sizes 500 \
     --seeds 42 \
     --top-features-global 1000 \
