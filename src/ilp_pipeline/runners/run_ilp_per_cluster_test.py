@@ -214,6 +214,8 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
     # --min-coverage 5      → Min coverage 5%
     # --min-recall 10       → Min recall 10%
     # --min-precision 75    → Min precision 75%
+    # --target-category 1   → Learn malware rules only
+    # --target-predicate    → Emit malware(V0) rules
 
     cmd = [
         "python3",
@@ -227,6 +229,8 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
         "--min-coverage", "5",
         "--min-recall", "10",
         "--min-precision", "75",
+        "--target-category", "1",
+        "--target-predicate", "malware",
     ]
 
     logger.info(f"PADTAI command: {' '.join(cmd)}")

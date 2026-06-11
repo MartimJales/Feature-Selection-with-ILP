@@ -102,7 +102,30 @@ repls = ('-', '_'), ('/', '_'), ('&', '_and_'), (' ', '_'), ('+', '_plus_'), ('<
         ('[', ''), (']', ''), ('(', ''), (')', ''), ('.', '_'), (',', '_'), ('\'', ''), ('%', '')
 
 
-def generate_bias(cols, rows, int_cols, grounded_ops, categorical=False, category=None):
+def normalize_value(value):
+    """Normalize a single table value to the representation used by Popper."""
+    value = str(value).strip().lower()
+    if is_number(value):
+        return value
+
+    for repl in repls:
+        value = value.replace(*repl)
+
+    return value
+
+
+def validate_predicate_name(name):
+    """Return a valid lowercase Prolog predicate name or raise ValueError."""
+    if not re.fullmatch(r'[a-z][a-zA-Z0-9_]*', name or ''):
+        raise ValueError(
+            "target predicate must start with a lowercase letter and contain "
+            "only letters, numbers, or underscores"
+        )
+    return name
+
+
+def generate_bias(cols, rows, int_cols, grounded_ops, categorical=False, category=None,
+                  head_name=None):
     """
     Generates bias file for a given dataset and configuration.
 
@@ -117,6 +140,8 @@ def generate_bias(cols, rows, int_cols, grounded_ops, categorical=False, categor
         categorical (bool, optional): A flag indicating whether the bias is for a
                                       run in categorical mode. Defaults to False.
         category (str, optional): The category for a categorical run. Defaults to None.
+        head_name (str, optional): Predicate name to use for the categorical head.
+                                  Defaults to the category value.
 
     Returns:
         list of str: A list with bias information.
@@ -136,8 +161,8 @@ def generate_bias(cols, rows, int_cols, grounded_ops, categorical=False, categor
 
     # Arity of head (protected) predicate
     arity = 1 if categorical else 2
-    head_name = category if categorical else cols[-1]
-    bias += ["head_pred({},{}).".format(head_name, arity)]
+    head_predicate = (head_name or category) if categorical else cols[-1]
+    bias += ["head_pred({},{}).".format(head_predicate, arity)]
 
     # Arity of grounded operators
     for op in grounded_ops:
@@ -149,7 +174,7 @@ def generate_bias(cols, rows, int_cols, grounded_ops, categorical=False, categor
 
     # Type information of head (protected) predicate
     if categorical:
-        bias += ["type({},(ex,)).".format(category)]
+        bias += ["type({},(ex,)).".format(head_predicate)]
     else:
         bias += ["type({},(ex,attr_{})).".format(cols[-1], cols[-1]) if not int_cols[-1] else "type({},(ex,int)).".format(cols[-1])]
 
@@ -271,7 +296,8 @@ def generate_functest(col):
     return list(dict.fromkeys(functest))
 
 
-def generate_exs(col, rows, rebinds, sample_size, categorical=False, category=None):
+def generate_exs(col, rows, rebinds, sample_size, categorical=False, category=None,
+                 predicate_name=None):
     """
     Generates examples for a given dataset and configuration.
 
@@ -285,6 +311,8 @@ def generate_exs(col, rows, rebinds, sample_size, categorical=False, category=No
         categorical (bool, optional): A flag indicating whether the examples are for a
                                       run in categorical mode. Defaults to False.
         category (str, optional): The category for a categorical run. Defaults to None.
+        predicate_name (str, optional): Predicate name used in categorical examples.
+                                       Defaults to the category value.
 
     Returns:
         list of str: A list with examples.
@@ -296,9 +324,14 @@ def generate_exs(col, rows, rebinds, sample_size, categorical=False, category=No
     """
 
     exs = []
+    example_predicate = predicate_name or category
     for (i, row) in zip(range(max(sample_size, len(rows))), rows):
         if categorical:
-            exs += ["{}({}({})).".format("pos" if row[0] == category else "neg", category, i)]
+            exs += ["{}({}({})).".format(
+                "pos" if row[0] == category else "neg",
+                example_predicate,
+                i,
+            )]
         else:
             exs += ["pos({}({},{})).".format(col, i, rebinds[row[0]] if row[0] in rebinds else row[0])]
 
@@ -337,7 +370,8 @@ def generate_popper_files(path, bias, consts, facts, exs, functest=[]):
         f.writelines(line + "\n" for line in sorted(exs))
 
 
-def main(table_path, int_cols, grounded_ops, sample_size, categorical, path):
+def main(table_path, int_cols, grounded_ops, sample_size, categorical, path,
+         target_category=None, target_predicate=None):
     """
     Main function to generate Popper files for a given dataset and configuration.
 
@@ -347,12 +381,22 @@ def main(table_path, int_cols, grounded_ops, sample_size, categorical, path):
         grounded_ops (list of object): A list of operators to be grounded.
         sample_size (int): The sample size to consider.
         categorical (bool): A flag indicating whether the run is in categorical mode.
+        target_category (str, optional): Protected value to learn one-vs-rest.
+        target_predicate (str, optional): Predicate name for the target rules.
 
     Returns:
         random_n (list of list of str): The random sample of the dataset.
         rebinds (dict of str to str): The rebindings of values that have both alpha
                                       and numeric characters.
     """
+
+    if categorical and target_category is not None:
+        raise ValueError("--categorical and --target-category cannot be used together")
+
+    target_mode = target_category is not None
+    if target_mode:
+        target_category = normalize_value(target_category)
+        target_predicate = validate_predicate_name(target_predicate or "target")
 
     with open(table_path, 'r') as f:
         # First line of dataset is column names
@@ -367,6 +411,35 @@ def main(table_path, int_cols, grounded_ops, sample_size, categorical, path):
         # No observed impact in memory usage, even in large datasets (e.g., KDD)
         records = f.readlines()
         records_sample = records if len(records) <= sample_size else random.sample(records, sample_size)
+
+        # One-vs-rest learning needs both positive and negative examples whenever
+        # both classes exist in the source table.
+        if target_mode and records:
+            target_records = [
+                record for record in records
+                if normalize_value(record.strip().split(',')[-1]) == target_category
+            ]
+            non_target_records = [
+                record for record in records
+                if normalize_value(record.strip().split(',')[-1]) != target_category
+            ]
+
+            if not target_records:
+                raise ValueError(
+                    "target category {!r} does not exist in the protected column".format(
+                        target_category
+                    )
+                )
+
+            sampled_categories = {
+                normalize_value(record.strip().split(',')[-1])
+                for record in records_sample
+            }
+            if target_category not in sampled_categories:
+                records_sample[0] = random.choice(target_records)
+            if non_target_records and sampled_categories == {target_category}:
+                records_sample[-1] = random.choice(non_target_records)
+
         random_n = [line.strip().lower().split(',') for line in records_sample]
 
         # Replace all substrings corresponding to illegal syntax in Popper
@@ -402,9 +475,40 @@ def main(table_path, int_cols, grounded_ops, sample_size, categorical, path):
     # Facts are independent of whether in categorical mode or not
     facts = generate_background(non_protected_columns, non_protected_random_n, protected_random_n, rebinds, int_cols, sample_size, grounded_ops)
 
+    # If learning a single target category, generate one one-vs-rest problem with
+    # a semantic and Prolog-safe predicate such as malware/1.
+    if target_mode:
+        bias = generate_bias(
+            column_names,
+            random_n,
+            int_cols,
+            grounded_ops,
+            categorical=True,
+            category=target_category,
+            head_name=target_predicate,
+        )
+        consts = generate_constants(
+            non_protected_columns,
+            non_protected_random_n,
+            rebinds,
+            int_cols[:-1],
+        )
+        exs = generate_exs(
+            protected_columns[0],
+            protected_random_n,
+            rebinds,
+            sample_size,
+            categorical=True,
+            category=target_category,
+            predicate_name=target_predicate,
+        )
+
+        out_path = path + "-" + target_predicate
+        generate_popper_files(out_path, bias, consts, facts, exs)
+
     # If running in categorical mode, generate bias/background/examples
     # for each protected value/category at a time
-    if categorical:
+    elif categorical:
         for category in map(lambda l: l[-1], random_n):
             bias = generate_bias(column_names, random_n, int_cols, grounded_ops, categorical, category)
 
@@ -441,6 +545,10 @@ if __name__ == '__main__':
                         help='path to the dataset (example: datasets/Adult/Adult-sex.csv)',)
     parser.add_argument('-c', '--categorical', action='store_true',
                         help='enable categorical mode (default: false)')
+    parser.add_argument('--target-category', type=str, default=None,
+                        help='learn rules only for this protected value (one-vs-rest)')
+    parser.add_argument('--target-predicate', type=str, default=None,
+                        help='predicate name for --target-category rules (default: target)')
     parser.add_argument('-o', '--out', type=str, metavar="path", default=None,
                         help='set output directory for generated files (default: dataset name)')
     parser.add_argument('--sample-size', type=int, default=-1,
@@ -464,6 +572,8 @@ if __name__ == '__main__':
                      args.grounded != "none" else [] if args.grounded else None
     sample_size = args.sample_size
     categorical = args.categorical
+    target_category = args.target_category
+    target_predicate = args.target_predicate
     path = args.out if args.out else Path(table_path).stem
 
     # By default, load only less-than operator
@@ -479,4 +589,13 @@ if __name__ == '__main__':
             OpClass = getattr(importlib.import_module('operators.' + file), op)
             grounded_ops.append(OpClass())
 
-    main(table_path, int_cols, grounded_ops, sample_size, categorical, path)
+    main(
+        table_path,
+        int_cols,
+        grounded_ops,
+        sample_size,
+        categorical,
+        path,
+        target_category,
+        target_predicate,
+    )

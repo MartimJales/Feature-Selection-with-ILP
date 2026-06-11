@@ -1,4 +1,11 @@
-from . parsetable import main as parse_table, is_number, strgen, repls
+from . parsetable import (
+    main as parse_table,
+    is_number,
+    normalize_value,
+    strgen,
+    repls,
+    validate_predicate_name,
+)
 
 import sys
 import argparse
@@ -93,6 +100,8 @@ def parse():
             - debug (str): The debug level (choice between 'none', 'padtai', 'popper',
                            and 'all').
             - categorical (bool): A flag indicating whether categorical mode is enabled.
+            - target_category (str): The protected value to learn one-vs-rest.
+            - target_predicate (str): The predicate name for target rules.
             - sample_size (int): The sample size.
             - max_timeout (int): The maximum timeout.
             - min_coverage (float): The minimum coverage threshold.
@@ -113,6 +122,10 @@ def parse():
                               (default: padtai)')
     parser.add_argument('-c', '--categorical', action='store_true',
                         help='enable categorical mode (default: false)')
+    parser.add_argument('--target-category', type=str, default=None,
+                        help='learn rules only for this protected value (one-vs-rest)')
+    parser.add_argument('--target-predicate', type=str, default=None,
+                        help='predicate name for --target-category rules (default: target)')
     parser.add_argument('-s', '--solver', choices=['rc2', 'nuwls'],
                         type=str, default='nuwls',
                         help='choose solver: rc2 (default pysat solver), nuwls (recommended solver) \
@@ -170,12 +183,13 @@ def load_table(table_path, batch_size, offset, line_offset,
     cols = []
 
     with open(table_path, 'r') as f:
-        column_names = next(f)
+        column_names = f.readline()
         cols = normalize(column_names.split(',')[:-1], rebinds)
 
-        # If first iteration, add offset of column names
+        # Start immediately after the header. Text-mode tell/seek avoids counting
+        # newline bytes manually and corrupting the first value of a batch.
         if offset == 0:
-            offset += len(column_names) + 1
+            offset = f.tell()
 
         # Mark operators and columns as dynamic because definitions
         # will be updated during validation
@@ -205,22 +219,16 @@ def load_table(table_path, batch_size, offset, line_offset,
         rows_count = 0
 
         f.seek(offset)
-        for row in f:
-            # Stop iterating once we've read the entire batch
-            if rows_count > batch_size:
+        while rows_count < batch_size:
+            row = f.readline()
+            if row == "":
                 break
-
-            # Update offset
-            offset += (len(row) + 1)
 
             # Increment number of processed rows
             rows_count += 1
 
             # Extract protected attribute
-            protected = row.strip().split(',')[-1].lower()
-
-            for repl in repls:
-                protected = protected.replace(*repl) if not is_number(protected) else protected
+            protected = normalize_value(row.strip().split(',')[-1])
 
             # If new value of protected attribute, add as new category
             if protected not in categories:
@@ -254,10 +262,23 @@ def load_table(table_path, batch_size, offset, line_offset,
 
             i += 1
 
-    return cols, table_pairs, categories_count, rows_count - 1, offset
+        offset = f.tell()
+
+    return cols, table_pairs, categories_count, rows_count, offset
 
 
-def validate_rules(head, rules, table_pairs, grounded_ops, categorical, categories, categories_count):
+def calculate_rule_metrics(correct_count, match_count, category_count, total_count,
+                           target_mode=False):
+    """Calculate rule metrics from accumulated counts."""
+    coverage_count = match_count if target_mode else correct_count
+    coverage = (coverage_count / total_count * 100) if total_count > 0 else 0
+    recall = (correct_count / category_count * 100) if category_count > 0 else 0
+    precision = (correct_count / match_count * 100) if match_count > 0 else 0
+    return coverage, recall, precision
+
+
+def validate_rules(head, rules, table_pairs, grounded_ops, categorical, categories,
+                   categories_count, target_category=None):
     """
     Validates a set of rules against a dataset and calculates performance metrics.
 
@@ -275,9 +296,13 @@ def validate_rules(head, rules, table_pairs, grounded_ops, categorical, categori
         categorical (bool): A flag indicating whether categorical mode is enabled.
         categories (list of str): A list of categories.
         categories_count (dict of str to int): A dictionary mapping categories to their counts.
+        target_category (str, optional): Positive protected value for one-vs-rest rules.
 
     Returns:
-        tuple: A tuple containing three lists:
+        tuple: A tuple containing six lists:
+            - counts (list of int): Correct predictions for each rule.
+            - match_counts (list of int): Rows matched by each rule.
+            - category_counts (list of int): Positive rows for each rule's category.
             - coverages (list of float): The coverage percentage for each rule.
             - recalls (list of float): The recall percentage for each rule.
             - precisions (list of float): The precision percentage for each rule.
@@ -285,9 +310,12 @@ def validate_rules(head, rules, table_pairs, grounded_ops, categorical, categori
 
     # Metrics for output rules
     counts = []
+    match_counts = []
+    rule_category_counts = []
     coverages = []
     recalls = []
     precisions = []
+    target_mode = target_category is not None
 
     for rule in rules:
         head_formatted = re.sub("[\(].*?[\)]", "", head)
@@ -316,16 +344,22 @@ def validate_rules(head, rules, table_pairs, grounded_ops, categorical, categori
 
             matches_head = True
 
-            # In categorical mode, count only rules where head matches protected attribute
-            if categorical:
-                matches_head = protected == head_formatted
+            # Unary rules represent either a categorical value or an explicit
+            # one-vs-rest target such as malware.
+            if categorical or target_mode:
+                positive_category = target_category if target_mode else head_formatted
+                matches_head = protected == positive_category
 
             if is_number(protected):
                 protected = int(protected) if '.' not in protected else float(protected)
 
             # Can the rule unify with the row (protected and non-protected attributes)?
             # Row was already loaded in load_table(...)
-            query_dict = { "V0": i } if categorical else { "V0": i, "V1": protected }
+            query_dict = (
+                {"V0": i}
+                if categorical or target_mode
+                else {"V0": i, "V1": protected}
+            )
             res = janus.query_once(rule, query_dict)['truth'] and matches_head
 
             # Can the rule unify with the row (non-protected attributes only)?
@@ -344,7 +378,9 @@ def validate_rules(head, rules, table_pairs, grounded_ops, categorical, categori
         # Determine category for recall calculation. Keep previous behavior
         # when possible but avoid StopIteration / KeyError and division by zero.
         try:
-            if categorical:
+            if target_mode:
+                category = target_category
+            elif categorical:
                 category = head_formatted
             else:
                 category = next(
@@ -363,17 +399,29 @@ def validate_rules(head, rules, table_pairs, grounded_ops, categorical, categori
 
         category_count = categories_count.get(category, 0) if isinstance(categories_count, dict) else 0
 
-        # Defensive calculations to avoid ZeroDivisionError
-        coverage = (count / len(table_pairs) * 100) if len(table_pairs) > 0 else 0
-        recall = (count / category_count * 100) if category_count > 0 else 0
-        precision = (count / count_all * 100) if count_all != 0 else 0  # bad rule (functional test)
+        coverage, recall, precision = calculate_rule_metrics(
+            count,
+            count_all,
+            category_count,
+            len(table_pairs),
+            target_mode=target_mode,
+        )
 
         counts.append(count)
+        match_counts.append(count_all)
+        rule_category_counts.append(category_count)
         coverages.append(coverage)
         recalls.append(recall)
         precisions.append(precision)
 
-    return counts, coverages, recalls, precisions
+    return (
+        counts,
+        match_counts,
+        rule_category_counts,
+        coverages,
+        recalls,
+        precisions,
+    )
 
 
 def print_results(out_rules, metrics_out_rules, top_coverage_rules, top_recall_rules,
@@ -460,12 +508,23 @@ def main(run_as_package=False,args={}):
                      args.grounded != "none" else [] if args.grounded else None
     sample_size = args.sample_size
     categorical = args.categorical
+    target_category = getattr(args, "target_category", None)
+    target_predicate = getattr(args, "target_predicate", None)
     debug = args.debug
     solver = args.solver
     max_timeout = args.max_timeout
     min_coverage = args.min_coverage
     min_recall = args.min_recall
     min_precision = args.min_precision
+    target_mode = target_category is not None
+
+    if categorical and target_mode:
+        raise ValueError("--categorical and --target-category cannot be used together")
+    if target_predicate and not target_mode:
+        raise ValueError("--target-predicate requires --target-category")
+    if target_mode:
+        target_category = normalize_value(target_category)
+        target_predicate = validate_predicate_name(target_predicate or "target")
 
     # By default, load only less-than operator
     grounded_ops = []
@@ -480,13 +539,24 @@ def main(run_as_package=False,args={}):
             OpClass = getattr(importlib.import_module('.operators.' + file, 'padtai'), op)
             grounded_ops.append(OpClass())
 
-    random_n, rebinds = parse_table(table_path, int_cols, grounded_ops, sample_size, categorical, Path(table_path).stem)
+    random_n, rebinds = parse_table(
+        table_path,
+        int_cols,
+        grounded_ops,
+        sample_size,
+        categorical,
+        Path(table_path).stem,
+        target_category,
+        target_predicate,
+    )
 
     # Categories are possible values of protected attribute
     categories = list(dict.fromkeys(map(lambda l: l[-1], random_n)))
 
     out_paths = []
-    if categorical:
+    if target_mode:
+        out_paths = [Path(table_path).stem + "-" + target_predicate]
+    elif categorical:
         for category in categories:
             out_paths.append(Path(table_path).stem + "-" + category)
     else:
@@ -510,13 +580,13 @@ def main(run_as_package=False,args={}):
             settings = Settings(timeout=max_timeout,
                                 kbpath=out_path,
                                 max_vars=5,
-                                functional_test=not categorical,
+                                functional_test=not (categorical or target_mode),
                                 quiet=(debug == 'none' or debug == 'padtai'))
         else:
             settings = Settings(timeout=max_timeout,
                                 kbpath=out_path,
                                 max_vars=5,
-                                functional_test=not categorical,
+                                functional_test=not (categorical or target_mode),
                                 quiet=(debug == 'none' or debug == 'padtai'),
                                 anytime_solver='nuwls')
 
@@ -535,6 +605,8 @@ def main(run_as_package=False,args={}):
         batch_size = 2000
         offset = 0
         line_offset = 0
+        total_rows = 0
+        counts, match_counts, category_counts = [], [], []
         coverages, recalls, precisions = [], [], []
 
         while batch_size == 2000:
@@ -550,24 +622,38 @@ def main(run_as_package=False,args={}):
 
             # Validate rules and calculate coverage/recall/precision metrics
             counts_batch, \
+            match_counts_batch, \
+            category_counts_batch, \
             coverages_batch, \
             recalls_batch, \
             precisions_batch = validate_rules(head, rules, table_pairs, grounded_ops,
-                                              categorical, categories, categories_count)
+                                              categorical, categories, categories_count,
+                                              target_category)
 
-            # Update metrics
-            if coverages == []:
-                counts, coverages, recalls, precisions = counts_batch, coverages_batch, \
-                                                         recalls_batch, precisions_batch
+            # Aggregate counts and derive metrics from their actual denominators.
+            if counts == []:
+                counts = counts_batch
+                match_counts = match_counts_batch
+                category_counts = category_counts_batch
             else:
                 for i in range(len(rules)):
                     counts[i] += counts_batch[i]
-                    coverages[i] = (coverages[i] * line_offset + coverages_batch[i] * batch_size) \
-                                 / (line_offset + batch_size)
-                    recalls[i] = (recalls[i] * line_offset + recalls_batch[i] * batch_size) \
-                               / (line_offset + batch_size)
-                    precisions[i] = (precisions[i] * line_offset + precisions_batch[i] * batch_size) \
-                                  / (line_offset + batch_size)
+                    match_counts[i] += match_counts_batch[i]
+                    category_counts[i] += category_counts_batch[i]
+
+            total_rows += batch_size
+            coverages, recalls, precisions = [], [], []
+            for i in range(len(rules)):
+                coverage, recall, precision = calculate_rule_metrics(
+                    counts[i],
+                    match_counts[i],
+                    category_counts[i],
+                    total_rows,
+                    target_mode=target_mode,
+                )
+                coverages.append(coverage)
+                recalls.append(recall)
+                precisions.append(precision)
 
             # Update offset
             line_offset += batch_size

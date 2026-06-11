@@ -78,7 +78,8 @@ run(run_as_package=True,args={...})
 Run PADTAI with the command:
 
 ```bash
-python3 padtai.py [-h] [-d {none,padtai,popper,all}] [-c] [-s {rc2,nuwls}] 
+python3 padtai.py [-h] [-d {none,padtai,popper,all}] [-c]
+                  [--target-category str] [--target-predicate str] [-s {rc2,nuwls}]
                   [--sample-size int] [--max-timeout int] [--min-coverage float]
                   [--min-recall float] [--min-precision float] [--intcols str]
                   [--grounded str]
@@ -94,6 +95,9 @@ PADTAI takes the following arguments:
     - `-h` and `--help` show the help message and exit
     - `-d {none,padtai,popper,all}` and `--debug {none,padtai,popper,all}` set debug level: `none` (no debug messages), `padtai` (padtai debug messages), `popper` (popper debug messages), `all` (padtai and popper debug messages) (default: `padtai`)
     - `-c` and `--categorical` enable categorical mode (default: false)
+    - `--target-category <str>` learns one-vs-rest rules only for the specified protected value
+    - `--target-predicate <str>` sets the Prolog predicate used by `--target-category` rules
+      (default: `target`)
     - `-s {rc2,nuwls}` and `--solver {rc2,nuwls}` choose solver: `rc2` (default pysat solver), `nuwls` (recommended solver) (default: `nuwls`)
     - `--sample-size <int>` sets sample size (default: 3400 / #columns)
     - `--max-timeout <int>` sets maximum timeout in seconds (default: 1200 seconds)
@@ -118,8 +122,9 @@ To tell Popper to include these operators, run PADTAI with the flag `--grounded 
 You can run only the table parser module by using the command:
 
 ```bash
-python3 padtai/parsetable.py [-h] [-c] [-o path] [--sample-size int] [--intcols str] 
-                             [--grounded str] 
+python3 padtai/parsetable.py [-h] [-c] [--target-category str]
+                             [--target-predicate str] [-o path]
+                             [--sample-size int] [--intcols str] [--grounded str]
                              dataset
 ```
 
@@ -131,6 +136,8 @@ The table parser module takes the following arguments:
 - Optional arguments:
     - `-h` and `--help` show the help message and exit
     - `-c` and `--categorical` enable categorical mode (default: false)
+    - `--target-category <str>` generates one one-vs-rest Popper problem for the specified value
+    - `--target-predicate <str>` sets the predicate name for the one-vs-rest problem
     - `-o <path>` and `--out <path>` set output directory for generated files (default: dataset name)
     - `--sample-size <int>` sets sample size (default: 3400 / #columns)
     - `--intcols <str>` specifies which columns should be treated as being of integer type; it expects a comma-separated list of integers (or `none`) (example: 1,4,5) (default: all integer columns)
@@ -204,4 +211,18 @@ Alternatively, you can disable the grounding of arithmetic operations by passing
 ./scripts/test_all.sh --grounded none
 ```
 
-Disabling grounding significantly reduces execution times (expect all tests to take between one and two hours) but will lead to missing relevant rules (e.g., the *combine* proxy in the *Ricci* dataset). 
+Disabling grounding significantly reduces execution times (expect all tests to take between one and two hours) but will lead to missing relevant rules (e.g., the *combine* proxy in the *Ricci* dataset).
+
+### One-vs-rest target rules
+
+To learn rules only for malware rows where the final CSV column is `1`, run:
+
+```bash
+python3 padtai.py dataset.csv --target-category 1 --target-predicate malware
+```
+
+The generated rules have the form `malware(V0) :- ...`. Their metrics are:
+
+- coverage: rows matched by the rule divided by all rows
+- recall: matched malware rows divided by all malware rows
+- precision: matched malware rows divided by all rows matched by the rule
