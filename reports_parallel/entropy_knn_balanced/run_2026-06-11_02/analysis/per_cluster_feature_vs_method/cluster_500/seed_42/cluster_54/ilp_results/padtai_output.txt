@@ -1,0 +1,1411 @@
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),int_0(V2),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),intent_com_urbanairship_push_received(V0,V2),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),perm_android_permission_system_alert_window(V0,V1),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),perm_android_permission_access_network_state(V0,V2),intent_com_google_android_gms_iid_instanceid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),intent_com_urbanairship_push_channel_updated(V0,V2),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),suspicious_system_bin_su(V0,V2),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),n_api_calls(V0,V2),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_system_alert_window(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),n_used_permissions(V0,V2),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),n_urls(V0,V2),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),suspicious_setwifienabled(V0,V2),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_system_alert_window(V0,V1),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),n_api_calls(V0,V2),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),n_used_permissions(V0,V2),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- int_7(V2),perm_android_permission_write_settings(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_write_settings(V0,V1),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),n_urls(V0,V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),perm_android_permission_write_settings(V0,V1),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V1),perm_android_permission_access_network_state(V0,V2),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),int_1(V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_ljava_lang_system___load(V0,V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_write_settings(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_write_settings(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V1),perm_android_permission_access_wifi_state(V0,V2),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_write_settings(V0,V1),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_write_settings(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- n_used_permissions(V0,V2),int_1(V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_write_settings(V0,V1),suspicious_ljava_lang_system___load(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_write_settings(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_write_settings(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_write_settings(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_write_settings(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_ljava_lang_system___load(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),suspicious_getpackageinfo(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getpackageinfo(V0,V2),perm_android_permission_access_network_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),intent_com_urbanairship_push_received(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),suspicious_getpackageinfo(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_urbanairship_push_channel_updated(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_system_bin_su(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_android_permission_access_network_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_get_tasks(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),suspicious_getsystemservice(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),int_1(V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),perm_android_permission_access_network_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),suspicious_getexternalstoragedirectory(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),suspicious_getsystemservice(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_android_appwidget_action_appwidget_update(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- int_0(V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_system___load(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_urbanairship_push_received(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_urbanairship_push_channel_updated(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_system_bin_su(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_android_appwidget_action_appwidget_update(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),n_api_calls(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_api_calls(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_access_wifi_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_network_state(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_getdeviceid(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getdeviceid(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),n_used_permissions(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_used_permissions(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_runtime___exec(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_system_alert_window(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_android_permission_access_network_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),suspicious_getpackageinfo(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),n_services(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V2),perm_android_permission_access_network_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getpackageinfo(V0,V2),n_services(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),n_services(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),n_services(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),n_services(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_services(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),n_services(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),n_services(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_api_calls(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),int_1(V2),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),int_1(V2),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),n_api_calls(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_api_calls(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_used_permissions(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),suspicious_getpackageinfo(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),suspicious_getpackageinfo(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),int_0(V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),suspicious_getexternalstoragedirectory(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),intent_com_urbanairship_push_received(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),suspicious_getsystemservice(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_android_permission_get_tasks(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),n_used_permissions(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),intent_com_amazon_device_messaging_intent_receive(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),intent_com_google_android_gms_iid_instanceid(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),intent_com_urbanairship_push_channel_updated(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),suspicious_system_bin_su(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),suspicious_getsystemservice(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),suspicious_getsystemservice(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),suspicious_getsystemservice(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_write_external_storage(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_write_external_storage(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_write_external_storage(V0,V2),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V1),n_services(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_runtime___exec(V0,V2),suspicious_getexternalstoragedirectory(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),int_1(V2),perm_android_permission_mount_unmount_filesystems(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),int_1(V2),perm_android_permission_mount_unmount_filesystems(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_ljava_lang_system___load(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_ljava_lang_system___load(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_getpackageinfo(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_getpackageinfo(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_getpackageinfo(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_urls(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),perm_android_permission_write_external_storage(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_write_external_storage(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_getpackageinfo(V0,V1),intent_com_urbanairship_push_received(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_access_network_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),perm_android_permission_write_external_storage(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),perm_android_permission_write_external_storage(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_getpackageinfo(V0,V1),intent_com_urbanairship_push_channel_updated(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_system_bin_su(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_getpackageinfo(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_getpackageinfo(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_getpackageinfo(V0,V1),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_ljava_lang_runtime___exec(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),suspicious_ljava_lang_runtime___exec(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),suspicious_getpackageinfo(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),suspicious_getpackageinfo(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),suspicious_getpackageinfo(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),suspicious_getpackageinfo(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getpackageinfo(V0,V1),intent_com_urbanairship_push_received(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),suspicious_getpackageinfo(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getpackageinfo(V0,V1),perm_android_permission_access_wifi_state(V0,V2),intent_com_urbanairship_push_channel_updated(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getpackageinfo(V0,V1),suspicious_system_bin_su(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getpackageinfo(V0,V1),perm_android_permission_access_wifi_state(V0,V2),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),suspicious_getpackageinfo(V0,V1),suspicious_getexternalstoragedirectory(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_network_state(V0,V2),n_api_calls(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_network_state(V0,V2),n_used_permissions(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),intent_com_urbanairship_push_received(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),perm_android_permission_get_tasks(V0,V1),intent_com_urbanairship_push_channel_updated(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_system_bin_su(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_get_tasks(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_get_tasks(V0,V1),perm_android_permission_get_tasks(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),n_used_permissions(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_get_tasks(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),suspicious_setwifienabled(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_read_phone_state(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),n_api_calls(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_read_phone_state(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),suspicious_setwifienabled(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_ljava_lang_system___load(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),intent_com_urbanairship_push_received(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getpackageinfo(V0,V2),perm_android_permission_access_network_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getpackageinfo(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getpackageinfo(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_urbanairship_push_channel_updated(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_system_bin_su(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_android_appwidget_action_appwidget_update(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),int_1(V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),perm_android_permission_access_network_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_api_calls(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_used_permissions(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_android_permission_access_network_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),n_api_calls(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),n_used_permissions(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_getdeviceid(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),suspicious_getpackageinfo(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_get_tasks(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),suspicious_getexternalstoragedirectory(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),suspicious_getpackageinfo(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),suspicious_getsystemservice(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),suspicious_getsystemservice(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_write_external_storage(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_system_alert_window(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_android_permission_access_network_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),suspicious_getpackageinfo(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),perm_android_permission_system_alert_window(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V2),perm_android_permission_access_network_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),n_services(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),n_services(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),n_services(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getpackageinfo(V0,V2),n_services(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),n_services(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),n_services(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),n_services(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),n_services(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_system___load(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_urbanairship_push_received(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_urbanairship_push_channel_updated(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_system_bin_su(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_android_appwidget_action_appwidget_update(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_getdeviceid(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_runtime___exec(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V2),perm_android_permission_read_phone_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_access_wifi_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_network_state(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getexternalstoragedirectory(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getsystemservice(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- n_services(V0,V2),perm_android_permission_access_wifi_state(V0,V2),n_used_permissions(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V2),n_services(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),perm_android_permission_write_external_storage(V0,V2),n_services(V0,V1).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),perm_android_permission_write_external_storage(V0,V2),intent_com_urbanairship_push_received(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),n_services(V0,V1),perm_android_permission_write_external_storage(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),perm_android_permission_write_external_storage(V0,V2),intent_com_google_android_gms_iid_instanceid(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),perm_android_permission_write_external_storage(V0,V2),intent_com_urbanairship_push_channel_updated(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),perm_android_permission_write_external_storage(V0,V2),suspicious_system_bin_su(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),perm_android_permission_write_external_storage(V0,V2),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),suspicious_setwifienabled(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_getwifistate(V0,V2),n_services(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- int_0(V2),n_services(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),intent_com_urbanairship_push_received(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),n_services(V0,V1),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),perm_android_permission_access_wifi_state(V0,V2),intent_com_google_android_gms_iid_instanceid(V0,V2).
+1
+frozenbitarray('00000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),intent_com_urbanairship_push_channel_updated(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),suspicious_system_bin_su(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('00000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),perm_android_permission_access_wifi_state(V0,V2),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),n_services(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),n_urls(V0,V2),n_services(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),intent_com_urbanairship_push_received(V0,V2),n_services(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),n_services(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),n_services(V0,V2),intent_com_google_android_gms_iid_instanceid(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),intent_com_urbanairship_push_channel_updated(V0,V2),n_services(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),suspicious_system_bin_su(V0,V2),n_services(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_services(V0,V1),n_services(V0,V2),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_urbanairship_push_received(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_amazon_device_messaging_intent_receive(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1),intent_com_urbanairship_push_channel_updated(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1),suspicious_system_bin_su(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1),intent_android_appwidget_action_appwidget_update(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getdeviceid(V0,V2),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_access_coarse_location(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_access_coarse_location(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- int_0(V2),perm_android_permission_access_network_state(V0,V1),suspicious_setwifienabled(V0,V2),int_1(V1)
+Coverage (%): 93.80, Recall (%): 97.51, Precision (%): 97.91
+Rule: label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V1)
+Coverage (%): 3.60, Recall (%): 3.74, Precision (%): 85.71
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- int_0(V2),perm_android_permission_access_network_state(V0,V1),suspicious_setwifienabled(V0,V2),int_1(V1)
+Coverage (%): 93.80, Recall (%): 97.51, Precision (%): 97.91
+Rule: label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V1)
+Coverage (%): 3.60, Recall (%): 3.74, Precision (%): 85.71
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- int_0(V2),perm_android_permission_access_network_state(V0,V1),suspicious_setwifienabled(V0,V2),int_1(V1)
+Coverage (%): 93.80, Recall (%): 97.51, Precision (%): 97.91
+Rule: label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V1)
+Coverage (%): 3.60, Recall (%): 3.74, Precision (%): 85.71
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- int_0(V2),perm_android_permission_access_network_state(V0,V1),suspicious_setwifienabled(V0,V2),int_1(V1)
+Coverage (%): 93.80, Recall (%): 97.51, Precision (%): 97.91
+Rule: label(V0,V1):- suspicious_setwifienabled(V0,V2),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V1)
+Coverage (%): 3.60, Recall (%): 3.74, Precision (%): 85.71
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- int_0(V2),perm_android_permission_access_network_state(V0,V1),suspicious_setwifienabled(V0,V2),int_1(V1)
+
+Avg. Coverage (%): 93.80, Avg. Recall (%): 97.51, Avg. Precision (%): 97.91
+++++++++++++++++++++++++++++++++++++++++++++++++
+

@@ -1,0 +1,419 @@
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V1),int_4(V2),n_services(V0,V2).
+1
+frozenbitarray('0000000000000000000000000001000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_8(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_19(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000001000000000000000000000000000000000')
+True
+label(V0,V1):- n_activities(V0,V2),int_12(V2),intent_com_google_android_gms_iid_instanceid(V0,V1).
+1
+frozenbitarray('0000000001000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_18(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),n_activities(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000010000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_gms_iid_instanceid(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000100000000')
+True
+label(V0,V1):- perm_android_permission_vibrate(V0,V1),n_urls(V0,V2),int_108(V2).
+1
+frozenbitarray('0000000000000100000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),int_12(V2),perm_android_permission_vibrate(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000001000000')
+True
+label(V0,V1):- int_11(V2),n_permissions(V0,V2),perm_android_permission_vibrate(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000100000000000000')
+True
+label(V0,V1):- int_29(V2),n_activities(V0,V2),perm_android_permission_vibrate(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000100000000000000000000000000000000000000')
+True
+label(V0,V1):- int_11(V2),n_receivers(V0,V2),perm_android_permission_vibrate(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000001000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V2),int_3(V2),perm_android_permission_vibrate(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000100000000000000')
+True
+label(V0,V1):- perm_com_android_vending_billing(V0,V1),n_urls(V0,V2),int_108(V2).
+1
+frozenbitarray('0000000000000100000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_billing(V0,V1),int_15(V2),n_used_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_billing(V0,V1),int_14(V2),n_used_permissions(V0,V2).
+1
+frozenbitarray('0000000010000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_billing(V0,V1),int_7(V2),n_services(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000010000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_billing(V0,V1),n_activities(V0,V2),int_12(V2).
+1
+frozenbitarray('0000000001000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_29(V2),n_activities(V0,V2),perm_com_android_vending_billing(V0,V1).
+1
+frozenbitarray('0000000010000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_billing(V0,V1),int_1(V2),intent_com_inmobi_share_id(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000100000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1),int_108(V2).
+1
+frozenbitarray('0000000000000100000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_7(V2),n_services(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1).
+1
+frozenbitarray('0000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_8(V2),n_permissions(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1).
+1
+frozenbitarray('0000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),suspicious_getcellsignalstrength(V0,V1),int_108(V2).
+1
+frozenbitarray('0000000000000100000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_29(V2),n_activities(V0,V2),suspicious_getcellsignalstrength(V0,V1).
+1
+frozenbitarray('0000000010000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),int_38(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000100000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_urls(V0,V2),int_108(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_activities(V0,V2),int_12(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000001000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_9(V2),n_used_permissions(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_4(V2),n_services(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_7(V2),n_services(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcellsignalstrength(V0,V2),int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_system_alert_window(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_receivers(V0,V2),int_4(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000001000000000000000000')
+True
+label(V0,V1):- int_5(V2),n_receivers(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- suspicious_system_bin_su(V0,V1),int_7(V2),n_services(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000010000000000000000000000')
+True
+label(V0,V1):- int_18(V2),intent_com_google_android_c2dm_intent_registration(V0,V1),n_activities(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000010000000000000000000000000000000000000')
+True
+label(V0,V1):- int_14(V2),n_used_permissions(V0,V2),intent_com_inmobi_share_id(V0,V1).
+1
+frozenbitarray('0000000010000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_activities(V0,V2),int_12(V2),int_0(V1).
+1
+frozenbitarray('0000000001000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_8(V2),int_0(V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_14(V2),int_0(V1),n_used_permissions(V0,V2).
+1
+frozenbitarray('0000000010000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),int_38(V2),intent_android_intent_action_boot_completed(V0,V1).
+1
+frozenbitarray('0000000100000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_8(V2),perm_android_permission_mount_unmount_filesystems(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_8(V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_7(V2),n_services(V0,V2).
+1
+frozenbitarray('0000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_8(V2),intent_com_google_firebase_messaging_event(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_7(V2),intent_com_google_firebase_messaging_event(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('0000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),int_7(V2),n_services(V0,V2).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_7(V2),intent_com_google_firebase_instance_id_event(V0,V1),n_services(V0,V2).
+1
+frozenbitarray('0000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_com_google_firebase_instance_id_event(V0,V1),suspicious_getcellsignalstrength(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- int_7(V2),int_1(V1),n_services(V0,V2).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V1),perm_android_permission_receive_boot_completed(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_system_bin_su(V0,V1),int_1(V1),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),suspicious_ljava_lang_system___load(V0,V2),int_1(V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V2),suspicious_ljava_lang_system___load(V0,V2),int_1(V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V2),suspicious_ljava_lang_system___load(V0,V2),int_1(V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_system___load(V0,V2),int_1(V1),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_system___load(V0,V2),int_1(V1),intent_com_google_android_gms_iid_instanceid(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_system___load(V0,V2),int_1(V1),perm_com_android_vending_billing(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_appinvite_action_preview(V0,V2),suspicious_ljava_lang_system___load(V0,V2),int_1(V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- int_0(V2),int_1(V1),suspicious_ljava_lang_system___loadlibrary(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V2),int_1(V1),suspicious_ljava_lang_system___loadlibrary(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V2),int_1(V1),suspicious_ljava_lang_system___loadlibrary(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- int_1(V1),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V2),suspicious_ljava_lang_system___loadlibrary(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- int_1(V1),suspicious_ljava_lang_system___loadlibrary(V0,V2),intent_com_google_android_gms_iid_instanceid(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- int_1(V1),perm_com_android_vending_billing(V0,V2),suspicious_ljava_lang_system___loadlibrary(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_appinvite_action_preview(V0,V2),int_1(V1),suspicious_ljava_lang_system___loadlibrary(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_providers_gsf_permission_read_gservices(V0,V2),int_1(V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V1),int_1(V2),suspicious_getcelllocation(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_getcellsignalstrength(V0,V1),suspicious_getcelllocation(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1).
+1
+frozenbitarray('0000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),int_0(V1),suspicious_getcelllocation(V0,V2),intent_android_intent_action_boot_completed(V0,V1).
+1
+frozenbitarray('0000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_billing(V0,V1),int_1(V2),suspicious_getcelllocation(V0,V2),intent_android_intent_action_boot_completed(V0,V1).
+1
+frozenbitarray('0000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_appinvite_action_preview(V0,V1),int_1(V2),suspicious_getcelllocation(V0,V2),intent_android_intent_action_boot_completed(V0,V1).
+1
+frozenbitarray('0000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_getcelllocation(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1),intent_android_intent_action_boot_completed(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- int_1(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),suspicious_getcelllocation(V0,V2),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_billing(V0,V1),int_1(V2),suspicious_getcelllocation(V0,V2),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- int_1(V2),int_0(V1),suspicious_getcelllocation(V0,V2),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_appinvite_action_preview(V0,V1),int_1(V2),suspicious_getcelllocation(V0,V2),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000001000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),int_1(V2),intent_android_intent_action_boot_completed(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),int_1(V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1),intent_android_intent_action_boot_completed(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),int_1(V2),perm_android_permission_receive_boot_completed(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),int_1(V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1),perm_android_permission_receive_boot_completed(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_ljava_lang_system___loadlibrary(V0,V1),suspicious_ljava_lang_system___load(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_ljava_lang_system___load(V0,V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_system___loadlibrary(V0,V2),int_1(V2),suspicious_ljava_lang_system___loadlibrary(V0,V1),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- suspicious_ljava_lang_system___loadlibrary(V0,V2),int_1(V2),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V1),suspicious_ljava_lang_system___load(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000010000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),int_1(V2),perm_android_permission_receive_boot_completed(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_boot_completed(V0,V2),int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_boot_completed(V0,V1).
+1
+frozenbitarray('0000000000001000000000000000000000000000000000000000000000000000000000000000000')
+True
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),suspicious_getcellsignalstrength(V0,V1)
+Coverage (%): 48.00, Recall (%): 104.80, Precision (%): 92.66
+Rule: label(V0,V1):- suspicious_ljava_lang_system___loadlibrary(V0,V1),suspicious_getsimcountryiso(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 43.80, Recall (%): 95.63, Precision (%): 93.99
+Rule: label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 24.40, Recall (%): 53.28, Precision (%): 96.83
+Rule: label(V0,V1):- n_providers(V0,V2),suspicious_getcelllocation(V0,V1),suspicious_getcellsignalstrength(V0,V2)
+Coverage (%): 21.00, Recall (%): 45.85, Precision (%): 80.77
+Rule: label(V0,V1):- n_providers(V0,V2),int_1(V2),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 18.40, Recall (%): 40.17, Precision (%): 86.79
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),suspicious_getcellsignalstrength(V0,V1)
+Coverage (%): 48.00, Recall (%): 104.80, Precision (%): 92.66
+Rule: label(V0,V1):- suspicious_ljava_lang_system___loadlibrary(V0,V1),suspicious_getsimcountryiso(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 43.80, Recall (%): 95.63, Precision (%): 93.99
+Rule: label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 24.40, Recall (%): 53.28, Precision (%): 96.83
+Rule: label(V0,V1):- n_providers(V0,V2),suspicious_getcelllocation(V0,V1),suspicious_getcellsignalstrength(V0,V2)
+Coverage (%): 21.00, Recall (%): 45.85, Precision (%): 80.77
+Rule: label(V0,V1):- n_providers(V0,V2),int_1(V2),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 18.40, Recall (%): 40.17, Precision (%): 86.79
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 24.40, Recall (%): 53.28, Precision (%): 96.83
+Rule: label(V0,V1):- suspicious_ljava_lang_system___loadlibrary(V0,V1),suspicious_getsimcountryiso(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 43.80, Recall (%): 95.63, Precision (%): 93.99
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),suspicious_getcellsignalstrength(V0,V1)
+Coverage (%): 48.00, Recall (%): 104.80, Precision (%): 92.66
+Rule: label(V0,V1):- n_providers(V0,V2),int_1(V2),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 18.40, Recall (%): 40.17, Precision (%): 86.79
+Rule: label(V0,V1):- n_providers(V0,V2),suspicious_getcelllocation(V0,V1),suspicious_getcellsignalstrength(V0,V2)
+Coverage (%): 21.00, Recall (%): 45.85, Precision (%): 80.77
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 24.40, Recall (%): 53.28, Precision (%): 96.83
+Rule: label(V0,V1):- suspicious_ljava_lang_system___loadlibrary(V0,V1),suspicious_getsimcountryiso(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 43.80, Recall (%): 95.63, Precision (%): 93.99
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),suspicious_getcellsignalstrength(V0,V1)
+Coverage (%): 48.00, Recall (%): 104.80, Precision (%): 92.66
+Rule: label(V0,V1):- n_providers(V0,V2),int_1(V2),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 18.40, Recall (%): 40.17, Precision (%): 86.79
+Rule: label(V0,V1):- n_providers(V0,V2),suspicious_getcelllocation(V0,V1),suspicious_getcellsignalstrength(V0,V2)
+Coverage (%): 21.00, Recall (%): 45.85, Precision (%): 80.77
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),suspicious_getcellsignalstrength(V0,V1)
+label(V0,V1):- n_providers(V0,V2),int_1(V2),perm_android_permission_system_alert_window(V0,V1)
+label(V0,V1):- n_providers(V0,V2),suspicious_getcelllocation(V0,V1),suspicious_getcellsignalstrength(V0,V2)
+label(V0,V1):- suspicious_ljava_lang_system___loadlibrary(V0,V1),suspicious_getsimcountryiso(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2),int_0(V1)
+
+Avg. Coverage (%): 31.12, Avg. Recall (%): 67.95, Avg. Precision (%): 90.21
+++++++++++++++++++++++++++++++++++++++++++++++++
+

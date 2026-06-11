@@ -1,0 +1,72 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_com_yuetu_shentu_intent_wechat_share(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+Coverage (%): 19.60, Recall (%): 29.17, Precision (%): 94.23
+Rule: label(V0,V1):- intent_com_yuetu_shentu_intent_wechat_share(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),int_1(V2)
+Coverage (%): 19.20, Recall (%): 58.54, Precision (%): 96.00
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),perm_android_permission_write_external_storage(V0,V1)
+Coverage (%): 13.80, Recall (%): 42.07, Precision (%): 90.79
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),suspicious_getsubscriberid(V0,V1)
+Coverage (%): 9.80, Recall (%): 29.88, Precision (%): 96.08
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),suspicious_ljava_lang_runtime___exec(V0,V1)
+Coverage (%): 9.00, Recall (%): 27.44, Precision (%): 93.75
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- intent_com_yuetu_shentu_intent_wechat_share(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),int_1(V2)
+Coverage (%): 19.20, Recall (%): 58.54, Precision (%): 96.00
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),perm_android_permission_write_external_storage(V0,V1)
+Coverage (%): 13.80, Recall (%): 42.07, Precision (%): 90.79
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),suspicious_getsubscriberid(V0,V1)
+Coverage (%): 9.80, Recall (%): 29.88, Precision (%): 96.08
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_com_yuetu_shentu_intent_wechat_share(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+Coverage (%): 19.60, Recall (%): 29.17, Precision (%): 94.23
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),suspicious_ljava_lang_runtime___exec(V0,V1)
+Coverage (%): 9.00, Recall (%): 27.44, Precision (%): 93.75
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_request_install_packages(V0,V1)
+Coverage (%): 3.80, Recall (%): 11.59, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),intent_com_yuetu_shentu_intent_wechat_pay(V0,V1)
+Coverage (%): 4.80, Recall (%): 14.63, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),suspicious_getsubscriberid(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 8.80, Recall (%): 26.83, Precision (%): 100.00
+Rule: label(V0,V1):- n_providers(V0,V2),intent_com_yuetu_shentu_intent_wechat_share(V0,V1),int_3(V2)
+Coverage (%): 2.00, Recall (%): 2.98, Precision (%): 100.00
+Rule: label(V0,V1):- n_api_calls(V0,V2),int_21(V2),intent_com_yuetu_shentu_intent_wechat_share(V0,V1)
+Coverage (%): 1.00, Recall (%): 3.05, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_request_install_packages(V0,V1)
+Coverage (%): 3.80, Recall (%): 11.59, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),intent_com_yuetu_shentu_intent_wechat_pay(V0,V1)
+Coverage (%): 4.80, Recall (%): 14.63, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),suspicious_getsubscriberid(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 8.80, Recall (%): 26.83, Precision (%): 100.00
+Rule: label(V0,V1):- n_providers(V0,V2),intent_com_yuetu_shentu_intent_wechat_share(V0,V1),int_3(V2)
+Coverage (%): 2.00, Recall (%): 2.98, Precision (%): 100.00
+Rule: label(V0,V1):- n_api_calls(V0,V2),int_21(V2),intent_com_yuetu_shentu_intent_wechat_share(V0,V1)
+Coverage (%): 1.00, Recall (%): 3.05, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- int_1(V1),perm_android_permission_send_sms(V0,V1)
+label(V0,V1):- intent_com_yuetu_shentu_intent_wechat_share(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),int_1(V2)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_9(V2),n_permissions(V0,V2)
+label(V0,V1):- int_1(V1),suspicious_getsubscriberid(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V2),suspicious_ljava_lang_runtime___exec(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_com_yuetu_shentu_intent_wechat_share(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),perm_android_permission_write_external_storage(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),suspicious_getsubscriberid(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_system_alert_window(V0,V1),suspicious_ljava_lang_runtime___exec(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_get_tasks(V0,V1),suspicious_ljava_lang_runtime___exec(V0,V1)
+
+Avg. Coverage (%): 10.96, Avg. Recall (%): 29.20, Avg. Precision (%): 92.76
+++++++++++++++++++++++++++++++++++++++++++++++++
+

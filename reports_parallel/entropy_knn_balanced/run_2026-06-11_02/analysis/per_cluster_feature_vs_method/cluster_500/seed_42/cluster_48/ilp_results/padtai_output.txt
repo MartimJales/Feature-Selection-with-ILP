@@ -1,0 +1,75 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- int_1(V2),perm_com_htc_launcher_permission_write_settings(V0,V1),intent_com_google_firebase_messaging_event(V0,V2)
+Coverage (%): 27.80, Recall (%): 110.32, Precision (%): 99.29
+Rule: label(V0,V1):- intent_com_android_vending_install_referrer(V0,V2),perm_com_htc_launcher_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2)
+Coverage (%): 27.80, Recall (%): 37.17, Precision (%): 89.68
+Rule: label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2),intent_com_google_firebase_instance_id_event(V0,V2)
+Coverage (%): 27.80, Recall (%): 37.17, Precision (%): 93.29
+Rule: label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+Coverage (%): 24.20, Recall (%): 32.35, Precision (%): 89.63
+Rule: label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2)
+Coverage (%): 24.20, Recall (%): 32.35, Precision (%): 93.08
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- int_1(V2),perm_com_htc_launcher_permission_write_settings(V0,V1),intent_com_google_firebase_messaging_event(V0,V2)
+Coverage (%): 27.80, Recall (%): 110.32, Precision (%): 99.29
+Rule: label(V0,V1):- int_1(V2),perm_android_permission_access_wifi_state(V0,V2),intent_com_example_servicejar_action_start_spirit(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+Coverage (%): 17.80, Recall (%): 70.63, Precision (%): 92.71
+Rule: label(V0,V1):- intent_android_intent_action_package_removed(V0,V1),int_1(V1)
+Coverage (%): 11.00, Recall (%): 43.65, Precision (%): 100.00
+Rule: label(V0,V1):- intent_com_android_vending_install_referrer(V0,V2),perm_com_htc_launcher_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2)
+Coverage (%): 27.80, Recall (%): 37.17, Precision (%): 89.68
+Rule: label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2),intent_com_google_firebase_instance_id_event(V0,V2)
+Coverage (%): 27.80, Recall (%): 37.17, Precision (%): 93.29
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- int_1(V1),perm_com_android_agedlauncher_permission_write_settings(V0,V1)
+Coverage (%): 4.00, Recall (%): 15.87, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_package_removed(V0,V1),int_1(V1)
+Coverage (%): 11.00, Recall (%): 43.65, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_ljava_lang_runtime___exec(V0,V1),n_providers(V0,V2),int_6(V2)
+Coverage (%): 0.20, Recall (%): 0.27, Precision (%): 100.00
+Rule: label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),int_3(V2),n_providers(V0,V2)
+Coverage (%): 3.60, Recall (%): 4.81, Precision (%): 100.00
+Rule: label(V0,V1):- int_4(V2),suspicious_ljava_lang_runtime___exec(V0,V1),n_providers(V0,V2)
+Coverage (%): 2.00, Recall (%): 2.67, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- int_1(V1),perm_com_android_agedlauncher_permission_write_settings(V0,V1)
+Coverage (%): 4.00, Recall (%): 15.87, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_package_removed(V0,V1),int_1(V1)
+Coverage (%): 11.00, Recall (%): 43.65, Precision (%): 100.00
+Rule: label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),int_3(V2),n_providers(V0,V2)
+Coverage (%): 3.60, Recall (%): 4.81, Precision (%): 100.00
+Rule: label(V0,V1):- int_4(V2),suspicious_ljava_lang_runtime___exec(V0,V1),n_providers(V0,V2)
+Coverage (%): 2.00, Recall (%): 2.67, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),perm_com_htc_launcher_permission_write_settings(V0,V1),int_7(V2)
+Coverage (%): 6.00, Recall (%): 8.02, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- int_1(V1),perm_com_android_launcher_permission_read_settings(V0,V1)
+label(V0,V1):- intent_android_intent_action_package_removed(V0,V1),int_1(V1)
+label(V0,V1):- int_1(V2),perm_com_htc_launcher_permission_write_settings(V0,V1),intent_com_google_firebase_messaging_event(V0,V2)
+label(V0,V1):- n_permissions(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V1),int_10(V2)
+label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2)
+label(V0,V1):- n_permissions(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V1),int_11(V2)
+label(V0,V1):- intent_com_android_vending_install_referrer(V0,V2),perm_com_htc_launcher_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2)
+label(V0,V1):- perm_com_htc_launcher_permission_write_settings(V0,V1),perm_android_permission_read_phone_state(V0,V2),intent_com_google_firebase_instance_id_event(V0,V2)
+label(V0,V1):- int_2(V2),perm_com_htc_launcher_permission_write_settings(V0,V1),n_providers(V0,V2)
+label(V0,V1):- int_12(V2),n_permissions(V0,V2),intent_android_net_conn_connectivity_change(V0,V1)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),n_permissions(V0,V2),int_8(V2),perm_com_android_agedlauncher_permission_write_settings(V0,V1)
+label(V0,V1):- int_1(V2),perm_android_permission_access_wifi_state(V0,V2),intent_com_example_servicejar_action_start_spirit(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+
+Avg. Coverage (%): 16.94, Avg. Recall (%): 37.06, Avg. Precision (%): 93.38
+++++++++++++++++++++++++++++++++++++++++++++++++
+

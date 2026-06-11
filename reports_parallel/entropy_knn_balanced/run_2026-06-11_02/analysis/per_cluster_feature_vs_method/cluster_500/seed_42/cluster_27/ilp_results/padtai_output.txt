@@ -1,0 +1,77 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_0(V1)
+Coverage (%): 32.80, Recall (%): 116.31, Precision (%): 96.47
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),suspicious_ljava_lang_system___loadlibrary(V0,V1),int_0(V1)
+Coverage (%): 22.20, Recall (%): 30.92, Precision (%): 94.87
+Rule: label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_permissions(V0,V2),n_activities(V0,V2)
+Coverage (%): 10.20, Recall (%): 36.17, Precision (%): 92.73
+Rule: label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_permissions(V0,V2),int_5(V2)
+Coverage (%): 9.60, Recall (%): 34.04, Precision (%): 94.12
+Rule: label(V0,V1):- n_permissions(V0,V2),int_4(V2),suspicious_getcelllocation(V0,V1)
+Coverage (%): 9.40, Recall (%): 33.33, Precision (%): 90.38
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_0(V1)
+Coverage (%): 32.80, Recall (%): 116.31, Precision (%): 96.47
+Rule: label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_permissions(V0,V2),n_activities(V0,V2)
+Coverage (%): 10.20, Recall (%): 36.17, Precision (%): 92.73
+Rule: label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_permissions(V0,V2),int_5(V2)
+Coverage (%): 9.60, Recall (%): 34.04, Precision (%): 94.12
+Rule: label(V0,V1):- n_permissions(V0,V2),int_4(V2),suspicious_getcelllocation(V0,V1)
+Coverage (%): 9.40, Recall (%): 33.33, Precision (%): 90.38
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),suspicious_ljava_lang_system___loadlibrary(V0,V1),int_0(V1)
+Coverage (%): 22.20, Recall (%): 30.92, Precision (%): 94.87
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),int_1(V1)
+Coverage (%): 5.20, Recall (%): 18.44, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),intent_com_yuetu_shentu_intent_wechat_share(V0,V1)
+Coverage (%): 4.40, Recall (%): 15.60, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),int_1(V2),perm_android_permission_change_network_state(V0,V2)
+Coverage (%): 7.60, Recall (%): 26.95, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),n_api_calls(V0,V2),int_41(V2)
+Coverage (%): 0.40, Recall (%): 1.42, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_api_calls(V0,V2),int_20(V2)
+Coverage (%): 2.20, Recall (%): 3.06, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),int_1(V1)
+Coverage (%): 5.20, Recall (%): 18.44, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),intent_com_yuetu_shentu_intent_wechat_share(V0,V1)
+Coverage (%): 4.40, Recall (%): 15.60, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),int_1(V2),perm_android_permission_change_network_state(V0,V2)
+Coverage (%): 7.60, Recall (%): 26.95, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),n_api_calls(V0,V2),int_41(V2)
+Coverage (%): 0.40, Recall (%): 1.42, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_api_calls(V0,V2),int_20(V2)
+Coverage (%): 2.20, Recall (%): 3.06, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_send_sms(V0,V1),int_1(V1)
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V1),int_2(V2),n_permissions(V0,V2)
+label(V0,V1):- int_24(V2),perm_android_permission_record_audio(V0,V1),n_api_calls(V0,V2)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),int_1(V2),perm_android_permission_change_network_state(V0,V2)
+label(V0,V1):- int_6(V2),perm_android_permission_read_phone_state(V0,V1),n_permissions(V0,V2)
+label(V0,V1):- int_22(V2),n_api_calls(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1)
+label(V0,V1):- n_permissions(V0,V2),int_4(V2),suspicious_getcelllocation(V0,V1)
+label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_api_calls(V0,V2),int_26(V2)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),suspicious_ljava_lang_system___loadlibrary(V0,V1),int_0(V1)
+label(V0,V1):- perm_android_permission_record_audio(V0,V1),int_27(V2),n_api_calls(V0,V2)
+label(V0,V1):- int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_0(V1)
+label(V0,V1):- n_api_calls(V0,V2),suspicious_getcelllocation(V0,V1),int_29(V2)
+label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_permissions(V0,V2),int_5(V2)
+label(V0,V1):- perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V2),int_1(V2),perm_android_permission_record_audio(V0,V1)
+label(V0,V1):- perm_android_permission_record_audio(V0,V1),n_permissions(V0,V2),n_activities(V0,V2)
+
+Avg. Coverage (%): 10.05, Avg. Recall (%): 32.46, Avg. Precision (%): 93.01
+++++++++++++++++++++++++++++++++++++++++++++++++
+

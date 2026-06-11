@@ -1,0 +1,669 @@
+label(V0,V1):- n_permissions(V0,V2),int_8(V2),suspicious_getwifistate(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000010000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V1),int_0(V2),perm_android_permission_receive_sms(V0,V2),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000001000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_sms(V0,V2),int_1(V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),suspicious_adb_enabled(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000001000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),int_1(V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),intent_com_google_android_gms_iid_instanceid(V0,V2).
+1
+frozenbitarray('00000010000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_system_alert_window(V0,V2),int_1(V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1).
+1
+frozenbitarray('00000010000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V2),intent_android_intent_action_user_present(V0,V1),perm_android_permission_receive_sms(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_receive_sms(V0,V1),intent_android_intent_action_package_removed(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V2),perm_android_permission_receive_sms(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_receive_sms(V0,V1),intent_android_intent_action_package_added(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V2),perm_android_permission_receive_sms(V0,V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000001000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V2),perm_android_permission_get_tasks(V0,V2),int_1(V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2),int_0(V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_htc_launcher_permission_update_shortcut(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_majeur_launcher_permission_update_badge(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000001000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),int_1(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2),int_0(V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),int_1(V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_com_htc_launcher_permission_update_shortcut(V0,V1),int_1(V2),perm_android_permission_bluetooth(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_com_majeur_launcher_permission_update_badge(V0,V1),int_1(V2),perm_android_permission_bluetooth(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),suspicious_adb_enabled(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),int_1(V2),suspicious_adb_enabled(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V2),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),int_0(V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_htc_launcher_permission_update_shortcut(V0,V1),int_1(V2),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_majeur_launcher_permission_update_badge(V0,V1),int_1(V2),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V2),suspicious_adb_enabled(V0,V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),perm_android_permission_receive_sms(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),int_1(V2),perm_android_permission_receive_sms(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),intent_android_intent_action_user_present(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_android_intent_action_user_present(V0,V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),intent_android_intent_action_package_removed(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_android_intent_action_package_removed(V0,V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getsubscriberid(V0,V2),int_1(V1),int_0(V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- int_1(V1),suspicious_getsubscriberid(V0,V2),perm_com_htc_launcher_permission_update_shortcut(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- perm_com_anddoes_launcher_permission_update_count(V0,V2),int_1(V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_gms_iid_instanceid(V0,V2),int_1(V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2),int_0(V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_com_htc_launcher_permission_update_shortcut(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_com_majeur_launcher_permission_update_badge(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V2),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000001000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_majeur_launcher_permission_update_badge(V0,V2),int_1(V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V2),suspicious_adb_enabled(V0,V1),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000')
+True
+label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V2),int_1(V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V2),int_1(V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000100000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_system_alert_window(V0,V2),perm_android_permission_read_phone_state(V0,V2),int_0(V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000001000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_htc_launcher_permission_update_shortcut(V0,V1),int_1(V2),perm_android_permission_system_alert_window(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000001000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_system_alert_window(V0,V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000001000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_majeur_launcher_permission_update_badge(V0,V1),int_1(V2),perm_android_permission_system_alert_window(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000001000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),perm_android_permission_system_alert_window(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000001000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),int_1(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000001000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_anddoes_launcher_permission_update_count(V0,V2),int_1(V1),perm_android_permission_read_phone_state(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000001000000000000000')
+True
+label(V0,V1):- perm_com_majeur_launcher_permission_update_badge(V0,V2),int_1(V1),perm_android_permission_read_phone_state(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000001000000000000000')
+True
+label(V0,V1):- int_1(V1),perm_android_permission_read_phone_state(V0,V2),perm_com_htc_launcher_permission_update_shortcut(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000001000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),int_1(V1),int_0(V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000001000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_read_phone_state(V0,V2),suspicious_getsubscriberid(V0,V2),int_0(V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_htc_launcher_permission_update_shortcut(V0,V1),int_1(V2),perm_android_permission_read_phone_state(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_com_anddoes_launcher_permission_update_count(V0,V1),perm_android_permission_read_phone_state(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_majeur_launcher_permission_update_badge(V0,V1),int_1(V2),perm_android_permission_read_phone_state(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),perm_android_permission_system_alert_window(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000001000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),int_1(V2),perm_android_permission_read_phone_state(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V2),int_1(V1),perm_android_permission_read_phone_state(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_read_phone_state(V0,V2),suspicious_adb_enabled(V0,V1),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),suspicious_adb_enabled(V0,V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),intent_android_intent_action_user_present(V0,V1),intent_com_google_android_gms_iid_instanceid(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),intent_android_intent_action_user_present(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_android_intent_action_user_present(V0,V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_android_intent_action_user_present(V0,V1),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),perm_android_permission_receive_sms(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),perm_android_permission_receive_sms(V0,V1),intent_com_google_android_gms_iid_instanceid(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),perm_android_permission_receive_sms(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_receive_sms(V0,V1),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),intent_android_intent_action_user_present(V0,V1),perm_android_permission_receive_sms(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),intent_android_intent_action_package_removed(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_android_intent_action_package_removed(V0,V1),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),intent_android_intent_action_package_removed(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),intent_android_intent_action_package_removed(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V2),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),suspicious_landroid_telephony_smsmessage___getmessagebody(V0,V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000001000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),suspicious_adb_enabled(V0,V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),suspicious_adb_enabled(V0,V1),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000001000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),intent_android_intent_action_package_removed(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),perm_android_permission_get_tasks(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),suspicious_adb_enabled(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),n_used_permissions(V0,V2),suspicious_adb_enabled(V0,V1),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_adb_enabled(V0,V1),intent_android_intent_action_user_present(V0,V1),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),intent_android_net_conn_connectivity_change(V0,V1),suspicious_adb_enabled(V0,V1),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_adb_enabled(V0,V1),perm_android_permission_write_external_storage(V0,V1),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),intent_android_intent_action_user_present(V0,V1),int_8(V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000010000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),intent_android_intent_action_user_present(V0,V1),intent_android_intent_action_package_removed(V0,V1),int_8(V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000010000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),intent_android_intent_action_user_present(V0,V1),intent_android_intent_action_package_added(V0,V1),int_8(V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000010000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),intent_android_net_conn_connectivity_change(V0,V1),intent_android_intent_action_user_present(V0,V1),int_8(V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000010000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),perm_android_permission_write_external_storage(V0,V1),perm_android_permission_receive_sms(V0,V1),int_3(V2).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_package_removed(V0,V1),int_3(V2).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_user_present(V0,V1),int_3(V2).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_package_added(V0,V1),int_3(V2).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),intent_android_net_conn_connectivity_change(V0,V1),int_3(V2),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),perm_com_google_android_c2dm_permission_receive(V0,V1),perm_android_permission_write_external_storage(V0,V1),int_3(V2).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),perm_android_permission_write_external_storage(V0,V1),int_3(V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),suspicious_adb_enabled(V0,V1),int_3(V2),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V2),int_1(V1),perm_android_permission_write_external_storage(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_write_external_storage(V0,V2),suspicious_adb_enabled(V0,V1),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000')
+True
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),int_1(V1),perm_android_permission_write_external_storage(V0,V2),suspicious_adb_enabled(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000000000000000001000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),int_1(V2),intent_com_google_android_c2dm_intent_receive(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V1),int_1(V2),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_android_intent_action_package_removed(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),intent_android_intent_action_user_present(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_receive_sms(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),int_1(V2),perm_android_permission_read_phone_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000000000000001000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_external_storage(V0,V1),int_3(V2),n_permissions(V0,V2).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_external_storage(V0,V1).
+1
+frozenbitarray('00000000000000000000000000000000000001000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_adb_enabled(V0,V1),perm_android_permission_send_sms(V0,V1),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),perm_android_permission_send_sms(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),perm_android_permission_send_sms(V0,V1),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_getcelllocation(V0,V2),int_1(V2),perm_android_permission_send_sms(V0,V1),intent_com_google_android_gms_iid_instanceid(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),perm_android_permission_send_sms(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_send_sms(V0,V1),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),perm_android_permission_send_sms(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),perm_android_permission_write_external_storage(V0,V1),perm_android_permission_send_sms(V0,V1),int_3(V2).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_1(V2),perm_android_permission_send_sms(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),perm_android_permission_change_wifi_state(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),suspicious_adb_enabled(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),intent_android_net_conn_connectivity_change(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),intent_android_intent_action_package_removed(V0,V1),n_used_permissions(V0,V2),int_11(V2).
+1
+frozenbitarray('00000000000000000000000000000100000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_bluetooth(V0,V1),perm_android_permission_change_wifi_state(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000000000000000000000000000000000000000000000010000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),perm_android_permission_change_wifi_state(V0,V1),int_1(V2),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V1),int_1(V2),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),int_1(V2),intent_com_google_android_gms_iid_instanceid(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),int_1(V2),intent_android_intent_action_package_removed(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),int_1(V2),suspicious_adb_enabled(V0,V1),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_com_google_android_c2dm_permission_receive(V0,V1),int_1(V2),suspicious_getcelllocation(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_permissions(V0,V2),perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_write_external_storage(V0,V1),int_3(V2).
+1
+frozenbitarray('00000000000000000000000000010000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),int_1(V2),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_android_intent_action_package_added(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),perm_android_permission_change_wifi_state(V0,V1),int_1(V2),perm_android_permission_mount_unmount_filesystems(V0,V2).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),int_1(V2),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_android_intent_action_package_removed(V0,V1).
+1
+frozenbitarray('00000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V1),perm_android_permission_send_sms(V0,V2)
+Coverage (%): 20.80, Recall (%): 29.30, Precision (%): 96.30
+Rule: label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V1)
+Coverage (%): 19.40, Recall (%): 27.32, Precision (%): 97.98
+Rule: label(V0,V1):- n_used_permissions(V0,V2),suspicious_getsubscriberid(V0,V1),int_9(V2)
+Coverage (%): 18.80, Recall (%): 26.48, Precision (%): 94.95
+Rule: label(V0,V1):- intent_android_intent_action_user_present(V0,V1),int_1(V1)
+Coverage (%): 16.00, Recall (%): 22.54, Precision (%): 100.00
+Rule: label(V0,V1):- n_providers(V0,V1),perm_android_permission_read_phone_state(V0,V1),suspicious_getsubscriberid(V0,V1)
+Coverage (%): 15.40, Recall (%): 21.69, Precision (%): 92.77
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V1),perm_android_permission_send_sms(V0,V2)
+Coverage (%): 20.80, Recall (%): 29.30, Precision (%): 96.30
+Rule: label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V1)
+Coverage (%): 19.40, Recall (%): 27.32, Precision (%): 97.98
+Rule: label(V0,V1):- n_used_permissions(V0,V2),suspicious_getsubscriberid(V0,V1),int_9(V2)
+Coverage (%): 18.80, Recall (%): 26.48, Precision (%): 94.95
+Rule: label(V0,V1):- int_30(V2),n_api_calls(V0,V2),suspicious_getsubscriberid(V0,V1)
+Coverage (%): 7.00, Recall (%): 24.14, Precision (%): 94.59
+Rule: label(V0,V1):- intent_android_intent_action_user_present(V0,V1),int_1(V1)
+Coverage (%): 16.00, Recall (%): 22.54, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- intent_android_intent_action_user_present(V0,V1),int_1(V1)
+Coverage (%): 16.00, Recall (%): 22.54, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),suspicious_getsubscriberid(V0,V1),int_12(V2)
+Coverage (%): 3.80, Recall (%): 5.35, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V1)
+Coverage (%): 19.40, Recall (%): 27.32, Precision (%): 97.98
+Rule: label(V0,V1):- int_1(V1),suspicious_getcelllocation(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 9.40, Recall (%): 13.24, Precision (%): 97.92
+Rule: label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V1),perm_android_permission_send_sms(V0,V2)
+Coverage (%): 20.80, Recall (%): 29.30, Precision (%): 96.30
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- intent_android_intent_action_user_present(V0,V1),int_1(V1)
+Coverage (%): 16.00, Recall (%): 22.54, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),suspicious_getsubscriberid(V0,V1),int_12(V2)
+Coverage (%): 3.80, Recall (%): 5.35, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V1)
+Coverage (%): 19.40, Recall (%): 27.32, Precision (%): 97.98
+Rule: label(V0,V1):- int_1(V1),suspicious_getcelllocation(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 9.40, Recall (%): 13.24, Precision (%): 97.92
+Rule: label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V1),perm_android_permission_send_sms(V0,V2)
+Coverage (%): 20.80, Recall (%): 29.30, Precision (%): 96.30
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- intent_android_intent_action_user_present(V0,V1),int_1(V1)
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V1)
+label(V0,V1):- int_30(V2),n_api_calls(V0,V2),suspicious_getsubscriberid(V0,V1)
+label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V1),n_providers(V0,V2)
+label(V0,V1):- int_1(V1),suspicious_getcelllocation(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+label(V0,V1):- n_used_permissions(V0,V2),suspicious_getsubscriberid(V0,V1),int_9(V2)
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+label(V0,V1):- suspicious_getwifistate(V0,V2),int_1(V2),suspicious_getcelllocation(V0,V1)
+label(V0,V1):- int_1(V2),suspicious_getsubscriberid(V0,V1),perm_android_permission_send_sms(V0,V2)
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_read_phone_state(V0,V1),suspicious_getsubscriberid(V0,V1)
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V1),int_1(V2),perm_android_permission_bluetooth(V0,V2)
+
+Avg. Coverage (%): 13.53, Avg. Recall (%): 20.35, Avg. Precision (%): 94.31
+++++++++++++++++++++++++++++++++++++++++++++++++
+

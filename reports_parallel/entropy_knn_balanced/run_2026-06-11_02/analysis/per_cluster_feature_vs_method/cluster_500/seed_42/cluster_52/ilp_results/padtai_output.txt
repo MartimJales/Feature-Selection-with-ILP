@@ -1,0 +1,1307 @@
+label(V0,V1):- int_66(V2),perm_android_permission_read_sms(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_read_sms(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),int_2(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),int_1(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),n_providers(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),intent_com_google_firebase_instance_id_event(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),int_66(V2),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_write_settings(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_change_network_state(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),int_46(V2),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_41(V2),intent_com_google_firebase_instance_id_event(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),n_api_calls(V0,V2),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),n_api_calls(V0,V2),int_43(V2).
+1
+frozenbitarray('0000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_change_wifi_state(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_send_sms(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_get_tasks(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),intent_com_google_android_c2dm_intent_receive(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_46(V2),intent_com_google_android_c2dm_intent_receive(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_41(V2),intent_com_google_android_c2dm_intent_receive(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),int_43(V2).
+1
+frozenbitarray('0000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),intent_com_google_android_c2dm_intent_receive(V0,V1),n_api_calls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_access_download_manager(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V1),int_2(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_check_license(V0,V2),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_check_license(V0,V2),perm_android_permission_write_settings(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_settings(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_owner_data(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_check_license(V0,V2),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V2),perm_android_permission_access_download_manager(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_owner_data(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_change_wifi_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_change_wifi_state(V0,V2),perm_android_permission_write_owner_data(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_android_permission_access_download_manager(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_owner_data(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_send_sms(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_com_android_launcher_permission_write_settings(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_66(V2),perm_com_android_launcher_permission_write_settings(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_46(V2),perm_com_android_launcher_permission_write_settings(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_com_android_launcher_permission_write_settings(V0,V1),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_com_android_launcher_permission_write_settings(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_com_android_launcher2_permission_read_settings(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher2_permission_read_settings(V0,V1),int_46(V2),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher2_permission_read_settings(V0,V1),n_api_calls(V0,V2),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher2_permission_read_settings(V0,V1),int_5(V2),n_api_calls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_46(V2),perm_com_android_vending_check_license(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_41(V2),perm_com_android_vending_check_license(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_com_android_vending_check_license(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_com_android_vending_check_license(V0,V1),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_5(V2),perm_com_android_vending_check_license(V0,V1),n_api_calls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_check_license(V0,V1),int_2(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_send_sms(V0,V2),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V2),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_check_license(V0,V1),perm_android_permission_change_wifi_state(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_check_license(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_system_alert_window(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_system_alert_window(V0,V1),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_system_alert_window(V0,V1).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_check_license(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_system_alert_window(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_change_network_state(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V1),n_api_calls(V0,V2),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V1),int_5(V2),n_api_calls(V0,V2).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V1),perm_android_permission_access_download_manager(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_com_android_vending_check_license(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),n_urls(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),n_urls(V0,V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V1),n_api_calls(V0,V2),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V1),perm_com_android_vending_check_license(V0,V1),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),int_46(V2),n_permissions(V0,V2).
+1
+frozenbitarray('0100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_41(V2),n_providers(V0,V1),n_permissions(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000')
+True
+label(V0,V1):- n_providers(V0,V1),int_1(V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),n_providers(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_write_settings(V0,V2),n_providers(V0,V1),perm_android_permission_disable_keyguard(V0,V2).
+1
+frozenbitarray('0000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_change_wifi_state(V0,V2),int_0(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_change_wifi_state(V0,V2),perm_android_permission_write_owner_data(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V2),n_providers(V0,V1),perm_android_permission_change_wifi_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_change_wifi_state(V0,V2),intent_com_google_firebase_messaging_event(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_change_wifi_state(V0,V2),intent_com_google_firebase_instance_id_event(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_get_tasks(V0,V2),int_0(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_get_tasks(V0,V2),perm_android_permission_write_owner_data(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V2),n_providers(V0,V1),perm_android_permission_get_tasks(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_get_tasks(V0,V2),intent_com_google_firebase_messaging_event(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_providers(V0,V1),perm_android_permission_get_tasks(V0,V2),intent_com_google_firebase_instance_id_event(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),n_urls(V0,V2),perm_android_permission_receive_mms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_mms(V0,V1),n_api_calls(V0,V2),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_receive_mms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),n_providers(V0,V2),perm_android_permission_receive_mms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_receive_mms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_receive_mms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_mms(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_mms(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_receive_mms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_disable_keyguard(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_disable_keyguard(V0,V1),n_api_calls(V0,V2),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_disable_keyguard(V0,V1),int_5(V2),n_api_calls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_receive_sms(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_receive_sms(V0,V1),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_receive_sms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_sms(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_firebase_messaging_event(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_broadcast_sticky(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_broadcast_sticky(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_write_owner_data(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),n_api_calls(V0,V2),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_write_owner_data(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),int_2(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),int_1(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),n_providers(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_android_permission_write_owner_data(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_android_permission_write_owner_data(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_android_permission_write_owner_data(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),perm_android_permission_write_settings(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_send_sms(V0,V2),perm_android_permission_write_owner_data(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),perm_android_permission_change_wifi_state(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),perm_android_permission_get_tasks(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),perm_android_permission_change_network_state(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_write_owner_data(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_owner_data(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1),perm_android_permission_write_settings(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V1),perm_android_permission_write_owner_data(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_com_android_launcher_permission_read_settings(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_com_android_launcher_permission_read_settings(V0,V1),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_com_android_launcher_permission_read_settings(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_send_sms(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_send_sms(V0,V1),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_send_sms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_write_sms(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_write_sms(V0,V1),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_5(V2),n_api_calls(V0,V2),perm_android_permission_write_sms(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),intent_com_google_firebase_messaging_event(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),n_api_calls(V0,V2),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),int_5(V2),n_api_calls(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),int_2(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),int_1(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),n_providers(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),intent_com_google_firebase_messaging_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),intent_com_google_firebase_messaging_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),intent_com_google_firebase_messaging_event(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_write_settings(V0,V2),intent_com_google_firebase_messaging_event(V0,V1),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_com_android_launcher_permission_write_settings(V0,V2),intent_com_google_firebase_messaging_event(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),intent_com_google_firebase_messaging_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_send_sms(V0,V2),intent_com_google_firebase_messaging_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_write_settings(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_write_settings(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_get_tasks(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_get_tasks(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_change_wifi_state(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_change_wifi_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_change_network_state(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_sms(V0,V2),intent_com_google_firebase_messaging_event(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_3(V2),perm_android_permission_access_wifi_state(V0,V1),n_urls(V0,V2).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_access_wifi_state(V0,V1),int_36(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000')
+True
+label(V0,V1):- int_5(V2),perm_android_permission_access_wifi_state(V0,V1),n_api_calls(V0,V2).
+1
+frozenbitarray('0000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),int_0(V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),intent_com_google_firebase_messaging_event(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_sms(V0,V2),int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_firebase_messaging_event(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_sms(V0,V2),int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_firebase_instance_id_event(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_access_download_manager(V0,V1),perm_android_permission_access_download_manager(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_vending_check_license(V0,V2),int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),int_0(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_access_download_manager(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_write_owner_data(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_sms(V0,V2),int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_broadcast_sticky(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_android_permission_broadcast_sticky(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_broadcast_sticky(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_broadcast_sticky(V0,V2),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),int_1(V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_system_alert_window(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_write_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_com_android_launcher_permission_write_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_write_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_com_android_launcher_permission_write_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),int_1(V2),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_1(V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_com_android_launcher_permission_read_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_1(V2),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_com_android_launcher_permission_read_settings(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),int_0(V1),int_1(V2),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_android_permission_send_sms(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_send_sms(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_1(V2),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_sms(V0,V1),perm_android_permission_send_sms(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_send_sms(V0,V2),int_1(V2),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_send_sms(V0,V2),perm_android_permission_read_sms(V0,V1),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_android_permission_send_sms(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),int_0(V1),perm_android_permission_send_sms(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_send_sms(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_write_settings(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_write_settings(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_write_settings(V0,V2),perm_android_permission_broadcast_sticky(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_android_permission_broadcast_sticky(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_get_tasks(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_android_permission_get_tasks(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_get_tasks(V0,V2),perm_android_permission_broadcast_sticky(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_get_tasks(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_get_tasks(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_access_download_manager(V0,V1),perm_android_permission_get_tasks(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_broadcast_sticky(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_android_permission_change_wifi_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_change_wifi_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_change_wifi_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_change_wifi_state(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_change_wifi_state(V0,V2),perm_android_permission_broadcast_sticky(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_access_download_manager(V0,V1),perm_android_permission_change_wifi_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_change_network_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_android_permission_change_network_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_android_permission_change_network_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_broadcast_sticky(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_change_network_state(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_write_settings(V0,V2),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_change_network_state(V0,V2),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),int_0(V1),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_change_network_state(V0,V2),perm_android_permission_broadcast_sticky(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2),int_0(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_change_network_state(V0,V2),perm_android_permission_disable_keyguard(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_access_download_manager(V0,V2),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_sms(V0,V2),perm_android_permission_access_download_manager(V0,V1),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_send_sms(V0,V2),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_android_permission_change_network_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_get_tasks(V0,V2),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_change_network_state(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_1(V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_android_c2dm_intent_receive(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_1(V2),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_broadcast_sticky(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_send_sms(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_write_settings(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V2),perm_android_permission_broadcast_sticky(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_broadcast_sticky(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_get_tasks(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_send_sms(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_read_sms(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_read_sms(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_access_download_manager(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_change_wifi_state(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_change_network_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_android_permission_change_network_state(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),intent_com_google_firebase_instance_id_event(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_system_alert_window(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_change_wifi_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_change_wifi_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_write_settings(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_get_tasks(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_get_tasks(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_com_android_launcher_permission_write_settings(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),intent_com_google_firebase_instance_id_event(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_change_network_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- int_0(V1),intent_com_google_firebase_instance_id_event(V0,V1),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),perm_android_permission_change_network_state(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),int_0(V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),int_0(V1),perm_android_permission_change_network_state(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_read_logs(V0,V2),int_0(V1),perm_com_android_launcher_permission_write_settings(V0,V2),int_1(V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_com_android_vending_check_license(V0,V1),int_1(V2),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_android_permission_access_download_manager(V0,V1),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_system_alert_window(V0,V2),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V2),perm_com_android_vending_check_license(V0,V1),perm_android_permission_read_sms(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_receive_sms(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_com_android_vending_check_license(V0,V1),intent_com_google_firebase_messaging_event(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_write_settings(V0,V2),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_write_settings(V0,V2),perm_com_android_vending_check_license(V0,V1),perm_android_permission_read_sms(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_read_sms(V0,V2),perm_com_android_vending_check_license(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V1),perm_com_android_vending_check_license(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_write_sms(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_receive_mms(V0,V2),perm_com_android_vending_check_license(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_android_permission_access_download_manager(V0,V1),perm_com_android_vending_check_license(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V2),perm_com_android_vending_check_license(V0,V1),perm_android_permission_read_sms(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_send_sms(V0,V2),perm_com_android_vending_check_license(V0,V1),intent_com_google_android_c2dm_intent_receive(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_access_download_manager(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_get_tasks(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_access_download_manager(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2),perm_android_permission_get_tasks(V0,V1).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000')
+True
+label(V0,V1):- perm_android_permission_disable_keyguard(V0,V1),int_2(V2),perm_android_permission_read_sms(V0,V1),n_providers(V0,V2).
+1
+frozenbitarray('0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000')
+True
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_disable_keyguard(V0,V2),perm_android_permission_read_phone_state(V0,V2)
+Coverage (%): 51.40, Recall (%): 65.56, Precision (%): 94.14
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_com_android_launcher_permission_write_settings(V0,V1)
+Coverage (%): 42.40, Recall (%): 54.08, Precision (%): 94.22
+Rule: label(V0,V1):- perm_com_android_launcher2_permission_read_settings(V0,V1),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 41.60, Recall (%): 53.06, Precision (%): 97.65
+Rule: label(V0,V1):- int_1(V1),n_providers(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2)
+Coverage (%): 19.00, Recall (%): 24.23, Precision (%): 87.16
+Rule: label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_firebase_instance_id_event(V0,V2)
+Coverage (%): 12.40, Recall (%): 15.82, Precision (%): 71.26
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_disable_keyguard(V0,V2),perm_android_permission_read_phone_state(V0,V2)
+Coverage (%): 51.40, Recall (%): 65.56, Precision (%): 94.14
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_com_android_launcher_permission_write_settings(V0,V1)
+Coverage (%): 42.40, Recall (%): 54.08, Precision (%): 94.22
+Rule: label(V0,V1):- perm_com_android_launcher2_permission_read_settings(V0,V1),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 41.60, Recall (%): 53.06, Precision (%): 97.65
+Rule: label(V0,V1):- int_1(V1),n_providers(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2)
+Coverage (%): 19.00, Recall (%): 24.23, Precision (%): 87.16
+Rule: label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),intent_com_google_firebase_instance_id_event(V0,V2)
+Coverage (%): 12.40, Recall (%): 15.82, Precision (%): 71.26
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- int_70(V2),n_api_calls(V0,V2),perm_com_google_android_finsky_permission_bind_get_install_referrer_service(V0,V1)
+Coverage (%): 0.20, Recall (%): 0.93, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_com_android_vending_check_license(V0,V2),n_urls(V0,V2)
+Coverage (%): 12.20, Recall (%): 15.56, Precision (%): 98.39
+Rule: label(V0,V1):- perm_com_android_launcher2_permission_read_settings(V0,V1),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 41.60, Recall (%): 53.06, Precision (%): 97.65
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_com_android_launcher_permission_write_settings(V0,V1)
+Coverage (%): 42.40, Recall (%): 54.08, Precision (%): 94.22
+Rule: label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_disable_keyguard(V0,V2),perm_android_permission_read_phone_state(V0,V2)
+Coverage (%): 51.40, Recall (%): 65.56, Precision (%): 94.14
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_com_android_vending_check_license(V0,V2),n_urls(V0,V2)
+Coverage (%): 12.20, Recall (%): 15.56, Precision (%): 98.39
+Rule: label(V0,V1):- perm_com_android_launcher2_permission_read_settings(V0,V1),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 41.60, Recall (%): 53.06, Precision (%): 97.65
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_com_android_launcher_permission_write_settings(V0,V1)
+Coverage (%): 42.40, Recall (%): 54.08, Precision (%): 94.22
+Rule: label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_disable_keyguard(V0,V2),perm_android_permission_read_phone_state(V0,V2)
+Coverage (%): 51.40, Recall (%): 65.56, Precision (%): 94.14
+Rule: label(V0,V1):- int_1(V1),int_61(V2),n_api_calls(V0,V2)
+Coverage (%): 2.40, Recall (%): 3.06, Precision (%): 92.31
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_com_android_launcher2_permission_read_settings(V0,V1),perm_android_permission_read_phone_state(V0,V1)
+label(V0,V1):- int_1(V1),n_providers(V0,V2),intent_com_google_android_c2dm_intent_receive(V0,V2)
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_disable_keyguard(V0,V2),perm_android_permission_read_phone_state(V0,V2)
+label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_com_android_launcher_permission_write_settings(V0,V1)
+label(V0,V1):- perm_android_permission_change_wifi_state(V0,V1),perm_com_android_vending_check_license(V0,V2),n_urls(V0,V2)
+
+Avg. Coverage (%): 33.32, Avg. Recall (%): 42.50, Avg. Precision (%): 94.31
+++++++++++++++++++++++++++++++++++++++++++++++++
+

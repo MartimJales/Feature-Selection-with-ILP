@@ -1,0 +1,669 @@
+label(V0,V1):- n_urls(V0,V2),int_36(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),suspicious_base64(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),suspicious_cipher(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_base64(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_cipher(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V1),n_permissions(V0,V2),int_3(V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),int_36(V2),n_urls(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- int_12(V2),suspicious_base64(V0,V1),n_activities(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_base64(V0,V1),int_1(V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_base64(V0,V1),suspicious_base64(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_cipher(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_0(V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_com_android_browser_permission_write_history_bookmarks(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_access_fine_location(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_android_permission_get_tasks(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_phone_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_net_conn_connectivity_change(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_screen_on(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_com_android_launcher_permission_uninstall_shortcut(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_kill_background_processes(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_action_power_connected(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_screen_off(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_write_apn_settings(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_change_configuration(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_package_fully_removed(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_action_power_disconnected(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_access_coarse_location(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),int_0(V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),perm_com_android_browser_permission_write_history_bookmarks(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_access_fine_location(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_android_permission_get_tasks(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_phone_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_net_conn_connectivity_change(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_screen_on(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_uninstall_shortcut(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_kill_background_processes(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_action_power_connected(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_screen_off(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_write_apn_settings(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_change_configuration(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_package_fully_removed(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_action_power_disconnected(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_android_permission_access_coarse_location(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_0(V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_com_android_browser_permission_write_history_bookmarks(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_access_fine_location(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_android_permission_get_tasks(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_phone_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_net_conn_connectivity_change(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_screen_on(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_com_android_launcher_permission_uninstall_shortcut(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_kill_background_processes(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_action_power_connected(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_screen_off(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_write_apn_settings(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_change_configuration(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_package_fully_removed(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_action_power_disconnected(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_android_permission_access_coarse_location(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_system_alert_window(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_android_permission_read_phone_state(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_read_phone_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_getsubscriberid(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),suspicious_getsubscriberid(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_getsubscriberid(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_getsubscriberid(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V2),perm_android_permission_access_wifi_state(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- suspicious_base64(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_base64(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- n_permissions(V0,V2),int_3(V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- int_36(V2),n_urls(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- int_12(V2),n_activities(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),int_1(V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_base64(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_cipher(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),int_0(V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_com_android_browser_permission_write_history_bookmarks(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_access_fine_location(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_phone_state(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_screen_on(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_com_android_launcher_permission_uninstall_shortcut(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_kill_background_processes(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_action_power_connected(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_screen_off(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_write_apn_settings(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_change_configuration(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_package_fully_removed(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),intent_android_intent_action_action_power_disconnected(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_system_alert_window(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),int_0(V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),perm_com_android_browser_permission_write_history_bookmarks(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_access_fine_location(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_phone_state(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_screen_on(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_com_android_launcher_permission_uninstall_shortcut(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_kill_background_processes(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_action_power_connected(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_screen_off(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_write_apn_settings(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_change_configuration(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_package_fully_removed(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),intent_android_intent_action_action_power_disconnected(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_system_alert_window(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),int_0(V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_com_android_browser_permission_write_history_bookmarks(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_access_fine_location(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_phone_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_net_conn_connectivity_change(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_screen_on(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_com_android_launcher_permission_uninstall_shortcut(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_kill_background_processes(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_action_power_connected(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_screen_off(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_write_apn_settings(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_change_configuration(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_package_fully_removed(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),intent_android_intent_action_action_power_disconnected(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_system_alert_window(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_android_permission_read_phone_state(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_read_phone_state(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_read_phone_state(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_read_phone_state(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_getsubscriberid(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),suspicious_getsubscriberid(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_getsubscriberid(V0,V2),intent_android_intent_action_quickboot_poweron(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_getsubscriberid(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000')
+True
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- intent_android_intent_action_quickboot_poweron(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_mount_unmount_filesystems(V0,V2),int_1(V1).
+1
+frozenbitarray('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010')
+True
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_base64(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+Coverage (%): 66.80, Recall (%): 71.67, Precision (%): 96.81
+Rule: label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+Coverage (%): 52.80, Recall (%): 56.65, Precision (%): 94.62
+Rule: label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_read_phone_state(V0,V2),intent_android_intent_action_screen_on(V0,V1)
+Coverage (%): 15.20, Recall (%): 16.31, Precision (%): 83.52
+Rule: label(V0,V1):- n_api_calls(V0,V2),int_22(V2),intent_android_intent_action_screen_on(V0,V1)
+Coverage (%): 9.00, Recall (%): 9.66, Precision (%): 100.00
+Rule: label(V0,V1):- int_37(V2),intent_android_intent_action_screen_on(V0,V1),n_urls(V0,V2)
+Coverage (%): 6.40, Recall (%): 6.87, Precision (%): 91.43
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_base64(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+Coverage (%): 66.80, Recall (%): 71.67, Precision (%): 96.81
+Rule: label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+Coverage (%): 52.80, Recall (%): 56.65, Precision (%): 94.62
+Rule: label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_read_phone_state(V0,V2),intent_android_intent_action_screen_on(V0,V1)
+Coverage (%): 15.20, Recall (%): 16.31, Precision (%): 83.52
+Rule: label(V0,V1):- n_api_calls(V0,V2),int_22(V2),intent_android_intent_action_screen_on(V0,V1)
+Coverage (%): 9.00, Recall (%): 9.66, Precision (%): 100.00
+Rule: label(V0,V1):- int_37(V2),intent_android_intent_action_screen_on(V0,V1),n_urls(V0,V2)
+Coverage (%): 6.40, Recall (%): 6.87, Precision (%): 91.43
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- n_api_calls(V0,V2),int_22(V2),intent_android_intent_action_screen_on(V0,V1)
+Coverage (%): 9.00, Recall (%): 9.66, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_cipher(V0,V1),int_32(V2),n_api_calls(V0,V2)
+Coverage (%): 0.40, Recall (%): 0.43, Precision (%): 100.00
+Rule: label(V0,V1):- int_44(V2),intent_android_intent_action_screen_on(V0,V1),n_urls(V0,V2)
+Coverage (%): 2.80, Recall (%): 3.00, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_base64(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+Coverage (%): 66.80, Recall (%): 71.67, Precision (%): 96.81
+Rule: label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+Coverage (%): 52.80, Recall (%): 56.65, Precision (%): 94.62
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- n_api_calls(V0,V2),int_22(V2),intent_android_intent_action_screen_on(V0,V1)
+Coverage (%): 9.00, Recall (%): 9.66, Precision (%): 100.00
+Rule: label(V0,V1):- int_44(V2),intent_android_intent_action_screen_on(V0,V1),n_urls(V0,V2)
+Coverage (%): 2.80, Recall (%): 3.00, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_base64(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+Coverage (%): 66.80, Recall (%): 71.67, Precision (%): 96.81
+Rule: label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+Coverage (%): 52.80, Recall (%): 56.65, Precision (%): 94.62
+Rule: label(V0,V1):- int_37(V2),intent_android_intent_action_screen_on(V0,V1),n_urls(V0,V2)
+Coverage (%): 6.40, Recall (%): 6.87, Precision (%): 91.43
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V2),suspicious_ljava_lang_runtime___exec(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+label(V0,V1):- suspicious_base64(V0,V2),perm_android_permission_read_phone_state(V0,V2),intent_android_intent_action_screen_on(V0,V1)
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),suspicious_base64(V0,V2),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+
+Avg. Coverage (%): 44.93, Avg. Recall (%): 48.21, Avg. Precision (%): 91.65
+++++++++++++++++++++++++++++++++++++++++++++++++
+

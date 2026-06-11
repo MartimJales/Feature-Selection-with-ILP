@@ -1,0 +1,68 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),intent_com_mobiletool_appstore_action_main(V0,V2),suspicious_getsystemservice(V0,V2),int_1(V1)
+Coverage (%): 47.20, Recall (%): 78.67, Precision (%): 98.33
+Rule: label(V0,V1):- suspicious_base64(V0,V2),int_1(V2),suspicious_getpackageinfo(V0,V1),int_0(V1)
+Coverage (%): 14.20, Recall (%): 35.50, Precision (%): 94.67
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),n_urls(V0,V2),intent_android_intent_action_view(V0,V1),int_1(V2)
+Coverage (%): 13.60, Recall (%): 22.67, Precision (%): 86.08
+Rule: label(V0,V1):- suspicious_ljava_lang_system___load(V0,V2),suspicious_getpackageinfo(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 9.40, Recall (%): 23.50, Precision (%): 97.92
+Rule: label(V0,V1):- suspicious_cipher(V0,V2),suspicious_ljava_lang_system___load(V0,V2),intent_android_intent_action_view(V0,V1),int_1(V2)
+Coverage (%): 6.20, Recall (%): 10.33, Precision (%): 96.88
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),intent_com_mobiletool_appstore_action_main(V0,V2),suspicious_getsystemservice(V0,V2),int_1(V1)
+Coverage (%): 47.20, Recall (%): 78.67, Precision (%): 98.33
+Rule: label(V0,V1):- suspicious_base64(V0,V2),int_1(V2),suspicious_getpackageinfo(V0,V1),int_0(V1)
+Coverage (%): 14.20, Recall (%): 35.50, Precision (%): 94.67
+Rule: label(V0,V1):- suspicious_ljava_lang_system___load(V0,V2),suspicious_getpackageinfo(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 9.40, Recall (%): 23.50, Precision (%): 97.92
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),n_urls(V0,V2),intent_android_intent_action_view(V0,V1),int_1(V2)
+Coverage (%): 13.60, Recall (%): 22.67, Precision (%): 86.08
+Rule: label(V0,V1):- suspicious_cipher(V0,V1),n_api_calls(V0,V2),int_2(V2)
+Coverage (%): 5.80, Recall (%): 14.50, Precision (%): 82.86
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- intent_android_intent_action_boot_completed(V0,V1),int_1(V1)
+Coverage (%): 1.00, Recall (%): 1.67, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 1.60, Recall (%): 4.00, Precision (%): 100.00
+Rule: label(V0,V1):- perm_com_android_vending_billing(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 1.20, Recall (%): 3.00, Precision (%): 100.00
+Rule: label(V0,V1):- n_urls(V0,V2),int_5(V2),int_0(V1)
+Coverage (%): 0.20, Recall (%): 0.50, Precision (%): 100.00
+Rule: label(V0,V1):- n_services(V0,V2),int_4(V2),int_1(V1)
+Coverage (%): 0.20, Recall (%): 0.33, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- intent_android_intent_action_boot_completed(V0,V1),int_1(V1)
+Coverage (%): 1.00, Recall (%): 1.67, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_access_coarse_location(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 1.60, Recall (%): 4.00, Precision (%): 100.00
+Rule: label(V0,V1):- perm_com_android_vending_billing(V0,V2),int_1(V2),int_0(V1)
+Coverage (%): 1.20, Recall (%): 3.00, Precision (%): 100.00
+Rule: label(V0,V1):- int_6(V2),n_permissions(V0,V2),perm_android_permission_access_network_state(V0,V1)
+Coverage (%): 1.40, Recall (%): 3.50, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_boot_completed(V0,V1),n_urls(V0,V2),int_4(V2),suspicious_getpackageinfo(V0,V1)
+Coverage (%): 1.00, Recall (%): 2.50, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- suspicious_cipher(V0,V1),n_api_calls(V0,V2),int_2(V2)
+label(V0,V1):- suspicious_cipher(V0,V2),suspicious_ljava_lang_system___load(V0,V2),intent_android_intent_action_view(V0,V1),int_1(V2)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V1),intent_com_mobiletool_appstore_action_main(V0,V2),suspicious_getsystemservice(V0,V2),int_1(V1)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V1),n_urls(V0,V2),intent_android_intent_action_view(V0,V1),int_1(V2)
+label(V0,V1):- suspicious_ljava_lang_system___load(V0,V2),suspicious_getpackageinfo(V0,V2),int_1(V2),int_0(V1)
+label(V0,V1):- suspicious_base64(V0,V2),int_1(V2),suspicious_getpackageinfo(V0,V1),int_0(V1)
+
+Avg. Coverage (%): 16.07, Avg. Recall (%): 30.86, Avg. Precision (%): 92.79
+++++++++++++++++++++++++++++++++++++++++++++++++
+

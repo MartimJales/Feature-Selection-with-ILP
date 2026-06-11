@@ -1,0 +1,76 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- suspicious_ldalvik_system_dexclassloader_(V0,V1),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 29.40, Recall (%): 38.89, Precision (%): 93.63
+Rule: label(V0,V1):- intent_com_adroid_service(V0,V1),int_18(V2),n_api_calls(V0,V2)
+Coverage (%): 16.00, Recall (%): 21.16, Precision (%): 95.24
+Rule: label(V0,V1):- n_providers(V0,V1),n_activities(V0,V2),int_6(V2)
+Coverage (%): 12.40, Recall (%): 16.40, Precision (%): 83.78
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V2),intent_com_adroid_service(V0,V1),perm_android_permission_set_wallpaper(V0,V2)
+Coverage (%): 12.20, Recall (%): 16.14, Precision (%): 96.83
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V2),perm_android_permission_set_wallpaper(V0,V1),perm_com_google_android_c2dm_permission_receive(V0,V2)
+Coverage (%): 12.00, Recall (%): 15.87, Precision (%): 96.77
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- suspicious_ldalvik_system_dexclassloader_(V0,V1),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 29.40, Recall (%): 38.89, Precision (%): 93.63
+Rule: label(V0,V1):- intent_com_adroid_service(V0,V1),int_18(V2),n_api_calls(V0,V2)
+Coverage (%): 16.00, Recall (%): 21.16, Precision (%): 95.24
+Rule: label(V0,V1):- n_providers(V0,V1),n_activities(V0,V2),int_6(V2)
+Coverage (%): 12.40, Recall (%): 16.40, Precision (%): 83.78
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V2),intent_com_adroid_service(V0,V1),perm_android_permission_set_wallpaper(V0,V2)
+Coverage (%): 12.20, Recall (%): 16.14, Precision (%): 96.83
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V2),perm_android_permission_set_wallpaper(V0,V1),perm_com_google_android_c2dm_permission_receive(V0,V2)
+Coverage (%): 12.00, Recall (%): 15.87, Precision (%): 96.77
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- n_providers(V0,V1),int_25(V2),n_api_calls(V0,V2)
+Coverage (%): 0.20, Recall (%): 0.26, Precision (%): 100.00
+Rule: label(V0,V1):- n_urls(V0,V2),perm_android_permission_set_wallpaper(V0,V1),int_18(V2)
+Coverage (%): 2.20, Recall (%): 2.91, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_set_wallpaper(V0,V1),n_api_calls(V0,V2),int_12(V2)
+Coverage (%): 5.00, Recall (%): 6.61, Precision (%): 100.00
+Rule: label(V0,V1):- n_providers(V0,V1),n_api_calls(V0,V2),int_11(V2)
+Coverage (%): 1.00, Recall (%): 4.10, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),n_used_permissions(V0,V2),int_6(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1)
+Coverage (%): 11.80, Recall (%): 15.61, Precision (%): 98.33
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- n_urls(V0,V2),perm_android_permission_set_wallpaper(V0,V1),int_18(V2)
+Coverage (%): 2.20, Recall (%): 2.91, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_set_wallpaper(V0,V1),n_api_calls(V0,V2),int_12(V2)
+Coverage (%): 5.00, Recall (%): 6.61, Precision (%): 100.00
+Rule: label(V0,V1):- n_providers(V0,V1),n_api_calls(V0,V2),int_11(V2)
+Coverage (%): 1.00, Recall (%): 4.10, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),n_used_permissions(V0,V2),int_6(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1)
+Coverage (%): 11.80, Recall (%): 15.61, Precision (%): 98.33
+Rule: label(V0,V1):- suspicious_base64(V0,V1),n_activities(V0,V2),int_2(V2),n_permissions(V0,V2)
+Coverage (%): 11.80, Recall (%): 15.61, Precision (%): 98.33
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_kill_background_processes(V0,V1),perm_android_permission_access_network_state(V0,V1)
+label(V0,V1):- perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_access_network_state(V0,V1)
+label(V0,V1):- suspicious_ldalvik_system_dexclassloader_(V0,V1),perm_android_permission_read_phone_state(V0,V1)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V1),perm_android_permission_read_logs(V0,V1)
+label(V0,V1):- intent_android_intent_action_package_added(V0,V1),perm_android_permission_access_network_state(V0,V1)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_17(V2),n_api_calls(V0,V2)
+label(V0,V1):- n_providers(V0,V1),n_activities(V0,V2),int_6(V2)
+label(V0,V1):- intent_com_adroid_service(V0,V1),n_api_calls(V0,V2),int_16(V2)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V2),intent_com_adroid_service(V0,V1),perm_android_permission_set_wallpaper(V0,V2)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V2),perm_android_permission_set_wallpaper(V0,V1),perm_com_google_android_c2dm_permission_receive(V0,V2)
+label(V0,V1):- intent_com_adroid_service(V0,V1),n_urls(V0,V2),int_12(V2)
+label(V0,V1):- intent_com_adroid_service(V0,V1),int_18(V2),n_api_calls(V0,V2)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),n_used_permissions(V0,V2),int_6(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1)
+label(V0,V1):- suspicious_base64(V0,V1),n_activities(V0,V2),int_2(V2),n_permissions(V0,V2)
+
+Avg. Coverage (%): 12.23, Avg. Recall (%): 16.18, Avg. Precision (%): 93.24
+++++++++++++++++++++++++++++++++++++++++++++++++
+

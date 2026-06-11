@@ -1,0 +1,67 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),suspicious_getsystemservice(V0,V2),int_0(V2),int_1(V1)
+Coverage (%): 49.20, Recall (%): 79.61, Precision (%): 98.40
+Rule: label(V0,V1):- suspicious_base64(V0,V2),n_activities(V0,V2),suspicious_cipher(V0,V1)
+Coverage (%): 18.00, Recall (%): 29.13, Precision (%): 92.78
+Rule: label(V0,V1):- n_api_calls(V0,V2),n_activities(V0,V2),perm_android_permission_access_network_state(V0,V1)
+Coverage (%): 13.20, Recall (%): 21.36, Precision (%): 89.19
+Rule: label(V0,V1):- int_1(V2),suspicious_ljava_lang_runtime___exec(V0,V1),suspicious_ljava_lang_system___loadlibrary(V0,V2)
+Coverage (%): 12.40, Recall (%): 20.06, Precision (%): 88.57
+Rule: label(V0,V1):- int_1(V2),perm_android_permission_access_network_state(V0,V1),perm_android_permission_read_external_storage(V0,V2)
+Coverage (%): 7.40, Recall (%): 11.97, Precision (%): 88.10
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),suspicious_getsystemservice(V0,V2),int_0(V2),int_1(V1)
+Coverage (%): 49.20, Recall (%): 79.61, Precision (%): 98.40
+Rule: label(V0,V1):- suspicious_base64(V0,V2),n_activities(V0,V2),suspicious_cipher(V0,V1)
+Coverage (%): 18.00, Recall (%): 29.13, Precision (%): 92.78
+Rule: label(V0,V1):- n_api_calls(V0,V2),n_activities(V0,V2),perm_android_permission_access_network_state(V0,V1)
+Coverage (%): 13.20, Recall (%): 21.36, Precision (%): 89.19
+Rule: label(V0,V1):- int_1(V2),suspicious_ljava_lang_runtime___exec(V0,V1),suspicious_ljava_lang_system___loadlibrary(V0,V2)
+Coverage (%): 12.40, Recall (%): 20.06, Precision (%): 88.57
+Rule: label(V0,V1):- n_api_calls(V0,V2),int_3(V2),int_0(V1)
+Coverage (%): 4.60, Recall (%): 12.04, Precision (%): 92.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_send_sms(V0,V1)
+Coverage (%): 0.80, Recall (%): 1.29, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_boot_completed(V0,V1),int_1(V1)
+Coverage (%): 1.20, Recall (%): 1.94, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V2),suspicious_getdeviceid(V0,V2),int_0(V1)
+Coverage (%): 5.20, Recall (%): 8.41, Precision (%): 100.00
+Rule: label(V0,V1):- n_urls(V0,V2),int_5(V2),int_0(V1)
+Coverage (%): 0.20, Recall (%): 0.52, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V2),perm_android_permission_record_audio(V0,V2),int_0(V1)
+Coverage (%): 1.20, Recall (%): 1.94, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_send_sms(V0,V1)
+Coverage (%): 0.80, Recall (%): 1.29, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_boot_completed(V0,V1),int_1(V1)
+Coverage (%): 1.20, Recall (%): 1.94, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V2),suspicious_getdeviceid(V0,V2),int_0(V1)
+Coverage (%): 5.20, Recall (%): 8.41, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V2),perm_android_permission_record_audio(V0,V2),int_0(V1)
+Coverage (%): 1.20, Recall (%): 1.94, Precision (%): 100.00
+Rule: label(V0,V1):- int_7(V2),n_permissions(V0,V2),perm_android_permission_access_network_state(V0,V1)
+Coverage (%): 4.00, Recall (%): 6.47, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- int_1(V2),perm_android_permission_access_network_state(V0,V1),perm_android_permission_read_external_storage(V0,V2)
+label(V0,V1):- suspicious_base64(V0,V2),n_activities(V0,V2),suspicious_cipher(V0,V1)
+label(V0,V1):- int_1(V2),suspicious_ljava_lang_runtime___exec(V0,V1),suspicious_ljava_lang_system___loadlibrary(V0,V2)
+label(V0,V1):- n_api_calls(V0,V2),n_activities(V0,V2),perm_android_permission_access_network_state(V0,V1)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V1),suspicious_getsystemservice(V0,V2),int_0(V2),int_1(V1)
+
+Avg. Coverage (%): 20.04, Avg. Recall (%): 32.43, Avg. Precision (%): 91.41
+++++++++++++++++++++++++++++++++++++++++++++++++
+

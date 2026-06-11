@@ -1,0 +1,72 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- intent_android_intent_action_user_present(V0,V1),perm_android_permission_system_alert_window(V0,V2),n_providers(V0,V2)
+Coverage (%): 43.40, Recall (%): 46.47, Precision (%): 93.13
+Rule: label(V0,V1):- perm_android_permission_get_tasks(V0,V2),intent_android_intent_action_user_present(V0,V1),n_providers(V0,V2)
+Coverage (%): 41.80, Recall (%): 44.75, Precision (%): 94.14
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),suspicious_getsubscriberid(V0,V1)
+Coverage (%): 41.20, Recall (%): 44.11, Precision (%): 98.10
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_action_power_connected(V0,V1)
+Coverage (%): 40.40, Recall (%): 43.25, Precision (%): 98.06
+Rule: label(V0,V1):- n_used_permissions(V0,V2),int_9(V2),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 20.00, Recall (%): 21.41, Precision (%): 95.24
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- n_used_permissions(V0,V2),int_11(V2),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 7.00, Recall (%): 106.06, Precision (%): 100.00
+Rule: label(V0,V1):- int_11(V2),intent_android_intent_action_user_present(V0,V1),n_permissions(V0,V2)
+Coverage (%): 3.60, Recall (%): 54.55, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_user_present(V0,V1),perm_android_permission_system_alert_window(V0,V2),n_providers(V0,V2)
+Coverage (%): 43.40, Recall (%): 46.47, Precision (%): 93.13
+Rule: label(V0,V1):- perm_android_permission_get_tasks(V0,V2),intent_android_intent_action_user_present(V0,V1),n_providers(V0,V2)
+Coverage (%): 41.80, Recall (%): 44.75, Precision (%): 94.14
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),suspicious_getsubscriberid(V0,V1)
+Coverage (%): 41.20, Recall (%): 44.11, Precision (%): 98.10
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- n_used_permissions(V0,V2),int_11(V2),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 7.00, Recall (%): 106.06, Precision (%): 100.00
+Rule: label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_change_configuration(V0,V1),int_4(V2)
+Coverage (%): 0.40, Recall (%): 0.43, Precision (%): 100.00
+Rule: label(V0,V1):- n_providers(V0,V2),intent_android_intent_action_user_present(V0,V1),int_3(V2)
+Coverage (%): 3.60, Recall (%): 3.85, Precision (%): 100.00
+Rule: label(V0,V1):- int_11(V2),intent_android_intent_action_user_present(V0,V1),n_permissions(V0,V2)
+Coverage (%): 3.60, Recall (%): 54.55, Precision (%): 100.00
+Rule: label(V0,V1):- int_8(V2),intent_android_intent_action_user_present(V0,V1),perm_android_permission_read_phone_state(V0,V1),n_permissions(V0,V2)
+Coverage (%): 6.20, Recall (%): 6.64, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- n_used_permissions(V0,V2),int_11(V2),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 7.00, Recall (%): 106.06, Precision (%): 100.00
+Rule: label(V0,V1):- n_providers(V0,V2),intent_android_intent_action_user_present(V0,V1),int_3(V2)
+Coverage (%): 3.60, Recall (%): 3.85, Precision (%): 100.00
+Rule: label(V0,V1):- int_11(V2),intent_android_intent_action_user_present(V0,V1),n_permissions(V0,V2)
+Coverage (%): 3.60, Recall (%): 54.55, Precision (%): 100.00
+Rule: label(V0,V1):- int_8(V2),intent_android_intent_action_user_present(V0,V1),perm_android_permission_read_phone_state(V0,V1),n_permissions(V0,V2)
+Coverage (%): 6.20, Recall (%): 6.64, Precision (%): 100.00
+Rule: label(V0,V1):- n_used_permissions(V0,V2),int_8(V2),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 15.60, Recall (%): 16.70, Precision (%): 98.73
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_action_power_connected(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),suspicious_getsubscriberid(V0,V1)
+label(V0,V1):- n_used_permissions(V0,V2),int_11(V2),intent_android_intent_action_user_present(V0,V1)
+label(V0,V1):- n_used_permissions(V0,V2),int_8(V2),intent_android_intent_action_user_present(V0,V1)
+label(V0,V1):- intent_android_intent_action_user_present(V0,V1),perm_android_permission_system_alert_window(V0,V2),n_providers(V0,V2)
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),int_7(V2),n_permissions(V0,V2)
+label(V0,V1):- n_used_permissions(V0,V2),perm_android_permission_read_phone_state(V0,V1),n_permissions(V0,V2)
+label(V0,V1):- n_used_permissions(V0,V2),int_9(V2),intent_android_intent_action_user_present(V0,V1)
+label(V0,V1):- intent_android_intent_action_user_present(V0,V1),int_6(V2),n_permissions(V0,V2)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V2),intent_android_intent_action_user_present(V0,V1),n_providers(V0,V2)
+
+Avg. Coverage (%): 24.48, Avg. Recall (%): 36.07, Avg. Precision (%): 96.24
+++++++++++++++++++++++++++++++++++++++++++++++++
+

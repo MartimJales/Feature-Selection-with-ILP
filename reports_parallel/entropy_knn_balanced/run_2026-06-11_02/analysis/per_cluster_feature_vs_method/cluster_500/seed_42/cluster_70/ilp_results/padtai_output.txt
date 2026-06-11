@@ -1,0 +1,68 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_get_tasks(V0,V1),intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2)
+Coverage (%): 20.80, Recall (%): 135.06, Precision (%): 96.30
+Rule: label(V0,V1):- int_1(V2),n_services(V0,V2),intent_android_intent_action_phone_state(V0,V1)
+Coverage (%): 14.00, Recall (%): 90.91, Precision (%): 81.40
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_10(V2),n_permissions(V0,V2)
+Coverage (%): 8.60, Recall (%): 10.17, Precision (%): 89.58
+Rule: label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_21(V2),n_api_calls(V0,V2)
+Coverage (%): 8.40, Recall (%): 54.55, Precision (%): 97.67
+Rule: label(V0,V1):- int_8(V2),perm_android_permission_system_alert_window(V0,V1),n_permissions(V0,V2)
+Coverage (%): 8.20, Recall (%): 9.69, Precision (%): 89.13
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_get_tasks(V0,V1),intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2)
+Coverage (%): 20.80, Recall (%): 135.06, Precision (%): 96.30
+Rule: label(V0,V1):- int_1(V2),n_services(V0,V2),intent_android_intent_action_phone_state(V0,V1)
+Coverage (%): 14.00, Recall (%): 90.91, Precision (%): 81.40
+Rule: label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_21(V2),n_api_calls(V0,V2)
+Coverage (%): 8.40, Recall (%): 54.55, Precision (%): 97.67
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_11(V2),n_permissions(V0,V2)
+Coverage (%): 6.80, Recall (%): 44.16, Precision (%): 89.47
+Rule: label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_1(V1),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 5.80, Recall (%): 37.66, Precision (%): 82.86
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_23(V2),n_activities(V0,V2)
+Coverage (%): 2.20, Recall (%): 2.60, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_5(V2),n_providers(V0,V2)
+Coverage (%): 1.20, Recall (%): 1.42, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_27(V2),n_api_calls(V0,V2)
+Coverage (%): 6.80, Recall (%): 8.04, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_34(V2),n_activities(V0,V2)
+Coverage (%): 0.60, Recall (%): 0.71, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),n_services(V0,V2),n_permissions(V0,V2)
+Coverage (%): 2.00, Recall (%): 2.36, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_23(V2),n_activities(V0,V2)
+Coverage (%): 2.20, Recall (%): 2.60, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_5(V2),n_providers(V0,V2)
+Coverage (%): 1.20, Recall (%): 1.42, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_27(V2),n_api_calls(V0,V2)
+Coverage (%): 6.80, Recall (%): 8.04, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),n_services(V0,V2),n_permissions(V0,V2)
+Coverage (%): 2.00, Recall (%): 2.36, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_23(V2),n_api_calls(V0,V2)
+Coverage (%): 7.40, Recall (%): 8.75, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- int_1(V2),n_services(V0,V2),intent_android_intent_action_phone_state(V0,V1)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_21(V2),n_api_calls(V0,V2)
+label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_10(V2),n_permissions(V0,V2)
+label(V0,V1):- perm_android_permission_write_sms(V0,V1),int_11(V2),n_permissions(V0,V2)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_1(V1),perm_android_permission_read_phone_state(V0,V1)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2)
+
+Avg. Coverage (%): 10.73, Avg. Recall (%): 62.08, Avg. Precision (%): 89.55
+++++++++++++++++++++++++++++++++++++++++++++++++
+

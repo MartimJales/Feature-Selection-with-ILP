@@ -1,0 +1,72 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- int_14(V2),n_api_calls(V0,V2),int_1(V1)
+Coverage (%): 19.20, Recall (%): 69.57, Precision (%): 97.96
+Rule: label(V0,V1):- n_providers(V0,V2),int_1(V2),suspicious_sendtextmessage(V0,V1)
+Coverage (%): 18.60, Recall (%): 67.39, Precision (%): 97.89
+Rule: label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V1),int_1(V2),suspicious_ljava_lang_system___loadlibrary(V0,V2)
+Coverage (%): 14.80, Recall (%): 53.62, Precision (%): 97.37
+Rule: label(V0,V1):- int_0(V1),n_permissions(V0,V2),int_3(V2)
+Coverage (%): 12.00, Recall (%): 16.57, Precision (%): 98.36
+Rule: label(V0,V1):- int_0(V1),n_api_calls(V0,V2),n_activities(V0,V2)
+Coverage (%): 9.00, Recall (%): 12.43, Precision (%): 95.74
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- int_14(V2),n_api_calls(V0,V2),int_1(V1)
+Coverage (%): 19.20, Recall (%): 69.57, Precision (%): 97.96
+Rule: label(V0,V1):- n_providers(V0,V2),int_1(V2),suspicious_sendtextmessage(V0,V1)
+Coverage (%): 18.60, Recall (%): 67.39, Precision (%): 97.89
+Rule: label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V1),int_1(V2),suspicious_ljava_lang_system___loadlibrary(V0,V2)
+Coverage (%): 14.80, Recall (%): 53.62, Precision (%): 97.37
+Rule: label(V0,V1):- int_0(V1),n_permissions(V0,V2),int_3(V2)
+Coverage (%): 12.00, Recall (%): 16.57, Precision (%): 98.36
+Rule: label(V0,V1):- perm_com_android_vending_billing(V0,V2),int_1(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1)
+Coverage (%): 3.60, Recall (%): 13.04, Precision (%): 85.71
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- n_api_calls(V0,V2),n_urls(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1)
+Coverage (%): 1.80, Recall (%): 2.49, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),int_24(V2),n_urls(V0,V2)
+Coverage (%): 1.40, Recall (%): 1.93, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),intent_com_google_android_c2dm_intent_registration(V0,V2),int_1(V2)
+Coverage (%): 4.00, Recall (%): 5.52, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_urls(V0,V2),int_23(V2)
+Coverage (%): 3.00, Recall (%): 4.14, Precision (%): 100.00
+Rule: label(V0,V1):- int_6(V2),int_0(V1),n_activities(V0,V2)
+Coverage (%): 7.00, Recall (%): 9.67, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- n_api_calls(V0,V2),n_urls(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V1)
+Coverage (%): 1.80, Recall (%): 2.49, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),int_24(V2),n_urls(V0,V2)
+Coverage (%): 1.40, Recall (%): 1.93, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),intent_com_google_android_c2dm_intent_registration(V0,V2),int_1(V2)
+Coverage (%): 4.00, Recall (%): 5.52, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_urls(V0,V2),int_23(V2)
+Coverage (%): 3.00, Recall (%): 4.14, Precision (%): 100.00
+Rule: label(V0,V1):- int_6(V2),int_0(V1),n_activities(V0,V2)
+Coverage (%): 7.00, Recall (%): 9.67, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- n_api_calls(V0,V2),int_4(V2),suspicious_ldalvik_system_pathclassloader_(V0,V1)
+label(V0,V1):- intent_com_android_vending_install_referrer(V0,V2),int_0(V1),int_1(V2)
+label(V0,V1):- int_0(V1),int_1(V2),perm_com_google_android_c2dm_permission_receive(V0,V2)
+label(V0,V1):- int_0(V1),n_api_calls(V0,V2),n_activities(V0,V2)
+label(V0,V1):- int_0(V1),n_permissions(V0,V2),n_activities(V0,V2)
+label(V0,V1):- int_0(V1),n_permissions(V0,V2),int_3(V2)
+label(V0,V1):- int_6(V2),int_0(V1),n_api_calls(V0,V2)
+label(V0,V1):- n_providers(V0,V2),int_1(V2),suspicious_sendtextmessage(V0,V1)
+label(V0,V1):- perm_com_android_launcher_permission_install_shortcut(V0,V1),int_1(V2),suspicious_ljava_lang_system___loadlibrary(V0,V2)
+label(V0,V1):- int_14(V2),n_api_calls(V0,V2),int_1(V1)
+
+Avg. Coverage (%): 11.48, Avg. Recall (%): 27.65, Avg. Precision (%): 96.22
+++++++++++++++++++++++++++++++++++++++++++++++++
+

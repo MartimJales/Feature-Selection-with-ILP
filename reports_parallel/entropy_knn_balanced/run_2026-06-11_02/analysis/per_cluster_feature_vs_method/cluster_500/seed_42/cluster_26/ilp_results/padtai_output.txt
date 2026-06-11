@@ -1,0 +1,72 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- intent_android_intent_action_package_added(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V2)
+Coverage (%): 56.60, Recall (%): 577.55, Precision (%): 97.25
+Rule: label(V0,V1):- perm_android_permission_change_configuration(V0,V2),perm_com_android_launcher_permission_read_settings(V0,V1),perm_android_permission_access_wifi_state(V0,V2)
+Coverage (%): 47.80, Recall (%): 52.99, Precision (%): 95.98
+Rule: label(V0,V1):- perm_android_permission_change_configuration(V0,V1),int_0(V2),perm_android_permission_access_wifi_state(V0,V2)
+Coverage (%): 47.00, Recall (%): 52.11, Precision (%): 94.76
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_change_wifi_state(V0,V1)
+Coverage (%): 30.40, Recall (%): 33.70, Precision (%): 94.41
+Rule: label(V0,V1):- n_permissions(V0,V2),intent_android_intent_action_package_added(V0,V1),int_6(V2)
+Coverage (%): 14.20, Recall (%): 15.74, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- intent_android_intent_action_package_added(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V2)
+Coverage (%): 56.60, Recall (%): 577.55, Precision (%): 97.25
+Rule: label(V0,V1):- perm_android_permission_change_configuration(V0,V2),perm_com_android_launcher_permission_read_settings(V0,V1),perm_android_permission_access_wifi_state(V0,V2)
+Coverage (%): 47.80, Recall (%): 52.99, Precision (%): 95.98
+Rule: label(V0,V1):- perm_android_permission_change_configuration(V0,V1),int_0(V2),perm_android_permission_access_wifi_state(V0,V2)
+Coverage (%): 47.00, Recall (%): 52.11, Precision (%): 94.76
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_change_wifi_state(V0,V1)
+Coverage (%): 30.40, Recall (%): 33.70, Precision (%): 94.41
+Rule: label(V0,V1):- int_11(V2),n_api_calls(V0,V2),intent_android_net_conn_connectivity_change(V0,V1)
+Coverage (%): 2.60, Recall (%): 26.53, Precision (%): 81.25
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_get_package_size(V0,V1),int_1(V1)
+Coverage (%): 0.40, Recall (%): 4.08, Precision (%): 100.00
+Rule: label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V1),int_1(V1)
+Coverage (%): 1.00, Recall (%): 10.20, Precision (%): 100.00
+Rule: label(V0,V1):- n_api_calls(V0,V2),intent_android_intent_action_package_added(V0,V1),int_7(V2)
+Coverage (%): 3.00, Recall (%): 3.33, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),int_17(V2),intent_android_intent_action_package_added(V0,V1)
+Coverage (%): 0.20, Recall (%): 0.22, Precision (%): 100.00
+Rule: label(V0,V1):- int_2(V2),intent_android_intent_action_package_added(V0,V1),n_providers(V0,V2)
+Coverage (%): 12.40, Recall (%): 13.75, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- perm_android_permission_get_package_size(V0,V1),int_1(V1)
+Coverage (%): 0.40, Recall (%): 4.08, Precision (%): 100.00
+Rule: label(V0,V1):- perm_com_android_launcher_permission_read_settings(V0,V1),int_1(V1)
+Coverage (%): 1.00, Recall (%): 10.20, Precision (%): 100.00
+Rule: label(V0,V1):- n_api_calls(V0,V2),intent_android_intent_action_package_added(V0,V1),int_7(V2)
+Coverage (%): 3.00, Recall (%): 3.33, Precision (%): 100.00
+Rule: label(V0,V1):- int_2(V2),intent_android_intent_action_package_added(V0,V1),n_providers(V0,V2)
+Coverage (%): 12.40, Recall (%): 13.75, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_package_added(V0,V1),n_api_calls(V0,V2),int_9(V2)
+Coverage (%): 4.00, Recall (%): 4.43, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- int_2(V2),intent_android_intent_action_package_added(V0,V1),n_providers(V0,V2)
+label(V0,V1):- intent_android_intent_action_package_added(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V2)
+label(V0,V1):- n_permissions(V0,V2),intent_android_intent_action_package_added(V0,V1),int_4(V2)
+label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_8(V2),n_permissions(V0,V2)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2),perm_android_permission_change_wifi_state(V0,V1)
+label(V0,V1):- n_permissions(V0,V2),intent_android_intent_action_package_added(V0,V1),int_6(V2)
+label(V0,V1):- perm_android_permission_change_configuration(V0,V2),perm_com_android_launcher_permission_read_settings(V0,V1),perm_android_permission_access_wifi_state(V0,V2)
+label(V0,V1):- perm_android_permission_change_configuration(V0,V1),int_0(V2),perm_android_permission_access_wifi_state(V0,V2)
+label(V0,V1):- intent_android_intent_action_package_added(V0,V1),n_api_calls(V0,V2),int_18(V2)
+label(V0,V1):- int_12(V2),intent_android_intent_action_package_added(V0,V1),n_api_calls(V0,V2)
+
+Avg. Coverage (%): 25.24, Avg. Recall (%): 79.46, Avg. Precision (%): 95.60
+++++++++++++++++++++++++++++++++++++++++++++++++
+

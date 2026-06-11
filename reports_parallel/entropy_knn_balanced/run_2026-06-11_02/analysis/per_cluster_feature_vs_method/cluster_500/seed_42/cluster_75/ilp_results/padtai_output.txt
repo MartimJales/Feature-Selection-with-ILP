@@ -1,0 +1,74 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 52.40, Recall (%): 73.18, Precision (%): 95.62
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_net_conn_connectivity_change(V0,V1)
+Coverage (%): 43.20, Recall (%): 60.34, Precision (%): 96.00
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 41.60, Recall (%): 58.10, Precision (%): 94.12
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_package_added(V0,V1)
+Coverage (%): 31.80, Recall (%): 44.41, Precision (%): 95.78
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 31.20, Recall (%): 43.58, Precision (%): 95.71
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 52.40, Recall (%): 73.18, Precision (%): 95.62
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_net_conn_connectivity_change(V0,V1)
+Coverage (%): 43.20, Recall (%): 60.34, Precision (%): 96.00
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 41.60, Recall (%): 58.10, Precision (%): 94.12
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_package_added(V0,V1)
+Coverage (%): 31.80, Recall (%): 44.41, Precision (%): 95.78
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 31.20, Recall (%): 43.58, Precision (%): 95.71
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_net_conn_connectivity_change(V0,V1)
+Coverage (%): 43.20, Recall (%): 60.34, Precision (%): 96.00
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_21(V2),n_permissions(V0,V2)
+Coverage (%): 4.80, Recall (%): 6.70, Precision (%): 96.00
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_package_added(V0,V1)
+Coverage (%): 31.80, Recall (%): 44.41, Precision (%): 95.78
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 31.20, Recall (%): 43.58, Precision (%): 95.71
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 52.40, Recall (%): 73.18, Precision (%): 95.62
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_net_conn_connectivity_change(V0,V1)
+Coverage (%): 43.20, Recall (%): 60.34, Precision (%): 96.00
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_21(V2),n_permissions(V0,V2)
+Coverage (%): 4.80, Recall (%): 6.70, Precision (%): 96.00
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_package_added(V0,V1)
+Coverage (%): 31.80, Recall (%): 44.41, Precision (%): 95.78
+Rule: label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 31.20, Recall (%): 43.58, Precision (%): 95.71
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 52.40, Recall (%): 73.18, Precision (%): 95.62
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_package_added(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),perm_android_permission_read_logs(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),perm_android_permission_receive_sms(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_user_present(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_intent_action_package_removed(V0,V1)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),perm_android_permission_send_sms(V0,V1)
+label(V0,V1):- perm_android_permission_write_external_storage(V0,V1),intent_android_net_conn_connectivity_change(V0,V1)
+label(V0,V1):- intent_android_intent_action_package_removed(V0,V1),intent_com_google_firebase_instance_id_event(V0,V2),perm_android_permission_write_external_storage(V0,V2)
+label(V0,V1):- intent_android_intent_action_package_removed(V0,V1),suspicious_adb_enabled(V0,V2),perm_android_permission_write_external_storage(V0,V2)
+label(V0,V1):- int_1(V2),perm_android_permission_get_tasks(V0,V1),intent_android_intent_action_package_removed(V0,V1),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+
+Avg. Coverage (%): 27.25, Avg. Recall (%): 38.06, Avg. Precision (%): 91.46
+++++++++++++++++++++++++++++++++++++++++++++++++
+

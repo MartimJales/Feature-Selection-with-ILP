@@ -1,0 +1,68 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+Coverage (%): 35.20, Recall (%): 54.15, Precision (%): 96.17
+Rule: label(V0,V1):- perm_android_permission_read_sms(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+Coverage (%): 29.00, Recall (%): 44.62, Precision (%): 94.77
+Rule: label(V0,V1):- int_1(V1),intent_android_net_conn_connectivity_change(V0,V1),perm_android_permission_change_network_state(V0,V1)
+Coverage (%): 16.40, Recall (%): 25.23, Precision (%): 94.25
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_com_oppo_launcher_permission_write_settings(V0,V2),perm_android_permission_access_wifi_state(V0,V2)
+Coverage (%): 11.40, Recall (%): 17.54, Precision (%): 87.69
+Rule: label(V0,V1):- perm_android_permission_access_wifi_state(V0,V1),n_receivers(V0,V1)
+Coverage (%): 10.20, Recall (%): 15.69, Precision (%): 78.46
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+Coverage (%): 35.20, Recall (%): 54.15, Precision (%): 96.17
+Rule: label(V0,V1):- perm_android_permission_read_sms(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+Coverage (%): 29.00, Recall (%): 44.62, Precision (%): 94.77
+Rule: label(V0,V1):- int_1(V1),intent_android_net_conn_connectivity_change(V0,V1),perm_android_permission_change_network_state(V0,V1)
+Coverage (%): 16.40, Recall (%): 25.23, Precision (%): 94.25
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_com_oppo_launcher_permission_write_settings(V0,V2),perm_android_permission_access_wifi_state(V0,V2)
+Coverage (%): 11.40, Recall (%): 17.54, Precision (%): 87.69
+Rule: label(V0,V1):- perm_android_permission_access_wifi_state(V0,V1),n_receivers(V0,V1)
+Coverage (%): 10.20, Recall (%): 15.69, Precision (%): 78.46
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- int_50(V2),n_api_calls(V0,V2),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 1.60, Recall (%): 4.57, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),int_47(V2),n_api_calls(V0,V2)
+Coverage (%): 4.80, Recall (%): 7.38, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),int_54(V2),n_api_calls(V0,V2)
+Coverage (%): 1.40, Recall (%): 2.15, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_user_present(V0,V1),int_1(V1),n_api_calls(V0,V2),int_42(V2)
+Coverage (%): 0.80, Recall (%): 1.23, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+Coverage (%): 35.20, Recall (%): 54.15, Precision (%): 96.17
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- int_50(V2),n_api_calls(V0,V2),perm_android_permission_read_phone_state(V0,V1)
+Coverage (%): 1.60, Recall (%): 4.57, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),int_47(V2),n_api_calls(V0,V2)
+Coverage (%): 4.80, Recall (%): 7.38, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),int_54(V2),n_api_calls(V0,V2)
+Coverage (%): 1.40, Recall (%): 2.15, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_user_present(V0,V1),int_1(V1),n_api_calls(V0,V2),int_42(V2)
+Coverage (%): 0.80, Recall (%): 1.23, Precision (%): 100.00
+Rule: label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+Coverage (%): 35.20, Recall (%): 54.15, Precision (%): 96.17
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_read_sms(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+label(V0,V1):- perm_android_permission_access_wifi_state(V0,V1),n_receivers(V0,V1)
+label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_android_permission_access_wifi_state(V0,V1)
+label(V0,V1):- int_1(V1),intent_android_net_conn_connectivity_change(V0,V1),perm_android_permission_change_network_state(V0,V1)
+label(V0,V1):- perm_android_permission_send_sms(V0,V1),perm_com_oppo_launcher_permission_write_settings(V0,V2),perm_android_permission_access_wifi_state(V0,V2)
+label(V0,V1):- int_1(V2),perm_android_permission_send_sms(V0,V1),intent_com_google_firebase_messaging_event(V0,V2)
+
+Avg. Coverage (%): 18.60, Avg. Recall (%): 28.62, Avg. Precision (%): 90.01
+++++++++++++++++++++++++++++++++++++++++++++++++
+

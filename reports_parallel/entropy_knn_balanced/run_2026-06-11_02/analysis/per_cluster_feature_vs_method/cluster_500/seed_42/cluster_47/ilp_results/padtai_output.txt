@@ -1,0 +1,72 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),intent_com_google_firebase_messaging_event(V0,V2),intent_android_intent_action_package_removed(V0,V1)
+Coverage (%): 38.40, Recall (%): 50.79, Precision (%): 95.52
+Rule: label(V0,V1):- intent_co_ronash_pushe_service_screenstateservice(V0,V1),perm_android_permission_access_wifi_state(V0,V2),intent_com_google_firebase_messaging_event(V0,V2)
+Coverage (%): 33.00, Recall (%): 43.65, Precision (%): 97.06
+Rule: label(V0,V1):- int_0(V1),n_providers(V0,V2),int_2(V2)
+Coverage (%): 15.60, Recall (%): 20.63, Precision (%): 90.70
+Rule: label(V0,V1):- int_0(V1),int_3(V2),n_providers(V0,V2)
+Coverage (%): 11.60, Recall (%): 15.34, Precision (%): 98.31
+Rule: label(V0,V1):- n_receivers(V0,V2),int_3(V2),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 9.80, Recall (%): 12.96, Precision (%): 85.96
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),intent_com_google_firebase_messaging_event(V0,V2),intent_android_intent_action_package_removed(V0,V1)
+Coverage (%): 38.40, Recall (%): 50.79, Precision (%): 95.52
+Rule: label(V0,V1):- intent_co_ronash_pushe_service_screenstateservice(V0,V1),perm_android_permission_access_wifi_state(V0,V2),intent_com_google_firebase_messaging_event(V0,V2)
+Coverage (%): 33.00, Recall (%): 43.65, Precision (%): 97.06
+Rule: label(V0,V1):- intent_android_intent_action_package_removed(V0,V1),int_1(V1)
+Coverage (%): 5.80, Recall (%): 23.77, Precision (%): 78.38
+Rule: label(V0,V1):- int_31(V2),n_api_calls(V0,V2),perm_android_permission_get_tasks(V0,V1)
+Coverage (%): 5.20, Recall (%): 21.31, Precision (%): 96.30
+Rule: label(V0,V1):- int_0(V1),n_providers(V0,V2),int_2(V2)
+Coverage (%): 15.60, Recall (%): 20.63, Precision (%): 90.70
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- intent_co_ronash_pushe_service_screenstateservice(V0,V1),int_1(V1)
+Coverage (%): 3.40, Recall (%): 13.93, Precision (%): 100.00
+Rule: label(V0,V1):- intent_com_evernote_android_job_add_job_creator(V0,V1),int_1(V1)
+Coverage (%): 3.20, Recall (%): 13.11, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),int_5(V2),n_providers(V0,V2)
+Coverage (%): 1.80, Recall (%): 2.38, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_receivers(V0,V2),int_16(V2)
+Coverage (%): 0.20, Recall (%): 0.26, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_api_calls(V0,V2),int_21(V2)
+Coverage (%): 6.00, Recall (%): 7.94, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- intent_co_ronash_pushe_service_screenstateservice(V0,V1),int_1(V1)
+Coverage (%): 3.40, Recall (%): 13.93, Precision (%): 100.00
+Rule: label(V0,V1):- intent_com_evernote_android_job_add_job_creator(V0,V1),int_1(V1)
+Coverage (%): 3.20, Recall (%): 13.11, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),int_5(V2),n_providers(V0,V2)
+Coverage (%): 1.80, Recall (%): 2.38, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_api_calls(V0,V2),int_21(V2)
+Coverage (%): 6.00, Recall (%): 7.94, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_providers(V0,V2),int_6(V2)
+Coverage (%): 1.60, Recall (%): 2.12, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- intent_android_intent_action_package_removed(V0,V1),int_1(V1)
+label(V0,V1):- int_7(V2),n_receivers(V0,V2),intent_android_intent_action_user_present(V0,V1)
+label(V0,V1):- int_0(V1),n_providers(V0,V2),int_2(V2)
+label(V0,V1):- int_0(V1),int_3(V2),n_providers(V0,V2)
+label(V0,V1):- int_31(V2),n_api_calls(V0,V2),perm_android_permission_get_tasks(V0,V1)
+label(V0,V1):- n_receivers(V0,V2),int_3(V2),perm_android_permission_mount_unmount_filesystems(V0,V1)
+label(V0,V1):- intent_co_ronash_pushe_service_screenstateservice(V0,V1),perm_android_permission_access_wifi_state(V0,V2),intent_com_google_firebase_messaging_event(V0,V2)
+label(V0,V1):- perm_com_android_launcher_permission_uninstall_shortcut(V0,V2),perm_android_permission_access_wifi_state(V0,V1),int_1(V2)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V2),intent_com_google_firebase_messaging_event(V0,V2),intent_android_intent_action_package_removed(V0,V1)
+label(V0,V1):- n_api_calls(V0,V2),perm_android_permission_change_wifi_state(V0,V1),int_27(V2)
+
+Avg. Coverage (%): 14.16, Avg. Recall (%): 23.17, Avg. Precision (%): 91.72
+++++++++++++++++++++++++++++++++++++++++++++++++
+

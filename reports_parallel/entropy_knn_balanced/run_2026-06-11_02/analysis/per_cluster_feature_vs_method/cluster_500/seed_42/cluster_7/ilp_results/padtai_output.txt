@@ -1,0 +1,79 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- suspicious_getdeviceid(V0,V2),suspicious_sendtextmessage(V0,V1),suspicious_getpackageinfo(V0,V2)
+Coverage (%): 32.80, Recall (%): 56.55, Precision (%): 92.13
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+Coverage (%): 19.40, Recall (%): 33.45, Precision (%): 97.00
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V2),suspicious_ldalvik_system_dexclassloader_(V0,V2),suspicious_sendtextmessage(V0,V1)
+Coverage (%): 18.80, Recall (%): 32.41, Precision (%): 94.95
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V2)
+Coverage (%): 17.40, Recall (%): 30.00, Precision (%): 94.57
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),int_2(V2),n_activities(V0,V2),suspicious_ldalvik_system_dexclassloader_(V0,V1)
+Coverage (%): 16.00, Recall (%): 27.59, Precision (%): 91.95
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- suspicious_getdeviceid(V0,V2),suspicious_sendtextmessage(V0,V1),suspicious_getpackageinfo(V0,V2)
+Coverage (%): 32.80, Recall (%): 56.55, Precision (%): 92.13
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+Coverage (%): 19.40, Recall (%): 33.45, Precision (%): 97.00
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V2),suspicious_ldalvik_system_dexclassloader_(V0,V2),suspicious_sendtextmessage(V0,V1)
+Coverage (%): 18.80, Recall (%): 32.41, Precision (%): 94.95
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V2)
+Coverage (%): 17.40, Recall (%): 30.00, Precision (%): 94.57
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),int_2(V2),n_activities(V0,V2),suspicious_ldalvik_system_dexclassloader_(V0,V1)
+Coverage (%): 16.00, Recall (%): 27.59, Precision (%): 91.95
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),n_activities(V0,V2),suspicious_ljava_lang_system___load(V0,V2)
+Coverage (%): 2.40, Recall (%): 4.14, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),n_activities(V0,V2),int_5(V2)
+Coverage (%): 12.60, Recall (%): 21.72, Precision (%): 98.44
+Rule: label(V0,V1):- n_activities(V0,V2),n_permissions(V0,V2),int_2(V2),suspicious_ldalvik_system_dexclassloader_(V0,V1)
+Coverage (%): 12.20, Recall (%): 21.03, Precision (%): 98.39
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),perm_android_permission_set_wallpaper(V0,V2)
+Coverage (%): 10.80, Recall (%): 18.62, Precision (%): 98.18
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),suspicious_sendtextmessage(V0,V1)
+Coverage (%): 10.40, Recall (%): 17.93, Precision (%): 98.11
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),n_activities(V0,V2),suspicious_ljava_lang_system___load(V0,V2)
+Coverage (%): 2.40, Recall (%): 4.14, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),n_activities(V0,V2),int_5(V2)
+Coverage (%): 12.60, Recall (%): 21.72, Precision (%): 98.44
+Rule: label(V0,V1):- n_activities(V0,V2),n_permissions(V0,V2),int_2(V2),suspicious_ldalvik_system_dexclassloader_(V0,V1)
+Coverage (%): 12.20, Recall (%): 21.03, Precision (%): 98.39
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),perm_android_permission_set_wallpaper(V0,V2)
+Coverage (%): 10.80, Recall (%): 18.62, Precision (%): 98.18
+Rule: label(V0,V1):- perm_android_permission_access_network_state(V0,V1),suspicious_sendtextmessage(V0,V1)
+Coverage (%): 10.40, Recall (%): 17.93, Precision (%): 98.11
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- suspicious_getsubscriberid(V0,V1),suspicious_getpackageinfo(V0,V1)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V1),suspicious_sendtextmessage(V0,V1)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V1),suspicious_getsubscriberid(V0,V1)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),n_api_calls(V0,V2),int_16(V2)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),n_activities(V0,V2),int_5(V2)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),perm_android_permission_set_wallpaper(V0,V2)
+label(V0,V1):- suspicious_getdeviceid(V0,V2),suspicious_sendtextmessage(V0,V1),suspicious_getpackageinfo(V0,V2)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),int_12(V2),n_api_calls(V0,V2)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),perm_com_android_vending_billing(V0,V2)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),n_providers(V0,V2)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),n_receivers(V0,V2)
+label(V0,V1):- suspicious_getsubscriberid(V0,V2),suspicious_ldalvik_system_dexclassloader_(V0,V2),suspicious_sendtextmessage(V0,V1)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),n_activities(V0,V2),int_4(V2)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),suspicious_ljava_lang_system___load(V0,V2)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),perm_android_permission_access_network_state(V0,V2),suspicious_ldalvik_system_pathclassloader_(V0,V2)
+label(V0,V1):- perm_android_permission_access_network_state(V0,V1),int_2(V2),n_activities(V0,V2),suspicious_ldalvik_system_dexclassloader_(V0,V1)
+label(V0,V1):- n_activities(V0,V2),n_permissions(V0,V2),int_2(V2),suspicious_ldalvik_system_dexclassloader_(V0,V1)
+
+Avg. Coverage (%): 13.86, Avg. Recall (%): 23.89, Avg. Precision (%): 95.30
+++++++++++++++++++++++++++++++++++++++++++++++++
+

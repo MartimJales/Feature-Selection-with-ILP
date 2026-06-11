@@ -1,0 +1,74 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_1(V1)
+Coverage (%): 33.60, Recall (%): 54.55, Precision (%): 99.41
+Rule: label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),int_1(V1)
+Coverage (%): 18.00, Recall (%): 29.22, Precision (%): 93.75
+Rule: label(V0,V1):- int_1(V1),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 17.80, Recall (%): 28.90, Precision (%): 98.89
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 15.20, Recall (%): 24.68, Precision (%): 95.00
+Rule: label(V0,V1):- int_1(V2),intent_android_intent_action_package_added(V0,V1),n_providers(V0,V2)
+Coverage (%): 14.60, Recall (%): 23.70, Precision (%): 97.33
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_1(V1)
+Coverage (%): 33.60, Recall (%): 54.55, Precision (%): 99.41
+Rule: label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),int_1(V1)
+Coverage (%): 18.00, Recall (%): 29.22, Precision (%): 93.75
+Rule: label(V0,V1):- int_1(V1),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 17.80, Recall (%): 28.90, Precision (%): 98.89
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+Coverage (%): 15.20, Recall (%): 24.68, Precision (%): 95.00
+Rule: label(V0,V1):- int_1(V2),intent_android_intent_action_package_added(V0,V1),n_providers(V0,V2)
+Coverage (%): 14.60, Recall (%): 23.70, Precision (%): 97.33
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- int_0(V1),int_10(V2),n_urls(V0,V2)
+Coverage (%): 0.60, Recall (%): 1.56, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_1(V1)
+Coverage (%): 33.60, Recall (%): 54.55, Precision (%): 99.41
+Rule: label(V0,V1):- int_1(V1),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 17.80, Recall (%): 28.90, Precision (%): 98.89
+Rule: label(V0,V1):- int_1(V2),int_0(V1),intent_com_google_android_c2dm_intent_receive(V0,V2)
+Coverage (%): 9.00, Recall (%): 14.61, Precision (%): 97.83
+Rule: label(V0,V1):- int_1(V1),suspicious_getcelllocation(V0,V1)
+Coverage (%): 8.60, Recall (%): 13.96, Precision (%): 97.73
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- int_0(V1),int_10(V2),n_urls(V0,V2)
+Coverage (%): 0.60, Recall (%): 1.56, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_1(V1)
+Coverage (%): 33.60, Recall (%): 54.55, Precision (%): 99.41
+Rule: label(V0,V1):- int_1(V1),intent_android_intent_action_user_present(V0,V1)
+Coverage (%): 17.80, Recall (%): 28.90, Precision (%): 98.89
+Rule: label(V0,V1):- int_1(V2),int_0(V1),intent_com_google_android_c2dm_intent_receive(V0,V2)
+Coverage (%): 9.00, Recall (%): 14.61, Precision (%): 97.83
+Rule: label(V0,V1):- int_1(V1),suspicious_getcelllocation(V0,V1)
+Coverage (%): 8.60, Recall (%): 13.96, Precision (%): 97.73
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- perm_android_permission_system_alert_window(V0,V1),int_1(V1)
+label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1)
+label(V0,V1):- int_1(V1),intent_android_intent_action_user_present(V0,V1)
+label(V0,V1):- int_1(V1),suspicious_getcelllocation(V0,V1)
+label(V0,V1):- int_1(V1),perm_com_android_launcher_permission_install_shortcut(V0,V1)
+label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_1(V1)
+label(V0,V1):- n_permissions(V0,V2),int_0(V1),int_3(V2)
+label(V0,V1):- int_1(V2),intent_android_intent_action_package_added(V0,V1),n_providers(V0,V2)
+label(V0,V1):- suspicious_ldalvik_system_pathclassloader_(V0,V2),int_1(V2),int_0(V1)
+label(V0,V1):- int_5(V2),n_urls(V0,V2),perm_android_permission_read_phone_state(V0,V1)
+label(V0,V1):- n_permissions(V0,V2),int_5(V2),n_receivers(V0,V1)
+label(V0,V1):- int_1(V2),int_0(V1),intent_com_google_android_c2dm_intent_receive(V0,V2)
+
+Avg. Coverage (%): 13.62, Avg. Recall (%): 22.53, Avg. Precision (%): 95.45
+++++++++++++++++++++++++++++++++++++++++++++++++
+

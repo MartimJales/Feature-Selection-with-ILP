@@ -1,0 +1,73 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),suspicious_getdeviceid(V0,V1)
+Coverage (%): 27.20, Recall (%): 73.51, Precision (%): 97.14
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_1(V1)
+Coverage (%): 19.40, Recall (%): 52.43, Precision (%): 97.00
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),int_1(V1)
+Coverage (%): 15.80, Recall (%): 42.70, Precision (%): 98.75
+Rule: label(V0,V1):- n_permissions(V0,V2),perm_android_permission_access_wifi_state(V0,V1),int_2(V2)
+Coverage (%): 11.20, Recall (%): 30.27, Precision (%): 91.80
+Rule: label(V0,V1):- n_urls(V0,V2),intent_android_intent_action_my_package_replaced(V0,V1),n_permissions(V0,V2)
+Coverage (%): 10.80, Recall (%): 29.19, Precision (%): 93.10
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),suspicious_getdeviceid(V0,V1)
+Coverage (%): 27.20, Recall (%): 73.51, Precision (%): 97.14
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_1(V1)
+Coverage (%): 19.40, Recall (%): 52.43, Precision (%): 97.00
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),int_1(V1)
+Coverage (%): 15.80, Recall (%): 42.70, Precision (%): 98.75
+Rule: label(V0,V1):- n_permissions(V0,V2),perm_android_permission_access_wifi_state(V0,V1),int_2(V2)
+Coverage (%): 11.20, Recall (%): 30.27, Precision (%): 91.80
+Rule: label(V0,V1):- n_urls(V0,V2),intent_android_intent_action_my_package_replaced(V0,V1),n_permissions(V0,V2)
+Coverage (%): 10.80, Recall (%): 29.19, Precision (%): 93.10
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- intent_android_intent_action_my_package_replaced(V0,V1),n_activities(V0,V2),n_providers(V0,V2)
+Coverage (%): 6.60, Recall (%): 17.84, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_cipher(V0,V2),perm_android_permission_send_sms(V0,V1),n_permissions(V0,V2)
+Coverage (%): 10.20, Recall (%): 27.57, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_my_package_replaced(V0,V1),n_activities(V0,V2),int_6(V2)
+Coverage (%): 2.80, Recall (%): 7.57, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_my_package_replaced(V0,V1),n_activities(V0,V2),int_9(V2)
+Coverage (%): 0.40, Recall (%): 1.08, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),int_1(V1)
+Coverage (%): 15.80, Recall (%): 42.70, Precision (%): 98.75
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- intent_android_intent_action_my_package_replaced(V0,V1),n_activities(V0,V2),n_providers(V0,V2)
+Coverage (%): 6.60, Recall (%): 17.84, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_cipher(V0,V2),perm_android_permission_send_sms(V0,V1),n_permissions(V0,V2)
+Coverage (%): 10.20, Recall (%): 27.57, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_my_package_replaced(V0,V1),n_activities(V0,V2),int_6(V2)
+Coverage (%): 2.80, Recall (%): 7.57, Precision (%): 100.00
+Rule: label(V0,V1):- intent_android_intent_action_my_package_replaced(V0,V1),n_activities(V0,V2),int_9(V2)
+Coverage (%): 0.40, Recall (%): 1.08, Precision (%): 100.00
+Rule: label(V0,V1):- suspicious_sendtextmessage(V0,V1),int_1(V1)
+Coverage (%): 15.80, Recall (%): 42.70, Precision (%): 98.75
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),int_1(V1)
+label(V0,V1):- suspicious_sendtextmessage(V0,V1),suspicious_getdeviceid(V0,V1)
+label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_1(V1)
+label(V0,V1):- perm_android_permission_send_sms(V0,V1),n_urls(V0,V1)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),n_urls(V0,V1)
+label(V0,V1):- intent_android_intent_action_my_package_replaced(V0,V1),n_activities(V0,V2),n_providers(V0,V2)
+label(V0,V1):- n_urls(V0,V2),intent_android_intent_action_my_package_replaced(V0,V1),n_permissions(V0,V2)
+label(V0,V1):- int_19(V2),n_api_calls(V0,V2),suspicious_getcelllocation(V0,V1)
+label(V0,V1):- suspicious_cipher(V0,V2),perm_android_permission_send_sms(V0,V1),n_permissions(V0,V2)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),n_activities(V0,V2),int_3(V2)
+label(V0,V1):- n_permissions(V0,V2),perm_android_permission_access_wifi_state(V0,V1),int_2(V2)
+
+Avg. Coverage (%): 11.60, Avg. Recall (%): 31.35, Avg. Precision (%): 91.73
+++++++++++++++++++++++++++++++++++++++++++++++++
+

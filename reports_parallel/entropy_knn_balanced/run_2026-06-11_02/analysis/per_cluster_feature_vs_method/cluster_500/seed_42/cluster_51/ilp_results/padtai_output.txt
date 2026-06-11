@@ -1,0 +1,81 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_access_wifi_state(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 43.40, Recall (%): 67.81, Precision (%): 96.88
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V2)
+Coverage (%): 34.80, Recall (%): 54.37, Precision (%): 97.75
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 31.00, Recall (%): 48.44, Precision (%): 97.48
+Rule: label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V2),int_1(V2),intent_android_intent_action_package_added(V0,V1)
+Coverage (%): 22.20, Recall (%): 34.69, Precision (%): 94.87
+Rule: label(V0,V1):- int_1(V1),perm_com_android_launcher_permission_read_settings(V0,V1)
+Coverage (%): 20.60, Recall (%): 32.19, Precision (%): 98.10
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_access_wifi_state(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 43.40, Recall (%): 67.81, Precision (%): 96.88
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V2)
+Coverage (%): 34.80, Recall (%): 54.37, Precision (%): 97.75
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+Coverage (%): 31.00, Recall (%): 48.44, Precision (%): 97.48
+Rule: label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V2),int_1(V2),intent_android_intent_action_package_added(V0,V1)
+Coverage (%): 22.20, Recall (%): 34.69, Precision (%): 94.87
+Rule: label(V0,V1):- int_1(V1),perm_com_android_launcher_permission_read_settings(V0,V1)
+Coverage (%): 20.60, Recall (%): 32.19, Precision (%): 98.10
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_2(V2),n_providers(V0,V2)
+Coverage (%): 6.80, Recall (%): 10.62, Precision (%): 100.00
+Rule: label(V0,V1):- int_7(V2),perm_android_permission_get_tasks(V0,V1),n_services(V0,V2)
+Coverage (%): 1.60, Recall (%): 2.50, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),perm_com_android_launcher_permission_read_settings(V0,V1)
+Coverage (%): 20.60, Recall (%): 32.19, Precision (%): 98.10
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),n_receivers(V0,V1)
+Coverage (%): 10.00, Recall (%): 15.62, Precision (%): 98.04
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V2)
+Coverage (%): 34.80, Recall (%): 54.37, Precision (%): 97.75
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_2(V2),n_providers(V0,V2)
+Coverage (%): 6.80, Recall (%): 10.62, Precision (%): 100.00
+Rule: label(V0,V1):- int_7(V2),perm_android_permission_get_tasks(V0,V1),n_services(V0,V2)
+Coverage (%): 1.60, Recall (%): 2.50, Precision (%): 100.00
+Rule: label(V0,V1):- int_1(V1),perm_com_android_launcher_permission_read_settings(V0,V1)
+Coverage (%): 20.60, Recall (%): 32.19, Precision (%): 98.10
+Rule: label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),n_receivers(V0,V1)
+Coverage (%): 10.00, Recall (%): 15.62, Precision (%): 98.04
+Rule: label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V2)
+Coverage (%): 34.80, Recall (%): 54.37, Precision (%): 97.75
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- int_1(V1),perm_com_android_launcher_permission_read_settings(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_change_configuration(V0,V1)
+label(V0,V1):- int_1(V1),intent_android_intent_action_package_removed(V0,V1)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),perm_com_sec_android_provider_badge_permission_read(V0,V2),int_1(V2)
+label(V0,V1):- intent_com_google_android_c2dm_intent_registration(V0,V2),perm_com_android_launcher_permission_read_settings(V0,V1),int_1(V2)
+label(V0,V1):- suspicious_getsubscriberid(V0,V1),int_2(V2),n_providers(V0,V2)
+label(V0,V1):- suspicious_getsubscriberid(V0,V1),perm_android_permission_read_phone_state(V0,V2),n_providers(V0,V2)
+label(V0,V1):- n_services(V0,V1),perm_android_permission_get_tasks(V0,V1),n_receivers(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_access_wifi_state(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_change_wifi_state(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+label(V0,V1):- perm_com_google_android_c2dm_permission_receive(V0,V2),int_1(V2),intent_android_intent_action_package_added(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),n_receivers(V0,V1)
+label(V0,V1):- int_1(V1),perm_android_permission_mount_unmount_filesystems(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),perm_com_google_android_providers_gsf_permission_read_gservices(V0,V2),int_1(V2)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),int_1(V2),intent_com_google_firebase_messaging_event(V0,V2)
+label(V0,V1):- perm_android_permission_get_tasks(V0,V1),intent_com_google_firebase_instance_id_event(V0,V2),int_1(V2)
+label(V0,V1):- int_1(V1),perm_android_permission_change_wifi_state(V0,V1),n_receivers(V0,V1)
+label(V0,V1):- int_1(V1),intent_android_intent_action_user_present(V0,V1),perm_android_permission_system_alert_window(V0,V1)
+label(V0,V1):- perm_android_permission_read_phone_state(V0,V1),perm_com_android_launcher_permission_install_shortcut(V0,V2),int_1(V2)
+
+Avg. Coverage (%): 15.87, Avg. Recall (%): 24.80, Avg. Precision (%): 95.16
+++++++++++++++++++++++++++++++++++++++++++++++++
+

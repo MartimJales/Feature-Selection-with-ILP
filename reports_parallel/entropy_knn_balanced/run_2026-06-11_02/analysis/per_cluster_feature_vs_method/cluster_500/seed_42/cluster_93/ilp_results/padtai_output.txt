@@ -1,0 +1,64 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: label(V0,V1):- int_2(V2),perm_android_permission_write_sms(V0,V1),n_providers(V0,V2)
+Coverage (%): 11.20, Recall (%): 16.62, Precision (%): 81.16
+Rule: label(V0,V1):- int_1(V1),intent_com_igexin_sdk_action_refreshls(V0,V1)
+Coverage (%): 5.40, Recall (%): 16.56, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),perm_android_permission_change_wifi_state(V0,V1),int_14(V2)
+Coverage (%): 4.60, Recall (%): 6.82, Precision (%): 88.46
+Rule: label(V0,V1):- suspicious_ljava_lang_runtime___exec(V0,V1),int_70(V2),n_activities(V0,V2)
+Coverage (%): 4.00, Recall (%): 5.93, Precision (%): 90.91
+Rule: label(V0,V1):- int_0(V1),int_27(V2),n_api_calls(V0,V2)
+Coverage (%): 4.00, Recall (%): 5.93, Precision (%): 83.33
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: label(V0,V1):- int_2(V2),perm_android_permission_write_sms(V0,V1),n_providers(V0,V2)
+Coverage (%): 11.20, Recall (%): 16.62, Precision (%): 81.16
+Rule: label(V0,V1):- int_1(V1),intent_com_igexin_sdk_action_refreshls(V0,V1)
+Coverage (%): 5.40, Recall (%): 16.56, Precision (%): 100.00
+Rule: label(V0,V1):- n_permissions(V0,V2),perm_android_permission_change_wifi_state(V0,V1),int_14(V2)
+Coverage (%): 4.60, Recall (%): 6.82, Precision (%): 88.46
+Rule: label(V0,V1):- suspicious_ljava_lang_runtime___exec(V0,V1),int_70(V2),n_activities(V0,V2)
+Coverage (%): 4.00, Recall (%): 5.93, Precision (%): 90.91
+Rule: label(V0,V1):- int_0(V1),int_27(V2),n_api_calls(V0,V2)
+Coverage (%): 4.00, Recall (%): 5.93, Precision (%): 83.33
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: label(V0,V1):- int_1(V1),intent_com_igexin_sdk_action_refreshls(V0,V1)
+Coverage (%): 5.40, Recall (%): 16.56, Precision (%): 100.00
+Rule: label(V0,V1):- int_39(V2),int_1(V1),n_permissions(V0,V2)
+Coverage (%): 0.40, Recall (%): 1.23, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_api_calls(V0,V2),int_17(V2)
+Coverage (%): 1.40, Recall (%): 2.08, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_api_calls(V0,V2),int_25(V2)
+Coverage (%): 1.60, Recall (%): 2.37, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),int_24(V2),n_api_calls(V0,V2)
+Coverage (%): 2.60, Recall (%): 3.86, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: label(V0,V1):- int_1(V1),intent_com_igexin_sdk_action_refreshls(V0,V1)
+Coverage (%): 5.40, Recall (%): 16.56, Precision (%): 100.00
+Rule: label(V0,V1):- int_39(V2),int_1(V1),n_permissions(V0,V2)
+Coverage (%): 0.40, Recall (%): 1.23, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_api_calls(V0,V2),int_17(V2)
+Coverage (%): 1.40, Recall (%): 2.08, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),n_api_calls(V0,V2),int_25(V2)
+Coverage (%): 1.60, Recall (%): 2.37, Precision (%): 100.00
+Rule: label(V0,V1):- int_0(V1),int_24(V2),n_api_calls(V0,V2)
+Coverage (%): 2.60, Recall (%): 3.86, Precision (%): 100.00
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+label(V0,V1):- int_1(V1),intent_com_igexin_sdk_action_refreshls(V0,V1)
+label(V0,V1):- int_2(V2),perm_android_permission_write_sms(V0,V1),n_providers(V0,V2)
+
+Avg. Coverage (%): 8.30, Avg. Recall (%): 16.59, Avg. Precision (%): 90.58
+++++++++++++++++++++++++++++++++++++++++++++++++
+
