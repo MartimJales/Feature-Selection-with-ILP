@@ -298,6 +298,7 @@ def run_ilp_cluster_from_data(
         "padtai_stderr": "",
         "padtai_input": None,
         "padtai_runtime_input": None,
+        "padtai_output_file": None,
         "error": None,
     }
 
@@ -407,6 +408,12 @@ def run_ilp_cluster_from_data(
     logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout}s)...")
     success, stdout, stderr = run_padtai(padtai_runtime_input, ilp_output_dir, timeout)
     result["elapsed_seconds"] = round(time.time() - cluster_start, 2)
+
+    padtai_output_file = ilp_output_dir / "padtai_output.txt"
+    with open(padtai_output_file, "w", encoding="utf-8") as f:
+        f.write(stdout or "")
+    result["padtai_output_file"] = str(padtai_output_file)
+    logger.info(f"[cluster_{cluster_id}] Full PADTAI output -> {padtai_output_file}")
 
     result["padtai_stdout"] = stdout[:2000] if stdout else ""
     result["padtai_stderr"] = stderr[:2000] if stderr else ""
