@@ -1,0 +1,31 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: malware(V0):- perm_com_huawei_android_launcher_permission_change_badge(V0,V1),int_0(V1)
+Coverage (%): 93.00, Recall (%): 99.78, Precision (%): 97.85
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: malware(V0):- perm_com_huawei_android_launcher_permission_change_badge(V0,V1),int_0(V1)
+Coverage (%): 93.00, Recall (%): 99.78, Precision (%): 97.85
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: malware(V0):- perm_com_huawei_android_launcher_permission_change_badge(V0,V1),int_0(V1)
+Coverage (%): 93.00, Recall (%): 99.78, Precision (%): 97.85
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: malware(V0):- perm_com_huawei_android_launcher_permission_change_badge(V0,V1),int_0(V1)
+Coverage (%): 93.00, Recall (%): 99.78, Precision (%): 97.85
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+malware(V0):- perm_com_huawei_android_launcher_permission_change_badge(V0,V1),int_0(V1)
+
+Avg. Coverage (%): 93.00, Avg. Recall (%): 99.78, Avg. Precision (%): 97.85
+++++++++++++++++++++++++++++++++++++++++++++++++
+

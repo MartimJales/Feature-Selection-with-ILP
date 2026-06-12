@@ -1,0 +1,40 @@
+
++++++++++++++++ Max. Coverages +++++++++++++++++
+Rule: malware(V0):- int_1(V1),perm_android_permission_access_network_state(V0,V1)
+Coverage (%): 96.00, Recall (%): 97.51, Precision (%): 97.71
+Rule: malware(V0):- n_used_permissions(V0,V1),n_services(V0,V1)
+Coverage (%): 18.40, Recall (%): 18.50, Precision (%): 96.74
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++ Max. Recalls ++++++++++++++++++
+Rule: malware(V0):- int_1(V1),perm_android_permission_access_network_state(V0,V1)
+Coverage (%): 96.00, Recall (%): 97.51, Precision (%): 97.71
+Rule: malware(V0):- n_used_permissions(V0,V1),n_services(V0,V1)
+Coverage (%): 18.40, Recall (%): 18.50, Precision (%): 96.74
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++ Max. Precisions ++++++++++++++++
+Rule: malware(V0):- int_1(V1),perm_android_permission_access_network_state(V0,V1)
+Coverage (%): 96.00, Recall (%): 97.51, Precision (%): 97.71
+Rule: malware(V0):- n_used_permissions(V0,V1),n_services(V0,V1)
+Coverage (%): 18.40, Recall (%): 18.50, Precision (%): 96.74
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++ Max. Precisions (Recall >= 1%) ++++++++
+Rule: malware(V0):- int_1(V1),perm_android_permission_access_network_state(V0,V1)
+Coverage (%): 96.00, Recall (%): 97.51, Precision (%): 97.71
+Rule: malware(V0):- n_used_permissions(V0,V1),n_services(V0,V1)
+Coverage (%): 18.40, Recall (%): 18.50, Precision (%): 96.74
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++ Solution +++++++++++++++++++
+malware(V0):- n_used_permissions(V0,V1),n_services(V0,V1)
+malware(V0):- int_1(V1),perm_android_permission_access_network_state(V0,V1)
+
+Avg. Coverage (%): 57.20, Avg. Recall (%): 58.00, Avg. Precision (%): 97.22
+++++++++++++++++++++++++++++++++++++++++++++++++
+
