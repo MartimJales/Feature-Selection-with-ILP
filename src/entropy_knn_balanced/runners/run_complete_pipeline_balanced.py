@@ -182,12 +182,20 @@ def main() -> None:
     parser.add_argument("--max-clusters", type=int, default=None)
     parser.add_argument("--cluster-ids", type=int, nargs="+", default=None)
     parser.add_argument("--ilp-top-n", type=int, default=30, help="Top N features for PADTAI")
-    parser.add_argument("--ilp-timeout", type=int, default=1200, help="PADTAI timeout in seconds")
+    parser.add_argument(
+        "--ilp-timeout",
+        type=int,
+        default=1200,
+        help="PADTAI timeout in seconds; 0 disables both PADTAI and subprocess timeouts",
+    )
     parser.add_argument("--ilp-workers", type=int, default=1, help="Number of parallel PADTAI workers")
     parser.add_argument("--ilp-dry-run", action="store_true", help="Prepare ILP inputs but do not execute PADTAI")
     parser.add_argument("--discord-webhook-url", default=os.getenv("DISCORD_WEBHOOK_URL", ""))
     parser.add_argument("--discord-user-id", default=os.getenv("DISCORD_USER_ID", ""))
     args = parser.parse_args()
+
+    if args.ilp_timeout < 0:
+        parser.error("--ilp-timeout must be zero or a positive number")
 
     # Resolve Discord settings robustly (CLI if provided, else env/.env).
     args.discord_webhook_url = (args.discord_webhook_url or os.getenv("DISCORD_WEBHOOK_URL", "")).strip()
@@ -469,8 +477,10 @@ def main() -> None:
                         "n_features": 0,
                         "n_samples": 0,
                         "elapsed_seconds": None,
+                        "padtai_elapsed_seconds": None,
                         "padtai_stdout": "",
                         "padtai_stderr": "",
+                        "padtai_stderr_file": None,
                         "error": str(exc)[:500],
                     }
 

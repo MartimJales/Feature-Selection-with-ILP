@@ -100,7 +100,8 @@ PADTAI takes the following arguments:
       (default: `target`)
     - `-s {rc2,nuwls}` and `--solver {rc2,nuwls}` choose solver: `rc2` (default pysat solver), `nuwls` (recommended solver) (default: `nuwls`)
     - `--sample-size <int>` sets sample size (default: 3400 / #columns)
-    - `--max-timeout <int>` sets maximum timeout in seconds (default: 1200 seconds)
+    - `--max-timeout <int>` sets maximum timeout in seconds; use `0` for no timeout
+      (default: 1200 seconds)
     - `--min-coverage <float>` sets coverage threshold (default: 10%)
     - `--min-recall <float>` sets recall threshold (default: 15%)
     - `--min-precision <float>` sets precision threshold (default: 85%)

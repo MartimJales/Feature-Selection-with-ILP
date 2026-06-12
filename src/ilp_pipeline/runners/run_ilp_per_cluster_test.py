@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ILP runner for per-cluster feature selection using PADTAI.
-Reads top-30 features from each cluster, executes PADTAI with timeout,
+Reads top-30 features from each cluster, executes PADTAI,
 saves results and metadata in cluster_i/ilp_results/ subfolder.
 """
 
@@ -194,7 +194,7 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
     Args:
         input_file: Path to CSV with features (binary 0/1) + 'label' column
         output_dir: Output directory for results
-        timeout: Timeout in seconds
+        timeout: Timeout in seconds, or 0 to run without a time limit
 
     Returns:
         (success: bool, stdout: str, stderr: str)
@@ -209,7 +209,7 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
     # --grounded none       → Use the default grounded-operator setup
     # --solver rc2          → SAT solver (stable)
     # --sample-size 100     → Use 100 samples
-    # --max-timeout <int>   → Timeout in seconds
+    # --max-timeout <int>   → Timeout in seconds; 0 disables it
     # --debug none          → No debug output
     # --min-coverage 5      → Min coverage 5%
     # --min-recall 10       → Min recall 10%
@@ -235,12 +235,14 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
 
     logger.info(f"PADTAI command: {' '.join(cmd)}")
 
+    subprocess_timeout = None if timeout == 0 else timeout + 30
+
     try:
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
-            timeout=timeout + 30,  # Allow 30s overhead for cleanup
+            timeout=subprocess_timeout,
             cwd=str(REPO_ROOT / "PADTAI")
         )
         success = result.returncode == 0
@@ -249,6 +251,19 @@ def run_padtai(input_file: Path, output_dir: Path, timeout: int = DEFAULT_TIMEOU
         return False, "", "PADTAI execution timed out"
     except Exception as e:
         return False, "", str(e)
+
+
+def save_padtai_stderr(output_dir: Path, stderr: str) -> Path:
+    """Persist the complete PADTAI stderr stream as a text file."""
+    stderr_file = output_dir / "padtai_stderr.txt"
+    with open(stderr_file, "w", encoding="utf-8") as handle:
+        handle.write(stderr or "")
+    return stderr_file
+
+
+def timeout_label(timeout: int) -> str:
+    """Return a human-readable timeout label for logs."""
+    return "unlimited" if timeout == 0 else f"{timeout}s"
 
 
 def _label_series(labels) -> pd.Series:
@@ -298,11 +313,13 @@ def run_ilp_cluster_from_data(
         "balanced_sample_indices": None,
         "original_sample_indices": None,
         "elapsed_seconds": None,
+        "padtai_elapsed_seconds": None,
         "padtai_stdout": "",
         "padtai_stderr": "",
         "padtai_input": None,
         "padtai_runtime_input": None,
         "padtai_output_file": None,
+        "padtai_stderr_file": None,
         "error": None,
     }
 
@@ -409,8 +426,10 @@ def run_ilp_cluster_from_data(
         result["elapsed_seconds"] = round(time.time() - cluster_start, 2)
         return result
 
-    logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout}s)...")
+    logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout_label(timeout)})...")
+    padtai_start = time.monotonic()
     success, stdout, stderr = run_padtai(padtai_runtime_input, ilp_output_dir, timeout)
+    result["padtai_elapsed_seconds"] = round(time.monotonic() - padtai_start, 2)
     result["elapsed_seconds"] = round(time.time() - cluster_start, 2)
 
     padtai_output_file = ilp_output_dir / "padtai_output.txt"
@@ -423,11 +442,9 @@ def run_ilp_cluster_from_data(
     result["padtai_stderr"] = stderr[:2000] if stderr else ""
     result["status"] = "success" if success else "failed"
 
-    if stderr:
-        stderr_file = ilp_output_dir / "padtai_stderr.log"
-        with open(stderr_file, "w", encoding="utf-8") as f:
-            f.write(stderr)
-        logger.info(f"[cluster_{cluster_id}] Full stderr -> {stderr_file}")
+    stderr_file = save_padtai_stderr(ilp_output_dir, stderr)
+    result["padtai_stderr_file"] = str(stderr_file)
+    logger.info(f"[cluster_{cluster_id}] Full stderr -> {stderr_file}")
 
     try:
         full_out = (stdout or "") + "\n" + (stderr or "")
@@ -492,8 +509,10 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         "n_features": 0,
         "n_samples": 0,
         "elapsed_seconds": None,
+        "padtai_elapsed_seconds": None,
         "padtai_stdout": "",
         "padtai_stderr": "",
+        "padtai_stderr_file": None,
         "error": None
     }
 
@@ -627,20 +646,19 @@ def run_ilp_cluster(cluster_dir: Path, top_n: int, timeout: int, dry_run: bool =
         return result
 
     # Step 6: Run PADTAI
-    logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout}s)...")
+    logger.info(f"[cluster_{cluster_id}] Starting PADTAI (timeout {timeout_label(timeout)})...")
+    padtai_start = time.monotonic()
     success, stdout, stderr = run_padtai(padtai_input, ilp_output_dir, timeout)
+    result["padtai_elapsed_seconds"] = round(time.monotonic() - padtai_start, 2)
     result["elapsed_seconds"] = round(time.time() - cluster_start, 2)
 
     result["padtai_stdout"] = stdout[:2000] if stdout else ""
     result["padtai_stderr"] = stderr[:2000] if stderr else ""
     result["status"] = "success" if success else "failed"
 
-    # Save full stderr to file for debugging
-    if stderr:
-        stderr_file = ilp_output_dir / "padtai_stderr.log"
-        with open(stderr_file, "w") as f:
-            f.write(stderr)
-        logger.info(f"[cluster_{cluster_id}] Full stderr → {stderr_file}")
+    stderr_file = save_padtai_stderr(ilp_output_dir, stderr)
+    result["padtai_stderr_file"] = str(stderr_file)
+    logger.info(f"[cluster_{cluster_id}] Full stderr -> {stderr_file}")
 
     # Extract rules from PADTAI stdout/stderr and save
     try:
@@ -700,7 +718,7 @@ def main():
         "--timeout",
         type=int,
         default=DEFAULT_TIMEOUT,
-        help=f"PADTAI timeout per cluster in seconds (default: {DEFAULT_TIMEOUT})"
+        help=f"PADTAI timeout per cluster in seconds; 0 disables it (default: {DEFAULT_TIMEOUT})"
     )
     parser.add_argument(
         "--dry-run",
@@ -720,11 +738,14 @@ def main():
 
     args = parser.parse_args()
 
+    if args.timeout < 0:
+        parser.error("--timeout must be zero or a positive number")
+
     print(f"ILP Runner (test mode)")
     print(f"Base dir: {args.cluster_dir}")
     print(f"Clusters: {args.cluster_ids}")
     print(f"Top-N features: {args.top_n}")
-    print(f"Timeout: {args.timeout}s")
+    print(f"Timeout: {timeout_label(args.timeout)}")
     print(f"Dry run: {args.dry_run}")
     print()
 

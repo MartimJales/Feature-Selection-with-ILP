@@ -106,8 +106,12 @@ Para cada cluster elegível:
 
 1. selecionam-se as top-N features do cluster;
 2. prepara-se o input binário para PADTAI;
-3. executa-se PADTAI com timeout e parâmetros definidos;
+3. executa-se PADTAI com os parâmetros definidos; `--ilp-timeout 0` remove
+   os limites de tempo internos e externos;
 4. guardam-se as regras, metadata e artefactos intermédios.
+
+O tempo do PADTAI é registado em `padtai_elapsed_seconds`, e o `stderr`
+completo de cada cluster é guardado em `ilp_results/padtai_stderr.txt`.
 
 ---
 

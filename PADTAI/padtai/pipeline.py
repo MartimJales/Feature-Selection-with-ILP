@@ -18,7 +18,23 @@ import janus_swi as janus
 from pathlib import Path
 
 from popper.util import Settings, order_prog, format_rule
-from popper.loop import learn_solution
+from popper import loop as popper_loop
+
+
+def learn_solution(settings, unlimited=False):
+    """Run Popper with its normal timeout wrapper or without a time limit."""
+    if not unlimited:
+        return popper_loop.learn_solution(settings)
+
+    settings.nonoise = not settings.noisy
+    settings.solution_found = False
+
+    with settings.stats.duration('load data'):
+        tester = popper_loop.Tester(settings)
+
+    bkcons = popper_loop.get_bk_cons(settings, tester)
+    popper_loop.popper(settings, tester, bkcons)
+    return settings.solution, settings.best_prog_score, settings.stats
 
 
 def format_prog(prog, settings):
@@ -103,7 +119,7 @@ def parse():
             - target_category (str): The protected value to learn one-vs-rest.
             - target_predicate (str): The predicate name for target rules.
             - sample_size (int): The sample size.
-            - max_timeout (int): The maximum timeout.
+            - max_timeout (int): The maximum timeout, or 0 for no timeout.
             - min_coverage (float): The minimum coverage threshold.
             - min_recall (float): The minimum recall threshold.
             - min_precision (float): The minimum precision threshold.
@@ -133,7 +149,7 @@ def parse():
     parser.add_argument('--sample-size', type=int, default=-1,
                         help='set sample size (default: 3400 / #columns)')
     parser.add_argument('--max-timeout', type=int, default=1200,
-                        help='set maximum timeout in seconds (default: 1200 seconds)')
+                        help='set maximum timeout in seconds; 0 disables it (default: 1200)')
     parser.add_argument('--min-coverage', type=float, default=10,
                         help='set coverage threshold (default: 10%%)')
     parser.add_argument('--min-recall', type=float, default=15,
@@ -518,6 +534,8 @@ def main(run_as_package=False,args={}):
     min_precision = args.min_precision
     target_mode = target_category is not None
 
+    if max_timeout < 0:
+        raise ValueError("--max-timeout must be zero or a positive number")
     if categorical and target_mode:
         raise ValueError("--categorical and --target-category cannot be used together")
     if target_predicate and not target_mode:
@@ -576,22 +594,20 @@ def main(run_as_package=False,args={}):
         # Popper settings
         # Generated files on out_path
         # NuWLS solver offers slightly better performance than rc2
+        settings_kwargs = {
+            "timeout": max_timeout,
+            "kbpath": out_path,
+            "max_vars": 5,
+            "functional_test": not (categorical or target_mode),
+            "quiet": (debug == 'none' or debug == 'padtai'),
+        }
         if solver == 'rc2':
-            settings = Settings(timeout=max_timeout,
-                                kbpath=out_path,
-                                max_vars=5,
-                                functional_test=not (categorical or target_mode),
-                                quiet=(debug == 'none' or debug == 'padtai'))
+            settings = Settings(**settings_kwargs)
         else:
-            settings = Settings(timeout=max_timeout,
-                                kbpath=out_path,
-                                max_vars=5,
-                                functional_test=not (categorical or target_mode),
-                                quiet=(debug == 'none' or debug == 'padtai'),
-                                anytime_solver='nuwls')
+            settings = Settings(**settings_kwargs, anytime_solver='nuwls')
 
         # Run Popper on generated files and obtain candidate rules
-        prog, _, _ = learn_solution(settings)
+        prog, _, _ = learn_solution(settings, unlimited=max_timeout == 0)
 
         if prog != None:
             rules, head = format_prog(prog, settings)
